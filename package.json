@@ -5,13 +5,16 @@
   "description": "The Nebular SDK is a developer toolkit designed to simplify interaction with the Nebular decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
   "private": "true",
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=18.19.1"
   },
   "scripts": {
     "test": "echo 'Error: no test specified' && exit 1",
     "lint": "eslint './src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
+    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
+    "typechain": "typechain --target ethers-v6 --out-dir src/interfaces/contracts src/abis/*.json",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,11 +25,22 @@
   },
   "homepage": "https://github.com/nebular-finance/nebular-sdk#readme",
   "devDependencies": {
+    "@typechain/ethers-v6": "^0.5.1",
     "@types/node": "^22.15.21",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
+    "typechain": "^8.3.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ethers": "^6.14.1",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
   }
 }
