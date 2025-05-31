@@ -13,7 +13,6 @@
     "test": "echo 'Error: no test specified' && exit 1",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
-    "typechain": "typechain --target ethers-v6 --out-dir src/interfaces/contracts src/abis/*.json",
     "build": "tsc"
   },
   "repository": {
@@ -25,7 +24,6 @@
   },
   "homepage": "https://github.com/nebular-finance/nebular-sdk#readme",
   "devDependencies": {
-    "@typechain/ethers-v6": "^0.5.1",
     "@types/node": "^22.15.21",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
@@ -34,7 +32,6 @@
     "eslint-plugin-prettier": "^5.4.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
-    "typechain": "^8.3.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
