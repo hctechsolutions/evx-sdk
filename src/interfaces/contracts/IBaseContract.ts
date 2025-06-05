@@ -1,6 +1,16 @@
-import { Contract } from "ethers";
+import { RPC } from "@providers/blockchain/RPC";
+import { ChainName, chains, ContractName } from "resources/chains";
+import { ethers, Signer } from "ethers";
 
 export interface IBaseContract {
-  readonly address: string;
-  readonly instance: Contract;
+  signer: Signer | null | undefined;
+  rpc: RPC;
+  instance: ethers.Contract;
+  name: ContractName;
+  chain: ChainName;
+  abi: any;
+
+  setSigner(signer: Signer): void;
+  setChain(chain: keyof typeof chains): void;
+  getAddress(): string;
 }
