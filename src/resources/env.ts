@@ -14,6 +14,11 @@ export const env = {
 };
 
 // Environment validations
+if (!env.rpcUrl) {
+  console.error(`Environment variable "RPC_URL" not found. Exiting...`);
+  process.exit(1);
+}
+
 const chain = env.chain in chains ? env.chain : 'mainnet';
 
 if (chain !== env.chain) {

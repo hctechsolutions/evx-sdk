@@ -1,5 +1,5 @@
 import NebularPoolABI from '@abis/NebularPool.json';
-import { RPC } from '@providers/blockchain/RPC';
+import { RPC } from '@providers/RPC';
 import { container } from 'tsyringe';
 import { ethers, Signer } from 'ethers';
 

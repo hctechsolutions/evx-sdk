@@ -1,6 +1,6 @@
 import NebularFactoryABI from '@abis/NebularFactory.json';
 import { injectable, inject, singleton } from 'tsyringe';
-import { RPC } from '@providers/blockchain/RPC';
+import { RPC } from '@providers/RPC';
 import { BaseContract } from './BaseContract';
 
 @injectable()
