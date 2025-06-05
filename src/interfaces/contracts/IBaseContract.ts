@@ -1,4 +1,4 @@
-import { RPC } from "@providers/blockchain/RPC";
+import { RPC } from "@providers/RPC";
 import { ChainName, chains, ContractName } from "resources/chains";
 import { ethers, Signer } from "ethers";
 

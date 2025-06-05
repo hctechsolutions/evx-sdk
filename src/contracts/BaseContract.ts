@@ -1,6 +1,6 @@
 import { IBaseContract } from '@interfaces/contracts/IBaseContract';
 import { chains, ChainName, ContractName } from 'resources/chains';
-import { RPC } from '@providers/blockchain/RPC';
+import { RPC } from '@providers/RPC';
 import { ethers, Signer } from 'ethers';
 import { env } from 'resources/env';
 
