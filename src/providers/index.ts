@@ -1,1 +1,1 @@
-export * from './blockchain';
+export * from './blockchain/RPC';

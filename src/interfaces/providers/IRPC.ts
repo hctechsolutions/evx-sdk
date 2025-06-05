@@ -1,5 +1,5 @@
 import { JsonRpcProvider } from 'ethers';
 
-export interface IBlockchainProvider {
+export interface IRPC {
   readonly provider: JsonRpcProvider;
 }
