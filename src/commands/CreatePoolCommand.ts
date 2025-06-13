@@ -1,7 +1,7 @@
 import { ICreatePoolCommandParams } from '@interfaces/commands/params/ICreatePoolCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { FactoryContract } from '@contracts/FactoryContract';
 import { injectable, inject, singleton } from 'tsyringe';
+import { FactoryContract } from '@contracts';
 
 @injectable()
 @singleton()

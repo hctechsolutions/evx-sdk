@@ -1,7 +1,7 @@
 import NebularPoolABI from '@abis/NebularPool.json';
-import { RPC } from '@providers/RPC';
-import { container } from 'tsyringe';
 import { ethers, Signer } from 'ethers';
+import { container } from 'tsyringe';
+import { RPC } from '@providers';
 
 export class PoolContract {
   instance: ethers.Contract;
@@ -18,9 +18,7 @@ export class PoolContract {
     );
   }
 
-
   async setSigner(signer?: Signer | null): Promise<void> {
-
     if (!signer) {
       this.instance = new ethers.Contract(
         this.address,
