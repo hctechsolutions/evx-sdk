@@ -57,11 +57,9 @@ const config: JestConfigWithTsJest = {
     '!src/**/index.ts'
   ],
 
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json'
-    }
-  }
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
+  },
 };
 
 export default config;
