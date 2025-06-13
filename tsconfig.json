@@ -13,27 +13,37 @@
     "skipLibCheck": true,
     "declaration": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@utils/*": [
-        "utils/*"
-      ],
       "@interfaces/*": [
-        "interfaces/*"
+        "src/interfaces/*"
       ],
       "@abis/*": [
-        "abis/*"
+        "src/abis/*"
       ],
-      "@providers/*": [
-        "providers/*"
+      "@utils": [
+        "src/utils/index.ts"
       ],
-      "@contracts/*": [
-        "contracts/*"
+      "@providers": [
+        "src/providers/index.ts"
+      ],
+      "@contracts": [
+        "src/contracts/index.ts"
+      ],
+      "@resources": [
+        "src/resources/index.ts"
+      ],
+      "@commands": [
+        "src/commands/index.ts"
+      ],
+      "@queries": [
+        "src/queries/index.ts"
       ]
     }
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules",

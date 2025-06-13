@@ -1,15 +1,15 @@
 import { IInitializeOnlyPoolCommandParams } from '@interfaces/commands/params/IInitializePoolCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { PoolContract } from '@contracts/PoolContract';
 import { injectable, singleton } from 'tsyringe';
-import { Signer } from 'ethers';
+import { PoolContract } from '@contracts';
 
 @injectable()
 @singleton()
 export class InitializePoolCommand implements IBaseCommand<IInitializeOnlyPoolCommandParams, void> {
-  async execute(params: IInitializeOnlyPoolCommandParams, signer?: Signer): Promise<void> {
+
+  async execute(params: IInitializeOnlyPoolCommandParams): Promise<void> {
     const pool = new PoolContract(params.poolAddress);
-    await pool.setSigner(signer);
+    await pool.setSigner(params.signer);
 
     try {
       const transaction = await pool.instance.InitializeObservation(params.initialPrice);

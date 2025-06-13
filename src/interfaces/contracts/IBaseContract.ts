@@ -1,6 +1,6 @@
-import { RPC } from "@providers/RPC";
-import { ChainName, chains, ContractName } from "resources/chains";
+import { ChainName, chains, ContractName } from "@resources";
 import { ethers, Signer } from "ethers";
+import { RPC } from "@providers";
 
 export interface IBaseContract {
   signer: Signer | null | undefined;

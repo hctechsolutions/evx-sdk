@@ -1,9 +1,9 @@
 import { ICreateAndInitializePoolCommandParams } from '@interfaces/commands/params/ICreateAndInitializePoolCommandParams';
 import { ICreatePoolCommandOutput } from '@interfaces/commands/outputs/ICreatePoolCommandOutput';
-import { PositionManagerContract } from '@contracts/PositionManagerContract';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { sortTokens } from '@utils/tokens';
+import { PositionManagerContract } from '@contracts';
+import { sortTokens } from '@utils';
 
 @injectable()
 @singleton()

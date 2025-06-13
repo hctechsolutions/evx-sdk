@@ -1,12 +1,11 @@
 import { IBaseContract } from '@interfaces/contracts/IBaseContract';
-import { chains, ChainName, ContractName } from 'resources/chains';
-import { RPC } from '@providers/RPC';
+import { chains, ChainName, ContractName } from '@resources';
 import { ethers, Signer } from 'ethers';
-import { env } from 'resources/env';
+import { RPC } from '@providers';
 
 export abstract class BaseContract implements IBaseContract {
   signer: Signer | null | undefined = null;
-  chain: ChainName = env.chain;
+  chain: ChainName = 'sepolia';
   instance: ethers.Contract;
   name: ContractName;
   rpc: RPC;

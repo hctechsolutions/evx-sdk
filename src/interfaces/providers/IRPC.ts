@@ -1,5 +1,6 @@
 import { JsonRpcProvider } from 'ethers';
 
 export interface IRPC {
-  readonly provider: JsonRpcProvider;
+  provider: JsonRpcProvider | null;
+  setProvider(newRPC: string): void
 }

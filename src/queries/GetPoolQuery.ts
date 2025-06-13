@@ -1,8 +1,8 @@
 import { IGetPoolOutput } from '@interfaces/queries/outputs/IGetPoolOutput';
 import { IGetPoolParams } from '@interfaces/queries/params/IGetPoolParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { PoolContract } from '@contracts/PoolContract';
 import { injectable, singleton } from 'tsyringe';
+import { PoolContract } from '@contracts';
 
 @injectable()
 @singleton()

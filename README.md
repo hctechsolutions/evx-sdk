@@ -1,4 +1,4 @@
-# ✨ Nebular SDK
+# Nebular SDK
 
 The Nebular SDK is a TypeScript developer toolkit designed to simplify interaction with the Nebular decentralized liquidity protocol. It provides a high-level abstraction over the core smart contracts. Built using a modular CQRS (Command Query Responsibility Segregation) architecture for scalability and clarity.
 
@@ -9,16 +9,16 @@ The Nebular SDK is a TypeScript developer toolkit designed to simplify interacti
 
 ---
 
-## ✨ Features
+## Features
 
-* 🔗 Connect to any EVM-compatible chain
-* 🧠 CQRS-based structure (`commands`, `queries`)
-* ⚙️ Minimal and typed interaction with contracts (ethers.js)
-* 🔍 Query pools and token pairs with ease
+* Connect to any EVM-compatible chain
+* CQRS-based structure (`commands`, `queries`)
+* Minimal and typed interaction with contracts (ethers.js)
+* Query pools and token pairs with ease
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install @nebular/sdk
@@ -26,7 +26,7 @@ npm install @nebular/sdk
 yarn add @nebular/sdk
 ```
 
-## ⚙️ Usage
+## Usage
 
 ### Read pool info direcly from blockchain
 
@@ -45,7 +45,7 @@ console.table(pool)
 
 ---
 
-## 🌐 Supported Networks
+## Supported Networks
 
 * Ethereum Mainnet
 * Sepolia
@@ -53,7 +53,7 @@ console.table(pool)
 
 ---
 
-## 🔧 Environment Configuration
+## Environment Configuration
 
 Crie um arquivo `.env`:
 
@@ -64,13 +64,13 @@ RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
 
 ---
 
-## 🧪 Testing
+## Testing
 
 > Tests are being written and will be available soon.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome! Clone o repositório, crie uma branch com sua feature ou correção e envie um PR.
 

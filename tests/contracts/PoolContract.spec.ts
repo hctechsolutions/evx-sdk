@@ -1,0 +1,100 @@
+import 'reflect-metadata';
+import { ethers } from 'ethers';
+import { PoolContract } from '../../src/contracts/PoolContract';
+import { RPC } from '../../src/providers/RPC';
+import { container } from 'tsyringe';
+
+// Mock the chains resource
+jest.mock('@resources', () => ({
+  chains: {
+    sepolia: {
+      factory: '0x1234567890123456789012345678901234567890',
+      pool: '0x2345678901234567890123456789012345678901',
+      positionManager: '0x3456789012345678901234567890123456789012'
+    }
+  },
+  ChainName: {
+    SEPOLIA: 'sepolia'
+  },
+  ContractName: {
+    FACTORY: 'factory',
+    POOL: 'pool',
+    POSITION_MANAGER: 'positionManager'
+  }
+}));
+
+describe('PoolContract', () => {
+  let mockProvider: jest.Mocked<ethers.JsonRpcProvider>;
+  let mockSigner: jest.Mocked<ethers.Signer>;
+  let rpc: RPC;
+  let contract: PoolContract;
+  const testAddress = '0x2345678901234567890123456789012345678901';
+
+  beforeEach(() => {
+    mockProvider = {
+      getNetwork: jest.fn(),
+      getBlockNumber: jest.fn(),
+      getBalance: jest.fn(),
+      getCode: jest.fn(),
+      getStorageAt: jest.fn(),
+      getTransaction: jest.fn(),
+      getTransactionReceipt: jest.fn(),
+      getLogs: jest.fn(),
+      estimateGas: jest.fn(),
+      call: jest.fn(),
+      sendTransaction: jest.fn(),
+      getBlock: jest.fn(),
+      getFeeData: jest.fn(),
+      lookupAddress: jest.fn(),
+      resolveName: jest.fn(),
+      waitForTransaction: jest.fn(),
+      on: jest.fn(),
+      once: jest.fn(),
+      emit: jest.fn(),
+      listenerCount: jest.fn(),
+      listeners: jest.fn(),
+      removeAllListeners: jest.fn(),
+      removeListener: jest.fn(),
+      addListener: jest.fn(),
+      off: jest.fn()
+    } as any;
+
+    mockSigner = {
+      getAddress: jest.fn(),
+      signMessage: jest.fn(),
+      signTransaction: jest.fn(),
+      connect: jest.fn(),
+      provider: mockProvider
+    } as any;
+
+    rpc = new RPC();
+    rpc.provider = mockProvider;
+
+    // Reset container and register RPC
+    container.clearInstances();
+    container.registerInstance(RPC, rpc);
+
+    contract = new PoolContract(testAddress);
+  });
+
+  describe('constructor', () => {
+    it('should initialize with correct properties', () => {
+      expect(contract.address).toBe(testAddress);
+      expect(contract.rpc).toBe(rpc);
+      expect(contract.instance).toBeInstanceOf(ethers.Contract);
+    });
+  });
+
+  describe('setSigner', () => {
+    it('should update contract instance when signer is provided', async () => {
+      await contract.setSigner(mockSigner);
+      expect(contract.instance).toBeInstanceOf(ethers.Contract);
+    });
+
+    it('should reset contract instance when signer is null', async () => {
+      await contract.setSigner(mockSigner);
+      await contract.setSigner(null);
+      expect(contract.instance).toBeInstanceOf(ethers.Contract);
+    });
+  });
+}); 
