@@ -1,0 +1,43 @@
+[
+  {
+    "type": "function",
+    "name": "getPopulatedTicksInWord",
+    "inputs": [
+      {
+        "name": "pool",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tickBitmapIndex",
+        "type": "int16",
+        "internalType": "int16"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "populatedTicks",
+        "type": "tuple[]",
+        "internalType": "struct ITickLens.PopulatedTick[]",
+        "components": [
+          {
+            "name": "tick",
+            "type": "int24",
+            "internalType": "int24"
+          },
+          {
+            "name": "liquidityNet",
+            "type": "int128",
+            "internalType": "int128"
+          },
+          {
+            "name": "liquidityGross",
+            "type": "uint128",
+            "internalType": "uint128"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  }
+]
