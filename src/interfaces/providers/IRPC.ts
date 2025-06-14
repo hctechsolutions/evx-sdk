@@ -6,8 +6,7 @@ import { JsonRpcProvider } from 'ethers';
  * @dev Defines the contract for RPC provider implementations
  */
 export interface IRPC {
-  /** The current RPC provider instance */
-  provider: JsonRpcProvider | null;
+  provider: JsonRpcProvider | null; // The current RPC provider instance
   
   /**
    * @notice Sets a new RPC provider URL

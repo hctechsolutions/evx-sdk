@@ -6,14 +6,9 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  * @dev Extends base command parameters with liquidity decrease specific parameters
  */
 export interface IDecreaseLiquidityCommandParams extends IBaseCommandParams {
-  /** The ID of the position to decrease liquidity from */
-  tokenId: BigNumberish;
-  /** The amount of liquidity to remove */
-  liquidity: BigNumberish;
-  /** The minimum amount of token0 to receive */
-  amount0Min: BigNumberish;
-  /** The minimum amount of token1 to receive */
-  amount1Min: BigNumberish;
-  /** The deadline for the transaction */
-  deadline: number;
+  tokenId: BigNumberish; // The ID of the position to decrease liquidity from
+  liquidity: BigNumberish; // The amount of liquidity to remove
+  amount0Min: BigNumberish; // The minimum amount of token0 to receive
+  amount1Min: BigNumberish; // The minimum amount of token1 to receive
+  deadline: number; // The deadline for the transaction
 } 

@@ -3,6 +3,5 @@
  * @dev Contains the address of the pool to query
  */
 export interface IGetPoolParams {
-  /** The address of the pool to query */
-  address: string;
+  address: string; // The address of the pool to query
 }

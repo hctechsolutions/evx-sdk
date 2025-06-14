@@ -6,12 +6,8 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  * @dev Extends base command parameters with collect specific parameters
  */
 export interface ICollectCommandParams extends IBaseCommandParams {
-  /** The ID of the position to collect from */
-  tokenId: BigNumberish;
-  /** The address that will receive the collected fees */
-  recipient: string;
-  /** The maximum amount of token0 to collect */
-  amount0Max: BigNumberish;
-  /** The maximum amount of token1 to collect */
-  amount1Max: BigNumberish;
+  tokenId: BigNumberish; // The ID of the position to collect from
+  recipient: string; // The address that will receive the collected fees
+  amount0Max: BigNumberish; // The maximum amount of token0 to collect
+  amount1Max: BigNumberish; // The maximum amount of token1 to collect
 } 

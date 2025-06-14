@@ -6,16 +6,10 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  * @dev Extends base command parameters with liquidity increase specific parameters
  */
 export interface IIncreaseLiquidityCommandParams extends IBaseCommandParams {
-  /** The ID of the position to increase liquidity for */
-  tokenId: BigNumberish;
-  /** The desired amount of token0 to add */
-  amount0Desired: BigNumberish;
-  /** The desired amount of token1 to add */
-  amount1Desired: BigNumberish;
-  /** The minimum amount of token0 to add */
-  amount0Min: BigNumberish;
-  /** The minimum amount of token1 to add */
-  amount1Min: BigNumberish;
-  /** The deadline for the transaction */
-  deadline: number;
+  tokenId: BigNumberish; // The ID of the position to increase liquidity for
+  amount0Desired: BigNumberish; // The desired amount of token0 to add
+  amount1Desired: BigNumberish; // The desired amount of token1 to add
+  amount0Min: BigNumberish; // The minimum amount of token0 to add
+  amount1Min: BigNumberish; // The minimum amount of token1 to add
+  deadline: number; // The deadline for the transaction
 } 

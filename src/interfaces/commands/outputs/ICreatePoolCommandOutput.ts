@@ -3,6 +3,5 @@
  * @dev Contains the address of the created pool
  */
 export interface ICreatePoolCommandOutput {
-  /** The address of the created pool */
-  pool: string;
+  pool: string; // The address of the created pool
 }

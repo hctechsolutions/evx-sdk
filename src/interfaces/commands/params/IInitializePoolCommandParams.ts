@@ -6,8 +6,7 @@ import { Signer } from "ethers";
  * @dev Extends base command parameters with initialization specific parameters
  */
 export interface IInitializePoolCommandParams extends IBaseCommandParams {
-  /** The initial price to set for the pool */
-  initialPrice: bigint
+  initialPrice: bigint // The initial price to set for the pool
 }
 
 /**
@@ -15,8 +14,6 @@ export interface IInitializePoolCommandParams extends IBaseCommandParams {
  * @dev Extends initialization parameters with pool address and signer
  */
 export interface IInitializeOnlyPoolCommandParams extends IInitializePoolCommandParams {
-  /** The address of the pool to initialize */
-  poolAddress: string;
-  /** The signer to use for the transaction */
-  signer: Signer;
+  poolAddress: string; // The address of the pool to initialize
+  signer: Signer; // The signer to use for the transaction
 }
