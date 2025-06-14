@@ -3,6 +3,11 @@ import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
+/**
+ * @title Decrease Liquidity Command
+ * @notice Decreases liquidity from a position
+ * @dev This command interacts with the PositionManager contract to decrease liquidity
+ */
 @injectable()
 @singleton()
 export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidityCommandParams, void> {
@@ -11,6 +16,15 @@ export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidity
     private readonly positionManager: PositionManagerContract
   ) {}
 
+  /**
+   * @notice Executes the decrease liquidity command
+   * @param params The parameters for decreasing liquidity
+   * @param params.tokenId The ID of the position
+   * @param params.liquidity The amount of liquidity to remove
+   * @param params.amount0Min The minimum amount of token0 to receive
+   * @param params.amount1Min The minimum amount of token1 to receive
+   * @param params.deadline The deadline for the transaction
+   */
   async execute(params: IDecreaseLiquidityCommandParams): Promise<void> {
     try {
       const transaction = await this.positionManager.instance.decreaseLiquidity({

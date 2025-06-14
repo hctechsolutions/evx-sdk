@@ -3,6 +3,11 @@ import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
+/**
+ * @title Burn Command
+ * @notice Burns a position and removes all liquidity
+ * @dev This command interacts with the PositionManager contract to burn a position
+ */
 @injectable()
 @singleton()
 export class BurnCommand implements IBaseCommand<IBurnCommandParams, void> {
@@ -11,6 +16,11 @@ export class BurnCommand implements IBaseCommand<IBurnCommandParams, void> {
     private readonly positionManager: PositionManagerContract
   ) {}
 
+  /**
+   * @notice Executes the burn command
+   * @param params The parameters for burning a position
+   * @param params.tokenId The ID of the position to burn
+   */
   async execute(params: IBurnCommandParams): Promise<void> {
     try {
       const transaction = await this.positionManager.instance.burn(params.tokenId);

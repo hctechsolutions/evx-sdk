@@ -3,6 +3,11 @@ import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
+/**
+ * @title Collect Command
+ * @notice Collects fees and rewards from a position
+ * @dev This command interacts with the PositionManager contract to collect fees
+ */
 @injectable()
 @singleton()
 export class CollectCommand implements IBaseCommand<ICollectCommandParams, void> {
@@ -11,6 +16,14 @@ export class CollectCommand implements IBaseCommand<ICollectCommandParams, void>
     private readonly positionManager: PositionManagerContract
   ) {}
 
+  /**
+   * @notice Executes the collect command
+   * @param params The parameters for collecting fees
+   * @param params.tokenId The ID of the position to collect from
+   * @param params.recipient The address that will receive the collected fees
+   * @param params.amount0Max The maximum amount of token0 to collect
+   * @param params.amount1Max The maximum amount of token1 to collect
+   */
   async execute(params: ICollectCommandParams): Promise<void> {
     try {
       const transaction = await this.positionManager.instance.collect({

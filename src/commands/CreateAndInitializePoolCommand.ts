@@ -5,6 +5,11 @@ import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { sortTokens } from '@utils';
 
+/**
+ * @title Create and Initialize Pool Command
+ * @notice Creates and initializes a pool if necessary
+ * @dev This command interacts with the PositionManager contract to create and initialize a pool
+ */
 @injectable()
 @singleton()
 export class CreateAndInitializePoolCommand implements
@@ -15,6 +20,15 @@ export class CreateAndInitializePoolCommand implements
     private readonly positionManager: PositionManagerContract
   ) {}
 
+  /**
+   * @notice Executes the create and initialize pool command
+   * @param params The parameters for creating and initializing the pool
+   * @param params.token0 The address of the first token
+   * @param params.token1 The address of the second token
+   * @param params.fee The fee tier of the pool
+   * @param params.initialPrice The initial price to set for the pool
+   * @returns The output containing the pool address
+   */
   async execute(params: ICreateAndInitializePoolCommandParams): Promise<ICreatePoolCommandOutput> {
 
     const orderedTokens = sortTokens({
