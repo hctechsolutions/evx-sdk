@@ -1,8 +1,9 @@
 import 'reflect-metadata';
-import { Signer } from 'ethers';
+import { JsonRpcProvider, Signer } from 'ethers';
 import { container } from 'tsyringe';
 import { PositionManagerContract, FactoryContract } from '@contracts';
-import { setAllSigner, setAllChain, ChainName } from '@resources';
+import { setAllSigner, setAllChain, ChainName, setRPCProvider } from '@resources';
+import { RPC } from '@providers';
 
 // Corrige o mock mantendo os decorators como @singleton funcionando
 jest.mock('tsyringe', () => {
@@ -10,7 +11,8 @@ jest.mock('tsyringe', () => {
   return {
     ...actual,
     container: {
-      resolve: jest.fn()
+      resolve: jest.fn(),
+      registerInstance: jest.fn()
     }
   };
 });
@@ -27,6 +29,11 @@ describe('writer contract setters with dynamic resolution', () => {
   const mockContractB = {
     setSigner: jest.fn(),
     setChain: jest.fn()
+  };
+
+  const mockRPC = {
+    provider: null as JsonRpcProvider | null,
+    setProvider: jest.fn(),
   };
 
   beforeEach(() => {
@@ -55,5 +62,17 @@ describe('writer contract setters with dynamic resolution', () => {
     expect(mockContractB.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
+  });
+
+  it('should set the RPC provider with the given URL', async () => {
+    (container.resolve as jest.Mock).mockImplementation((contractClass) => {
+      if (contractClass === RPC) return mockRPC;
+      throw new Error(`Unknown contract: ${contractClass}`);
+    });
+
+    const rpcUrl = 'https://test-rpc-url';
+    await setRPCProvider(rpcUrl);
+
+    expect(mockRPC.setProvider).toHaveBeenCalledWith(rpcUrl);
   });
 });

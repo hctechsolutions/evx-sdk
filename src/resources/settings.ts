@@ -2,6 +2,7 @@ import { PositionManagerContract } from "@contracts";
 import { FactoryContract } from "@contracts";
 import { ChainName } from "@resources";
 import { container } from "tsyringe";
+import { RPC } from "@providers";
 import { Signer } from "ethers";
 
 function getWriterContracts() {
@@ -17,4 +18,9 @@ export async function setAllSigner(signer: Signer) {
 
 export async function setAllChain(chain: ChainName) {
   await Promise.all(getWriterContracts().map(c => c.setChain(chain)));
+}
+
+export async function setRPCProvider(rpcUrl: string): Promise<void> {
+  const rpc = container.resolve(RPC);
+  rpc.setProvider(rpcUrl);
 }
