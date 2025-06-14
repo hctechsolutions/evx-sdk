@@ -1,6 +1,6 @@
 import { ICreateAndInitializePoolCommandParams } from '@interfaces/commands/params/ICreateAndInitializePoolCommandParams';
 import { ICreatePoolCommandOutput } from '@interfaces/commands/outputs/ICreatePoolCommandOutput';
-import { CreateAndInitializePoolCommand } from '@commands/factory';
+import { CreateAndInitializePoolCommand } from '@commands/position-manager';
 import { PositionManagerContract } from '@contracts';
 import { sortTokens } from '@utils';
 import { RPC } from '@providers';
