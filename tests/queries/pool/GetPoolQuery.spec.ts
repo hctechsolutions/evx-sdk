@@ -1,4 +1,4 @@
-import { GetPoolQuery } from '@queries/factory';
+import { GetPoolQuery } from '@queries/pool';
 import { PoolContract } from '@contracts';
 import { IGetPoolParams } from '@interfaces/queries/params/IGetPoolParams';
 

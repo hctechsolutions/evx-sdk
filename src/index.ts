@@ -26,16 +26,18 @@ export * from './utils';
 
 // import { container } from 'tsyringe';
 
-// import { GetFeeAmountTickSpacingQuery } from './queries';
-// import { setAllChain, setRPCProvider } from './resources';
-// import { IGetFeeAmountTickSpacingQueryParams } from '@interfaces/queries/params/IGetFeeAmountTickSpacingQueryParams';
+// import { GetPositionQuery } from '@queries';
+// import { setAllChain, setRPCProvider } from '@resources';
+// import { IGetPositionParams } from '@interfaces/queries/params/IGetPositionParams';
+
 
 
 // (async () => {
 //     await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
 //     await setAllChain('sepolia');
     
-//     const getFeeAmountTickSpacingQuery = container.resolve(GetFeeAmountTickSpacingQuery);
-//     const params: IGetFeeAmountTickSpacingQueryParams = { fee: 3000 };
-//     console.log('Result:', await getFeeAmountTickSpacingQuery.execute(params));
+//     const getFeeAmountTickSpacingQuery = container.resolve(GetPositionQuery);
+//     const params: IGetPositionParams = { tokenId: 1n };
+//     const output = await getFeeAmountTickSpacingQuery.execute(params);
+//     console.log('Result:', output);
 // })()

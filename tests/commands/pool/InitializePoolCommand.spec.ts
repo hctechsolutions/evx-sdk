@@ -1,4 +1,4 @@
-import { InitializePoolCommand } from '@commands/factory';
+import { InitializePoolCommand } from '@commands/pool';
 import { PoolContract } from '@contracts';
 import { IInitializeOnlyPoolCommandParams } from '@interfaces/commands/params/IInitializePoolCommandParams';
 import { Signer } from 'ethers';
