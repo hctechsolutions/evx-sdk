@@ -36,8 +36,14 @@
       "@commands": [
         "src/commands/index.ts"
       ],
+      "@commands/*": [
+        "src/commands/*"
+      ],
       "@queries": [
         "src/queries/index.ts"
+      ],
+      "@queries/*": [
+        "src/queries/*"
       ]
     }
   },

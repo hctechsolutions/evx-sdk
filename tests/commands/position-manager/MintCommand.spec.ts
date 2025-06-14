@@ -1,5 +1,5 @@
-import { MintCommand } from '../../src/commands/MintCommand';
-import { PositionManagerContract } from '../../src/contracts';
+import { MintCommand } from '@commands/position-manager';
+import { PositionManagerContract } from '@contracts';
 import { BigNumberish } from 'ethers';
 
 describe('MintCommand', () => {
@@ -25,16 +25,16 @@ describe('MintCommand', () => {
     (positionManager.instance.mint as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const params = {
-      token0: '0xToken0',
-      token1: '0xToken1',
+      token0: '0x123',
+      token1: '0x456',
       fee: 3000,
-      tickLower: -100,
-      tickUpper: 100,
-      amount0Desired: '1000000000000000000',
-      amount1Desired: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
-      recipient: '0xRecipient',
+      tickLower: -887220,
+      tickUpper: 887220,
+      amount0Desired: '1000000',
+      amount1Desired: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
+      recipient: '0x789',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),
@@ -66,16 +66,16 @@ describe('MintCommand', () => {
     (positionManager.instance.mint as unknown as jest.Mock).mockRejectedValue(error);
 
     const params = {
-      token0: '0xToken0',
-      token1: '0xToken1',
+      token0: '0x123',
+      token1: '0x456',
       fee: 3000,
-      tickLower: -100,
-      tickUpper: 100,
-      amount0Desired: '1000000000000000000',
-      amount1Desired: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
-      recipient: '0xRecipient',
+      tickLower: -887220,
+      tickUpper: 887220,
+      amount0Desired: '1000000',
+      amount1Desired: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
+      recipient: '0x789',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),

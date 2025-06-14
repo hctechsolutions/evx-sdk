@@ -1,5 +1,5 @@
-import { CollectCommand } from '../../src/commands/CollectCommand';
-import { PositionManagerContract } from '../../src/contracts';
+import { CollectCommand } from '@commands/position-manager';
+import { PositionManagerContract } from '@contracts';
 import { BigNumberish } from 'ethers';
 
 describe('CollectCommand', () => {
@@ -26,9 +26,9 @@ describe('CollectCommand', () => {
 
     const params = {
       tokenId: '1',
-      recipient: '0xRecipient',
-      amount0Max: '1000000000000000000',
-      amount1Max: '1000000000000000000',
+      recipient: '0x123',
+      amount0Max: '1000000',
+      amount1Max: '1000000',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
       onFail: jest.fn(),
@@ -53,9 +53,9 @@ describe('CollectCommand', () => {
 
     const params = {
       tokenId: '1',
-      recipient: '0xRecipient',
-      amount0Max: '1000000000000000000',
-      amount1Max: '1000000000000000000',
+      recipient: '0x123',
+      amount0Max: '1000000',
+      amount1Max: '1000000',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
       onFail: jest.fn(),
