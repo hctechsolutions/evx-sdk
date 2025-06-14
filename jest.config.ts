@@ -7,6 +7,7 @@ const config: JestConfigWithTsJest = {
   collectCoverage: false,
   coverageDirectory: '<rootDir>/coverage',
   setupFiles: [],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
 
   testMatch: [
     '**/tests/**/*.spec.ts',
