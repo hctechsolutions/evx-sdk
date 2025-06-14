@@ -1,4 +1,4 @@
-import { PositionManagerContract } from "@contracts";
+import { PositionManagerContract, QuoterContract } from "@contracts";
 import { FactoryContract } from "@contracts";
 import { ChainName } from "@resources";
 import { container } from "tsyringe";
@@ -12,7 +12,7 @@ import { Signer } from "ethers";
 function getWriterContracts() {
   return [
     container.resolve(PositionManagerContract),
-    container.resolve(FactoryContract),
+    container.resolve(FactoryContract)
   ];
 }
 
