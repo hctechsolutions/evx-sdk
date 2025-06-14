@@ -1,6 +1,5 @@
 import { DecreaseLiquidityCommand } from '@commands/position-manager';
 import { PositionManagerContract } from '@contracts';
-import { BigNumberish } from 'ethers';
 
 describe('DecreaseLiquidityCommand', () => {
   let command: DecreaseLiquidityCommand;
