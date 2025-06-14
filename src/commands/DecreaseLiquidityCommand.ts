@@ -19,11 +19,6 @@ export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidity
   /**
    * @notice Executes the decrease liquidity command
    * @param params The parameters for decreasing liquidity
-   * @param params.tokenId The ID of the position
-   * @param params.liquidity The amount of liquidity to remove
-   * @param params.amount0Min The minimum amount of token0 to receive
-   * @param params.amount1Min The minimum amount of token1 to receive
-   * @param params.deadline The deadline for the transaction
    */
   async execute(params: IDecreaseLiquidityCommandParams): Promise<void> {
     try {

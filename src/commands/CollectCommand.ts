@@ -19,10 +19,6 @@ export class CollectCommand implements IBaseCommand<ICollectCommandParams, void>
   /**
    * @notice Executes the collect command
    * @param params The parameters for collecting fees
-   * @param params.tokenId The ID of the position to collect from
-   * @param params.recipient The address that will receive the collected fees
-   * @param params.amount0Max The maximum amount of token0 to collect
-   * @param params.amount1Max The maximum amount of token1 to collect
    */
   async execute(params: ICollectCommandParams): Promise<void> {
     try {

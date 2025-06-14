@@ -20,9 +20,6 @@ export class CreatePoolCommand implements IBaseCommand<ICreatePoolCommandParams,
   /**
    * @notice Executes the create pool command
    * @param params The parameters for creating the pool
-   * @param params.token0 The address of the first token
-   * @param params.token1 The address of the second token
-   * @param params.fee The fee tier of the pool
    */
   async execute(params: ICreatePoolCommandParams): Promise<void> {
     try {
