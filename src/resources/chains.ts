@@ -1,3 +1,8 @@
+/**
+ * @title Chain Configuration
+ * @notice Contract addresses for different networks
+ * @dev Maps contract names to their addresses for each supported chain
+ */
 export const chains = {
   sepolia: {
     positionDescriptor: '0x17C50c136887C9258310d9C3331aA0e1f8f98330',
@@ -21,6 +26,14 @@ export const chains = {
   }
 };
 
+/**
+ * @title Chain Name Type
+ * @notice Type definition for supported chain names
+ */
 export type ChainName = keyof typeof chains;
 
+/**
+ * @title Contract Name Type
+ * @notice Type definition for supported contract names
+ */
 export type ContractName = keyof typeof chains[ChainName];

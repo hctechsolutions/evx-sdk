@@ -2,15 +2,40 @@ import { ChainName, chains, ContractName } from "@resources";
 import { ethers, Signer } from "ethers";
 import { RPC } from "@providers";
 
+/**
+ * @title Base Contract Interface
+ * @notice Interface for contract interactions
+ * @dev Defines the base contract structure for all contract implementations
+ */
 export interface IBaseContract {
+  /** The current signer instance */
   signer: Signer | null | undefined;
+  /** The RPC provider instance */
   rpc: RPC;
+  /** The ethers contract instance */
   instance: ethers.Contract;
+  /** The name of the contract */
   name: ContractName;
+  /** The current chain */
   chain: ChainName;
+  /** The contract ABI */
   abi: any;
 
+  /**
+   * @notice Sets the signer for contract interactions
+   * @param signer The signer to use for transactions
+   */
   setSigner(signer: Signer): void;
+
+  /**
+   * @notice Sets the chain for contract interactions
+   * @param chain The chain to use for contract interactions
+   */
   setChain(chain: keyof typeof chains): void;
+
+  /**
+   * @notice Gets the contract address for the current chain
+   * @returns The contract address
+   */
   getAddress(): string;
 }
