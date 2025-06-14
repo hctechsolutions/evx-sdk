@@ -1,2 +1,3 @@
 export * from './SwapExactInputCommand';
-export * from './SwapExactInputSingleCommand'; 
+export * from './SwapExactOutputCommand';
+export * from './SwapExactInputSingleCommand';
