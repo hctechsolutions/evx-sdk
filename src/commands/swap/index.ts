@@ -1,1 +1,2 @@
-export * from './SwapExactInputCommand'; 
+export * from './SwapExactInputCommand';
+export * from './SwapExactInputSingleCommand'; 
