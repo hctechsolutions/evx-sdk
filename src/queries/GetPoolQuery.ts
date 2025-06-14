@@ -4,10 +4,21 @@ import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 
+/**
+ * @title Get Pool Query
+ * @notice Retrieves pool information and configuration
+ * @dev Queries the pool contract to get token addresses, fee tier, and other pool parameters
+ */
 @injectable()
 @singleton()
 export class GetPoolQuery implements IBaseQuery<IGetPoolParams, IGetPoolOutput> {
 
+  /**
+   * @notice Executes the query to get pool information
+   * @param params The parameters for the query
+   * @param params.address The address of the pool contract
+   * @returns Pool information including token addresses, fee tier, and configuration
+   */
   async execute(params: IGetPoolParams): Promise<IGetPoolOutput> {
     const pool = new PoolContract(params.address);
 
