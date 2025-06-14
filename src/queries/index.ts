@@ -4,3 +4,4 @@ export * from './position-manager';
 export * from './factory';
 export * from './pool';
 export * from './position-lens';
+export * from './quoter';

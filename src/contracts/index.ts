@@ -7,3 +7,4 @@ export * from './PositionManagerContract';
 export * from './PositionLensContract';
 export * from './PairFlashContract';
 export * from './SwapRouterContract';
+export * from './QuoterContract';
