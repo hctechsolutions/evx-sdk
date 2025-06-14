@@ -19,7 +19,6 @@ export class BurnCommand implements IBaseCommand<IBurnCommandParams, void> {
   /**
    * @notice Executes the burn command
    * @param params The parameters for burning a position
-   * @param params.tokenId The ID of the position to burn
    */
   async execute(params: IBurnCommandParams): Promise<void> {
     try {

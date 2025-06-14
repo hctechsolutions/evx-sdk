@@ -19,12 +19,6 @@ export class IncreaseLiquidityCommand implements IBaseCommand<IIncreaseLiquidity
   /**
    * @notice Executes the increase liquidity command
    * @param params The parameters for increasing liquidity
-   * @param params.tokenId The ID of the position
-   * @param params.amount0Desired The desired amount of token0 to add
-   * @param params.amount1Desired The desired amount of token1 to add
-   * @param params.amount0Min The minimum amount of token0 to add
-   * @param params.amount1Min The minimum amount of token1 to add
-   * @param params.deadline The deadline for the transaction
    */
   async execute(params: IIncreaseLiquidityCommandParams): Promise<void> {
     try {
