@@ -1,5 +1,5 @@
-import { IncreaseLiquidityCommand } from '../../src/commands/IncreaseLiquidityCommand';
-import { PositionManagerContract } from '../../src/contracts';
+import { IncreaseLiquidityCommand } from '@commands/position-manager';
+import { PositionManagerContract } from '@contracts';
 import { BigNumberish } from 'ethers';
 
 describe('IncreaseLiquidityCommand', () => {
@@ -16,7 +16,7 @@ describe('IncreaseLiquidityCommand', () => {
     command = new IncreaseLiquidityCommand(positionManager);
   });
 
-  it('should execute increaseLiquidity command successfully', async () => {
+  it('should execute increase liquidity command successfully', async () => {
     const mockTransaction = {
       hash: '0x123',
       wait: jest.fn().mockResolvedValue({}),
@@ -26,10 +26,10 @@ describe('IncreaseLiquidityCommand', () => {
 
     const params = {
       tokenId: '1',
-      amount0Desired: '1000000000000000000',
-      amount1Desired: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
+      amount0Desired: '1000000',
+      amount1Desired: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),
@@ -51,16 +51,16 @@ describe('IncreaseLiquidityCommand', () => {
     expect(params.onFail).not.toHaveBeenCalled();
   });
 
-  it('should handle errors during increaseLiquidity execution', async () => {
+  it('should handle errors during increase liquidity execution', async () => {
     const error = new Error('Transaction failed');
     (positionManager.instance.increaseLiquidity as unknown as jest.Mock).mockRejectedValue(error);
 
     const params = {
       tokenId: '1',
-      amount0Desired: '1000000000000000000',
-      amount1Desired: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
+      amount0Desired: '1000000',
+      amount1Desired: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),

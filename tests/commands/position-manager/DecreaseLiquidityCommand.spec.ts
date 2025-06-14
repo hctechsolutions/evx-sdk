@@ -1,5 +1,5 @@
-import { DecreaseLiquidityCommand } from '../../src/commands/DecreaseLiquidityCommand';
-import { PositionManagerContract } from '../../src/contracts';
+import { DecreaseLiquidityCommand } from '@commands/position-manager';
+import { PositionManagerContract } from '@contracts';
 import { BigNumberish } from 'ethers';
 
 describe('DecreaseLiquidityCommand', () => {
@@ -16,7 +16,7 @@ describe('DecreaseLiquidityCommand', () => {
     command = new DecreaseLiquidityCommand(positionManager);
   });
 
-  it('should execute decreaseLiquidity command successfully', async () => {
+  it('should execute decrease liquidity command successfully', async () => {
     const mockTransaction = {
       hash: '0x123',
       wait: jest.fn().mockResolvedValue({}),
@@ -26,9 +26,9 @@ describe('DecreaseLiquidityCommand', () => {
 
     const params = {
       tokenId: '1',
-      liquidity: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
+      liquidity: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),
@@ -49,15 +49,15 @@ describe('DecreaseLiquidityCommand', () => {
     expect(params.onFail).not.toHaveBeenCalled();
   });
 
-  it('should handle errors during decreaseLiquidity execution', async () => {
+  it('should handle errors during decrease liquidity execution', async () => {
     const error = new Error('Transaction failed');
     (positionManager.instance.decreaseLiquidity as unknown as jest.Mock).mockRejectedValue(error);
 
     const params = {
       tokenId: '1',
-      liquidity: '1000000000000000000',
-      amount0Min: '900000000000000000',
-      amount1Min: '900000000000000000',
+      liquidity: '1000000',
+      amount0Min: '0',
+      amount1Min: '0',
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),

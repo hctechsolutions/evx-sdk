@@ -1,5 +1,4 @@
 import "reflect-metadata"
 
-export * from './GetPoolQuery';
-export * from './GetFeeAmountTickSpacingQuery';
-export * from './GetOwnerQuery';
+export * from './position-manager';
+export * from './factory';

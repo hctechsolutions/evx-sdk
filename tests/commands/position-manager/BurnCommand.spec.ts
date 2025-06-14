@@ -1,6 +1,5 @@
-import { BurnCommand } from '../../src/commands/BurnCommand';
-import { PositionManagerContract } from '../../src/contracts';
-import { BigNumberish } from 'ethers';
+import { BurnCommand } from '@commands/position-manager';
+import { PositionManagerContract } from '@contracts';
 
 describe('BurnCommand', () => {
   let command: BurnCommand;
