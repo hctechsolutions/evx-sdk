@@ -8,18 +8,12 @@ import { RPC } from "@providers";
  * @dev Defines the base contract structure for all contract implementations
  */
 export interface IBaseContract {
-  /** The current signer instance */
-  signer: Signer | null | undefined;
-  /** The RPC provider instance */
-  rpc: RPC;
-  /** The ethers contract instance */
-  instance: ethers.Contract;
-  /** The name of the contract */
-  name: ContractName;
-  /** The current chain */
-  chain: ChainName;
-  /** The contract ABI */
-  abi: any;
+  signer: Signer | null | undefined; // The current signer instance
+  instance: ethers.Contract;         // The ethers contract instance
+  name: ContractName;                // The name of the contract
+  chain: ChainName;                  // The current chain
+  rpc: RPC;                          // The RPC provider instance
+  abi: any;                          // The contract ABI
 
   /**
    * @notice Sets the signer for contract interactions
