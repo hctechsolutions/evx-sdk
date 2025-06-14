@@ -16,7 +16,6 @@ export class GetPoolQuery implements IBaseQuery<IGetPoolParams, IGetPoolOutput> 
   /**
    * @notice Executes the query to get pool information
    * @param params The parameters for the query
-   * @param params.address The address of the pool contract
    * @returns Pool information including token addresses, fee tier, and configuration
    */
   async execute(params: IGetPoolParams): Promise<IGetPoolOutput> {

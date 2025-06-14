@@ -19,7 +19,6 @@ export class GetFeeAmountTickSpacingQuery implements IBaseQuery<IGetFeeAmountTic
   /**
    * @notice Executes the query to get tick spacing
    * @param params The parameters for the query
-   * @param params.fee The fee amount to get tick spacing for
    * @returns The tick spacing for the given fee amount
    */
   async execute(params: IGetFeeAmountTickSpacingQueryParams): Promise<number> {
