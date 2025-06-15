@@ -8,3 +8,4 @@ export * from './PositionLensContract';
 export * from './PairFlashContract';
 export * from './SwapRouterContract';
 export * from './QuoterContract';
+export * from './TickLensContract';

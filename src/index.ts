@@ -72,3 +72,46 @@ export * from './utils';
 // }
 
 // main().catch(console.error);
+
+// Playground
+
+// import { container } from 'tsyringe';
+// import { setAllChain, setRPCProvider, TICK_BITMAP_INDEX } from './resources';
+
+// function getBitmapIndex(tick: number, tickSpacing: number): number {
+//     return Math.floor(tick / tickSpacing) >> 8;
+// }
+
+// async function playground() {
+//   const rpc = container.resolve(RPC);
+
+//   await setRPCProvider('https://sepolia.infura.io/v3/bee828df1f514cbcaa66c72a9c18a4dd');
+//   await setAllChain('sepolia');
+
+//   const query = container.resolve(GetPopulatedTicksQuery);
+//   const bitmapIndexes: number[] = [];
+//   let current = 0;
+//   for (let index = TICK_BITMAP_INDEX.MIN; index <= TICK_BITMAP_INDEX.MAX; index++) {
+//     current = getBitmapIndex(index, 200);
+//     if (!bitmapIndexes.includes(current)) {
+//         bitmapIndexes.push(current);
+//     }
+//   }
+
+//   console.log(bitmapIndexes);
+
+//   for (const index of bitmapIndexes) {
+//     try {
+//         const result = await query.execute({
+//           pool: '0x7A7c0571A89b01dF4EBBc70e95B9a6c19DC7571F', // Replace with actual pool address
+//           tickBitmapIndex: index
+//         });
+
+//         console.log('Populated Ticks:', result.populatedTicks);
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+//   }
+// }
+
+// playground();
