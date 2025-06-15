@@ -11,6 +11,7 @@ export const chains = {
     swapRouter: '0xDea4395543832560b33F80C4B5cA1F852856D088',
     swapQuoter: '0x6cb7Df410cD1c47e29473154f2FA36cf058D4477',
     pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
+    tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
     dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
   },
@@ -21,6 +22,7 @@ export const chains = {
     swapRouter: '0xDea4395543832560b33F80C4B5cA1F852856D088',
     swapQuoter: '0x6cb7Df410cD1c47e29473154f2FA36cf058D4477',
     pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
+    tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
     dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
   }
