@@ -80,10 +80,12 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 
 ## Features
 
-* 🌐 Connect to any EVM-compatible chain
+* 🌐 Connect to any EVM-compatible chain (Mainnet, Sepolia)
+* ⚙️ Simple configuration with `setRPCProvider` and `setAllChain`
 * 🏗️ CQRS-based structure (`commands`, `queries`)
 * 🔗 Minimal and typed interaction with contracts (ethers.js)
 * 🔍 Query pools and token pairs with ease
+* 👂 Real-time event listening capabilities
 * ⚡ Auto-versioning with GitFlow
 * 🧪 Comprehensive test coverage
 * 📦 CI/CD automation
@@ -100,44 +102,81 @@ yarn add @nebular/sdk
 
 ## Usage
 
+### Setup SDK Configuration
+
+Before using any SDK functionality, you need to configure the RPC provider and chain:
+
+```ts
+import { setRPCProvider, setAllChain } from '@nebular/sdk';
+
+// Configure RPC provider and chain
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia'); // or 'mainnet'
+```
+
 ### Read pool info directly from blockchain
 
 ```ts
-import { GetPoolQuery } from '@nebular/sdk/queries';
+import { GetPoolQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
 import { container } from 'tsyringe';
 
-const getPool = container.resolve(GetPoolQuery);
+// Setup SDK configuration
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
 
+// Query pool information
+const getPool = container.resolve(GetPoolQuery);
 const pool = await getPool.execute({ 
   address: '0x7Fb01B2d918Edcad3d3a05b5B7A511ACA1C66aD8' 
-})
+});
 
-console.table(pool)
+console.table(pool);
 ```
 
 ### Query multiple pools
 
 ```ts
-import { GetPoolsQuery } from '@nebular/sdk/queries';
+import { GetPoolsQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
 
+// Setup SDK configuration
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
+
+// Query multiple pools
 const getPools = container.resolve(GetPoolsQuery);
 const pools = await getPools.execute({
   token0: '0xA0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE',
   token1: '0xB0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE'
 });
+
+console.log('Found pools:', pools);
 ```
 
 ### Listen to pool events
 
 ```ts
-import { PoolCreatedListener } from '@nebular/sdk/listeners';
+import { PoolCreatedListener, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
 
-const listener = container.resolve(PoolCreatedListener);
-await listener.start();
+async function listenToEvents() {
+  // Setup SDK configuration
+  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+  await setAllChain('sepolia');
 
-listener.on('poolCreated', (pool) => {
-  console.log('New pool created:', pool);
-});
+  // Start listening for pool creation events
+  const listener = container.resolve(PoolCreatedListener);
+  
+  await listener.start(async (event) => {
+    console.log('🎉 New pool created!');
+    console.log('Token0:', event.token0);
+    console.log('Token1:', event.token1);
+    console.log('Fee:', event.fee);
+    console.log('Pool Address:', event.pool);
+  });
+}
+
+listenToEvents();
 ```
 
 ---
@@ -152,22 +191,39 @@ listener.on('poolCreated', (pool) => {
 
 ## Environment Configuration
 
+### Supported Chains
+
+The SDK supports the following networks:
+
+```typescript
+import { setRPCProvider, setAllChain } from '@nebular/sdk';
+
+// Sepolia Testnet
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
+
+// Ethereum Mainnet
+await setRPCProvider('https://mainnet.infura.io/v3/YOUR_KEY');
+await setAllChain('mainnet');
+```
+
+### Using Environment Variables
+
 Create a `.env` file:
 
 ```env
-CHAIN=mainnet
-RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
+CHAIN=sepolia
+RPC_URL=https://sepolia.infura.io/v3/YOUR_KEY
 ```
 
-### Supported Chains
+Then use in your code:
 
 ```typescript
-// Available chains
-const chains = {
-  mainnet: 'https://mainnet.infura.io/v3/YOUR_KEY',
-  sepolia: 'https://sepolia.infura.io/v3/YOUR_KEY',
-  // Add custom chains...
-}
+import { setRPCProvider, setAllChain } from '@nebular/sdk';
+
+// Load from environment variables
+await setRPCProvider(process.env.RPC_URL!);
+await setAllChain(process.env.CHAIN as 'sepolia' | 'mainnet');
 ```
 
 ---
