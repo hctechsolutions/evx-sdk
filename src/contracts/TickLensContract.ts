@@ -21,4 +21,4 @@ export class TickLensContract extends BaseContract {
   ) {
     super('tickLens', rpc, TickLensABI);
   }
-} 
+}

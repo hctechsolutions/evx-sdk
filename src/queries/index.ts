@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata';
 
 export * from './position-manager';
 export * from './factory';

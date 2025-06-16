@@ -21,4 +21,4 @@ export class QuoterContract extends BaseContract {
   ) {
     super('swapQuoter', rpc, QuoterABI);
   }
-} 
+}

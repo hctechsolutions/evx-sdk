@@ -12,6 +12,6 @@ export function sortTokens(pair: ITokenPair): ITokenPair {
 
   return {
     token0: isCorrectOrder ? pair.token0 : pair.token1,
-    token1: isCorrectOrder ? pair.token1 : pair.token0,
+    token1: isCorrectOrder ? pair.token1 : pair.token0
   } as ITokenPair;
 }

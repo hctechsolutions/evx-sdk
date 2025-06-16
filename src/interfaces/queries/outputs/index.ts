@@ -5,4 +5,4 @@ export * from './IQuoteExactInputOutput';
 export * from './IQuoteExactInputSingleOutput';
 export * from './IGetPopulatedTicksOutput';
 export * from './IQuoteExactOutputOutput';
-export * from './IQuoteExactOutputSingleOutput'; 
+export * from './IQuoteExactOutputSingleOutput';

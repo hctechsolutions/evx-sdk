@@ -1,12 +1,12 @@
-import { IBaseCommandParams } from "./IBaseCommandParams"
-import { Signer } from "ethers";
+import { IBaseCommandParams } from './IBaseCommandParams';
+import { Signer } from 'ethers';
 
 /**
  * @notice Parameters for initializing a pool
  * @dev Extends base command parameters with initialization specific parameters
  */
 export interface IInitializePoolCommandParams extends IBaseCommandParams {
-  initialPrice: bigint // The initial price to set for the pool
+  initialPrice: bigint; // The initial price to set for the pool
 }
 
 /**

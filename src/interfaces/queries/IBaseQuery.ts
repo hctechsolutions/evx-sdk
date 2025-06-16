@@ -15,4 +15,3 @@ export interface IBaseQuery<Params, Output> {
    */
   execute(params: Params): Promise<Output>;
 }
-

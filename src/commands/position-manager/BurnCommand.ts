@@ -32,4 +32,4 @@ export class BurnCommand implements IBaseCommand<IBurnCommandParams, void> {
       params.onFail?.(error);
     }
   }
-} 
+}

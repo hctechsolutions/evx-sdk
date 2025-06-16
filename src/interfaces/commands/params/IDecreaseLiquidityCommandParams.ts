@@ -11,4 +11,4 @@ export interface IDecreaseLiquidityCommandParams extends IBaseCommandParams {
   amount0Min: BigNumberish; // The minimum amount of token0 to receive
   amount1Min: BigNumberish; // The minimum amount of token1 to receive
   deadline: number; // The deadline for the transaction
-} 
+}

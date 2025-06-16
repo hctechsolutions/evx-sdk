@@ -11,7 +11,6 @@ import { PoolContract } from '@contracts';
 @injectable()
 @singleton()
 export class InitializePoolCommand implements IBaseCommand<IInitializeOnlyPoolCommandParams, void> {
-
   /**
    * @notice Executes the initialize pool command
    * @param params The parameters for initializing the pool
