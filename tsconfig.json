@@ -44,6 +44,12 @@
       ],
       "@queries/*": [
         "src/queries/*"
+      ],
+      "@listeners": [
+        "src/listeners/index.ts"
+      ],
+      "@listeners/*": [
+        "src/listeners/*"
       ]
     }
   },

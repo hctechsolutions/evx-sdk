@@ -35,7 +35,10 @@ const config: JestConfigWithTsJest = {
     '^@utils': '<rootDir>/src/utils/index.ts',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
 
-    '^@abis/(.*)$': '<rootDir>/src/abis/$1'
+    '^@abis/(.*)$': '<rootDir>/src/abis/$1',
+
+    '^@listeners': '<rootDir>/src/listeners/index.ts',
+    '^@listeners/(.*)$': '<rootDir>/src/listeners/$1'
   },
 
   moduleFileExtensions: [
