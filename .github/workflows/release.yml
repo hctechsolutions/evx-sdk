@@ -138,11 +138,11 @@ jobs:
       - name: Notify success
         if: needs.create-release.result == 'success'
         run: |
-          echo "✅ Successfully released ${{ steps.get_version.outputs.version }}"
-          echo "📦 GitHub Release: https://github.com/nebular-finance/nebular-sdk/releases/tag/${{ steps.get_version.outputs.version }}"
+          echo "Successfully released ${{ steps.get_version.outputs.version }}"
+          echo "GitHub Release: https://github.com/nebular-finance/nebular-sdk/releases/tag/${{ steps.get_version.outputs.version }}"
           
       - name: Notify NPM publish
         if: needs.publish-npm.result == 'success'
         run: |
-          echo "📦 Successfully published to NPM"
-          echo "🔗 NPM Package: https://www.npmjs.com/package/nebular-sdk" 
+          echo "Successfully published to NPM"
+          echo "NPM Package: https://www.npmjs.com/package/nebular-sdk" 

@@ -33,12 +33,12 @@ jobs:
       - name: Run tests
         run: npm run test:cov
 
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
-        if: success()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+      # - name: Upload coverage reports
+      #   uses: codecov/codecov-action@v3
+      #   if: success()
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     fail_ci_if_error: false
 
   build:
     name: Build
