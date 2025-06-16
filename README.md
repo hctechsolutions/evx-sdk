@@ -25,49 +25,21 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 | ⚙️ **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
 
 #### 🔧 **Development Tools**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 📦 **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md) | ✅ Complete |
-| 🔀 **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md) | ✅ Complete |
-| 🏃‍♂️ **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md) | ✅ Complete |
-
-#### 🏗️ **Architecture**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 📝 **CQRS Pattern** | Command Query Responsibility Segregation | [CQRS Pattern](docs/architecture/cqrs.md) | 🚧 In Progress |
-| 📁 **Project Structure** | Directory organization | [Project Structure](docs/architecture/structure.md) | 🚧 In Progress |
-| 🔧 **Dependency Injection** | TSyringe container usage | [Dependency Injection](docs/architecture/di.md) | 🚧 In Progress |
-
-#### 🧪 **Testing**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🏗️ **Test Structure** | Jest configuration and patterns | [Test Structure](docs/testing/structure.md) | 🚧 In Progress |
-| ✍️ **Writing Tests** | Best practices | [Writing Tests](docs/testing/writing-tests.md) | 🚧 In Progress |
-| 📊 **Coverage Reports** | Understanding test coverage | [Coverage Reports](docs/testing/coverage.md) | 🚧 In Progress |
+| Section | Description | Link |
+|---------|-------------|------|
+| 📦 **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md)
+| 🔀 **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md)
+| 🏃‍♂️ **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md)
 
 #### 🚀 **Deployment**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🔄 **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md) | ✅ Complete |
-| 📦 **NPM Publishing** | Package publication | [NPM Publishing](docs/deployment/npm.md) | 📋 Planned |
-| 🏷️ **GitHub Releases** | Release management | [GitHub Releases](docs/deployment/releases.md) | 📋 Planned |
+| Section | Description | Link |
+|---------|-------------|------|
+| 🔄 **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md)
 
 #### 🤝 **Contributing**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🤝 **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md) | ✅ Complete |
-| 🎨 **Code Style** | Coding standards | [Code Style](docs/contributing/style.md) | 📋 Planned |
-| 🔄 **Pull Request Process** | PR workflow | [Pull Request Process](docs/contributing/pr-process.md) | 📋 Planned |
-
-#### 📋 **API Reference**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| ⚡ **Commands** | Available commands | [Commands](docs/api/commands.md) | 📋 Planned |
-| 🔍 **Queries** | Available queries | [Queries](docs/api/queries.md) | 📋 Planned |
-| 📝 **Types** | TypeScript definitions | [Types](docs/api/types.md) | 📋 Planned |
-| 🌐 **Chains** | Supported networks | [Chains](docs/api/chains.md) | 📋 Planned |
-
-> **Documentation Status Legend**: ✅ Complete | 🚧 In Progress | 📋 Planned
+| Section | Description | Link |
+|---------|-------------|------|
+| 🤝 **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md)
 
 ### 🔗 Quick Links
 
@@ -168,7 +140,7 @@ async function listenToEvents() {
   const listener = container.resolve(PoolCreatedListener);
   
   await listener.start(async (event) => {
-    console.log('🎉 New pool created!');
+    console.log('New pool created!');
     console.log('Token0:', event.token0);
     console.log('Token1:', event.token1);
     console.log('Fee:', event.fee);
@@ -206,27 +178,6 @@ await setAllChain('sepolia');
 await setRPCProvider('https://mainnet.infura.io/v3/YOUR_KEY');
 await setAllChain('mainnet');
 ```
-
-### Using Environment Variables
-
-Create a `.env` file:
-
-```env
-CHAIN=sepolia
-RPC_URL=https://sepolia.infura.io/v3/YOUR_KEY
-```
-
-Then use in your code:
-
-```typescript
-import { setRPCProvider, setAllChain } from '@nebular/sdk';
-
-// Load from environment variables
-await setRPCProvider(process.env.RPC_URL!);
-await setAllChain(process.env.CHAIN as 'sepolia' | 'mainnet');
-```
-
----
 
 ## Development
 
