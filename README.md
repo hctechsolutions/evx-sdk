@@ -9,39 +9,39 @@ The Nebular SDK is a TypeScript developer toolkit designed to simplify interacti
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 Welcome to the comprehensive documentation for the Nebular SDK. This section contains detailed guides, workflows, and tools documentation.
 
-**🚀 [Quick Start](#installation)** | **🤝 [Contributing](docs/contributing.md)** | **🔧 [Development Tools](#development)**
+**[Quick Start](#installation)** | **[Contributing](docs/contributing.md)** | **[Development Tools](#development)**
 
-### 📋 Documentation Structure
+### Documentation Structure
 
-#### 🚀 **Getting Started**
+#### **Getting Started**
 | Section | Description | Link |
 |---------|-------------|------|
-| 🚀 **Installation** | Quick start guide | [Getting Started](#installation) |
-| 🔧 **Basic Usage** | Your first SDK queries | [Usage Examples](#usage) |
-| ⚙️ **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
+| **Installation** | Quick start guide | [Getting Started](#installation) |
+| **Basic Usage** | Your first SDK queries | [Usage Examples](#usage) |
+| **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
 
-#### 🔧 **Development Tools**
+#### **Development Tools**
 | Section | Description | Link |
 |---------|-------------|------|
-| 📦 **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md)
-| 🔀 **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md)
-| 🏃‍♂️ **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md)
+| **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md)
+| **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md)
+| **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md)
 
-#### 🚀 **Deployment**
+#### **Deployment**
 | Section | Description | Link |
 |---------|-------------|------|
-| 🔄 **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md)
+| **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md)
 
-#### 🤝 **Contributing**
+#### **Contributing**
 | Section | Description | Link |
 |---------|-------------|------|
-| 🤝 **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md)
+| **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md)
 
-### 🔗 Quick Links
+### Quick Links
 
 - **[Version Manager](docs/version-manager.md)** - Automatic GitFlow versioning
 - **[GitHub Workflows](docs/workflows.md)** - CI/CD automation
@@ -52,15 +52,15 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 
 ## Features
 
-* 🌐 Connect to any EVM-compatible chain (Mainnet, Sepolia)
-* ⚙️ Simple configuration with `setRPCProvider` and `setAllChain`
-* 🏗️ CQRS-based structure (`commands`, `queries`)
-* 🔗 Minimal and typed interaction with contracts (ethers.js)
-* 🔍 Query pools and token pairs with ease
-* 👂 Real-time event listening capabilities
-* ⚡ Auto-versioning with GitFlow
-* 🧪 Comprehensive test coverage
-* 📦 CI/CD automation
+* Connect to any EVM-compatible chain (Mainnet, Sepolia)
+* Simple configuration with `setRPCProvider` and `setAllChain`
+* CQRS-based structure (`commands`, `queries`)
+* Minimal and typed interaction with contracts (ethers.js)
+* Query pools and token pairs with ease
+* Real-time event listening capabilities
+* Auto-versioning with GitFlow
+* Comprehensive test coverage
+* CI/CD automation
 
 ---
 
@@ -155,9 +155,9 @@ listenToEvents();
 
 ## Supported Networks
 
-* 🌐 Ethereum Mainnet
-* 🧪 Sepolia Testnet
-* ⚙️ Add your own in `resources/chains.ts`
+* Ethereum Mainnet
+* Sepolia Testnet
+* Add your own in `resources/chains.ts`
 
 ---
 
@@ -217,7 +217,7 @@ npm run test:watch    # Watch mode
 npm run test:cov      # With coverage report
 ```
 
-> **📊 Test Coverage**: We maintain >80% test coverage across all modules.
+> **Test Coverage**: We maintain >80% test coverage across all modules.
 
 ---
 
@@ -236,12 +236,12 @@ src/
 
 ### Key Patterns
 
-- **🔧 Dependency Injection** - Using TSyringe container
-- **📝 CQRS** - Separation of read and write operations
-- **🎯 Single Responsibility** - Each class has one clear purpose
-- **🧪 Test-Driven** - Comprehensive test coverage
+- **Dependency Injection** - Using TSyringe container
+- **CQRS** - Separation of read and write operations
+- **Single Responsibility** - Each class has one clear purpose
+- **Test-Driven** - Comprehensive test coverage
 
-> **📖 Learn More**: [Architecture Guide](docs/architecture/cqrs.md)
+> **Learn More**: [Architecture Guide](docs/architecture/cqrs.md)
 
 ---
 
@@ -267,19 +267,19 @@ We use **GitFlow** for branch management:
 | `bugfix/*` | Bug fixes | `bugfix/fix-pool-query` |
 | `hotfix/*` | Critical fixes | `hotfix/security-patch` |
 
-> **📖 Learn More**: [Contributing Guide](docs/contributing.md) | [GitFlow Workflow](docs/versioning.md)
+> **Learn More**: [Contributing Guide](docs/contributing.md) | [GitFlow Workflow](docs/versioning.md)
 
 ---
 
 ## Community & Support
 
-### 🆘 Need Help?
+### Need Help?
 
-- **📖 Documentation**: Browse the guides above
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/nebular-finance/nebular-sdk/issues)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
-- **🔧 Development**: [Contributing Guide](docs/contributing.md)
-- **📧 Contact**: [Team Email](mailto:team@nebular.finance)
+- **Documentation**: Browse the guides above
+- **Bug Reports**: [GitHub Issues](https://github.com/nebular-finance/nebular-sdk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
+- **Development**: [Contributing Guide](docs/contributing.md)
+- **Contact**: [Team Email](mailto:team@nebular.finance)
 
 ---
 
@@ -299,7 +299,7 @@ See [Releases](https://github.com/nebular-finance/nebular-sdk/releases) for vers
 
 <div align="center">
   
-**Built with ❤️ by the Nebular Finance Team**
+**Built with love by the Nebular Finance Team**
 
 [Website](https://nebular.finance) • [Twitter](https://twitter.com/nebular_finance) • [Discord](https://discord.gg/nebular)
 
