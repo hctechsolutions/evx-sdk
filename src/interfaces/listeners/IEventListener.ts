@@ -34,4 +34,4 @@ export interface IEventListener<T> {
    * Check if the listener is currently active
    */
   readonly listening: boolean;
-} 
+}

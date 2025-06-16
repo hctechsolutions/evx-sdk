@@ -12,4 +12,4 @@ export interface IIncreaseLiquidityCommandParams extends IBaseCommandParams {
   amount0Min: BigNumberish; // The minimum amount of token0 to add
   amount1Min: BigNumberish; // The minimum amount of token1 to add
   deadline: number; // The deadline for the transaction
-} 
+}

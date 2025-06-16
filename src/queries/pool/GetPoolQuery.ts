@@ -12,7 +12,6 @@ import { PoolContract } from '@contracts';
 @injectable()
 @singleton()
 export class GetPoolQuery implements IBaseQuery<IGetPoolParams, IGetPoolOutput> {
-
   /**
    * @notice Executes the query to get pool information
    * @param params The parameters for the query
@@ -26,7 +25,7 @@ export class GetPoolQuery implements IBaseQuery<IGetPoolParams, IGetPoolOutput> 
       pool.instance.token1(),
       pool.instance.fee(),
       pool.instance.tickSpacing(),
-      pool.instance.maxLiquidityPerTick(),
+      pool.instance.maxLiquidityPerTick()
     ]);
 
     return {
@@ -35,6 +34,6 @@ export class GetPoolQuery implements IBaseQuery<IGetPoolParams, IGetPoolOutput> 
       feeTier,
       tickSpacing,
       maxLiquidityPerTick
-    }
+    };
   }
 }

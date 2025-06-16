@@ -14,7 +14,7 @@ import { EventLog } from 'ethers';
 export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
   private isListening = false;
   private eventFilter: any;
-  private callbacks: Array<(event: IPoolCreatedEvent) => void | Promise<void>> = [];
+  private callbacks: ((event: IPoolCreatedEvent) => void | Promise<void>)[] = [];
 
   constructor(
     @inject(FactoryContract)
@@ -24,9 +24,8 @@ export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
   /**
    * @notice Start listening for PoolCreated events
    * @param callback Function to call when event is received
-   * @param fromBlock Starting block number (optional)
    */
-  async start(callback: (event: IPoolCreatedEvent) => void | Promise<void>, fromBlock?: number): Promise<void> {
+  async start(callback: (event: IPoolCreatedEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
     if (this.isListening) {
@@ -34,8 +33,15 @@ export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
     }
 
     this.eventFilter = this.factoryContract.instance.filters.PoolCreated();
-    
-    const handleEvent = async (token0: string, token1: string, fee: bigint, tickSpacing: bigint, pool: string, event: EventLog) => {
+
+    const handleEvent = async (
+      token0: string,
+      token1: string,
+      fee: bigint,
+      tickSpacing: bigint,
+      pool: string,
+      event: EventLog
+    ) => {
       const poolCreatedEvent: IPoolCreatedEvent = {
         token0,
         token1,
@@ -105,7 +111,7 @@ export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
     return events.map((event) => {
       if ('args' in event) {
         const [token0, token1, fee, tickSpacing, pool] = event.args;
-        
+
         return {
           token0,
           token1,
@@ -127,4 +133,4 @@ export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

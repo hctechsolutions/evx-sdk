@@ -12,7 +12,9 @@ import { TICK_BITMAP_INDEX } from '@resources';
  */
 @injectable()
 @singleton()
-export class GetPopulatedTicksQuery implements IBaseQuery<IGetPopulatedTicksQueryParams, IGetPopulatedTicksOutput> {
+export class GetPopulatedTicksQuery
+  implements IBaseQuery<IGetPopulatedTicksQueryParams, IGetPopulatedTicksOutput>
+{
   constructor(
     @inject(TickLensContract)
     private readonly tickLens: TickLensContract
@@ -25,8 +27,13 @@ export class GetPopulatedTicksQuery implements IBaseQuery<IGetPopulatedTicksQuer
    * @throws Error if tickBitmapIndex is out of range
    */
   async execute(params: IGetPopulatedTicksQueryParams): Promise<IGetPopulatedTicksOutput> {
-    if (params.tickBitmapIndex < TICK_BITMAP_INDEX.MIN || params.tickBitmapIndex > TICK_BITMAP_INDEX.MAX) {
-      throw new Error(`tickBitmapIndex must be between ${TICK_BITMAP_INDEX.MIN} and ${TICK_BITMAP_INDEX.MAX}`);
+    if (
+      params.tickBitmapIndex < TICK_BITMAP_INDEX.MIN ||
+      params.tickBitmapIndex > TICK_BITMAP_INDEX.MAX
+    ) {
+      throw new Error(
+        `tickBitmapIndex must be between ${TICK_BITMAP_INDEX.MIN} and ${TICK_BITMAP_INDEX.MAX}`
+      );
     }
 
     const populatedTicks = await this.tickLens.instance.getPopulatedTicksInWord.staticCall(
@@ -35,13 +42,15 @@ export class GetPopulatedTicksQuery implements IBaseQuery<IGetPopulatedTicksQuer
     );
 
     const result = {
-      populatedTicks: populatedTicks.map((tick: { tick: bigint; liquidityNet: bigint; liquidityGross: bigint }) => ({
-        tick: Number(tick.tick),
-        liquidityNet: tick.liquidityNet,
-        liquidityGross: tick.liquidityGross
-      }))
+      populatedTicks: populatedTicks.map(
+        (tick: { tick: bigint; liquidityNet: bigint; liquidityGross: bigint }) => ({
+          tick: Number(tick.tick),
+          liquidityNet: tick.liquidityNet,
+          liquidityGross: tick.liquidityGross
+        })
+      )
     };
 
     return result;
   }
-} 
+}

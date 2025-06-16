@@ -22,4 +22,4 @@ export class GetOwnerQuery implements IBaseQuery<void, string> {
   async execute(): Promise<string> {
     return await this.factory.instance.owner();
   }
-} 
+}

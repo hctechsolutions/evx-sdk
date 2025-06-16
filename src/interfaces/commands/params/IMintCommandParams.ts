@@ -17,4 +17,4 @@ export interface IMintCommandParams extends IBaseCommandParams {
   amount1Min: BigNumberish; // The minimum amount of token1 to add
   recipient: string; // The address that will receive the position
   deadline: number; // The deadline for the transaction
-} 
+}

@@ -3,4 +3,4 @@ export interface IQuoteExactOutputSingleOutput {
   sqrtPriceX96After: bigint;
   initializedTicksCrossed: number;
   gasEstimate: bigint;
-} 
+}

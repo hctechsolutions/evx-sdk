@@ -1,1 +1,1 @@
-export * from './GetPositionFeeQuery'; 
+export * from './GetPositionFeeQuery';

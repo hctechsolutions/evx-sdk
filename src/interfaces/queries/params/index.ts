@@ -7,4 +7,4 @@ export * from './IQuoteExactInputQueryParams';
 export * from './IQuoteExactInputSingleQueryParams';
 export * from './IGetPopulatedTicksQueryParams';
 export * from './IQuoteExactOutputQueryParams';
-export * from './IQuoteExactOutputSingleQueryParams'; 
+export * from './IQuoteExactOutputSingleQueryParams';

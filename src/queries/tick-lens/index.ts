@@ -1,1 +1,1 @@
-export * from './GetPopulatedTicksQuery'; 
+export * from './GetPopulatedTicksQuery';
