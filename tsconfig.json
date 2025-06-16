@@ -50,11 +50,18 @@
       ],
       "@listeners/*": [
         "src/listeners/*"
+      ],
+      "@tools": [
+        "tools/index.ts"
+      ],
+      "@tools/*": [
+        "tools/*"
       ]
     }
   },
   "include": [
     "src/**/*.ts",
+    "tools/**/*.ts",
     "tests/**/*.ts"
   ],
   "exclude": [
