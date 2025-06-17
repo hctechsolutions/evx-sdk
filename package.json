@@ -7,9 +7,9 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "readme": "README.md",
   "files": [
     "dist/**/*",
-    "src/**/*",
     "README.md",
     "LICENSE"
   ],
@@ -29,6 +29,7 @@
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
