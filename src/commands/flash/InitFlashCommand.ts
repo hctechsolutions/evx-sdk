@@ -32,4 +32,4 @@ export class InitFlashCommand implements IBaseCommand<IInitFlashCommandParams, v
       params.onFail?.(error);
     }
   }
-} 
+}

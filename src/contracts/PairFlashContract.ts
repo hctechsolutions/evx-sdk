@@ -17,4 +17,4 @@ export class PairFlashContract extends BaseContract {
   ) {
     super('pairFlash', rpc, PairFlashAbi);
   }
-} 
+}

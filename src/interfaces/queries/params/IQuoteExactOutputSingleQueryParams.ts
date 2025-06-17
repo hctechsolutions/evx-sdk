@@ -6,4 +6,4 @@ export interface IQuoteExactOutputSingleQueryParams extends IBaseQueryParams {
   amount: bigint;
   fee: bigint;
   sqrtPriceLimitX96?: bigint;
-} 
+}

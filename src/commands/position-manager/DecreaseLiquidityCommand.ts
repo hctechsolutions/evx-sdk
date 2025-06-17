@@ -10,7 +10,9 @@ import { PositionManagerContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidityCommandParams, void> {
+export class DecreaseLiquidityCommand
+  implements IBaseCommand<IDecreaseLiquidityCommandParams, void>
+{
   constructor(
     @inject(PositionManagerContract)
     private readonly positionManager: PositionManagerContract
@@ -27,7 +29,7 @@ export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidity
         liquidity: params.liquidity,
         amount0Min: params.amount0Min,
         amount1Min: params.amount1Min,
-        deadline: params.deadline,
+        deadline: params.deadline
       });
 
       params.onTransaction?.(transaction.hash);
@@ -38,4 +40,4 @@ export class DecreaseLiquidityCommand implements IBaseCommand<IDecreaseLiquidity
       params.onFail?.(error);
     }
   }
-} 
+}

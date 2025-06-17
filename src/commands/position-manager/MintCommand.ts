@@ -33,7 +33,7 @@ export class MintCommand implements IBaseCommand<IMintCommandParams, void> {
         amount0Min: params.amount0Min,
         amount1Min: params.amount1Min,
         recipient: params.recipient,
-        deadline: params.deadline,
+        deadline: params.deadline
       });
 
       params.onTransaction?.(transaction.hash);
@@ -44,4 +44,4 @@ export class MintCommand implements IBaseCommand<IMintCommandParams, void> {
       params.onFail?.(error);
     }
   }
-} 
+}

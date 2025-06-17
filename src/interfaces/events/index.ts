@@ -1,1 +1,1 @@
-export * from './IPoolCreatedEvent'; 
+export * from './IPoolCreatedEvent';

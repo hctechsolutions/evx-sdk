@@ -22,19 +22,11 @@ export abstract class BaseContract implements IBaseContract {
    * @param rpc The RPC provider instance
    * @param abi The contract ABI
    */
-  constructor(
-    name: ContractName,
-    rpc: RPC,
-    abi: any
-  ) {
+  constructor(name: ContractName, rpc: RPC, abi: any) {
     this.rpc = rpc;
     this.name = name;
     this.abi = abi;
-    this.instance = new ethers.Contract(
-      this.getAddress(),
-      this.abi,
-      this.rpc.provider
-    );
+    this.instance = new ethers.Contract(this.getAddress(), this.abi, this.rpc.provider);
   }
 
   /**
@@ -45,20 +37,12 @@ export abstract class BaseContract implements IBaseContract {
     this.signer = signer;
 
     if (!signer) {
-      this.instance = new ethers.Contract(
-        this.getAddress(),
-        this.abi,
-        this.rpc.provider
-      );
+      this.instance = new ethers.Contract(this.getAddress(), this.abi, this.rpc.provider);
 
       return;
     }
 
-    this.instance = new ethers.Contract(
-      this.getAddress(),
-      this.abi,
-      signer
-    );
+    this.instance = new ethers.Contract(this.getAddress(), this.abi, signer);
   }
 
   /**
@@ -67,11 +51,7 @@ export abstract class BaseContract implements IBaseContract {
    */
   setChain(chain: keyof typeof chains): void {
     this.chain = chain;
-    this.instance = new ethers.Contract(
-      this.getAddress(),
-      this.abi,
-      this.rpc.provider
-    );
+    this.instance = new ethers.Contract(this.getAddress(), this.abi, this.rpc.provider);
   }
 
   /**

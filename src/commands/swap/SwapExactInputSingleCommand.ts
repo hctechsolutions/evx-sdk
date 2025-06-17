@@ -10,7 +10,9 @@ import { SwapRouterContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class SwapExactInputSingleCommand implements IBaseCommand<ISwapExactInputSingleCommandParams, void> {
+export class SwapExactInputSingleCommand
+  implements IBaseCommand<ISwapExactInputSingleCommandParams, void>
+{
   constructor(
     @inject(SwapRouterContract)
     private readonly swapRouter: SwapRouterContract
@@ -30,7 +32,7 @@ export class SwapExactInputSingleCommand implements IBaseCommand<ISwapExactInput
         deadline: params.deadline,
         amountIn: params.amountIn,
         amountOutMinimum: params.amountOutMinimum,
-        sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+        sqrtPriceLimitX96: params.sqrtPriceLimitX96
       });
 
       params.onTransaction?.(transaction.hash);
@@ -41,4 +43,4 @@ export class SwapExactInputSingleCommand implements IBaseCommand<ISwapExactInput
       params.onFail?.(error);
     }
   }
-} 
+}

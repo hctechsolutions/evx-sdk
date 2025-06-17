@@ -10,4 +10,4 @@ export interface ICollectCommandParams extends IBaseCommandParams {
   recipient: string; // The address that will receive the collected fees
   amount0Max: BigNumberish; // The maximum amount of token0 to collect
   amount1Max: BigNumberish; // The maximum amount of token1 to collect
-} 
+}

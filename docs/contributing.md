@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to the Nebular SDK! This guide will help you get started with contributing to the project.
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Fork the repository**
    ```bash
@@ -25,7 +25,7 @@ Thank you for your interest in contributing to the Nebular SDK! This guide will 
    npm run test:watch  # Run tests in watch mode
    ```
 
-## 🌊 GitFlow Workflow
+## GitFlow Workflow
 
 We use GitFlow for branch management. All contributions should follow this pattern:
 
@@ -54,9 +54,9 @@ We use GitFlow for branch management. All contributions should follow this patte
 
 3. **Test your changes**
    ```bash
-   npm run lint        # Check code style
-   npm test           # Run all tests
-   npm run build      # Ensure it builds
+   npm run lint    # Check code style
+   npm test        # Run all tests
+   npm run build   # Ensure it builds
    ```
 
 4. **Commit your changes**
@@ -71,7 +71,7 @@ We use GitFlow for branch management. All contributions should follow this patte
    ```
    Then create a Pull Request to `develop` branch.
 
-## 📝 Commit Convention
+## Commit Convention
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
@@ -100,7 +100,7 @@ docs: update README with new installation instructions
 test: add unit tests for PoolCreatedListener
 ```
 
-## 🧪 Testing Guidelines
+## Testing Guidelines
 
 ### Writing Tests
 
@@ -132,7 +132,7 @@ npm run test:watch    # Watch mode
 npm run test:cov      # With coverage
 ```
 
-## 🎨 Coding Standards
+## Coding Standards
 
 ### TypeScript Guidelines
 
@@ -172,8 +172,7 @@ src/
 ├── commands/          # Write operations
 ├── queries/           # Read operations
 ├── listeners/         # Event listeners
-├── resources/         # Constants, types, configs
-└── services/          # Shared services
+└── resources/         # Constants, types, configs
 ```
 
 ### ESLint & Prettier
@@ -185,7 +184,7 @@ npm run lint           # Check linting
 npm run lint:fix       # Auto-fix issues
 ```
 
-## 🔍 Code Review Process
+## Code Review Process
 
 ### Before Submitting PR
 
@@ -212,7 +211,7 @@ Reviewers will check:
 - [ ] No breaking changes (or properly documented)
 - [ ] Performance implications considered
 
-## 🐛 Reporting Issues
+## Reporting Issues
 
 ### Bug Reports
 
@@ -231,7 +230,7 @@ Include:
 - **Alternative solutions** considered
 - **Impact** on existing functionality
 
-## 🚀 Release Process
+## Release Process
 
 Only maintainers handle releases:
 
@@ -240,14 +239,14 @@ Only maintainers handle releases:
 3. Merge to `main` (creates tag and release)
 4. Merge back to `develop`
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Project Architecture](architecture/structure.md)
-- [CQRS Pattern Guide](architecture/cqrs.md)
+- [CQRS Pattern Guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)
 - [Version Manager](version-manager.md)
 - [GitHub Workflows](workflows.md)
 
-## 🤝 Community
+## Community
 
 - [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
 - [Discord Server](https://discord.gg/nebular) (coming soon)

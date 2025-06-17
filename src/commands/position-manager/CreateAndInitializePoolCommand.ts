@@ -12,9 +12,9 @@ import { sortTokens } from '@utils';
  */
 @injectable()
 @singleton()
-export class CreateAndInitializePoolCommand implements
-  IBaseCommand<ICreateAndInitializePoolCommandParams, ICreatePoolCommandOutput> {
-
+export class CreateAndInitializePoolCommand
+  implements IBaseCommand<ICreateAndInitializePoolCommandParams, ICreatePoolCommandOutput>
+{
   constructor(
     @inject(PositionManagerContract)
     private readonly positionManager: PositionManagerContract
@@ -26,7 +26,6 @@ export class CreateAndInitializePoolCommand implements
    * @returns The output containing the pool address
    */
   async execute(params: ICreateAndInitializePoolCommandParams): Promise<ICreatePoolCommandOutput> {
-
     const orderedTokens = sortTokens({
       token0: params.token0,
       token1: params.token1
@@ -36,12 +35,13 @@ export class CreateAndInitializePoolCommand implements
     params.token1 = orderedTokens.token1;
 
     try {
-      const pool = await this.positionManager.instance.createAndInitializePoolIfNecessary.staticCall(
-        params.token0,
-        params.token1,
-        params.fee,
-        params.initialPrice
-      );
+      const pool =
+        await this.positionManager.instance.createAndInitializePoolIfNecessary.staticCall(
+          params.token0,
+          params.token1,
+          params.fee,
+          params.initialPrice
+        );
 
       const transaction = await this.positionManager.instance.createAndInitializePoolIfNecessary(
         params.token0,
@@ -55,7 +55,7 @@ export class CreateAndInitializePoolCommand implements
 
       const output: ICreatePoolCommandOutput = {
         pool: pool
-      }
+      };
 
       params.onDone?.(output);
       return output;

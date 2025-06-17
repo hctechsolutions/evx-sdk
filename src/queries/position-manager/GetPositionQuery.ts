@@ -38,7 +38,7 @@ export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPosi
       feeGrowthInside0LastX128,
       feeGrowthInside1LastX128,
       tokensOwed0,
-      tokensOwed1,
+      tokensOwed1
     ] = await positionManager.instance.positions(params.tokenId);
 
     return {
@@ -53,7 +53,7 @@ export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPosi
       feeGrowthInside0LastX128,
       feeGrowthInside1LastX128,
       tokensOwed0,
-      tokensOwed1,
+      tokensOwed1
     };
   }
-} 
+}

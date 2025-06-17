@@ -1,1 +1,1 @@
-export * from './GetFeeAmountTickSpacingQuery'; 
+export * from './GetFeeAmountTickSpacingQuery';

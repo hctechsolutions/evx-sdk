@@ -40,6 +40,11 @@ export default defineConfig([
       parser: tsParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
+      
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+      },
     },
 
     rules: {
@@ -52,14 +57,24 @@ export default defineConfig([
           semi: true,
           singleQuote: true,
           printWidth: 100,
-          trailingComma: 'all',
-          parser: 'flow'
+          trailingComma: 'none',
+          parser: 'typescript'
         },
       ],
 
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 2,
-      '@typescript-eslint/explicit-module-boundary-types': 'off'
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
   },
 ]);

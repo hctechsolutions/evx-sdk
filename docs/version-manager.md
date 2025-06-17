@@ -2,7 +2,7 @@
 
 Este é um version manager em TypeScript que implementa o padrão GitFlow para automatizar o versionamento do `package.json` baseado na branch atual e tags existentes.
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - ✅ **Versionamento automático** baseado na branch GitFlow
 - ✅ **Atualização do package.json** preservando outros campos
@@ -11,14 +11,14 @@ Este é um version manager em TypeScript que implementa o padrão GitFlow para a
 - ✅ **Interface CLI** completa
 - ✅ **Testes abrangentes** incluídos
 
-## 📦 Instalação
+## Instalação
 
 O version manager já está configurado no projeto. As dependências necessárias já estão instaladas:
 
 - `tsx` - Para executar TypeScript diretamente
 - `@types/node` - Types do Node.js
 
-## 🎯 Scripts NPM
+## Scripts NPM
 
 ```bash
 # Testar o version manager
@@ -31,7 +31,7 @@ npm run version:simulate <branch-name>
 npm run version:update <branch-name>
 ```
 
-## 📝 Exemplos de Uso
+## Exemplos de Uso
 
 ### 1. Modo Simulação (Recomendado para testes)
 
@@ -74,7 +74,7 @@ tsx tools/version-manager.ts --branch main
 tsx tools/version-manager.ts --branch develop --package-path ./custom/package.json
 ```
 
-## 🏷️ Padrão de Versionamento
+## Padrão de Versionamento
 
 | Branch Type | Formato Gerado | Exemplo |
 |-------------|----------------|---------|
@@ -85,7 +85,7 @@ tsx tools/version-manager.ts --branch develop --package-path ./custom/package.js
 | `hotfix/name` | `X.Y.Z-hotfix.N` | `1.2.3-hotfix.1` |
 | `bugfix/name` | `X.Y.Z-alpha.N` | `1.2.3-alpha.1` |
 
-## 🧪 Executar Testes
+## Executar Testes
 
 ```bash
 # Executar todos os testes do version manager
@@ -104,7 +104,7 @@ npm run version:test
 # 🎉 All tests passed!
 ```
 
-## 🔧 API Programática
+## API Programática
 
 ```typescript
 import { VersionManager } from './tools/version-manager';
@@ -114,8 +114,8 @@ const manager = new VersionManager({
   branch: 'feature/new-api',
   packagePath: './package.json',  // opcional
   simulate: false,                // opcional
-  tags: ['1.2.3', '1.3.0-rc.1'], // opcional
-  useGitTags: true               // opcional (padrão: true)
+  tags: ['1.2.3', '1.3.0-rc.1'],  // opcional
+  useGitTags: true                // opcional (padrão: true)
 });
 
 // Gerar nova versão
@@ -130,7 +130,7 @@ console.log(`${oldVersion} -> ${newVersion}`);
 const currentVersion = manager.getCurrentVersion();
 ```
 
-## ⚙️ Opções de Configuração
+## Opções de Configuração
 
 | Opção | Tipo | Padrão | Descrição |
 |-------|------|--------|-----------|
@@ -140,7 +140,7 @@ const currentVersion = manager.getCurrentVersion();
 | `tags` | `string[]` | `[]` | Tags customizadas (para testes) |
 | `useGitTags` | `boolean` | `true` | Usar tags do Git ou tags customizadas |
 
-## 🔄 Integração com CI/CD
+## Integração com CI/CD
 
 ### GitHub Actions
 
@@ -190,7 +190,7 @@ update-version:
     - /^hotfix\/.*$/
 ```
 
-## 🚀 Vantagens do Version Manager TypeScript
+## Vantagens do Version Manager TypeScript
 
 | Característica | Benefício |
 |----------------|-----------|
@@ -203,7 +203,7 @@ update-version:
 | **Dependências** | Zero dependências externas |
 | **Manutenção** | Usa Git tags (sem AWS) |
 
-## 🛠️ Desenvolvimento
+## Desenvolvimento
 
 Para modificar o version manager:
 
@@ -212,7 +212,7 @@ Para modificar o version manager:
 3. **Valide** com `npm run version:simulate <branch>`
 4. **Aplique** com `npm run version:update <branch>`
 
-## 📋 Checklist de Validação
+## Checklist de Validação
 
 - [ ] ✅ Testes passando (`npm run version:test`)
 - [ ] ✅ Simulação funcionando (`npm run version:simulate main`)

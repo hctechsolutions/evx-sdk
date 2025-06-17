@@ -21,4 +21,4 @@ export class SwapRouterContract extends BaseContract {
   ) {
     super('swapRouter', rpc, SwapRouterABI);
   }
-} 
+}

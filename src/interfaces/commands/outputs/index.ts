@@ -1,1 +1,1 @@
-export * from './ICreatePoolCommandOutput'; 
+export * from './ICreatePoolCommandOutput';
