@@ -3,9 +3,25 @@
   "version": "1.0.0",
   "author": "Jeffersson Abreu",
   "description": "The Nebular SDK is a developer toolkit designed to simplify interaction with the Nebular decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
-  "private": "true",
   "license": "MIT",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "defi",
+    "uniswap",
+    "ethereum",
+    "liquidity",
+    "sdk",
+    "blockchain",
+    "smart-contracts"
+  ],
   "engines": {
     "node": ">=18.19.1"
   },
