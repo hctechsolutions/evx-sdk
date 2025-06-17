@@ -26,7 +26,7 @@ export class CollectCommand implements IBaseCommand<ICollectCommandParams, void>
         tokenId: params.tokenId,
         recipient: params.recipient,
         amount0Max: params.amount0Max,
-        amount1Max: params.amount1Max,
+        amount1Max: params.amount1Max
       });
 
       params.onTransaction?.(transaction.hash);
@@ -37,4 +37,4 @@ export class CollectCommand implements IBaseCommand<ICollectCommandParams, void>
       params.onFail?.(error);
     }
   }
-} 
+}

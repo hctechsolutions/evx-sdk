@@ -4,4 +4,4 @@
  */
 export interface IGetPositionFeeParams {
   tokenId: bigint; // The tokenId of the position to query fees for
-} 
+}

@@ -7,10 +7,10 @@ import { JsonRpcProvider } from 'ethers';
  */
 export interface IRPC {
   provider: JsonRpcProvider | null; // The current RPC provider instance
-  
+
   /**
    * @notice Sets a new RPC provider URL
    * @param newRPC The new RPC URL to connect to
    */
-  setProvider(newRPC: string): void
+  setProvider(newRPC: string): void;
 }

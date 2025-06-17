@@ -1,1 +1,1 @@
-export * from './ITokenPair'; 
+export * from './ITokenPair';

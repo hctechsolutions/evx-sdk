@@ -7,4 +7,4 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  */
 export interface IBurnCommandParams extends IBaseCommandParams {
   tokenId: BigNumberish; // The ID of the position to burn
-} 
+}

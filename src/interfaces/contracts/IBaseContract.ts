@@ -1,6 +1,6 @@
-import { ChainName, chains, ContractName } from "@resources";
-import { ethers, Signer } from "ethers";
-import { RPC } from "@providers";
+import { ChainName, chains, ContractName } from '@resources';
+import { ethers, Signer } from 'ethers';
+import { RPC } from '@providers';
 
 /**
  * @title Base Contract Interface
@@ -9,11 +9,11 @@ import { RPC } from "@providers";
  */
 export interface IBaseContract {
   signer: Signer | null | undefined; // The current signer instance
-  instance: ethers.Contract;         // The ethers contract instance
-  name: ContractName;                // The name of the contract
-  chain: ChainName;                  // The current chain
-  rpc: RPC;                          // The RPC provider instance
-  abi: any;                          // The contract ABI
+  instance: ethers.Contract; // The ethers contract instance
+  name: ContractName; // The name of the contract
+  chain: ChainName; // The current chain
+  rpc: RPC; // The RPC provider instance
+  abi: any; // The contract ABI
 
   /**
    * @notice Sets the signer for contract interactions

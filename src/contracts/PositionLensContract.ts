@@ -17,4 +17,4 @@ export class PositionLensContract extends BaseContract {
   ) {
     super('positionLens', rpc, PositionLensABI);
   }
-} 
+}

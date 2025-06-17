@@ -10,7 +10,7 @@
 export function decimalToSqrtX96Price(
   decimalPrice: number,
   decimalsToken0: number,
-  decimalsToken1: number,
+  decimalsToken1: number
 ): bigint {
   // √(price01 * 10^(dec1-dec0))  *  2^96
   const factor = 10 ** (decimalsToken1 - decimalsToken0);
@@ -34,7 +34,7 @@ export function decimalToSqrtX96Price(
 export function sqrtX96ToDecimalPrice(
   sqrtPriceX96: bigint | number,
   decimalsToken0: number,
-  decimalsToken1: number,
+  decimalsToken1: number
 ): number {
   // (sqrtPriceX96 / 2**96) ** 2
   const sqrtPrice = sqrtPriceX96.toString();

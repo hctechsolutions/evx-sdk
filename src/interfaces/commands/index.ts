@@ -1,3 +1,3 @@
 export * from './IBaseCommand';
 export * from './params';
-export * from './outputs'; 
+export * from './outputs';

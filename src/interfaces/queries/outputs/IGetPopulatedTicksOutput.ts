@@ -6,4 +6,4 @@ export interface IPopulatedTick {
 
 export interface IGetPopulatedTicksOutput {
   populatedTicks: IPopulatedTick[];
-} 
+}

@@ -46,10 +46,10 @@ jobs:
             const fs = require('fs');
             const current = fs.readFileSync('./package.json', 'utf8');
             if (formatted !== current) {
-              console.error('❌ package.json is not properly formatted');
+              console.error('package.json is not properly formatted');
               process.exit(1);
             } else {
-              console.log('✅ package.json formatting is correct');
+              console.log('package.json formatting is correct');
             }
           "
 
@@ -76,11 +76,11 @@ jobs:
       - name: Check bundle size
         run: |
           if [ -d "dist" ]; then
-            echo "📦 Bundle size information:"
+            echo "Bundle size information:"
             du -sh dist/
             find dist -name "*.js" -exec wc -l {} + | tail -1
           else
-            echo "⚠️ No dist directory found after build"
+            echo "No dist directory found after build"
           fi
 
   comment-pr:
@@ -99,7 +99,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ All checks passed! This PR is ready for review.'
+              body: 'All checks passed! This PR is ready for review.'
             })
 
       - name: Comment failure
@@ -111,5 +111,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '❌ Some checks failed. Please review the errors and fix them before merging.'
+              body: 'Some checks failed. Please review the errors and fix them before merging.'
             }) 

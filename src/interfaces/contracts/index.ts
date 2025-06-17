@@ -1,1 +1,1 @@
-export * from './IBaseContract'; 
+export * from './IBaseContract';

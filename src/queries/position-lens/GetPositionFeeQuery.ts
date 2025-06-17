@@ -12,7 +12,9 @@ import { RPC } from '@providers';
  */
 @injectable()
 @singleton()
-export class GetPositionFeeQuery implements IBaseQuery<IGetPositionFeeParams, IGetPositionFeeOutput> {
+export class GetPositionFeeQuery
+  implements IBaseQuery<IGetPositionFeeParams, IGetPositionFeeOutput>
+{
   constructor(
     @inject(RPC)
     private readonly rpc: RPC
@@ -29,7 +31,7 @@ export class GetPositionFeeQuery implements IBaseQuery<IGetPositionFeeParams, IG
 
     return {
       owed0,
-      owed1,
+      owed1
     };
   }
-} 
+}

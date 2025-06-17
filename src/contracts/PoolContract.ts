@@ -20,11 +20,7 @@ export class PoolContract {
   constructor(address: string) {
     this.address = address;
     this.rpc = container.resolve(RPC);
-    this.instance = new ethers.Contract(
-      address,
-      NebularPoolABI,
-      this.rpc.provider
-    );
+    this.instance = new ethers.Contract(address, NebularPoolABI, this.rpc.provider);
   }
 
   /**
@@ -33,19 +29,11 @@ export class PoolContract {
    */
   async setSigner(signer?: Signer | null): Promise<void> {
     if (!signer) {
-      this.instance = new ethers.Contract(
-        this.address,
-        NebularPoolABI,
-        this.rpc.provider
-      );
+      this.instance = new ethers.Contract(this.address, NebularPoolABI, this.rpc.provider);
 
       return;
     }
 
-    this.instance = new ethers.Contract(
-      this.address,
-      NebularPoolABI,
-      signer
-    );
+    this.instance = new ethers.Contract(this.address, NebularPoolABI, signer);
   }
 }

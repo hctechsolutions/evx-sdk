@@ -1,1 +1,1 @@
-export * from './InitFlashCommand'; 
+export * from './InitFlashCommand';

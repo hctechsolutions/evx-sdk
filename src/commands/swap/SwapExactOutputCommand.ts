@@ -27,7 +27,7 @@ export class SwapExactOutputCommand implements IBaseCommand<ISwapExactOutputComm
         recipient: params.recipient,
         deadline: params.deadline,
         amountOut: params.amountOut,
-        amountInMaximum: params.amountInMaximum,
+        amountInMaximum: params.amountInMaximum
       });
 
       params.onTransaction?.(transaction.hash);
@@ -38,4 +38,4 @@ export class SwapExactOutputCommand implements IBaseCommand<ISwapExactOutputComm
       params.onFail?.(error);
     }
   }
-} 
+}

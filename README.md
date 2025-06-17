@@ -9,67 +9,39 @@ The Nebular SDK is a TypeScript developer toolkit designed to simplify interacti
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 Welcome to the comprehensive documentation for the Nebular SDK. This section contains detailed guides, workflows, and tools documentation.
 
-**🚀 [Quick Start](#installation)** | **🤝 [Contributing](docs/contributing.md)** | **🔧 [Development Tools](#development)**
+**[Quick Start](#installation)** | **[Contributing](docs/contributing.md)** | **[Development Tools](#development)**
 
-### 📋 Documentation Structure
+### Documentation Structure
 
-#### 🚀 **Getting Started**
+#### **Getting Started**
 | Section | Description | Link |
 |---------|-------------|------|
-| 🚀 **Installation** | Quick start guide | [Getting Started](#installation) |
-| 🔧 **Basic Usage** | Your first SDK queries | [Usage Examples](#usage) |
-| ⚙️ **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
+| **Installation** | Quick start guide | [Getting Started](#installation) |
+| **Basic Usage** | Your first SDK queries | [Usage Examples](#usage) |
+| **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
 
-#### 🔧 **Development Tools**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 📦 **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md) | ✅ Complete |
-| 🔀 **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md) | ✅ Complete |
-| 🏃‍♂️ **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md) | ✅ Complete |
+#### **Development Tools**
+| Section | Description | Link |
+|---------|-------------|------|
+| **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md)
+| **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md)
+| **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md)
 
-#### 🏗️ **Architecture**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 📝 **CQRS Pattern** | Command Query Responsibility Segregation | [CQRS Pattern](docs/architecture/cqrs.md) | 🚧 In Progress |
-| 📁 **Project Structure** | Directory organization | [Project Structure](docs/architecture/structure.md) | 🚧 In Progress |
-| 🔧 **Dependency Injection** | TSyringe container usage | [Dependency Injection](docs/architecture/di.md) | 🚧 In Progress |
+#### **Deployment**
+| Section | Description | Link |
+|---------|-------------|------|
+| **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md)
 
-#### 🧪 **Testing**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🏗️ **Test Structure** | Jest configuration and patterns | [Test Structure](docs/testing/structure.md) | 🚧 In Progress |
-| ✍️ **Writing Tests** | Best practices | [Writing Tests](docs/testing/writing-tests.md) | 🚧 In Progress |
-| 📊 **Coverage Reports** | Understanding test coverage | [Coverage Reports](docs/testing/coverage.md) | 🚧 In Progress |
+#### **Contributing**
+| Section | Description | Link |
+|---------|-------------|------|
+| **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md)
 
-#### 🚀 **Deployment**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🔄 **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md) | ✅ Complete |
-| 📦 **NPM Publishing** | Package publication | [NPM Publishing](docs/deployment/npm.md) | 📋 Planned |
-| 🏷️ **GitHub Releases** | Release management | [GitHub Releases](docs/deployment/releases.md) | 📋 Planned |
-
-#### 🤝 **Contributing**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| 🤝 **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md) | ✅ Complete |
-| 🎨 **Code Style** | Coding standards | [Code Style](docs/contributing/style.md) | 📋 Planned |
-| 🔄 **Pull Request Process** | PR workflow | [Pull Request Process](docs/contributing/pr-process.md) | 📋 Planned |
-
-#### 📋 **API Reference**
-| Section | Description | Link | Status |
-|---------|-------------|------|--------|
-| ⚡ **Commands** | Available commands | [Commands](docs/api/commands.md) | 📋 Planned |
-| 🔍 **Queries** | Available queries | [Queries](docs/api/queries.md) | 📋 Planned |
-| 📝 **Types** | TypeScript definitions | [Types](docs/api/types.md) | 📋 Planned |
-| 🌐 **Chains** | Supported networks | [Chains](docs/api/chains.md) | 📋 Planned |
-
-> **Documentation Status Legend**: ✅ Complete | 🚧 In Progress | 📋 Planned
-
-### 🔗 Quick Links
+### Quick Links
 
 - **[Version Manager](docs/version-manager.md)** - Automatic GitFlow versioning
 - **[GitHub Workflows](docs/workflows.md)** - CI/CD automation
@@ -80,13 +52,15 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 
 ## Features
 
-* 🌐 Connect to any EVM-compatible chain
-* 🏗️ CQRS-based structure (`commands`, `queries`)
-* 🔗 Minimal and typed interaction with contracts (ethers.js)
-* 🔍 Query pools and token pairs with ease
-* ⚡ Auto-versioning with GitFlow
-* 🧪 Comprehensive test coverage
-* 📦 CI/CD automation
+* Connect to any EVM-compatible chain (Mainnet, Sepolia)
+* Simple configuration with `setRPCProvider` and `setAllChain`
+* CQRS-based structure (`commands`, `queries`)
+* Minimal and typed interaction with contracts (ethers.js)
+* Query pools and token pairs with ease
+* Real-time event listening capabilities
+* Auto-versioning with GitFlow
+* Comprehensive test coverage
+* CI/CD automation
 
 ---
 
@@ -100,77 +74,110 @@ yarn add @nebular/sdk
 
 ## Usage
 
+### Setup SDK Configuration
+
+Before using any SDK functionality, you need to configure the RPC provider and chain:
+
+```ts
+import { setRPCProvider, setAllChain } from '@nebular/sdk';
+
+// Configure RPC provider and chain
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia'); // or 'mainnet'
+```
+
 ### Read pool info directly from blockchain
 
 ```ts
-import { GetPoolQuery } from '@nebular/sdk/queries';
+import { GetPoolQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
 import { container } from 'tsyringe';
 
-const getPool = container.resolve(GetPoolQuery);
+// Setup SDK configuration
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
 
+// Query pool information
+const getPool = container.resolve(GetPoolQuery);
 const pool = await getPool.execute({ 
   address: '0x7Fb01B2d918Edcad3d3a05b5B7A511ACA1C66aD8' 
-})
+});
 
-console.table(pool)
+console.table(pool);
 ```
 
 ### Query multiple pools
 
 ```ts
-import { GetPoolsQuery } from '@nebular/sdk/queries';
+import { GetPoolsQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
 
+// Setup SDK configuration
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
+
+// Query multiple pools
 const getPools = container.resolve(GetPoolsQuery);
 const pools = await getPools.execute({
   token0: '0xA0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE',
   token1: '0xB0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE'
 });
+
+console.log('Found pools:', pools);
 ```
 
 ### Listen to pool events
 
 ```ts
-import { PoolCreatedListener } from '@nebular/sdk/listeners';
+import { PoolCreatedListener, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
 
-const listener = container.resolve(PoolCreatedListener);
-await listener.start();
+async function listenToEvents() {
+  // Setup SDK configuration
+  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+  await setAllChain('sepolia');
 
-listener.on('poolCreated', (pool) => {
-  console.log('New pool created:', pool);
-});
+  // Start listening for pool creation events
+  const listener = container.resolve(PoolCreatedListener);
+  
+  await listener.start(async (event) => {
+    console.log('New pool created!');
+    console.log('Token0:', event.token0);
+    console.log('Token1:', event.token1);
+    console.log('Fee:', event.fee);
+    console.log('Pool Address:', event.pool);
+  });
+}
+
+listenToEvents();
 ```
 
 ---
 
 ## Supported Networks
 
-* 🌐 Ethereum Mainnet
-* 🧪 Sepolia Testnet
-* ⚙️ Add your own in `resources/chains.ts`
+* Ethereum Mainnet
+* Sepolia Testnet
+* Add your own in `resources/chains.ts`
 
 ---
 
 ## Environment Configuration
 
-Create a `.env` file:
-
-```env
-CHAIN=mainnet
-RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
-```
-
 ### Supported Chains
 
-```typescript
-// Available chains
-const chains = {
-  mainnet: 'https://mainnet.infura.io/v3/YOUR_KEY',
-  sepolia: 'https://sepolia.infura.io/v3/YOUR_KEY',
-  // Add custom chains...
-}
-```
+The SDK supports the following networks:
 
----
+```typescript
+import { setRPCProvider, setAllChain } from '@nebular/sdk';
+
+// Sepolia Testnet
+await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+await setAllChain('sepolia');
+
+// Ethereum Mainnet
+await setRPCProvider('https://mainnet.infura.io/v3/YOUR_KEY');
+await setAllChain('mainnet');
+```
 
 ## Development
 
@@ -192,14 +199,14 @@ npm install
 
 ```bash
 npm run build      # Build TypeScript
-npm test          # Run tests
-npm run lint      # Check code style
-npm run lint:fix  # Fix linting issues
+npm test           # Run tests
+npm run lint       # Check code style
+npm run lint:fix   # Fix linting issues
 
 # Version management
 npm run version:update    # Update version based on branch
 npm run version:simulate  # Simulate version update
-npm run version:test     # Test version manager
+npm run version:test      # Test version manager
 ```
 
 ### Testing
@@ -210,7 +217,7 @@ npm run test:watch    # Watch mode
 npm run test:cov      # With coverage report
 ```
 
-> **📊 Test Coverage**: We maintain >80% test coverage across all modules.
+> **Test Coverage**: We maintain >80% test coverage across all modules.
 
 ---
 
@@ -223,18 +230,15 @@ src/
 ├── commands/     # Write operations (mutations)
 ├── queries/      # Read operations (queries)
 ├── listeners/    # Event listeners
-├── resources/    # Constants, types, configs
-└── services/     # Shared services
+└── resources/    # Constants, types, configs
 ```
 
 ### Key Patterns
 
-- **🔧 Dependency Injection** - Using TSyringe container
-- **📝 CQRS** - Separation of read and write operations
-- **🎯 Single Responsibility** - Each class has one clear purpose
-- **🧪 Test-Driven** - Comprehensive test coverage
-
-> **📖 Learn More**: [Architecture Guide](docs/architecture/cqrs.md)
+- **Dependency Injection** - Using TSyringe container
+- **CQRS** - Separation of read and write operations
+- **Single Responsibility** - Each class has one clear purpose
+- **Test-Driven** - Comprehensive test coverage
 
 ---
 
@@ -260,19 +264,19 @@ We use **GitFlow** for branch management:
 | `bugfix/*` | Bug fixes | `bugfix/fix-pool-query` |
 | `hotfix/*` | Critical fixes | `hotfix/security-patch` |
 
-> **📖 Learn More**: [Contributing Guide](docs/contributing.md) | [GitFlow Workflow](docs/versioning.md)
+> **Learn More**: [Contributing Guide](docs/contributing.md) | [GitFlow Workflow](docs/versioning.md)
 
 ---
 
 ## Community & Support
 
-### 🆘 Need Help?
+### Need Help?
 
-- **📖 Documentation**: Browse the guides above
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/nebular-finance/nebular-sdk/issues)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
-- **🔧 Development**: [Contributing Guide](docs/contributing.md)
-- **📧 Contact**: [Team Email](mailto:team@nebular.finance)
+- **Documentation**: Browse the guides above
+- **Bug Reports**: [GitHub Issues](https://github.com/nebular-finance/nebular-sdk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
+- **Development**: [Contributing Guide](docs/contributing.md)
+- **Contact**: [Team Email](mailto:team@nebular.finance)
 
 ---
 
@@ -292,7 +296,7 @@ See [Releases](https://github.com/nebular-finance/nebular-sdk/releases) for vers
 
 <div align="center">
   
-**Built with ❤️ by the Nebular Finance Team**
+**Built with love by the Nebular Finance Team**
 
 [Website](https://nebular.finance) • [Twitter](https://twitter.com/nebular_finance) • [Discord](https://discord.gg/nebular)
 

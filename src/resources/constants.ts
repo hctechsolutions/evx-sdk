@@ -9,4 +9,4 @@
 export const TICK_BITMAP_INDEX = {
   MIN: -32768,
   MAX: 32767
-} as const; 
+} as const;

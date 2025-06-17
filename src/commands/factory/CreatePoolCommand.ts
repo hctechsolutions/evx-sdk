@@ -11,7 +11,6 @@ import { FactoryContract } from '@contracts';
 @injectable()
 @singleton()
 export class CreatePoolCommand implements IBaseCommand<ICreatePoolCommandParams, void> {
-
   constructor(
     @inject(FactoryContract)
     private readonly factory: FactoryContract
@@ -26,7 +25,7 @@ export class CreatePoolCommand implements IBaseCommand<ICreatePoolCommandParams,
       const transaction = await this.factory.instance.createPool(
         params.token0,
         params.token1,
-        params.fee,
+        params.fee
       );
 
       params.onTransaction?.(transaction.hash);

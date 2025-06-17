@@ -12,7 +12,9 @@ import { RPC } from '@providers';
  */
 @injectable()
 @singleton()
-export class QuoteExactInputQuery implements IBaseQuery<IQuoteExactInputQueryParams, IQuoteExactInputOutput> {
+export class QuoteExactInputQuery
+  implements IBaseQuery<IQuoteExactInputQueryParams, IQuoteExactInputOutput>
+{
   constructor(
     @inject(RPC)
     private readonly rpc: RPC
@@ -25,7 +27,7 @@ export class QuoteExactInputQuery implements IBaseQuery<IQuoteExactInputQueryPar
    */
   async execute(params: IQuoteExactInputQueryParams): Promise<IQuoteExactInputOutput> {
     const quoter = new QuoterContract(this.rpc);
-    const [amountOut, sqrtPriceX96AfterList, initializedTicksCrossedList, gasEstimate] = 
+    const [amountOut, sqrtPriceX96AfterList, initializedTicksCrossedList, gasEstimate] =
       await quoter.instance.quoteExactInput.staticCall(params.path, params.amountIn);
 
     return {
@@ -35,4 +37,4 @@ export class QuoteExactInputQuery implements IBaseQuery<IQuoteExactInputQueryPar
       gasEstimate
     };
   }
-} 
+}

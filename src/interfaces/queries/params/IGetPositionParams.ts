@@ -4,4 +4,4 @@
  */
 export interface IGetPositionParams {
   tokenId: bigint; // The tokenId of the position to query
-} 
+}
