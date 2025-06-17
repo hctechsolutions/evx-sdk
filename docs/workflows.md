@@ -2,9 +2,9 @@
 
 This directory contains the GitHub Actions workflows for the Nebular SDK.
 
-## 📋 Available Workflows
+## Available Workflows
 
-### 🔧 `ci.yml` - Main CI/CD Pipeline
+### `ci.yml` - Main CI/CD Pipeline
 
 **Triggers:**
 - Push to branches: `main`, `develop`, `feature/*`, `release/*`, `hotfix/*`, `bugfix/*`
@@ -25,7 +25,7 @@ This directory contains the GitHub Actions workflows for the Nebular SDK.
 - ✅ Automatic tag creation
 - ✅ NPM security audit
 
-### 🔍 `pr.yml` - Pull Request Validation
+### `pr.yml` - Pull Request Validation
 
 **Triggers:**
 - Pull requests to: `main`, `develop`
@@ -44,7 +44,7 @@ This directory contains the GitHub Actions workflows for the Nebular SDK.
 - ✅ Bundle size verification
 - ✅ Automatic status comments
 
-### 🚀 `release.yml` - Release Publishing
+### `release.yml` - Release Publishing
 
 **Triggers:**
 - Push tags in format `v*` (e.g., v1.0.0, v1.2.3)
@@ -61,7 +61,7 @@ This directory contains the GitHub Actions workflows for the Nebular SDK.
 - ✅ NPM publishing (stable releases)
 - ✅ Status notifications
 
-## 🔐 Required Secrets
+## Required Secrets
 
 For the workflows to function completely, configure the following secrets in the repository:
 
@@ -72,7 +72,7 @@ For the workflows to function completely, configure the following secrets in the
 ### Automatic (provided by GitHub):
 - `GITHUB_TOKEN` - Used automatically for GitHub operations
 
-## 🎯 GitFlow Branching Strategy
+## GitFlow Branching Strategy
 
 The workflows automatically implement GitFlow strategy:
 
@@ -85,7 +85,7 @@ The workflows automatically implement GitFlow strategy:
 | `hotfix/*` | `X.Y.Z-hotfix.N` | Hotfix |
 | `bugfix/*` | `X.Y.Z-alpha.N` | Bugfix |
 
-## 🚀 How to Use
+## How to Use
 
 ### For Development:
 1. Create a `feature/feature-name` branch
@@ -103,7 +103,7 @@ The workflows automatically implement GitFlow strategy:
 2. Push will generate version `X.Y.Z-hotfix.N`
 3. Merge to `main` and `develop`
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Tests failing:
 ```bash
@@ -128,7 +128,7 @@ git tag -a v1.0.0 -m "Release v1.0.0"
 git push origin v1.0.0
 ```
 
-## 📚 Additional Documentation
+## Additional Documentation
 
 - [Version Manager TypeScript](version-manager.md)
 - [GitFlow Versioning](versioning.md)

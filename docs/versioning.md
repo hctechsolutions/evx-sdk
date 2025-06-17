@@ -2,7 +2,7 @@
 
 This document explains how the TypeScript `version-manager.ts` implements versioning following the GitFlow pattern.
 
-## 🎯 GitFlow Branching Model
+## GitFlow Branching Model
 
 The Nebular SDK uses GitFlow branching strategy with automated version management:
 
@@ -12,7 +12,7 @@ main ←-- release/X.Y.Z ←-- develop ←-- feature/name
 hotfix/name                bugfix/name
 ```
 
-## 📦 Version Format Pattern
+## Version Format Pattern
 
 | Branch Type | Version Pattern | Example | Description |
 |-------------|----------------|---------|-------------|
@@ -23,7 +23,7 @@ hotfix/name                bugfix/name
 | `hotfix/*` | `X.Y.Z-hotfix.N` | `1.2.3-hotfix.1` | Production hotfix |
 | `bugfix/*` | `X.Y.Z-alpha.N` | `1.2.3-alpha.1` | Bug fix |
 
-## 🔧 Implementation
+## Implementation
 
 The version manager automatically:
 
@@ -33,7 +33,7 @@ The version manager automatically:
 4. **Calculates next version** based on GitFlow rules
 5. **Updates package.json** with new version
 
-## 💻 Usage Examples
+## Usage Examples
 
 ### Feature Development
 ```bash
@@ -65,7 +65,7 @@ npm run version:update develop
 # Output: 1.3.0-dev (next minor + dev suffix)
 ```
 
-## 🧪 Testing & Simulation
+## Testing & Simulation
 
 ### Simulate Version Changes
 ```bash
@@ -79,7 +79,7 @@ npm run version:test
 # Runs comprehensive tests for all branch scenarios
 ```
 
-## 🚀 Automatic CI/CD Integration
+## Automatic CI/CD Integration
 
 The version manager integrates with GitHub Actions workflows:
 
@@ -94,7 +94,7 @@ The version manager integrates with GitHub Actions workflows:
     echo "version=$VERSION" >> $GITHUB_OUTPUT
 ```
 
-## 📋 Available Scripts
+## Available Scripts
 
 | Script | Description | Usage |
 |--------|-------------|-------|
@@ -102,7 +102,7 @@ The version manager integrates with GitHub Actions workflows:
 | `version:simulate` | Simulate version without changes | `npm run version:simulate <branch>` |
 | `version:test` | Run all version manager tests | `npm run version:test` |
 
-## 🔍 Advanced Features
+## Advanced Features
 
 ### Custom Base Version
 ```bash
@@ -122,7 +122,7 @@ npm run version:simulate feature/new-feature
 npm run version:update
 ```
 
-## 🛡️ Error Handling
+## Error Handling
 
 The version manager includes robust error handling for:
 
@@ -131,7 +131,7 @@ The version manager includes robust error handling for:
 - **Git repository issues** - Repository checks
 - **Network failures** - Graceful degradation
 
-## 📚 Related Documentation
+## Related Documentation
 
 - [TypeScript Version Manager](version-manager.md) - Complete API documentation
 - [GitHub Workflows](workflows.md) - CI/CD integration
