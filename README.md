@@ -199,14 +199,14 @@ npm install
 
 ```bash
 npm run build      # Build TypeScript
-npm test          # Run tests
-npm run lint      # Check code style
-npm run lint:fix  # Fix linting issues
+npm test           # Run tests
+npm run lint       # Check code style
+npm run lint:fix   # Fix linting issues
 
 # Version management
 npm run version:update    # Update version based on branch
 npm run version:simulate  # Simulate version update
-npm run version:test     # Test version manager
+npm run version:test      # Test version manager
 ```
 
 ### Testing
@@ -230,8 +230,7 @@ src/
 ├── commands/     # Write operations (mutations)
 ├── queries/      # Read operations (queries)
 ├── listeners/    # Event listeners
-├── resources/    # Constants, types, configs
-└── services/     # Shared services
+└── resources/    # Constants, types, configs
 ```
 
 ### Key Patterns
@@ -240,8 +239,6 @@ src/
 - **CQRS** - Separation of read and write operations
 - **Single Responsibility** - Each class has one clear purpose
 - **Test-Driven** - Comprehensive test coverage
-
-> **Learn More**: [Architecture Guide](docs/architecture/cqrs.md)
 
 ---
 
