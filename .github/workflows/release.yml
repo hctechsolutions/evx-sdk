@@ -34,6 +34,13 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Create build archive
+        run: |
+          cd dist
+          zip -r ../nebular-sdk-build.zip .
+          cd ..
+          ls -la nebular-sdk-build.zip
+
       - name: Extract version from tag
         id: get_version
         run: |
@@ -71,7 +78,9 @@ jobs:
           body_path: CHANGELOG.md
           draft: false
           prerelease: ${{ contains(steps.get_version.outputs.version, '-') }}
-          files: dist/**/*
+          files: |
+            nebular-sdk-build.zip
+            package.json
 
 
 
