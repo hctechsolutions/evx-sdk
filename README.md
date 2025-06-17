@@ -105,26 +105,6 @@ const pool = await getPool.execute({
 console.table(pool);
 ```
 
-### Query multiple pools
-
-```ts
-import { GetPoolsQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
-import { container } from 'tsyringe';
-
-// Setup SDK configuration
-await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-await setAllChain('sepolia');
-
-// Query multiple pools
-const getPools = container.resolve(GetPoolsQuery);
-const pools = await getPools.execute({
-  token0: '0xA0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE',
-  token1: '0xB0b86a33E6441E7C9f1E8d33c3B6C7D8B3B9E1FE'
-});
-
-console.log('Found pools:', pools);
-```
-
 ### Listen to pool events
 
 ```ts
@@ -149,6 +129,83 @@ async function listenToEvents() {
 }
 
 listenToEvents();
+```
+
+### Execute Commands
+
+Commands are used for write operations that modify the blockchain state. Here are examples of simple and callback-based commands:
+
+#### Simple Command Execution
+
+```ts
+import { CreatePoolCommand, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
+
+async function createPool() {
+  // Setup SDK configuration
+  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+  await setAllChain('sepolia');
+
+  // Create a new pool
+  const createPoolCommand = container.resolve(CreatePoolCommand);
+  
+  const result = await createPoolCommand.execute({
+    tokenA: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // Token A address
+    tokenB: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4', // Token B address
+    fee: 3000 // Fee tier (0.3%)
+  });
+
+  console.log('Pool created successfully!');
+  console.log('Transaction hash:', result.transactionHash);
+  console.log('Pool address:', result.poolAddress);
+}
+
+createPool();
+```
+
+#### Command with Callback for Transaction Monitoring
+
+```ts
+import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from '@nebular/sdk';
+import { container } from 'tsyringe';
+
+async function executeSwapWithCallback() {
+  // Setup SDK configuration
+  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+  await setAllChain('sepolia');
+
+  const swapCommand = container.resolve(SwapExactInputSingleCommand);
+  
+  await swapCommand.execute({
+    tokenIn: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3',
+    tokenOut: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4',
+    fee: 3000,
+    recipient: '0xRecipientAddress',
+    deadline: Math.floor(Date.now() / 1000) + 1800, // 30 minutes
+    amountIn: '1000000000000000000',                // 1 token (18 decimals)
+    amountOutMinimum: '0',
+    sqrtPriceLimitX96: 0
+  }, {
+    // Optional callback for transaction monitoring
+    onTransactionSent: (txHash: string) => {
+      console.log('Transaction sent:', txHash);
+      console.log('Waiting for confirmation...');
+    },
+    onConfirmation: (confirmationNumber: number, receipt: any) => {
+      console.log(`Confirmation ${confirmationNumber}:`, receipt.transactionHash);
+    },
+    onSuccess: (receipt: any) => {
+      console.log('Swap completed successfully!');
+      console.log('Gas used:', receipt.gasUsed.toString());
+      console.log('Block number:', receipt.blockNumber);
+    },
+    onError: (error: Error) => {
+      console.error('Swap failed:', error.message);
+    }
+  });
+}
+
+executeSwapWithCallback();
 ```
 
 ---
@@ -198,10 +255,10 @@ npm install
 ### Scripts
 
 ```bash
-npm run build      # Build TypeScript
-npm test           # Run tests
-npm run lint       # Check code style
-npm run lint:fix   # Fix linting issues
+npm run build             # Build TypeScript
+npm test                  # Run tests
+npm run lint              # Check code style
+npm run lint:fix          # Fix linting issues
 
 # Version management
 npm run version:update    # Update version based on branch
