@@ -1,0 +1,17 @@
+name: Test Release Trigger
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  test-trigger:
+    name: Test Release Trigger
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Test trigger
+        run: |
+          echo "Release trigger working! Tag: ${{ github.ref }}"
+          echo "Tag name: ${GITHUB_REF#refs/tags/}" 
