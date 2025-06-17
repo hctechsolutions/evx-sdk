@@ -43,6 +43,7 @@
     "price-feed",
     "dex",
     "pool",
+    "multichain",
     "defi-protocol"
   ],
   "engines": {
