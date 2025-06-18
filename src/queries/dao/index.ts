@@ -1,3 +1,4 @@
 export * from './ClockQuery';
 export * from './GetProposalIdQuery';
-export * from './GetVotesQuery'; 
+export * from './GetVotesQuery';
+export * from './GetVotesWithParamsQuery'; 
