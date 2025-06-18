@@ -7,3 +7,4 @@ export * from './CastVoteBySigCommand';
 export * from './CastVoteWithReasonCommand';
 export * from './CastVoteWithReasonAndParamsCommand';
 export * from './CastVoteWithReasonAndParamsBySigCommand';
+export * from './HashProposalCommand';

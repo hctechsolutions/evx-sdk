@@ -21,3 +21,4 @@ export * from './ICastVoteBySigCommandParams';
 export * from './ICastVoteWithReasonCommandParams';
 export * from './ICastVoteWithReasonAndParamsCommandParams';
 export * from './ICastVoteWithReasonAndParamsBySigCommandParams';
+export * from './IHashProposalCommandParams';
