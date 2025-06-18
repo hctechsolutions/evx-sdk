@@ -16,3 +16,4 @@ export * from './IGetPopulatedTicksQueryParams';
 export * from './IQuoteExactOutputQueryParams';
 export * from './IQuoteExactOutputSingleQueryParams';
 export * from './IProposalEtaQueryParams';
+export * from './IProposalNeedsQueuingQueryParams';
