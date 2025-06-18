@@ -1,4 +1,5 @@
 export * from './CancelCommand';
+export * from './ExecuteCommand';
 export * from './CastOverrideVoteCommand';
 export * from './CastOverrideVoteBySigCommand';
 export * from './CastVoteCommand';

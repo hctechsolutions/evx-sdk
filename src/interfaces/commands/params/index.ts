@@ -12,6 +12,8 @@ export * from './ISwapExactInputCommandParams';
 export * from './ISwapExactInputSingleCommandParams';
 export * from './ISwapExactOutputCommandParams';
 export * from './ISwapExactOutputSingleCommandParams';
+export * from './ICancelCommandParams';
+export * from './IExecuteCommandParams';
 export * from './ICastOverrideVoteCommandParams';
 export * from './ICastOverrideVoteBySigCommandParams';
 export * from './ICastVoteCommandParams';
