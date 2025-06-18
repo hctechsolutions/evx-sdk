@@ -20,3 +20,4 @@ export * from './IProposalNeedsQueuingQueryParams';
 export * from './IGetProposerQueryParams';
 export * from './IProposalSnapshotQueryParams';
 export * from './IProposalThresholdQueryParams';
+export * from './IGetProposalVotesQueryParams';
