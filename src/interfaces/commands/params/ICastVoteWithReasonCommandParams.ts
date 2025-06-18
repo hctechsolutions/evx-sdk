@@ -9,4 +9,4 @@ export interface ICastVoteWithReasonCommandParams extends IBaseCommandParams {
   proposalId: bigint; // The ID of the proposal to vote on
   support: VoteSupport; // The vote support (Against, For, Abstain)
   reason: string; // The reason for the vote
-} 
+}
