@@ -5,4 +5,5 @@ export * from './GetVotesWithParamsQuery';
 export * from './HasVotedQuery';
 export * from './HasVotedOverrideQuery';
 export * from './ProposalDeadlineQuery';
-export * from './ProposalEtaQuery'; 
+export * from './ProposalEtaQuery';
+export * from './ProposalNeedsQueuingQuery'; 
