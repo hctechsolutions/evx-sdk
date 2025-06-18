@@ -5,3 +5,4 @@ export * from './CastVoteCommand';
 export * from './CastVoteBySigCommand';
 export * from './CastVoteWithReasonCommand';
 export * from './CastVoteWithReasonAndParamsCommand';
+export * from './CastVoteWithReasonAndParamsBySigCommand';

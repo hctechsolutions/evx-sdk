@@ -18,3 +18,4 @@ export * from './ICastVoteCommandParams';
 export * from './ICastVoteBySigCommandParams';
 export * from './ICastVoteWithReasonCommandParams';
 export * from './ICastVoteWithReasonAndParamsCommandParams';
+export * from './ICastVoteWithReasonAndParamsBySigCommandParams';
