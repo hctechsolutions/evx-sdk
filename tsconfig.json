@@ -56,6 +56,9 @@
       ],
       "@tools/*": [
         "tools/*"
+      ],
+      "@enums/*": [
+        "src/enums/*"
       ]
     }
   },
