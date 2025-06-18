@@ -5,6 +5,7 @@ export * from './IGetPoolParams';
 export * from './IGetPositionParams';
 export * from './IGetPositionFeeParams';
 export * from './IGetProposalIdQueryParams';
+export * from './IGetVotesQueryParams';
 export * from './IQuoteExactInputQueryParams';
 export * from './IQuoteExactInputSingleQueryParams';
 export * from './IGetPopulatedTicksQueryParams';
