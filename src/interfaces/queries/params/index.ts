@@ -1,3 +1,4 @@
+export * from './IClockQueryParams';
 export * from './IGetFeeAmountTickSpacingQueryParams';
 export * from './IGetOwnerQueryParams';
 export * from './IGetPoolParams';
