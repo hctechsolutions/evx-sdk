@@ -6,7 +6,7 @@ import { VoteSupport } from '@enums/VoteSupport';
  * @dev Extends base command parameters with cast override vote specific parameters
  */
 export interface ICastOverrideVoteCommandParams extends IBaseCommandParams {
-  proposalId: bigint;   // The ID of the proposal to vote on
+  proposalId: bigint; // The ID of the proposal to vote on
   support: VoteSupport; // The vote support (Against, For, Abstain)
-  reason: string;       // The reason for the vote
+  reason: string; // The reason for the vote
 }
