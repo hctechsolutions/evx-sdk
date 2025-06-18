@@ -18,3 +18,4 @@ export * from './IQuoteExactOutputSingleQueryParams';
 export * from './IProposalEtaQueryParams';
 export * from './IProposalNeedsQueuingQueryParams';
 export * from './IGetProposerQueryParams';
+export * from './IProposalSnapshotQueryParams';
