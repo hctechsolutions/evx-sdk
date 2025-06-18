@@ -1,1 +1,2 @@
-export * from './ClockQuery'; 
+export * from './ClockQuery';
+export * from './GetProposalIdQuery'; 
