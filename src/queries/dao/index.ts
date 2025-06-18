@@ -9,4 +9,5 @@ export * from './ProposalEtaQuery';
 export * from './ProposalNeedsQueuingQuery';
 export * from './GetProposerQuery';
 export * from './ProposalSnapshotQuery';
-export * from './ProposalThresholdQuery'; 
+export * from './ProposalThresholdQuery';
+export * from './GetProposalVotesQuery'; 
