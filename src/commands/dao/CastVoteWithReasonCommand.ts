@@ -10,7 +10,9 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class CastVoteWithReasonCommand implements IBaseCommand<ICastVoteWithReasonCommandParams, void> {
+export class CastVoteWithReasonCommand
+  implements IBaseCommand<ICastVoteWithReasonCommandParams, void>
+{
   constructor(
     @inject(NebularGovernanceContract)
     private readonly nebularGovernance: NebularGovernanceContract
@@ -36,4 +38,4 @@ export class CastVoteWithReasonCommand implements IBaseCommand<ICastVoteWithReas
       params.onFail?.(error);
     }
   }
-} 
+}
