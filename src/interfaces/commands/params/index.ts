@@ -16,3 +16,4 @@ export * from './ICastOverrideVoteCommandParams';
 export * from './ICastOverrideVoteBySigCommandParams';
 export * from './ICastVoteCommandParams';
 export * from './ICastVoteBySigCommandParams';
+export * from './ICastVoteWithReasonCommandParams';
