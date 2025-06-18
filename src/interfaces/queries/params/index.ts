@@ -9,6 +9,7 @@ export * from './IGetVotesQueryParams';
 export * from './IGetVotesWithParamsQueryParams';
 export * from './IHasVotedQueryParams';
 export * from './IHasVotedOverrideQueryParams';
+export * from './IProposalDeadlineQueryParams';
 export * from './IQuoteExactInputQueryParams';
 export * from './IQuoteExactInputSingleQueryParams';
 export * from './IGetPopulatedTicksQueryParams';
