@@ -19,3 +19,4 @@ export * from './IProposalEtaQueryParams';
 export * from './IProposalNeedsQueuingQueryParams';
 export * from './IGetProposerQueryParams';
 export * from './IProposalSnapshotQueryParams';
+export * from './IProposalThresholdQueryParams';

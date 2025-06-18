@@ -8,4 +8,5 @@ export * from './ProposalDeadlineQuery';
 export * from './ProposalEtaQuery';
 export * from './ProposalNeedsQueuingQuery';
 export * from './GetProposerQuery';
-export * from './ProposalSnapshotQuery'; 
+export * from './ProposalSnapshotQuery';
+export * from './ProposalThresholdQuery'; 
