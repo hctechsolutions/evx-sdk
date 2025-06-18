@@ -1,1 +1,1 @@
-export * from './VoteSupport'; 
+export * from './VoteSupport';

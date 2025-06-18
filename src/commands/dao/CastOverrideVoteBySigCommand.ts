@@ -10,7 +10,9 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class CastOverrideVoteBySigCommand implements IBaseCommand<ICastOverrideVoteBySigCommandParams, void> {
+export class CastOverrideVoteBySigCommand
+  implements IBaseCommand<ICastOverrideVoteBySigCommandParams, void>
+{
   constructor(
     @inject(NebularGovernanceContract)
     private readonly nebularGovernance: NebularGovernanceContract
@@ -38,4 +40,4 @@ export class CastOverrideVoteBySigCommand implements IBaseCommand<ICastOverrideV
       params.onFail?.(error);
     }
   }
-} 
+}
