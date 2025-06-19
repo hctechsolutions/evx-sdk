@@ -5,4 +5,5 @@ export * from './IProposalQueuedEvent';
 export * from './IQuorumNumeratorUpdatedEvent';
 export * from './IVoteCastEvent';
 export * from './IVoteCastWithParamsEvent';
-export * from './IVoteReducedEvent'; 
+export * from './IVoteReducedEvent';
+export * from './IOverrideVoteCastEvent'; 
