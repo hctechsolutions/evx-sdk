@@ -11,6 +11,8 @@ export * from './IGetQuorumQueryParams';
 export * from './IGetStateQueryParams';
 export * from './IGetVotesQueryParams';
 export * from './IGetVotesWithParamsQueryParams';
+export * from './IGetVotingDelayQueryParams';
+export * from './IGetVotingPeriodQueryParams';
 export * from './IHasVotedQueryParams';
 export * from './IHasVotedOverrideQueryParams';
 export * from './IProposalDeadlineQueryParams';

@@ -6,6 +6,8 @@ export * from './GetQuorumQuery';
 export * from './GetStateQuery';
 export * from './GetVotesQuery';
 export * from './GetVotesWithParamsQuery';
+export * from './GetVotingDelayQuery';
+export * from './GetVotingPeriodQuery';
 export * from './HasVotedQuery';
 export * from './HasVotedOverrideQuery';
 export * from './ProposalDeadlineQuery';
