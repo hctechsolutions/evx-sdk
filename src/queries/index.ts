@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+export * from './dao';
 export * from './position-manager';
 export * from './factory';
 export * from './pool';
