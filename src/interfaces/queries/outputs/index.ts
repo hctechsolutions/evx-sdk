@@ -6,3 +6,4 @@ export * from './IQuoteExactInputSingleOutput';
 export * from './IGetPopulatedTicksOutput';
 export * from './IQuoteExactOutputOutput';
 export * from './IQuoteExactOutputSingleOutput';
+export * from './IEip712DomainQueryOutput';
