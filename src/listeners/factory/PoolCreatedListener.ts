@@ -1,7 +1,7 @@
 import { injectable, inject, singleton } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
-import { IPoolCreatedEvent } from '@interfaces/listeners/factory/IPoolCreatedEvent';
+import { IPoolCreatedEvent } from '@interfaces/events/factory/IPoolCreatedEvent';
 import { EventLog } from 'ethers';
 
 /**
