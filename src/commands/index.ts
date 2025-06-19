@@ -5,3 +5,4 @@ export * from './factory';
 export * from './pool';
 export * from './flash';
 export * from './swap';
+export * from './dao';
