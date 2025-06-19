@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class ProposalThresholdQuery
-  implements IBaseQuery<IProposalThresholdQueryParams, bigint>
-{
+export class ProposalThresholdQuery implements IBaseQuery<IProposalThresholdQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -23,7 +21,7 @@ export class ProposalThresholdQuery
    * @param params The parameters for the query (empty for this query)
    * @returns The proposal threshold as a bigint
    */
-  async execute(params: IProposalThresholdQueryParams): Promise<bigint> {
+  async execute(_?: IProposalThresholdQueryParams): Promise<bigint> {
     return await this.governance.instance.proposalThreshold();
   }
-} 
+}

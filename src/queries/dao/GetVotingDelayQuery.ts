@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetVotingDelayQuery
-  implements IBaseQuery<IGetVotingDelayQueryParams, bigint>
-{
+export class GetVotingDelayQuery implements IBaseQuery<IGetVotingDelayQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -23,7 +21,7 @@ export class GetVotingDelayQuery
    * @param params The parameters for the query (empty for this query)
    * @returns The voting delay as a bigint
    */
-  async execute(params: IGetVotingDelayQueryParams): Promise<bigint> {
+  async execute(_?: IGetVotingDelayQueryParams): Promise<bigint> {
     return await this.governance.instance.votingDelay();
   }
-} 
+}

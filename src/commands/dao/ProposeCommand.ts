@@ -37,4 +37,4 @@ export class ProposeCommand implements IBaseCommand<IProposeCommandParams, void>
       params.onFail?.(error);
     }
   }
-} 
+}

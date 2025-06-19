@@ -4,4 +4,4 @@
  */
 export interface IProposalDeadlineQueryParams {
   proposalId: bigint; // The proposal ID to get the deadline for
-} 
+}

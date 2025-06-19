@@ -37,4 +37,4 @@ export class QueueCommand implements IBaseCommand<IQueueCommandParams, void> {
       params.onFail?.(error);
     }
   }
-} 
+}

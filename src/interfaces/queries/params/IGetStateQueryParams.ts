@@ -4,4 +4,4 @@
  */
 export interface IGetStateQueryParams {
   proposalId: bigint; // The proposal ID to get the state for
-} 
+}

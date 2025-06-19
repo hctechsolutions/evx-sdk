@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class ProposalSnapshotQuery
-  implements IBaseQuery<IProposalSnapshotQueryParams, bigint>
-{
+export class ProposalSnapshotQuery implements IBaseQuery<IProposalSnapshotQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,8 +22,6 @@ export class ProposalSnapshotQuery
    * @returns The proposal snapshot as a bigint
    */
   async execute(params: IProposalSnapshotQueryParams): Promise<bigint> {
-    return await this.governance.instance.proposalSnapshot(
-      params.proposalId
-    );
+    return await this.governance.instance.proposalSnapshot(params.proposalId);
   }
-} 
+}

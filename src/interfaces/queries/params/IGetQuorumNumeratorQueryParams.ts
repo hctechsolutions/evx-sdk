@@ -4,4 +4,4 @@
  */
 export interface IGetQuorumNumeratorQueryParams {
   timepoint?: bigint; // Optional timepoint for the quorum numerator calculation
-} 
+}

@@ -6,4 +6,4 @@ export interface IGetProposalVotesResult {
   againstVotes: bigint;
   forVotes: bigint;
   abstainVotes: bigint;
-} 
+}

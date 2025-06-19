@@ -4,4 +4,4 @@
  */
 export interface IGetQuorumQueryParams {
   blockNumber: bigint; // The block number to get the quorum for
-} 
+}

@@ -4,4 +4,4 @@
  */
 export interface IGetProposerQueryParams {
   proposalId: bigint; // The proposal ID to get the proposer address for
-} 
+}

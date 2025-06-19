@@ -24,8 +24,6 @@ export class ProposalNeedsQueuingQuery
    * @returns True if the proposal needs queuing, false otherwise
    */
   async execute(params: IProposalNeedsQueuingQueryParams): Promise<boolean> {
-    return await this.governance.instance.proposalNeedsQueuing(
-      params.proposalId
-    );
+    return await this.governance.instance.proposalNeedsQueuing(params.proposalId);
   }
-} 
+}

@@ -16,4 +16,4 @@ export * from './ProposalNeedsQueuingQuery';
 export * from './GetProposerQuery';
 export * from './ProposalSnapshotQuery';
 export * from './ProposalThresholdQuery';
-export * from './GetProposalVotesQuery'; 
+export * from './GetProposalVotesQuery';

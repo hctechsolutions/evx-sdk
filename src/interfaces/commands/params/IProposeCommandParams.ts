@@ -9,4 +9,4 @@ export interface IProposeCommandParams extends IBaseCommandParams {
   values: bigint[]; // Array of values (in wei) for each target
   calldatas: string[]; // Array of calldata for each target
   description: string; // Description of the proposal
-} 
+}

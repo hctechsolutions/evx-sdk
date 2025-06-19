@@ -11,9 +11,7 @@ import { ProposalState } from '@enums/ProposalState';
  */
 @injectable()
 @singleton()
-export class GetStateQuery
-  implements IBaseQuery<IGetStateQueryParams, ProposalState>
-{
+export class GetStateQuery implements IBaseQuery<IGetStateQueryParams, ProposalState> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -28,4 +26,4 @@ export class GetStateQuery
     const result = await this.governance.instance.state(params.proposalId);
     return result as ProposalState;
   }
-} 
+}

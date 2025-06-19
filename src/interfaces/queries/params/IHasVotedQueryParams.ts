@@ -5,4 +5,4 @@
 export interface IHasVotedQueryParams {
   proposalId: bigint; // The proposal ID to check voting status for
   account: string; // The account address to check if they have voted
-} 
+}

@@ -4,4 +4,4 @@
  */
 export interface IProposalSnapshotQueryParams {
   proposalId: bigint; // The proposal ID to get the snapshot for
-} 
+}

@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class HasVotedOverrideQuery
-  implements IBaseQuery<IHasVotedOverrideQueryParams, boolean>
-{
+export class HasVotedOverrideQuery implements IBaseQuery<IHasVotedOverrideQueryParams, boolean> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,9 +22,6 @@ export class HasVotedOverrideQuery
    * @returns True if the account has voted with override, false otherwise
    */
   async execute(params: IHasVotedOverrideQueryParams): Promise<boolean> {
-    return await this.governance.instance.hasVotedOverride(
-      params.proposalId,
-      params.account
-    );
+    return await this.governance.instance.hasVotedOverride(params.proposalId, params.account);
   }
-} 
+}

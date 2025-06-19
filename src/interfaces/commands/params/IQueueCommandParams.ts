@@ -9,4 +9,4 @@ export interface IQueueCommandParams extends IBaseCommandParams {
   values: bigint[]; // Array of values (in wei) for each target
   calldatas: string[]; // Array of calldata for each target
   descriptionHash: string; // Hash of the proposal description (keccak256 of the proposal description)
-} 
+}

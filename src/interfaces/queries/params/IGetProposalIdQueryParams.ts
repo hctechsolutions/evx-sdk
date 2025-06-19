@@ -7,4 +7,4 @@ export interface IGetProposalIdQueryParams {
   values: bigint[]; // Array of values to send with each call
   calldatas: string[]; // Array of calldata for each call
   descriptionHash: string; // Hash of the proposal description
-} 
+}

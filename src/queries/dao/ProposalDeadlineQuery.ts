@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class ProposalDeadlineQuery
-  implements IBaseQuery<IProposalDeadlineQueryParams, bigint>
-{
+export class ProposalDeadlineQuery implements IBaseQuery<IProposalDeadlineQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,8 +22,6 @@ export class ProposalDeadlineQuery
    * @returns The proposal deadline as a bigint timestamp
    */
   async execute(params: IProposalDeadlineQueryParams): Promise<bigint> {
-    return await this.governance.instance.proposalDeadline(
-      params.proposalId
-    );
+    return await this.governance.instance.proposalDeadline(params.proposalId);
   }
-} 
+}

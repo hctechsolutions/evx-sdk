@@ -23,7 +23,7 @@ export class GetQuorumDenominatorQuery
    * @param params The parameters for the query (empty for this query)
    * @returns The quorum denominator as a bigint
    */
-  async execute(params: IGetQuorumDenominatorQueryParams): Promise<bigint> {
+  async execute(_?: IGetQuorumDenominatorQueryParams): Promise<bigint> {
     return await this.governance.instance.quorumDenominator();
   }
-} 
+}

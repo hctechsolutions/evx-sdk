@@ -4,4 +4,4 @@
  */
 export interface IClockQueryParams {
   // No parameters required for the clock function
-} 
+}
