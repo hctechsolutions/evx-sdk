@@ -4,4 +4,4 @@
  */
 export interface INameQueryParams {
   // No parameters required for the name function
-} 
+}

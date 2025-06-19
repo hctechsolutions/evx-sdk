@@ -4,4 +4,4 @@
  */
 export interface IOverrideBallotTypeHashQueryParams {
   // No parameters required for the OVERRIDE_BALLOT_TYPEHASH function
-} 
+}

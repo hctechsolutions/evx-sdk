@@ -4,4 +4,4 @@
  */
 export interface INebularTokenQueryParams {
   // No parameters required for the nebularToken function
-} 
+}

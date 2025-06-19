@@ -4,4 +4,4 @@
  */
 export interface IEip712DomainQueryParams {
   // No parameters required for the eip712Domain function
-} 
+}

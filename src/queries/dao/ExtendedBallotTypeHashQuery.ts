@@ -10,7 +10,9 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class ExtendedBallotTypeHashQuery implements IBaseQuery<IExtendedBallotTypeHashQueryParams, string> {
+export class ExtendedBallotTypeHashQuery
+  implements IBaseQuery<IExtendedBallotTypeHashQueryParams, string>
+{
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,4 +26,4 @@ export class ExtendedBallotTypeHashQuery implements IBaseQuery<IExtendedBallotTy
   async execute(_?: IExtendedBallotTypeHashQueryParams): Promise<string> {
     return await this.governance.instance.EXTENDED_BALLOT_TYPEHASH();
   }
-} 
+}

@@ -4,4 +4,4 @@
  */
 export interface IVersionQueryParams {
   // No parameters required for the version function
-} 
+}
