@@ -6,4 +6,4 @@ export interface ICollectPositionEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

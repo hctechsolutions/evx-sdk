@@ -4,4 +4,4 @@ export interface IProposalQueuedEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

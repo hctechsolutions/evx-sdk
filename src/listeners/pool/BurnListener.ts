@@ -114,4 +114,4 @@ export class BurnListener implements IEventListener<IBurnEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

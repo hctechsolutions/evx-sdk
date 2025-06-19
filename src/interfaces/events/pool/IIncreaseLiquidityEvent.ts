@@ -6,4 +6,4 @@ export interface IIncreaseLiquidityEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

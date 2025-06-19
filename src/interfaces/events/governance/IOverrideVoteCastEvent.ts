@@ -7,4 +7,4 @@ export interface IOverrideVoteCastEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

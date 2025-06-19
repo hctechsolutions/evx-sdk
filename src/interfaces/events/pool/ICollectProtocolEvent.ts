@@ -6,4 +6,4 @@ export interface ICollectProtocolEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

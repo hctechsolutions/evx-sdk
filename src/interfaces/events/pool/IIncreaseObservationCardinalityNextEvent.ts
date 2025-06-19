@@ -4,4 +4,4 @@ export interface IIncreaseObservationCardinalityNextEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

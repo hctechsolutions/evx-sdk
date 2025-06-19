@@ -4,4 +4,4 @@ export interface IFeeAmountEnabledEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

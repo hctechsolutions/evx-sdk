@@ -41,7 +41,11 @@ export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquid
         logIndex: event.index
       };
       for (const cb of this.callbacks) {
-        try { await cb(increaseEvent); } catch (error) { console.error('Error in IncreaseLiquidity event callback:', error); }
+        try {
+          await cb(increaseEvent);
+        } catch (error) {
+          console.error('Error in IncreaseLiquidity event callback:', error);
+        }
       }
     };
     this.positionManagerContract.instance.on(this.eventFilter, handleEvent);
@@ -64,9 +68,16 @@ export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquid
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IIncreaseLiquidityEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number
+  ): Promise<IIncreaseLiquidityEvent[]> {
     const filter = this.positionManagerContract.instance.filters.IncreaseLiquidity();
-    const events = await this.positionManagerContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.positionManagerContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
     return events.map((event) => {
       if ('args' in event) {
         const [tokenId, liquidity, amount0, amount1] = event.args;
@@ -87,4 +98,4 @@ export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquid
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

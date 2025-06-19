@@ -3,4 +3,4 @@ export interface IProposalExecutedEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

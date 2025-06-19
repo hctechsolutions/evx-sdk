@@ -34,10 +34,7 @@ export class ProposalCanceledListener implements IEventListener<IProposalCancele
 
     this.eventFilter = this.governanceContract.instance.filters.ProposalCanceled();
 
-    const handleEvent = async (
-      proposalId: bigint,
-      event: EventLog
-    ) => {
+    const handleEvent = async (proposalId: bigint, event: EventLog) => {
       const proposalCanceledEvent: IProposalCanceledEvent = {
         proposalId: proposalId,
         blockNumber: event.blockNumber,
@@ -96,7 +93,10 @@ export class ProposalCanceledListener implements IEventListener<IProposalCancele
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IProposalCanceledEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number
+  ): Promise<IProposalCanceledEvent[]> {
     const filter = this.governanceContract.instance.filters.ProposalCanceled();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
 
@@ -121,4 +121,4 @@ export class ProposalCanceledListener implements IEventListener<IProposalCancele
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

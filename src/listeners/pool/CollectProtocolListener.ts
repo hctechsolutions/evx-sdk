@@ -108,4 +108,4 @@ export class CollectProtocolListener implements IEventListener<ICollectProtocolE
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -155,4 +155,4 @@ export class ProposalCreatedListener implements IEventListener<IProposalCreatedE
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

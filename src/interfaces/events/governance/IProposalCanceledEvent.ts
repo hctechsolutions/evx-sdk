@@ -3,4 +3,4 @@ export interface IProposalCanceledEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

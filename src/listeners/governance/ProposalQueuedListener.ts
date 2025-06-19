@@ -34,11 +34,7 @@ export class ProposalQueuedListener implements IEventListener<IProposalQueuedEve
 
     this.eventFilter = this.governanceContract.instance.filters.ProposalQueued();
 
-    const handleEvent = async (
-      proposalId: bigint,
-      etaSeconds: bigint,
-      event: EventLog
-    ) => {
+    const handleEvent = async (proposalId: bigint, etaSeconds: bigint, event: EventLog) => {
       const proposalQueuedEvent: IProposalQueuedEvent = {
         proposalId: proposalId,
         etaSeconds: etaSeconds,
@@ -124,4 +120,4 @@ export class ProposalQueuedListener implements IEventListener<IProposalQueuedEve
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

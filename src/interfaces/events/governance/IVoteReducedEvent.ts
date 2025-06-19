@@ -6,4 +6,4 @@ export interface IVoteReducedEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

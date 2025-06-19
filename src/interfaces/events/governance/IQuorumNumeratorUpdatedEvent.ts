@@ -4,4 +4,4 @@ export interface IQuorumNumeratorUpdatedEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

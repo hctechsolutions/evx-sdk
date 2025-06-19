@@ -9,4 +9,4 @@ export interface ISwapEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

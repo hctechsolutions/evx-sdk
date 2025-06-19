@@ -41,7 +41,11 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
         logIndex: event.index
       };
       for (const cb of this.callbacks) {
-        try { await cb(collectEvent); } catch (error) { console.error('Error in CollectPosition event callback:', error); }
+        try {
+          await cb(collectEvent);
+        } catch (error) {
+          console.error('Error in CollectPosition event callback:', error);
+        }
       }
     };
     this.positionManagerContract.instance.on(this.eventFilter, handleEvent);
@@ -66,7 +70,11 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
 
   async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ICollectPositionEvent[]> {
     const filter = this.positionManagerContract.instance.filters.Collect();
-    const events = await this.positionManagerContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.positionManagerContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
     return events.map((event) => {
       if ('args' in event) {
         const [tokenId, recipient, amount0, amount1] = event.args;
@@ -87,4 +95,4 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -9,4 +9,4 @@ export interface IMintEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

@@ -117,4 +117,4 @@ export class SwapListener implements IEventListener<ISwapEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

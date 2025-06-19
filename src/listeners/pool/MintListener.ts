@@ -117,4 +117,4 @@ export class MintListener implements IEventListener<IMintEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

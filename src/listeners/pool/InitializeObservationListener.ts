@@ -25,7 +25,9 @@ export class InitializeObservationListener implements IEventListener<IInitialize
    * @notice Start listening for InitializeObservation events
    * @param callback Function to call when event is received
    */
-  async start(callback: (event: IInitializeObservationEvent) => void | Promise<void>): Promise<void> {
+  async start(
+    callback: (event: IInitializeObservationEvent) => void | Promise<void>
+  ): Promise<void> {
     this.addCallback(callback);
 
     if (this.isListening) {
@@ -34,11 +36,7 @@ export class InitializeObservationListener implements IEventListener<IInitialize
 
     this.eventFilter = this.poolContract.instance.filters.InitializeObservation();
 
-    const handleEvent = async (
-      sqrtPriceX96: bigint,
-      tick: number,
-      event: EventLog
-    ) => {
+    const handleEvent = async (sqrtPriceX96: bigint, tick: number, event: EventLog) => {
       const initializeObservationEvent: IInitializeObservationEvent = {
         sqrtPriceX96,
         tick,
@@ -80,7 +78,10 @@ export class InitializeObservationListener implements IEventListener<IInitialize
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IInitializeObservationEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number
+  ): Promise<IInitializeObservationEvent[]> {
     const filter = this.poolContract.instance.filters.InitializeObservation();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
@@ -102,4 +103,4 @@ export class InitializeObservationListener implements IEventListener<IInitialize
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

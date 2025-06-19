@@ -9,4 +9,4 @@ export * from './ISetFeeProtocolEvent';
 export * from './ISwapEvent';
 export * from './ICollectPositionEvent';
 export * from './IDecreaseLiquidityEvent';
-export * from './IIncreaseLiquidityEvent'; 
+export * from './IIncreaseLiquidityEvent';

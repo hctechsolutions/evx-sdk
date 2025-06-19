@@ -1,2 +1,2 @@
 export * from './IPoolCreatedEvent';
-export * from './IFeeAmountEnabledEvent'; 
+export * from './IFeeAmountEnabledEvent';

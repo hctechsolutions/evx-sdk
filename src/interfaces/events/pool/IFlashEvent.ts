@@ -8,4 +8,4 @@ export interface IFlashEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

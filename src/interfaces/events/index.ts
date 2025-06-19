@@ -2,4 +2,4 @@
 export * from './factory';
 
 // Governance Events
-export * from './governance'; 
+export * from './governance';

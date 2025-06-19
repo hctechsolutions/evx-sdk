@@ -8,4 +8,4 @@ export interface IBurnEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

@@ -11,4 +11,4 @@ export interface IProposalCreatedEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}
