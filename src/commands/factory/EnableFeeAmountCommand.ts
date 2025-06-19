@@ -35,4 +35,4 @@ export class EnableFeeAmountCommand implements IBaseCommand<IEnableFeeAmountComm
       params.onFail?.(error);
     }
   }
-} 
+}

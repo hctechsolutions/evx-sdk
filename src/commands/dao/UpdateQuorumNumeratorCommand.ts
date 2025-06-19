@@ -10,7 +10,9 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class UpdateQuorumNumeratorCommand implements IBaseCommand<IUpdateQuorumNumeratorCommandParams, void> {
+export class UpdateQuorumNumeratorCommand
+  implements IBaseCommand<IUpdateQuorumNumeratorCommandParams, void>
+{
   constructor(
     @inject(NebularGovernanceContract)
     private readonly nebularGovernance: NebularGovernanceContract
@@ -34,4 +36,4 @@ export class UpdateQuorumNumeratorCommand implements IBaseCommand<IUpdateQuorumN
       params.onFail?.(error);
     }
   }
-} 
+}

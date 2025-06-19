@@ -8,4 +8,4 @@ export interface IRelayCommandParams extends IBaseCommandParams {
   target: string; // Target address for the relay call
   value: bigint; // Value to send with the relay call (in wei)
   data: string; // Calldata for the relay call
-} 
+}

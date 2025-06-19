@@ -37,4 +37,4 @@ export class RelayCommand implements IBaseCommand<IRelayCommandParams, void> {
       params.onFail?.(error);
     }
   }
-} 
+}
