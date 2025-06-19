@@ -8,6 +8,7 @@ export * from './IGetProposalIdQueryParams';
 export * from './IGetQuorumDenominatorQueryParams';
 export * from './IGetQuorumNumeratorQueryParams';
 export * from './IGetQuorumQueryParams';
+export * from './IGetStateQueryParams';
 export * from './IGetVotesQueryParams';
 export * from './IGetVotesWithParamsQueryParams';
 export * from './IHasVotedQueryParams';
