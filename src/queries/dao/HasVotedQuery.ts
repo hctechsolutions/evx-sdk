@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class HasVotedQuery
-  implements IBaseQuery<IHasVotedQueryParams, boolean>
-{
+export class HasVotedQuery implements IBaseQuery<IHasVotedQueryParams, boolean> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,9 +22,6 @@ export class HasVotedQuery
    * @returns True if the account has voted, false otherwise
    */
   async execute(params: IHasVotedQueryParams): Promise<boolean> {
-    return await this.governance.instance.hasVoted(
-      params.proposalId,
-      params.account
-    );
+    return await this.governance.instance.hasVoted(params.proposalId, params.account);
   }
-} 
+}

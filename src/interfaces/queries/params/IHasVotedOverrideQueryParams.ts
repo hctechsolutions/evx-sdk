@@ -5,4 +5,4 @@
 export interface IHasVotedOverrideQueryParams {
   proposalId: bigint; // The proposal ID to check override voting status for
   account: string; // The account address to check if they have voted with override
-} 
+}

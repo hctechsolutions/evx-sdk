@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetVotesWithParamsQuery
-  implements IBaseQuery<IGetVotesWithParamsQueryParams, bigint>
-{
+export class GetVotesWithParamsQuery implements IBaseQuery<IGetVotesWithParamsQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -30,4 +28,4 @@ export class GetVotesWithParamsQuery
       params.params
     );
   }
-} 
+}

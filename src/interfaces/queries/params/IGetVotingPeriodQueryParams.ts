@@ -4,4 +4,4 @@
  */
 export interface IGetVotingPeriodQueryParams {
   // No parameters required for this query
-} 
+}

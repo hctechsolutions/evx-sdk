@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetQuorumQuery
-  implements IBaseQuery<IGetQuorumQueryParams, bigint>
-{
+export class GetQuorumQuery implements IBaseQuery<IGetQuorumQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -26,4 +24,4 @@ export class GetQuorumQuery
   async execute(params: IGetQuorumQueryParams): Promise<bigint> {
     return await this.governance.instance.quorum(params.blockNumber);
   }
-} 
+}

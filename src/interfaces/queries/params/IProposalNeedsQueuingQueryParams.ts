@@ -4,4 +4,4 @@
  */
 export interface IProposalNeedsQueuingQueryParams {
   proposalId: bigint; // The proposal ID to check if it needs queuing
-} 
+}

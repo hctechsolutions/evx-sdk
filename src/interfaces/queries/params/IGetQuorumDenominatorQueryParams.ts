@@ -4,4 +4,4 @@
  */
 export interface IGetQuorumDenominatorQueryParams {
   // No parameters required for this query
-} 
+}

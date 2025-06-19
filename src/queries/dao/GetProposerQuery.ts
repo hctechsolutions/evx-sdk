@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetProposerQuery
-  implements IBaseQuery<IGetProposerQueryParams, string>
-{
+export class GetProposerQuery implements IBaseQuery<IGetProposerQueryParams, string> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,8 +22,6 @@ export class GetProposerQuery
    * @returns The proposer address as a string
    */
   async execute(params: IGetProposerQueryParams): Promise<string> {
-    return await this.governance.instance.proposalProposer(
-      params.proposalId
-    );
+    return await this.governance.instance.proposalProposer(params.proposalId);
   }
-} 
+}

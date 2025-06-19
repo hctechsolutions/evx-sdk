@@ -4,4 +4,4 @@
  */
 export interface IGetProposalVotesQueryParams {
   proposalId: bigint; // The proposal ID to get the votes for
-} 
+}

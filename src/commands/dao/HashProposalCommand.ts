@@ -37,4 +37,4 @@ export class HashProposalCommand implements IBaseCommand<IHashProposalCommandPar
       throw error;
     }
   }
-} 
+}

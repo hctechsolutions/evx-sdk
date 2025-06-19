@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetVotesQuery
-  implements IBaseQuery<IGetVotesQueryParams, bigint>
-{
+export class GetVotesQuery implements IBaseQuery<IGetVotesQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -24,9 +22,6 @@ export class GetVotesQuery
    * @returns The voting power as a bigint
    */
   async execute(params: IGetVotesQueryParams): Promise<bigint> {
-    return await this.governance.instance.getVotes(
-      params.account,
-      params.blockNumber
-    );
+    return await this.governance.instance.getVotes(params.account, params.blockNumber);
   }
-} 
+}

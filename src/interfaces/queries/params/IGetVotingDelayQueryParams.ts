@@ -4,4 +4,4 @@
  */
 export interface IGetVotingDelayQueryParams {
   // No parameters required for this query
-} 
+}

@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class ClockQuery
-  implements IBaseQuery<IClockQueryParams, bigint>
-{
+export class ClockQuery implements IBaseQuery<IClockQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -23,7 +21,7 @@ export class ClockQuery
    * @param params The parameters for the query (empty for clock function)
    * @returns The current clock value as a bigint
    */
-  async execute(params: IClockQueryParams): Promise<bigint> {
+  async execute(_?: IClockQueryParams): Promise<bigint> {
     return await this.governance.instance.clock();
   }
-} 
+}

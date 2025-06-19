@@ -4,4 +4,4 @@
  */
 export interface IProposalThresholdQueryParams {
   // No parameters required for this query
-} 
+}

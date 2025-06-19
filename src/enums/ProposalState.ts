@@ -11,4 +11,4 @@ export enum ProposalState {
   Queued = 5,
   Expired = 6,
   Executed = 7
-} 
+}

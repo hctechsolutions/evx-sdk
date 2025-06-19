@@ -10,9 +10,7 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class GetProposalIdQuery
-  implements IBaseQuery<IGetProposalIdQueryParams, bigint>
-{
+export class GetProposalIdQuery implements IBaseQuery<IGetProposalIdQueryParams, bigint> {
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -31,4 +29,4 @@ export class GetProposalIdQuery
       params.descriptionHash
     );
   }
-} 
+}
