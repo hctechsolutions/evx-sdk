@@ -1,7 +1,7 @@
 import { injectable, inject, singleton } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
-import { IFeeAmountEnabledEvent } from '@interfaces/listeners/factory/IFeeAmountEnabledEvent';
+import { IFeeAmountEnabledEvent } from '@interfaces/events/factory/IFeeAmountEnabledEvent';
 import { EventLog } from 'ethers';
 
 /**
