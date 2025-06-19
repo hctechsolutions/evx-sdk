@@ -45,6 +45,12 @@
       "@queries/*": [
         "src/queries/*"
       ],
+      "@events": [
+        "src/events/index.ts"
+      ],
+      "@events/*": [
+        "src/events/*"
+      ],
       "@listeners": [
         "src/listeners/index.ts"
       ],
