@@ -10,3 +10,6 @@ export * from './CastVoteWithReasonAndParamsBySigCommand';
 export * from './HashProposalCommand';
 export * from './ProposeCommand';
 export * from './QueueCommand';
+export * from './RelayCommand';
+export * from './UpdateQuorumNumeratorCommand';
+export * from './UpdateTimelockCommand';
