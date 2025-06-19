@@ -24,4 +24,4 @@ export class NameQuery implements IBaseQuery<INameQueryParams, string> {
   async execute(_?: INameQueryParams): Promise<string> {
     return await this.governance.instance.name();
   }
-} 
+}

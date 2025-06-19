@@ -11,7 +11,9 @@ import { NebularGovernanceContract } from '@contracts';
  */
 @injectable()
 @singleton()
-export class Eip712DomainQuery implements IBaseQuery<IEip712DomainQueryParams, IEip712DomainQueryOutput> {
+export class Eip712DomainQuery
+  implements IBaseQuery<IEip712DomainQueryParams, IEip712DomainQueryOutput>
+{
   constructor(
     @inject(NebularGovernanceContract)
     private readonly governance: NebularGovernanceContract
@@ -31,7 +33,7 @@ export class Eip712DomainQuery implements IBaseQuery<IEip712DomainQueryParams, I
       chainId: BigInt(result.chainId),
       verifyingContract: result.verifyingContract,
       salt: result.salt,
-      extensions: result.extensions.map((e: any) => BigInt(e)),
+      extensions: result.extensions.map((e: any) => BigInt(e))
     };
   }
-} 
+}

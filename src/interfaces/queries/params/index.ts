@@ -1,5 +1,7 @@
 export * from './IBallotTypeHashQueryParams';
+export * from './IClockModeQueryParams';
 export * from './IClockQueryParams';
+export * from './ICountingModeQueryParams';
 export * from './IExtendedBallotTypeHashQueryParams';
 export * from './IGetFeeAmountTickSpacingQueryParams';
 export * from './IGetOwnerQueryParams';
@@ -33,4 +35,8 @@ export * from './IGetProposalVotesQueryParams';
 export * from './IEip712DomainQueryParams';
 export * from './INameQueryParams';
 export * from './INebularTokenQueryParams';
+export * from './INoncesQueryParams';
+export * from './ISupportsInterfaceQueryParams';
+export * from './ITimelockQueryParams';
+export * from './ITokenQueryParams';
 export * from './IVersionQueryParams';

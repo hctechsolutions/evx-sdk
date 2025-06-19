@@ -1,5 +1,7 @@
 export * from './BallotTypeHashQuery';
+export * from './ClockModeQuery';
 export * from './ClockQuery';
+export * from './CountingModeQuery';
 export * from './ExtendedBallotTypeHashQuery';
 export * from './GetProposalIdQuery';
 export * from './GetQuorumDenominatorQuery';
@@ -23,4 +25,8 @@ export * from './GetProposalVotesQuery';
 export * from './Eip712DomainQuery';
 export * from './NameQuery';
 export * from './NebularTokenQuery';
+export * from './NoncesQuery';
+export * from './SupportsInterfaceQuery';
+export * from './TimelockQuery';
+export * from './TokenQuery';
 export * from './VersionQuery';

@@ -24,4 +24,4 @@ export class BallotTypeHashQuery implements IBaseQuery<IBallotTypeHashQueryParam
   async execute(_?: IBallotTypeHashQueryParams): Promise<string> {
     return await this.governance.instance.BALLOT_TYPEHASH();
   }
-} 
+}

@@ -4,4 +4,4 @@
  */
 export interface IBallotTypeHashQueryParams {
   // No parameters required for the BALLOT_TYPEHASH function
-} 
+}

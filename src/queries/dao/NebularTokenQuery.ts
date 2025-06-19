@@ -24,4 +24,4 @@ export class NebularTokenQuery implements IBaseQuery<INebularTokenQueryParams, s
   async execute(_?: INebularTokenQueryParams): Promise<string> {
     return await this.governance.instance.nebularToken();
   }
-} 
+}

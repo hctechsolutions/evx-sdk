@@ -24,4 +24,4 @@ export class VersionQuery implements IBaseQuery<IVersionQueryParams, string> {
   async execute(_?: IVersionQueryParams): Promise<string> {
     return await this.governance.instance.version();
   }
-} 
+}

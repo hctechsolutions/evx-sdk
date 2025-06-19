@@ -10,4 +10,4 @@ export interface IEip712DomainQueryOutput {
   verifyingContract: string; // address
   salt: string; // bytes32
   extensions: bigint[]; // uint256[]
-} 
+}
