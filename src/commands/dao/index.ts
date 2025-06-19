@@ -8,3 +8,5 @@ export * from './CastVoteWithReasonCommand';
 export * from './CastVoteWithReasonAndParamsCommand';
 export * from './CastVoteWithReasonAndParamsBySigCommand';
 export * from './HashProposalCommand';
+export * from './ProposeCommand';
+export * from './QueueCommand';
