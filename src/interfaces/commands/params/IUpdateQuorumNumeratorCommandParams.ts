@@ -6,4 +6,4 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  */
 export interface IUpdateQuorumNumeratorCommandParams extends IBaseCommandParams {
   newQuorumNumerator: bigint; // New quorum numerator value
-} 
+}

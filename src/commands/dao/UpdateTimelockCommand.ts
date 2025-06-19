@@ -22,9 +22,7 @@ export class UpdateTimelockCommand implements IBaseCommand<IUpdateTimelockComman
    */
   async execute(params: IUpdateTimelockCommandParams): Promise<void> {
     try {
-      const transaction = await this.nebularGovernance.instance.updateTimelock(
-        params.newTimelock
-      );
+      const transaction = await this.nebularGovernance.instance.updateTimelock(params.newTimelock);
 
       params.onTransaction?.(transaction.hash);
       const receipt = await transaction.wait();
@@ -34,4 +32,4 @@ export class UpdateTimelockCommand implements IBaseCommand<IUpdateTimelockComman
       params.onFail?.(error);
     }
   }
-} 
+}

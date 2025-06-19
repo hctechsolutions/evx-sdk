@@ -6,4 +6,4 @@ import { IBaseCommandParams } from './IBaseCommandParams';
  */
 export interface IUpdateTimelockCommandParams extends IBaseCommandParams {
   newTimelock: string; // New timelock controller address
-} 
+}
