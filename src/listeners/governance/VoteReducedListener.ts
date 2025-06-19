@@ -130,4 +130,4 @@ export class VoteReducedListener implements IEventListener<IVoteReducedEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

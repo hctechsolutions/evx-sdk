@@ -1,2 +1,2 @@
 export * from './PoolCreatedListener';
-export * from './FeeAmountEnabledListener'; 
+export * from './FeeAmountEnabledListener';

@@ -6,4 +6,4 @@ export * from './QuorumNumeratorUpdatedListener';
 export * from './VoteCastListener';
 export * from './VoteCastWithParamsListener';
 export * from './VoteReducedListener';
-export * from './OverrideVoteCastListener'; 
+export * from './OverrideVoteCastListener';

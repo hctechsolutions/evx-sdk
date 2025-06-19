@@ -7,4 +7,4 @@ export interface IVoteCastEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}

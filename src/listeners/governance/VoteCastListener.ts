@@ -133,4 +133,4 @@ export class VoteCastListener implements IEventListener<IVoteCastEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -114,4 +114,4 @@ export class CollectListener implements IEventListener<ICollectEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

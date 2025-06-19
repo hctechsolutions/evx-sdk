@@ -11,7 +11,9 @@ import { EventLog } from 'ethers';
  */
 @injectable()
 @singleton()
-export class QuorumNumeratorUpdatedListener implements IEventListener<IQuorumNumeratorUpdatedEvent> {
+export class QuorumNumeratorUpdatedListener
+  implements IEventListener<IQuorumNumeratorUpdatedEvent>
+{
   private isListening = false;
   private eventFilter: any;
   private callbacks: ((event: IQuorumNumeratorUpdatedEvent) => void | Promise<void>)[] = [];
@@ -25,7 +27,9 @@ export class QuorumNumeratorUpdatedListener implements IEventListener<IQuorumNum
    * @notice Start listening for QuorumNumeratorUpdated events
    * @param callback Function to call when event is received
    */
-  async start(callback: (event: IQuorumNumeratorUpdatedEvent) => void | Promise<void>): Promise<void> {
+  async start(
+    callback: (event: IQuorumNumeratorUpdatedEvent) => void | Promise<void>
+  ): Promise<void> {
     this.addCallback(callback);
 
     if (this.isListening) {
@@ -98,7 +102,10 @@ export class QuorumNumeratorUpdatedListener implements IEventListener<IQuorumNum
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IQuorumNumeratorUpdatedEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number
+  ): Promise<IQuorumNumeratorUpdatedEvent[]> {
     const filter = this.governanceContract.instance.filters.QuorumNumeratorUpdated();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
 
@@ -124,4 +131,4 @@ export class QuorumNumeratorUpdatedListener implements IEventListener<IQuorumNum
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -114,4 +114,4 @@ export class FlashListener implements IEventListener<IFlashEvent> {
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

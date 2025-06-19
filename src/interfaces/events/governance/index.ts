@@ -6,4 +6,4 @@ export * from './IQuorumNumeratorUpdatedEvent';
 export * from './IVoteCastEvent';
 export * from './IVoteCastWithParamsEvent';
 export * from './IVoteReducedEvent';
-export * from './IOverrideVoteCastEvent'; 
+export * from './IOverrideVoteCastEvent';

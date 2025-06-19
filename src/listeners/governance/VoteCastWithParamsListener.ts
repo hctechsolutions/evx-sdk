@@ -106,7 +106,10 @@ export class VoteCastWithParamsListener implements IEventListener<IVoteCastWithP
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IVoteCastWithParamsEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number
+  ): Promise<IVoteCastWithParamsEvent[]> {
     const filter = this.governanceContract.instance.filters.VoteCastWithParams();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
 
@@ -136,4 +139,4 @@ export class VoteCastWithParamsListener implements IEventListener<IVoteCastWithP
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -108,4 +108,4 @@ export class SetFeeProtocolListener implements IEventListener<ISetFeeProtocolEve
   get listening(): boolean {
     return this.isListening;
   }
-} 
+}

@@ -8,4 +8,4 @@ export interface IVoteCastWithParamsEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
-} 
+}
