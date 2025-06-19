@@ -3,6 +3,7 @@ export * from './GetProposalIdQuery';
 export * from './GetQuorumDenominatorQuery';
 export * from './GetQuorumNumeratorQuery';
 export * from './GetQuorumQuery';
+export * from './GetStateQuery';
 export * from './GetVotesQuery';
 export * from './GetVotesWithParamsQuery';
 export * from './HasVotedQuery';
