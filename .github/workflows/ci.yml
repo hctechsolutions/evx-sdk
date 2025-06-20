@@ -104,7 +104,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No version changes to commit"
           else
-            git commit -m "chore: update version to ${{ steps.tag.outputs.version }}"
+            git commit -m "chore: update version to ${{ steps.tag.outputs.version }} [skip ci]"
             git push
           fi
 
