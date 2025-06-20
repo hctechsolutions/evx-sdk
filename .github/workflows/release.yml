@@ -3,7 +3,8 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'  # Triggers on version tags like v1.0.0, v1.2.3-rc.1, v1.1.0-dev, etc.
+      - 'v*'      # Triggers on version tags like v1.0.0, v1.1.0-dev, etc.
+      - 'v*-rc*'  # Explicitly include release candidates for versions like v1.2.3-rc.1
 
 env:
   NODE_VERSION: '18.19.1'
