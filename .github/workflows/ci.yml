@@ -109,13 +109,21 @@ jobs:
           fi
 
       - name: Create Git tag
-        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || startsWith(github.ref, 'refs/heads/bugfix/')
         run: |
+          # Configure git for the action
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
           VERSION=${{ steps.tag.outputs.version }}
           TAG_NAME="v$VERSION"
+          echo "Creating tag: $TAG_NAME"
+          
+          # Check if tag already exists
           if git tag -l | grep -q "^$TAG_NAME$"; then
-            echo "Tag $TAG_NAME already exists"
+            echo "Tag $TAG_NAME already exists, skipping creation"
           else
+            # Create annotated tag
             git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
             git push origin "$TAG_NAME"
             echo "Created and pushed tag: $TAG_NAME"
