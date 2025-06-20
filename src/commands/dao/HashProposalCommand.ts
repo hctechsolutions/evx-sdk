@@ -1,0 +1,40 @@
+import { IHashProposalCommandParams } from '@interfaces/commands/params/IHashProposalCommandParams';
+import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
+import { injectable, inject, singleton } from 'tsyringe';
+import { NebularGovernanceContract } from '@contracts';
+
+/**
+ * @title Hash Proposal Command
+ * @notice Executes a hash proposal operation to calculate the proposal ID
+ * @dev This command interacts with the NebularGovernance contract to hash proposal parameters
+ */
+@injectable()
+@singleton()
+export class HashProposalCommand implements IBaseCommand<IHashProposalCommandParams, bigint> {
+  constructor(
+    @inject(NebularGovernanceContract)
+    private readonly nebularGovernance: NebularGovernanceContract
+  ) {}
+
+  /**
+   * @notice Executes the hash proposal command
+   * @param params The parameters for executing the hash proposal operation
+   * @returns The calculated proposal ID as a bigint
+   */
+  async execute(params: IHashProposalCommandParams): Promise<bigint> {
+    try {
+      const proposalId = await this.nebularGovernance.instance.hashProposal(
+        params.targets,
+        params.values,
+        params.calldatas,
+        params.descriptionHash
+      );
+
+      params.onDone?.(proposalId);
+      return proposalId;
+    } catch (error: any) {
+      params.onFail?.(error);
+      throw error;
+    }
+  }
+}
