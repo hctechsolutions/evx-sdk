@@ -58,7 +58,7 @@ export class VersionManager {
 
     // Stable tags: X.Y.Z
     for (const tag of tags) {
-      const match = tag.match(/^(\d+)\.(\d+)\.(\d+)$/);
+      const match = tag.match(/^v?(\d+)\.(\d+)\.(\d+)$/);
       if (match) {
         baseVersions.push([parseInt(match[1]), parseInt(match[2]), parseInt(match[3])]);
       }
@@ -67,7 +67,7 @@ export class VersionManager {
     // RC tags: X.Y.Z-rc.N -> treat base X.Y.Z (only if not stableOnly)
     if (!stableOnly) {
       for (const tag of tags) {
-        const match = tag.match(/^(\d+)\.(\d+)\.(\d+)-rc\.\d+$/);
+        const match = tag.match(/^v?(\d+)\.(\d+)\.(\d+)-rc\.(\d+)$/);
         if (match) {
           baseVersions.push([parseInt(match[1]), parseInt(match[2]), parseInt(match[3])]);
         }
@@ -85,7 +85,7 @@ export class VersionManager {
     if (branch === 'main' || branch.startsWith('hotfix/') || branch.startsWith('bugfix/')) {
       const stableVersions: Array<[number, number, number]> = [];
       for (const tag of tags) {
-        const match = tag.match(/^(\d+)\.(\d+)\.(\d+)$/);
+        const match = tag.match(/^v?(\d+)\.(\d+)\.(\d+)$/);
         if (match) {
           stableVersions.push([parseInt(match[1]), parseInt(match[2]), parseInt(match[3])]);
         }
@@ -122,7 +122,7 @@ export class VersionManager {
    * Determine next numeric suffix for rc, alpha, or hotfix on given base
    */
   private getNextSuffix(base: string, tags: string[], label: string): string {
-    const pattern = new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-${label}\\.(\\d+)$`);
+    const pattern = new RegExp(`^v?${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-${label}\\.(\\d+)$`);
     const nums = tags
       .map(tag => {
         const match = tag.match(pattern);
