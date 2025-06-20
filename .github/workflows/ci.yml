@@ -3,6 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main, develop, 'feature/*', 'release/*', 'hotfix/*', 'bugfix/*' ]
+    tags-ignore: ['v*']
   pull_request:
     branches: [ main, develop ]
 
@@ -13,7 +14,6 @@ jobs:
   test:
     name: Test & Lint
     runs-on: ubuntu-latest
-    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     
     steps:
       - name: Checkout code
@@ -38,7 +38,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     
     steps:
       - name: Checkout code
@@ -70,28 +69,45 @@ jobs:
     if: github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/'))
     
     steps:
+      - name: Check if this is a version commit
+        id: check-version-commit
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" == *"chore: update version to"* ]]; then
+            echo "This is a version update commit. Skipping to prevent recursive execution."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "This is a regular commit. Proceeding with version management."
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout code
+        if: steps.check-version-commit.outputs.skip != 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all history for tags
           token: ${{ secrets.RELEASE_CREATOR_TOKEN }}
 
       - name: Setup Node.js
+        if: steps.check-version-commit.outputs.skip != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.check-version-commit.outputs.skip != 'true'
         run: npm ci
 
       - name: Test version manager
+        if: steps.check-version-commit.outputs.skip != 'true'
         run: npm run version:test
 
       - name: Update version
+        if: steps.check-version-commit.outputs.skip != 'true'
         run: npm run version:update ${{ github.ref_name }}
 
       - name: Generate tag name
+        if: steps.check-version-commit.outputs.skip != 'true'
         id: tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
@@ -99,6 +115,7 @@ jobs:
           echo "Generated version: $VERSION"
 
       - name: Commit version change
+        if: steps.check-version-commit.outputs.skip != 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -111,7 +128,7 @@ jobs:
           fi
 
       - name: Create Git tag
-        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
+        if: steps.check-version-commit.outputs.skip != 'true' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/'))
         run: |
           VERSION=${{ steps.tag.outputs.version }}
           TAG_NAME="v$VERSION"
