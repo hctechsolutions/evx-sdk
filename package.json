@@ -5,8 +5,8 @@
   "description": "The Nebular SDK is a developer toolkit designed to simplify interaction with the Nebular decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
   "license": "MIT",
   "type": "module",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "readme": "README.md",
   "files": [
     "dist/**/*",
@@ -52,8 +52,7 @@
   "scripts": {
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
-    "build": "tsc && tsc-alias",
-    "prepublishOnly": "npm run build",
+    "build": "tsx tools/sdk-builder.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -74,6 +73,7 @@
     "@types/node": "^22.15.21",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "cpy-cli": "^5.0.0",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
