@@ -52,24 +52,44 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 
 ## Features
 
-* Connect to any EVM-compatible chain (Mainnet, Sepolia)
-* Simple configuration with `setRPCProvider` and `setAllChain`
-* CQRS-based structure (`commands`, `queries`)
-* Minimal and typed interaction with contracts (ethers.js)
-* Query pools and token pairs with ease
-* Real-time event listening capabilities
-* Auto-versioning with GitFlow
-* Comprehensive test coverage
-* CI/CD automation
+### Core Functionality
+* **Multi-chain Support** - Connect to any EVM-compatible chain (Ethereum Mainnet, Sepolia Testnet)
+* **Smart Contract Integration** - Full Nebular protocol contract wrappers (Factory, Pool, Position Manager, Governance)
+* **Type-safe Interactions** - Complete TypeScript support with full type definitions
+* **Dependency Injection** - Built with TSyringe for clean architecture and testability
+
+### CQRS Architecture
+* **Commands** - Write operations for pool creation, swaps, liquidity management, and governance
+* **Queries** - Read operations for pool data, positions, quotes, and protocol information
+* **Event Listeners** - Real-time blockchain event monitoring for pools, swaps, and governance
+
+### DeFi Operations
+* **Pool Management** - Create pools, query pool data, and manage liquidity positions
+* **Swap Operations** - Execute exact input/output swaps with slippage protection
+* **Liquidity Provision** - Add/remove liquidity with NFT-based position management
+* **Flash Loans** - Execute flash loan operations through the PairFlash contract
+* **Governance** - Participate in DAO governance with voting and proposal management
+
+### Developer Experience
+* **Simple Configuration** - Easy setup with `setRPCProvider` and `setAllChain`
+* **Transaction Monitoring** - Built-in callbacks for transaction lifecycle tracking
+* **Error Handling** - Comprehensive error handling with detailed error messages
+* **Modular Design** - Import only what you need for optimal bundle size
+
+### Infrastructure
+* **Auto-versioning** - GitFlow-based version management
+* **Comprehensive Testing** - >80% test coverage with Jest
+* **CI/CD Pipeline** - Automated builds, tests, and deployments
+* **Documentation** - Complete API documentation and usage examples
 
 ---
 
 ## Installation
 
 ```bash
-npm install @nebular/sdk
+npm install nebular-sdk
 # or
-yarn add @nebular/sdk
+yarn add nebular-sdk
 ```
 
 ## Usage
@@ -79,7 +99,7 @@ yarn add @nebular/sdk
 Before using any SDK functionality, you need to configure the RPC provider and chain:
 
 ```ts
-import { setRPCProvider, setAllChain } from '@nebular/sdk';
+import { setRPCProvider, setAllChain } from 'nebular-sdk';
 
 // Configure RPC provider and chain
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -89,7 +109,8 @@ await setAllChain('sepolia'); // or 'mainnet'
 ### Read pool info directly from blockchain
 
 ```ts
-import { GetPoolQuery, setRPCProvider, setAllChain } from '@nebular/sdk';
+import 'reflect-metadata';
+import { GetPoolQuery, setRPCProvider, setAllChain } from 'nebular-sdk';
 import { container } from 'tsyringe';
 
 // Setup SDK configuration
@@ -108,7 +129,8 @@ console.table(pool);
 ### Listen to pool events
 
 ```ts
-import { PoolCreatedListener, setRPCProvider, setAllChain } from '@nebular/sdk';
+import 'reflect-metadata';
+import { PoolCreatedListener, setRPCProvider, setAllChain } from 'nebular-sdk';
 import { container } from 'tsyringe';
 
 async function listenToEvents() {
@@ -138,7 +160,8 @@ Commands are used for write operations that modify the blockchain state. Here ar
 #### Simple Command Execution
 
 ```ts
-import { CreatePoolCommand, setRPCProvider, setAllChain } from '@nebular/sdk';
+import 'reflect-metadata';
+import { CreatePoolCommand, setRPCProvider, setAllChain } from 'nebular-sdk';
 import { container } from 'tsyringe';
 
 async function createPool() {
@@ -149,10 +172,10 @@ async function createPool() {
   // Create a new pool
   const createPoolCommand = container.resolve(CreatePoolCommand);
   
-  const result = await createPoolCommand.execute({
-    tokenA: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // Token A address
-    tokenB: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4', // Token B address
-    fee: 3000 // Fee tier (0.3%)
+  await createPoolCommand.execute({
+    token0: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // Token A address
+    token1: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4', // Token B address
+    fee: 3000n // Fee tier (0.3%)
   });
 
   console.log('Pool created successfully!');
@@ -166,7 +189,8 @@ createPool();
 #### Command with Callback for Transaction Monitoring
 
 ```ts
-import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from '@nebular/sdk';
+import 'reflect-metadata';
+import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'nebular-sdk';
 import { container } from 'tsyringe';
 
 async function executeSwapWithCallback() {
@@ -184,22 +208,18 @@ async function executeSwapWithCallback() {
     deadline: Math.floor(Date.now() / 1000) + 1800, // 30 minutes
     amountIn: '1000000000000000000',                // 1 token (18 decimals)
     amountOutMinimum: '0',
-    sqrtPriceLimitX96: 0
-  }, {
-    // Optional callback for transaction monitoring
-    onTransactionSent: (txHash: string) => {
+    sqrtPriceLimitX96: 0,
+    // Callbacks are part of the parameters object
+    onTransaction: (txHash: string) => {
       console.log('Transaction sent:', txHash);
       console.log('Waiting for confirmation...');
     },
-    onConfirmation: (confirmationNumber: number, receipt: any) => {
-      console.log(`Confirmation ${confirmationNumber}:`, receipt.transactionHash);
-    },
-    onSuccess: (receipt: any) => {
+    onDone: (receipt: any) => {
       console.log('Swap completed successfully!');
       console.log('Gas used:', receipt.gasUsed.toString());
       console.log('Block number:', receipt.blockNumber);
     },
-    onError: (error: Error) => {
+    onFail: (error: Error) => {
       console.error('Swap failed:', error.message);
     }
   });
@@ -225,7 +245,7 @@ executeSwapWithCallback();
 The SDK supports the following networks:
 
 ```typescript
-import { setRPCProvider, setAllChain } from '@nebular/sdk';
+import { setRPCProvider, setAllChain } from 'nebular-sdk';
 
 // Sepolia Testnet
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -284,10 +304,16 @@ The Nebular SDK follows the **CQRS (Command Query Responsibility Segregation)** 
 
 ```
 src/
+├── abis/         # Contract ABIs and interfaces
 ├── commands/     # Write operations (mutations)
-├── queries/      # Read operations (queries)
+├── contracts/    # Smart contract wrappers
+├── enums/        # TypeScript enums
+├── interfaces/   # TypeScript interfaces and types
 ├── listeners/    # Event listeners
-└── resources/    # Constants, types, configs
+├── providers/    # RPC and provider management
+├── queries/      # Read operations (queries)
+├── resources/    # Constants, chains, and configurations
+└── utils/        # Utility functions and helpers
 ```
 
 ### Key Patterns
@@ -347,7 +373,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 See [Releases](https://github.com/nebular-finance/nebular-sdk/releases) for version history and changelogs.
 
-**Latest Version**: ![npm](https://img.shields.io/npm/v/@nebular/sdk)
+**Latest Version**: ![npm](https://img.shields.io/npm/v/nebular-sdk)
 
 ---
 
@@ -358,5 +384,3 @@ See [Releases](https://github.com/nebular-finance/nebular-sdk/releases) for vers
 [Website](https://nebular.finance) • [Twitter](https://twitter.com/nebular_finance) • [Discord](https://discord.gg/nebular)
 
 </div>
-
-
