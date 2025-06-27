@@ -14,15 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Debug workflow trigger
-        run: |
-          echo "=== RELEASE WORKFLOW DEBUG ==="
-          echo "Workflow triggered by: ${{ github.event_name }}"
-          echo "GITHUB_REF: ${{ github.ref }}"
-          echo "Tag name: ${GITHUB_REF#refs/tags/}"
-          echo "Repository: ${{ github.repository }}"
-          echo "================================"
-      
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -90,8 +81,6 @@ jobs:
           files: |
             nebular-sdk-build.zip
             package.json
-
-
 
   publish-npm:
     name: Publish to NPM
