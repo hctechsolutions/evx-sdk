@@ -108,7 +108,7 @@ jobs:
           fi
 
       - name: Create Git tag
-        #if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
         run: |
           # Configure git for the action
           git config --local user.email "action@github.com"
