@@ -1,7 +1,7 @@
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
-import { ICollectPositionEvent } from '@interfaces/events/pool/ICollectPositionEvent';
+import { ICollectPositionEvent } from '@interfaces/events/positionManager/ICollectPositionEvent';
 import { EventLog } from 'ethers';
 
 /**
