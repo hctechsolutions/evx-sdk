@@ -90,9 +90,13 @@ export class MintListener implements IEventListener<IMintEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IMintEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IMintEvent[]> {
     const filter = this.poolContract.instance.filters.Mint();
-    const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.poolContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {

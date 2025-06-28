@@ -102,9 +102,13 @@ export class VoteReducedListener implements IEventListener<IVoteReducedEvent> {
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IVoteReducedEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IVoteReducedEvent[]> {
     const filter = this.governanceContract.instance.filters.VoteReduced();
-    const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.governanceContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {
