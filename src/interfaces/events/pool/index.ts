@@ -7,6 +7,3 @@ export * from './IInitializeObservationEvent';
 export * from './IMintEvent';
 export * from './ISetFeeProtocolEvent';
 export * from './ISwapEvent';
-export * from './ICollectPositionEvent';
-export * from './IDecreaseLiquidityEvent';
-export * from './IIncreaseLiquidityEvent';
