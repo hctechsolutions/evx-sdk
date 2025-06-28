@@ -88,9 +88,13 @@ export class FlashListener implements IEventListener<IFlashEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IFlashEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IFlashEvent[]> {
     const filter = this.poolContract.instance.filters.Flash();
-    const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.poolContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {

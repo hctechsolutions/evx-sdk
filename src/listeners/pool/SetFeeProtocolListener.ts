@@ -84,9 +84,13 @@ export class SetFeeProtocolListener implements IEventListener<ISetFeeProtocolEve
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ISetFeeProtocolEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<ISetFeeProtocolEvent[]> {
     const filter = this.poolContract.instance.filters.SetFeeProtocol();
-    const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.poolContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {

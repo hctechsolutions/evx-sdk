@@ -68,10 +68,7 @@ export class DecreaseLiquidityListener implements IEventListener<IDecreaseLiquid
     this.isListening = false;
   }
 
-  async getHistoricalEvents(
-    fromBlock: number,
-    toBlock?: number
-  ): Promise<IDecreaseLiquidityEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IDecreaseLiquidityEvent[]> {
     const filter = this.positionManagerContract.instance.filters.DecreaseLiquidity();
     const events = await this.positionManagerContract.instance.queryFilter(
       filter,

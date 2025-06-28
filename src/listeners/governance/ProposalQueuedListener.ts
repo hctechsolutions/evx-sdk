@@ -94,9 +94,13 @@ export class ProposalQueuedListener implements IEventListener<IProposalQueuedEve
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IProposalQueuedEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IProposalQueuedEvent[]> {
     const filter = this.governanceContract.instance.filters.ProposalQueued();
-    const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.governanceContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {

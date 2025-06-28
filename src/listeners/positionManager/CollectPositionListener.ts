@@ -68,7 +68,7 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ICollectPositionEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<ICollectPositionEvent[]> {
     const filter = this.positionManagerContract.instance.filters.Collect();
     const events = await this.positionManagerContract.instance.queryFilter(
       filter,

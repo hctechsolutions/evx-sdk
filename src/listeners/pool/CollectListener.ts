@@ -88,9 +88,13 @@ export class CollectListener implements IEventListener<ICollectEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ICollectEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<ICollectEvent[]> {
     const filter = this.poolContract.instance.filters.Collect();
-    const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
+    const events = await this.poolContract.instance.queryFilter(
+      filter,
+      fromBlock,
+      toBlock
+    );
 
     return events.map((event) => {
       if ('args' in event) {

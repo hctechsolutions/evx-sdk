@@ -14,9 +14,9 @@ export interface IEventListener<T> {
   /**
    * Get historical events
    * @param fromBlock Starting block number
-   * @param toBlock Ending block number (optional, defaults to latest)
+   * @param toBlock Ending block number or "latest" (optional, defaults to latest)
    */
-  getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<T[]>;
+  getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<T[]>;
 
   /**
    * Add a callback to the listener
