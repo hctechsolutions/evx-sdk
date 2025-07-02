@@ -13,9 +13,9 @@ import { EventLog } from 'ethers';
 @singleton()
 export class MintListener implements IEventListener<IMintEvent> {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
   private callbacks: ((event: IMintEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -164,7 +164,11 @@ export class MintListener implements IEventListener<IMintEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<IMintEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<IMintEvent[]> {
     const allEvents: IMintEvent[] = [];
 
     if (poolAddress) {
@@ -198,15 +202,11 @@ export class MintListener implements IEventListener<IMintEvent> {
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<IMintEvent[]> {
     const filter = poolContract.instance.filters.Mint();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {

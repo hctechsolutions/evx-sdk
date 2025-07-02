@@ -2,7 +2,7 @@ import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IIncreaseObservationCardinalityNextEvent } from '@interfaces/events/pool/IIncreaseObservationCardinalityNextEvent';
-import { EventLog, ethers } from 'ethers';
+import { EventLog } from 'ethers';
 
 /**
  * @title IncreaseObservationCardinalityNext Event Listener
@@ -15,9 +15,10 @@ export class IncreaseObservationCardinalityNextListener
   implements IEventListener<IIncreaseObservationCardinalityNextEvent>
 {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
-  private callbacks: ((event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
+  private callbacks: ((event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>)[] =
+    [];
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -113,7 +114,10 @@ export class IncreaseObservationCardinalityNextListener
         try {
           await cb(increaseObservationCardinalityNextEvent);
         } catch (error) {
-          console.error(`Error in IncreaseObservationCardinalityNext event callback for pool ${poolAddress}:`, error);
+          console.error(
+            `Error in IncreaseObservationCardinalityNext event callback for pool ${poolAddress}:`,
+            error
+          );
         }
       }
     };
@@ -162,7 +166,11 @@ export class IncreaseObservationCardinalityNextListener
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<IIncreaseObservationCardinalityNextEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<IIncreaseObservationCardinalityNextEvent[]> {
     const allEvents: IIncreaseObservationCardinalityNextEvent[] = [];
 
     if (poolAddress) {
@@ -196,15 +204,11 @@ export class IncreaseObservationCardinalityNextListener
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<IIncreaseObservationCardinalityNextEvent[]> {
     const filter = poolContract.instance.filters.IncreaseObservationCardinalityNext();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {

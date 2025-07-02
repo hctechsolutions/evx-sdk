@@ -2,7 +2,7 @@ import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { ICollectProtocolEvent } from '@interfaces/events/pool/ICollectProtocolEvent';
-import { EventLog, ethers } from 'ethers';
+import { EventLog } from 'ethers';
 
 /**
  * @title CollectProtocol Event Listener
@@ -13,9 +13,9 @@ import { EventLog, ethers } from 'ethers';
 @singleton()
 export class CollectProtocolListener implements IEventListener<ICollectProtocolEvent> {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
   private callbacks: ((event: ICollectProtocolEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -158,7 +158,11 @@ export class CollectProtocolListener implements IEventListener<ICollectProtocolE
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<ICollectProtocolEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<ICollectProtocolEvent[]> {
     const allEvents: ICollectProtocolEvent[] = [];
 
     if (poolAddress) {
@@ -192,15 +196,11 @@ export class CollectProtocolListener implements IEventListener<ICollectProtocolE
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<ICollectProtocolEvent[]> {
     const filter = poolContract.instance.filters.CollectProtocol();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {

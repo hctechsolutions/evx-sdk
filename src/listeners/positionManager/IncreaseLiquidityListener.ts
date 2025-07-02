@@ -68,7 +68,10 @@ export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquid
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IIncreaseLiquidityEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IIncreaseLiquidityEvent[]> {
     const filter = this.positionManagerContract.instance.filters.IncreaseLiquidity();
     const events = await this.positionManagerContract.instance.queryFilter(
       filter,

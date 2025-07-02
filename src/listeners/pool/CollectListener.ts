@@ -2,7 +2,7 @@ import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { ICollectEvent } from '@interfaces/events/pool/ICollectEvent';
-import { EventLog, ethers } from 'ethers';
+import { EventLog } from 'ethers';
 
 /**
  * @title Collect Event Listener
@@ -13,9 +13,9 @@ import { EventLog, ethers } from 'ethers';
 @singleton()
 export class CollectListener implements IEventListener<ICollectEvent> {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
   private callbacks: ((event: ICollectEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -162,7 +162,11 @@ export class CollectListener implements IEventListener<ICollectEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<ICollectEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<ICollectEvent[]> {
     const allEvents: ICollectEvent[] = [];
 
     if (poolAddress) {
@@ -196,15 +200,11 @@ export class CollectListener implements IEventListener<ICollectEvent> {
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<ICollectEvent[]> {
     const filter = poolContract.instance.filters.Collect();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {
