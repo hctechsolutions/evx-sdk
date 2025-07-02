@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title IncreaseObservationCardinalityNext Event Listener
- * @notice Listens for IncreaseObservationCardinalityNext events from the NebularPool contract
- * @dev This listener monitors the pool contract for observation cardinality increase events
+ * @notice Listens for IncreaseObservationCardinalityNext events from a NebularPool contract
+ * @dev This listener monitors a pool contract for increase observation cardinality next events
  */
 @injectable()
 @singleton()
@@ -24,10 +24,6 @@ export class IncreaseObservationCardinalityNextListener
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for IncreaseObservationCardinalityNext events
-   * @param callback Function to call when event is received
-   */
   async start(
     callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>
   ): Promise<void> {
@@ -84,6 +80,7 @@ export class IncreaseObservationCardinalityNextListener
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('IncreaseObservationCardinalityNext');
     this.callbacks = [];
     this.isListening = false;
@@ -91,7 +88,7 @@ export class IncreaseObservationCardinalityNextListener
 
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IIncreaseObservationCardinalityNextEvent[]> {
     const filter = this.poolContract.instance.filters.IncreaseObservationCardinalityNext();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);

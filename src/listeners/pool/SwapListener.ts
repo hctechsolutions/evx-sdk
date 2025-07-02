@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Swap Event Listener
- * @notice Listens for Swap events from the NebularPool contract
- * @dev This listener monitors the pool contract for swap events
+ * @notice Listens for Swap events from a NebularPool contract
+ * @dev This listener monitors a pool contract for swap events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class SwapListener implements IEventListener<ISwapEvent> {
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for Swap events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: ISwapEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -85,12 +81,13 @@ export class SwapListener implements IEventListener<ISwapEvent> {
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('Swap');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ISwapEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | 'latest'): Promise<ISwapEvent[]> {
     const filter = this.poolContract.instance.filters.Swap();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 

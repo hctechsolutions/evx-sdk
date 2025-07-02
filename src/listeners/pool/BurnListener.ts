@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Burn Event Listener
- * @notice Listens for Burn events from the NebularPool contract
- * @dev This listener monitors the pool contract for burn events
+ * @notice Listens for Burn events from a NebularPool contract
+ * @dev This listener monitors a pool contract for burn events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class BurnListener implements IEventListener<IBurnEvent> {
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for Burn events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: IBurnEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -83,12 +79,13 @@ export class BurnListener implements IEventListener<IBurnEvent> {
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('Burn');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IBurnEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | 'latest'): Promise<IBurnEvent[]> {
     const filter = this.poolContract.instance.filters.Burn();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 

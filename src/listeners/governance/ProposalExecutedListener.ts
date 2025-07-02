@@ -95,7 +95,7 @@ export class ProposalExecutedListener implements IEventListener<IProposalExecute
    */
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IProposalExecutedEvent[]> {
     const filter = this.governanceContract.instance.filters.ProposalExecuted();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);

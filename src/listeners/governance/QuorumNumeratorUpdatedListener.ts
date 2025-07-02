@@ -104,7 +104,7 @@ export class QuorumNumeratorUpdatedListener
    */
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IQuorumNumeratorUpdatedEvent[]> {
     const filter = this.governanceContract.instance.filters.QuorumNumeratorUpdated();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);

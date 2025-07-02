@@ -6,3 +6,6 @@ export * from './governance';
 
 // Pool Listeners
 export * from './pool';
+
+// Position Manager Listeners
+export * from './positionManager';

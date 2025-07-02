@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title CollectProtocol Event Listener
- * @notice Listens for CollectProtocol events from the NebularPool contract
- * @dev This listener monitors the pool contract for collect protocol events
+ * @notice Listens for CollectProtocol events from a NebularPool contract
+ * @dev This listener monitors a pool contract for collect protocol events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class CollectProtocolListener implements IEventListener<ICollectProtocolE
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for CollectProtocol events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: ICollectProtocolEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -79,12 +75,16 @@ export class CollectProtocolListener implements IEventListener<ICollectProtocolE
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('CollectProtocol');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ICollectProtocolEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<ICollectProtocolEvent[]> {
     const filter = this.poolContract.instance.filters.CollectProtocol();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
