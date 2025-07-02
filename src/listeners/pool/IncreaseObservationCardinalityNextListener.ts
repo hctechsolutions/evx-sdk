@@ -11,17 +11,22 @@ import { EventLog } from 'ethers';
  */
 @injectable()
 @singleton()
-export class IncreaseObservationCardinalityNextListener implements IEventListener<IIncreaseObservationCardinalityNextEvent> {
+export class IncreaseObservationCardinalityNextListener
+  implements IEventListener<IIncreaseObservationCardinalityNextEvent>
+{
   private isListening = false;
   private eventFilter: any;
-  private callbacks: ((event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>)[] = [];
+  private callbacks: ((event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>)[] =
+    [];
 
   constructor(
     @inject(PoolContract)
     private readonly poolContract: PoolContract
   ) {}
 
-  async start(callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>): Promise<void> {
+  async start(
+    callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>
+  ): Promise<void> {
     this.addCallback(callback);
 
     if (this.isListening) {
@@ -56,11 +61,15 @@ export class IncreaseObservationCardinalityNextListener implements IEventListene
     this.isListening = true;
   }
 
-  addCallback(callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>): void {
+  addCallback(
+    callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>
+  ): void {
     this.callbacks.push(callback);
   }
 
-  removeCallback(callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>): void {
+  removeCallback(
+    callback: (event: IIncreaseObservationCardinalityNextEvent) => void | Promise<void>
+  ): void {
     const index = this.callbacks.indexOf(callback);
     if (index > -1) {
       this.callbacks.splice(index, 1);
