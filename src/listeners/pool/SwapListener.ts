@@ -2,7 +2,7 @@ import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { ISwapEvent } from '@interfaces/events/pool/ISwapEvent';
-import { EventLog, ethers } from 'ethers';
+import { EventLog } from 'ethers';
 
 /**
  * @title Swap Event Listener
@@ -13,9 +13,9 @@ import { EventLog, ethers } from 'ethers';
 @singleton()
 export class SwapListener implements IEventListener<ISwapEvent> {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
   private callbacks: ((event: ISwapEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -164,7 +164,11 @@ export class SwapListener implements IEventListener<ISwapEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<ISwapEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<ISwapEvent[]> {
     const allEvents: ISwapEvent[] = [];
 
     if (poolAddress) {
@@ -198,15 +202,11 @@ export class SwapListener implements IEventListener<ISwapEvent> {
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<ISwapEvent[]> {
     const filter = poolContract.instance.filters.Swap();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {

@@ -2,7 +2,7 @@ import { injectable, singleton } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IInitializeObservationEvent } from '@interfaces/events/pool/IInitializeObservationEvent';
-import { EventLog, ethers } from 'ethers';
+import { EventLog } from 'ethers';
 
 /**
  * @title InitializeObservation Event Listener
@@ -13,9 +13,9 @@ import { EventLog, ethers } from 'ethers';
 @singleton()
 export class InitializeObservationListener implements IEventListener<IInitializeObservationEvent> {
   private isListening = false;
-  private poolContracts: Map<string, PoolContract> = new Map();
+  private poolContracts = new Map<string, PoolContract>();
   private callbacks: ((event: IInitializeObservationEvent) => void | Promise<void>)[] = [];
-  private eventHandlers: Map<string, any> = new Map();
+  private eventHandlers = new Map<string, any>();
 
   /**
    * @notice Add a pool contract to listen for events
@@ -107,7 +107,10 @@ export class InitializeObservationListener implements IEventListener<IInitialize
         try {
           await cb(initializeObservationEvent);
         } catch (error) {
-          console.error(`Error in InitializeObservation event callback for pool ${poolAddress}:`, error);
+          console.error(
+            `Error in InitializeObservation event callback for pool ${poolAddress}:`,
+            error
+          );
         }
       }
     };
@@ -152,7 +155,11 @@ export class InitializeObservationListener implements IEventListener<IInitialize
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest", poolAddress?: string): Promise<IInitializeObservationEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest',
+    poolAddress?: string
+  ): Promise<IInitializeObservationEvent[]> {
     const allEvents: IInitializeObservationEvent[] = [];
 
     if (poolAddress) {
@@ -186,15 +193,11 @@ export class InitializeObservationListener implements IEventListener<IInitialize
   private async getEventsFromPool(
     poolContract: PoolContract,
     fromBlock: number,
-    toBlock?: number | "latest",
+    toBlock?: number | 'latest',
     poolAddress?: string
   ): Promise<IInitializeObservationEvent[]> {
     const filter = poolContract.instance.filters.InitializeObservation();
-    const events = await poolContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {
