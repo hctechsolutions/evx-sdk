@@ -6,4 +6,5 @@ export interface ISetFeeProtocolEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
+  poolAddress?: string;
 }
