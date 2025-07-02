@@ -4,4 +4,5 @@ export interface IInitializeObservationEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
+  poolAddress?: string;
 }
