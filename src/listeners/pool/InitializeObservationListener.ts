@@ -21,7 +21,9 @@ export class InitializeObservationListener implements IEventListener<IInitialize
     private readonly poolContract: PoolContract
   ) {}
 
-  async start(callback: (event: IInitializeObservationEvent) => void | Promise<void>): Promise<void> {
+  async start(
+    callback: (event: IInitializeObservationEvent) => void | Promise<void>
+  ): Promise<void> {
     this.addCallback(callback);
 
     if (this.isListening) {
@@ -30,11 +32,7 @@ export class InitializeObservationListener implements IEventListener<IInitialize
 
     this.eventFilter = this.poolContract.instance.filters.InitializeObservation();
 
-    const handleEvent = async (
-      sqrtPriceX96: bigint,
-      tick: number,
-      event: EventLog
-    ) => {
+    const handleEvent = async (sqrtPriceX96: bigint, tick: number, event: EventLog) => {
       const initializeObservationEvent: IInitializeObservationEvent = {
         sqrtPriceX96,
         tick,

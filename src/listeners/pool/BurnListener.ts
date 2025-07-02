@@ -85,10 +85,7 @@ export class BurnListener implements IEventListener<IBurnEvent> {
     this.isListening = false;
   }
 
-  async getHistoricalEvents(
-    fromBlock: number,
-    toBlock?: number | 'latest'
-  ): Promise<IBurnEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | 'latest'): Promise<IBurnEvent[]> {
     const filter = this.poolContract.instance.filters.Burn();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 
