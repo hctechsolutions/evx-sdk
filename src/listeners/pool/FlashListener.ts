@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Flash Event Listener
- * @notice Listens for Flash events from the NebularPool contract
- * @dev This listener monitors the pool contract for flash events
+ * @notice Listens for Flash events from a NebularPool contract
+ * @dev This listener monitors a pool contract for flash events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class FlashListener implements IEventListener<IFlashEvent> {
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for Flash events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: IFlashEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -83,12 +79,16 @@ export class FlashListener implements IEventListener<IFlashEvent> {
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('Flash');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IFlashEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IFlashEvent[]> {
     const filter = this.poolContract.instance.filters.Flash();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 

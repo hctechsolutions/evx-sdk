@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title SetFeeProtocol Event Listener
- * @notice Listens for SetFeeProtocol events from the NebularPool contract
- * @dev This listener monitors the pool contract for set fee protocol events
+ * @notice Listens for SetFeeProtocol events from a NebularPool contract
+ * @dev This listener monitors a pool contract for set fee protocol events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class SetFeeProtocolListener implements IEventListener<ISetFeeProtocolEve
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for SetFeeProtocol events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: ISetFeeProtocolEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -79,12 +75,16 @@ export class SetFeeProtocolListener implements IEventListener<ISetFeeProtocolEve
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('SetFeeProtocol');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ISetFeeProtocolEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<ISetFeeProtocolEvent[]> {
     const filter = this.poolContract.instance.filters.SetFeeProtocol();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 

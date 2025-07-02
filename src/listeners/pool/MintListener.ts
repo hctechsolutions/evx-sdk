@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Mint Event Listener
- * @notice Listens for Mint events from the NebularPool contract
- * @dev This listener monitors the pool contract for mint events
+ * @notice Listens for Mint events from a NebularPool contract
+ * @dev This listener monitors a pool contract for mint events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class MintListener implements IEventListener<IMintEvent> {
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for Mint events
-   * @param callback Function to call when event is received
-   */
   async start(callback: (event: IMintEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
 
@@ -85,12 +81,13 @@ export class MintListener implements IEventListener<IMintEvent> {
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('Mint');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IMintEvent[]> {
+  async getHistoricalEvents(fromBlock: number, toBlock?: number | 'latest'): Promise<IMintEvent[]> {
     const filter = this.poolContract.instance.filters.Mint();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);
 

@@ -1,39 +1,39 @@
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
-import { ICollectPositionEvent } from '@interfaces/events/pool/ICollectPositionEvent';
+import { IIncreaseLiquidityEvent } from '@interfaces/events/positionManager/IIncreaseLiquidityEvent';
 import { EventLog } from 'ethers';
 
 /**
- * @title Collect Position Event Listener
- * @notice Listens for Collect events from the NonfungiblePositionManager contract
+ * @title IncreaseLiquidity Event Listener
+ * @notice Listens for IncreaseLiquidity events from the NonfungiblePositionManager contract
  */
 @injectable()
 @singleton()
-export class CollectPositionListener implements IEventListener<ICollectPositionEvent> {
+export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquidityEvent> {
   private isListening = false;
   private eventFilter: any;
-  private callbacks: ((event: ICollectPositionEvent) => void | Promise<void>)[] = [];
+  private callbacks: ((event: IIncreaseLiquidityEvent) => void | Promise<void>)[] = [];
 
   constructor(
     @inject(PositionManagerContract)
     private readonly positionManagerContract: PositionManagerContract
   ) {}
 
-  async start(callback: (event: ICollectPositionEvent) => void | Promise<void>): Promise<void> {
+  async start(callback: (event: IIncreaseLiquidityEvent) => void | Promise<void>): Promise<void> {
     this.addCallback(callback);
     if (this.isListening) return;
-    this.eventFilter = this.positionManagerContract.instance.filters.Collect();
+    this.eventFilter = this.positionManagerContract.instance.filters.IncreaseLiquidity();
     const handleEvent = async (
       tokenId: bigint,
-      recipient: string,
+      liquidity: bigint,
       amount0: bigint,
       amount1: bigint,
       event: EventLog
     ) => {
-      const collectEvent: ICollectPositionEvent = {
+      const increaseEvent: IIncreaseLiquidityEvent = {
         tokenId,
-        recipient,
+        liquidity,
         amount0,
         amount1,
         blockNumber: event.blockNumber,
@@ -42,9 +42,9 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
       };
       for (const cb of this.callbacks) {
         try {
-          await cb(collectEvent);
+          await cb(increaseEvent);
         } catch (error) {
-          console.error('Error in CollectPosition event callback:', error);
+          console.error('Error in IncreaseLiquidity event callback:', error);
         }
       }
     };
@@ -52,24 +52,27 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
     this.isListening = true;
   }
 
-  addCallback(callback: (event: ICollectPositionEvent) => void | Promise<void>): void {
+  addCallback(callback: (event: IIncreaseLiquidityEvent) => void | Promise<void>): void {
     this.callbacks.push(callback);
   }
 
-  removeCallback(callback: (event: ICollectPositionEvent) => void | Promise<void>): void {
+  removeCallback(callback: (event: IIncreaseLiquidityEvent) => void | Promise<void>): void {
     const index = this.callbacks.indexOf(callback);
     if (index > -1) this.callbacks.splice(index, 1);
   }
 
   stop(): void {
     if (!this.isListening) return;
-    this.positionManagerContract.instance.removeAllListeners('Collect');
+    this.positionManagerContract.instance.removeAllListeners('IncreaseLiquidity');
     this.callbacks = [];
     this.isListening = false;
   }
 
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<ICollectPositionEvent[]> {
-    const filter = this.positionManagerContract.instance.filters.Collect();
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IIncreaseLiquidityEvent[]> {
+    const filter = this.positionManagerContract.instance.filters.IncreaseLiquidity();
     const events = await this.positionManagerContract.instance.queryFilter(
       filter,
       fromBlock,
@@ -77,10 +80,10 @@ export class CollectPositionListener implements IEventListener<ICollectPositionE
     );
     return events.map((event) => {
       if ('args' in event) {
-        const [tokenId, recipient, amount0, amount1] = event.args;
+        const [tokenId, liquidity, amount0, amount1] = event.args;
         return {
           tokenId,
-          recipient,
+          liquidity,
           amount0,
           amount1,
           blockNumber: event.blockNumber,

@@ -106,7 +106,7 @@ export class OverrideVoteCastListener implements IEventListener<IOverrideVoteCas
    */
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IOverrideVoteCastEvent[]> {
     const filter = this.governanceContract.instance.filters.OverrideVoteCast();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);

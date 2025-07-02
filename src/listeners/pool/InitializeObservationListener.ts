@@ -6,8 +6,8 @@ import { EventLog } from 'ethers';
 
 /**
  * @title InitializeObservation Event Listener
- * @notice Listens for InitializeObservation events from the NebularPool contract
- * @dev This listener monitors the pool contract for observation initialization events
+ * @notice Listens for InitializeObservation events from a NebularPool contract
+ * @dev This listener monitors a pool contract for initialize observation events
  */
 @injectable()
 @singleton()
@@ -21,10 +21,6 @@ export class InitializeObservationListener implements IEventListener<IInitialize
     private readonly poolContract: PoolContract
   ) {}
 
-  /**
-   * @notice Start listening for InitializeObservation events
-   * @param callback Function to call when event is received
-   */
   async start(
     callback: (event: IInitializeObservationEvent) => void | Promise<void>
   ): Promise<void> {
@@ -73,6 +69,7 @@ export class InitializeObservationListener implements IEventListener<IInitialize
     if (!this.isListening) {
       return;
     }
+
     this.poolContract.instance.removeAllListeners('InitializeObservation');
     this.callbacks = [];
     this.isListening = false;
@@ -80,7 +77,7 @@ export class InitializeObservationListener implements IEventListener<IInitialize
 
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IInitializeObservationEvent[]> {
     const filter = this.poolContract.instance.filters.InitializeObservation();
     const events = await this.poolContract.instance.queryFilter(filter, fromBlock, toBlock);

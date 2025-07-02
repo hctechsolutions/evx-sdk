@@ -1,7 +1,7 @@
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
-import { IDecreaseLiquidityEvent } from '@interfaces/events/pool/IDecreaseLiquidityEvent';
+import { IDecreaseLiquidityEvent } from '@interfaces/events/positionManager/IDecreaseLiquidityEvent';
 import { EventLog } from 'ethers';
 
 /**
@@ -70,7 +70,7 @@ export class DecreaseLiquidityListener implements IEventListener<IDecreaseLiquid
 
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IDecreaseLiquidityEvent[]> {
     const filter = this.positionManagerContract.instance.filters.DecreaseLiquidity();
     const events = await this.positionManagerContract.instance.queryFilter(

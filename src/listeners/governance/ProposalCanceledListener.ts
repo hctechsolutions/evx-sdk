@@ -95,7 +95,7 @@ export class ProposalCanceledListener implements IEventListener<IProposalCancele
    */
   async getHistoricalEvents(
     fromBlock: number,
-    toBlock?: number
+    toBlock?: number | 'latest'
   ): Promise<IProposalCanceledEvent[]> {
     const filter = this.governanceContract.instance.filters.ProposalCanceled();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);

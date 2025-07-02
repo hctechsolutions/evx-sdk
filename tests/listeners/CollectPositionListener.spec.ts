@@ -163,4 +163,29 @@ describe('CollectPositionListener', () => {
     const result = await listener.getHistoricalEvents(12000, 13000);
     expect(result).toEqual([]);
   });
+
+  it('should work with "latest" as toBlock parameter', async () => {
+    const mockEvents = [
+      {
+        args: [1n, '0xabc', 1000n, 2000n],
+        blockNumber: 12345,
+        transactionHash: '0xabc',
+        index: 0
+      }
+    ];
+    (mockContract.instance.queryFilter as jest.Mock).mockResolvedValue(mockEvents);
+    const result = await listener.getHistoricalEvents(12000, "latest");
+    expect(mockContract.instance.queryFilter).toHaveBeenCalledWith(expect.any(Object), 12000, "latest");
+    expect(result).toEqual([
+      {
+        tokenId: 1n,
+        recipient: '0xabc',
+        amount0: 1000n,
+        amount1: 2000n,
+        blockNumber: 12345,
+        transactionHash: '0xabc',
+        logIndex: 0
+      }
+    ]);
+  });
 }); 

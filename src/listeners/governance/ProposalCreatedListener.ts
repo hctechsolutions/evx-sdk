@@ -112,7 +112,10 @@ export class ProposalCreatedListener implements IEventListener<IProposalCreatedE
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number): Promise<IProposalCreatedEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IProposalCreatedEvent[]> {
     const filter = this.governanceContract.instance.filters.ProposalCreated();
     const events = await this.governanceContract.instance.queryFilter(filter, fromBlock, toBlock);
 

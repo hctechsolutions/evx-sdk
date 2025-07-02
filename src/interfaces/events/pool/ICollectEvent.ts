@@ -8,4 +8,5 @@ export interface ICollectEvent {
   blockNumber: number;
   transactionHash: string;
   logIndex: number;
+  poolAddress?: string;
 }
