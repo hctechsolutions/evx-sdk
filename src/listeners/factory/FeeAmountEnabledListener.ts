@@ -94,13 +94,12 @@ export class FeeAmountEnabledListener implements IEventListener<IFeeAmountEnable
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IFeeAmountEnabledEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IFeeAmountEnabledEvent[]> {
     const filter = this.factoryContract.instance.filters.FeeAmountEnabled();
-    const events = await this.factoryContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await this.factoryContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {

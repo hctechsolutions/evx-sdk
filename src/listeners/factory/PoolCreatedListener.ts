@@ -104,13 +104,12 @@ export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
    * @param fromBlock Starting block number
    * @param toBlock Ending block number (optional, defaults to latest)
    */
-  async getHistoricalEvents(fromBlock: number, toBlock?: number | "latest"): Promise<IPoolCreatedEvent[]> {
+  async getHistoricalEvents(
+    fromBlock: number,
+    toBlock?: number | 'latest'
+  ): Promise<IPoolCreatedEvent[]> {
     const filter = this.factoryContract.instance.filters.PoolCreated();
-    const events = await this.factoryContract.instance.queryFilter(
-      filter,
-      fromBlock,
-      toBlock
-    );
+    const events = await this.factoryContract.instance.queryFilter(filter, fromBlock, toBlock);
 
     return events.map((event) => {
       if ('args' in event) {
