@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags like v1.0.0, v1.2.3-rc.1, v1.1.0-dev, etc.
+
+env:
+  NODE_VERSION: '18.19.1'
+
+jobs:
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Create build archive
+        run: |
+          cd dist
+          zip -r ../nebular-sdk-build.zip .
+          cd ..
+          ls -la nebular-sdk-build.zip
+
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get commits since last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges)
+          else
+            COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges ${LAST_TAG}..HEAD)
+          fi
+          
+          # Create changelog
+          cat > CHANGELOG.md << EOF
+          ## What's Changed
+          
+          $COMMITS
+          
+          **Full Changelog**: https://github.com/nebular-finance/nebular-sdk/compare/${LAST_TAG}...${{ steps.get_version.outputs.version }}
+          EOF
+          
+          echo "Generated changelog for release"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: ${{ steps.get_version.outputs.version }}
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: ${{ contains(steps.get_version.outputs.version, '-') }}
+          files: |
+            nebular-sdk-build.zip
+            package.json
+
+  publish-npm:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    needs: create-release
+    if: contains(github.ref, '-') == false  # Only for stable releases
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Check if package is already published
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          
+          if npm view "$PACKAGE_NAME@$VERSION" version 2>/dev/null; then
+            echo "Package $PACKAGE_NAME@$VERSION already published to NPM"
+          else
+            echo "Publishing $PACKAGE_NAME@$VERSION to NPM"
+            npm publish
+          fi
+
+  notify:
+    name: Notify Release
+    runs-on: ubuntu-latest
+    needs: [create-release, publish-npm]
+    if: always()
+    
+    steps:
+      - name: Extract version
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Notify success
+        if: needs.create-release.result == 'success'
+        run: |
+          echo "Successfully released ${{ steps.get_version.outputs.version }}"
+          echo "GitHub Release: https://github.com/nebular-finance/nebular-sdk/releases/tag/${{ steps.get_version.outputs.version }}"
+          
+      - name: Notify NPM publish
+        if: needs.publish-npm.result == 'success'
+        run: |
+          echo "Successfully published to NPM"
+          echo "NPM Package: https://www.npmjs.com/package/nebular-sdk" 
