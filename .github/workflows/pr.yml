@@ -8,6 +8,11 @@ on:
 env:
   NODE_VERSION: '18.19.1'
 
+# Prevent concurrent runs on the same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     name: Validate PR
@@ -112,4 +117,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Some checks failed. Please review the errors and fix them before merging.'
-            }) 
+            })
