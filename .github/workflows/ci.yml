@@ -2,7 +2,14 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop, 'release/*' ]
+    branches: [ 
+      main, 
+      develop, 
+      'release/*', 
+      'feature/*', 
+      'hotfix/*', 
+      'bugfix/*' 
+    ]
 
 env:
   NODE_VERSION: '18.19.1'
