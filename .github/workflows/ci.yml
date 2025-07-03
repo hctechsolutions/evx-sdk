@@ -275,6 +275,15 @@ jobs:
     if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/'))
     
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
       - name: Get version from package.json
         id: get_version
         run: |
@@ -293,9 +302,21 @@ jobs:
           echo "Successfully published to NPM"
           echo "NPM Package: https://www.npmjs.com/package/nebular-sdk"
           
+      - name: Notify NPM skipped
+        if: needs.publish-npm.result == 'skipped'
+        run: |
+          echo "NPM publish skipped (not a stable release on main)"
+          
       - name: Notify failures
         if: needs.versionate.result == 'failure' || needs.publish-npm.result == 'failure'
         run: |
           echo "Release process failed"
           echo "Version job result: ${{ needs.versionate.result }}"
           echo "NPM publish job result: ${{ needs.publish-npm.result }}"
+          
+      - name: Notify summary
+        run: |
+          echo "Release Summary:"
+          echo "- Version job: ${{ needs.versionate.result }}"
+          echo "- NPM publish job: ${{ needs.publish-npm.result }}"
+          echo "- Current version: ${{ steps.get_version.outputs.version }}"
