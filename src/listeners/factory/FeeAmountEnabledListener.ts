@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Fee Amount Enabled Event Listener
- * @notice Listens for FeeAmountEnabled events from the NebularFactory contract
+ * @notice Listens for FeeAmountEnabled events from the EvexFactory contract
  * @dev This listener monitors the factory contract for fee amount enablement events
  */
 @injectable()

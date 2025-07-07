@@ -1,19 +1,19 @@
 import { ExecuteCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IExecuteCommandParams } from '@interfaces/commands/params/IExecuteCommandParams';
 
 describe('ExecuteCommand', () => {
   let command: ExecuteCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: IExecuteCommandParams;
 
   beforeEach(() => {
     const mockExecute = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         execute: mockExecute,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -25,7 +25,7 @@ describe('ExecuteCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new ExecuteCommand(mockNebularGovernance);
+    command = new ExecuteCommand(mockEvexGovernance);
   });
 
   it('should execute governance proposal successfully', async () => {
@@ -34,11 +34,11 @@ describe('ExecuteCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.execute as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.execute as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.execute).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.execute).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('ExecuteCommand', () => {
 
   it('should handle errors during execute execution', async () => {
     const mockError = new Error('Execute failed');
-    ((mockNebularGovernance.instance.execute as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.execute as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

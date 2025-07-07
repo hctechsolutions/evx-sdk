@@ -1,10 +1,10 @@
 import { Eip712DomainQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IEip712DomainQueryParams } from '@interfaces/queries/params/IEip712DomainQueryParams';
 
 describe('Eip712DomainQuery', () => {
   let query: Eip712DomainQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {
@@ -19,7 +19,7 @@ describe('Eip712DomainQuery', () => {
   it('should execute eip712Domain query successfully', async () => {
     const mockResult = {
       fields: '0x01',
-      name: 'NebularDAO',
+      name: 'EvexDAO',
       version: '1',
       chainId: 1,
       verifyingContract: '0x123',

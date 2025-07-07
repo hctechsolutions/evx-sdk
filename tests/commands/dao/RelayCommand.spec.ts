@@ -1,19 +1,19 @@
 import { RelayCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IRelayCommandParams } from '@interfaces/commands/params/IRelayCommandParams';
 
 describe('RelayCommand', () => {
   let command: RelayCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: IRelayCommandParams;
 
   beforeEach(() => {
     const mockRelay = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         relay: mockRelay,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       target: '0xTargetAddress',
@@ -24,7 +24,7 @@ describe('RelayCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new RelayCommand(mockNebularGovernance);
+    command = new RelayCommand(mockEvexGovernance);
   });
 
   it('should execute relay successfully', async () => {
@@ -33,11 +33,11 @@ describe('RelayCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.relay as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.relay as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.relay).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.relay).toHaveBeenCalledWith(
       mockParams.target,
       mockParams.value,
       mockParams.data,
@@ -51,7 +51,7 @@ describe('RelayCommand', () => {
 
   it('should handle errors during relay execution', async () => {
     const mockError = new Error('Relay failed');
-    ((mockNebularGovernance.instance.relay as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.relay as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

@@ -1,10 +1,10 @@
 import { CountingModeQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { ICountingModeQueryParams } from '@interfaces/queries/params/ICountingModeQueryParams';
 
 describe('CountingModeQuery', () => {
   let query: CountingModeQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

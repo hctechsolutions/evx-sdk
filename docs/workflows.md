@@ -1,6 +1,6 @@
 # GitHub Workflows
 
-This directory contains the GitHub Actions workflows for the Nebular SDK.
+This directory contains the GitHub Actions workflows for the Evex SDK.
 
 ## Available Workflows
 

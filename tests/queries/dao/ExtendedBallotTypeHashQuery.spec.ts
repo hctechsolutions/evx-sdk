@@ -1,10 +1,10 @@
 import { ExtendedBallotTypeHashQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IExtendedBallotTypeHashQueryParams } from '@interfaces/queries/params/IExtendedBallotTypeHashQueryParams';
 
 describe('ExtendedBallotTypeHashQuery', () => {
   let query: ExtendedBallotTypeHashQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

@@ -1,10 +1,10 @@
 import { ProposalSnapshotQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IProposalSnapshotQueryParams } from '@interfaces/queries/params/IProposalSnapshotQueryParams';
 
 describe('ProposalSnapshotQuery', () => {
   let query: ProposalSnapshotQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

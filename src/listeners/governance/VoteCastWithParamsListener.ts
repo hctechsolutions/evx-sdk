@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IVoteCastWithParamsEvent } from '@interfaces/events/governance/IVoteCastWithParamsEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Vote Cast With Params Event Listener
- * @notice Listens for VoteCastWithParams events from the NebularGovernance contract
+ * @notice Listens for VoteCastWithParams events from the EvexGovernance contract
  * @dev This listener monitors the governance contract for vote casting events with additional parameters
  */
 @injectable()
@@ -17,8 +17,8 @@ export class VoteCastWithParamsListener implements IEventListener<IVoteCastWithP
   private callbacks: ((event: IVoteCastWithParamsEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governanceContract: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governanceContract: EvexGovernanceContract
   ) {}
 
   /**

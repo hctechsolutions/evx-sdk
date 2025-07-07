@@ -1,19 +1,19 @@
 import { HashProposalCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IHashProposalCommandParams } from '@interfaces/commands/params/IHashProposalCommandParams';
 
 describe('HashProposalCommand', () => {
   let command: HashProposalCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: IHashProposalCommandParams;
 
   beforeEach(() => {
     const mockHashProposal = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         hashProposal: mockHashProposal,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       targets: ['0x1234567890123456789012345678901234567890'],
@@ -24,16 +24,16 @@ describe('HashProposalCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new HashProposalCommand(mockNebularGovernance);
+    command = new HashProposalCommand(mockEvexGovernance);
   });
 
   it('should execute hash proposal successfully', async () => {
     const mockProposalId = BigInt(123456789);
-    ((mockNebularGovernance.instance.hashProposal as unknown) as jest.Mock).mockResolvedValue(mockProposalId);
+    ((mockEvexGovernance.instance.hashProposal as unknown) as jest.Mock).mockResolvedValue(mockProposalId);
 
     const result = await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.hashProposal).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.hashProposal).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -47,7 +47,7 @@ describe('HashProposalCommand', () => {
 
   it('should handle errors during hash proposal execution', async () => {
     const mockError = new Error('Hash proposal failed');
-    ((mockNebularGovernance.instance.hashProposal as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.hashProposal as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await expect(command.execute(mockParams)).rejects.toThrow('Hash proposal failed');
 
@@ -57,7 +57,7 @@ describe('HashProposalCommand', () => {
 
   it('should handle multiple targets and values', async () => {
     const mockProposalId = BigInt(987654321);
-    ((mockNebularGovernance.instance.hashProposal as unknown) as jest.Mock).mockResolvedValue(mockProposalId);
+    ((mockEvexGovernance.instance.hashProposal as unknown) as jest.Mock).mockResolvedValue(mockProposalId);
 
     mockParams.targets = [
       '0x1234567890123456789012345678901234567890',
@@ -68,7 +68,7 @@ describe('HashProposalCommand', () => {
 
     const result = await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.hashProposal).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.hashProposal).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,

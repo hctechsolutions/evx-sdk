@@ -1,13 +1,13 @@
-# Contributing to Nebular SDK
+# Contributing to Evex SDK
 
-Thank you for your interest in contributing to the Nebular SDK! This guide will help you get started with contributing to the project.
+Thank you for your interest in contributing to the Evex SDK! This guide will help you get started with contributing to the project.
 
 ## Quick Start
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/your-username/nebular-sdk.git
-   cd nebular-sdk
+   git clone https://github.com/your-username/evex-sdk.git
+   cd evex-sdk
    ```
 
 2. **Install dependencies**
@@ -248,10 +248,10 @@ Only maintainers handle releases:
 
 ## Community
 
-- [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
-- [Discord Server](https://discord.gg/nebular) (coming soon)
-- [Twitter](https://twitter.com/nebular_finance)
+- [GitHub Discussions](https://github.com/evex-finance/evex-sdk/discussions)
+- [Discord Server](https://discord.gg/evex) (coming soon)
+- [Twitter](https://twitter.com/evex_finance)
 
 ---
 
-Thank you for contributing to Nebular SDK! 🚀 
+Thank you for contributing to Evex SDK! 🚀 

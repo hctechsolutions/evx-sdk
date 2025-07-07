@@ -1,20 +1,20 @@
 import { CastVoteWithReasonAndParamsBySigCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { ICastVoteWithReasonAndParamsBySigCommandParams } from '@interfaces/commands/params/ICastVoteWithReasonAndParamsBySigCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastVoteWithReasonAndParamsBySigCommand', () => {
   let command: CastVoteWithReasonAndParamsBySigCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: ICastVoteWithReasonAndParamsBySigCommandParams;
 
   beforeEach(() => {
     const mockCastVoteWithReasonAndParamsBySig = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         castVoteWithReasonAndParamsBySig: mockCastVoteWithReasonAndParamsBySig,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -28,7 +28,7 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new CastVoteWithReasonAndParamsBySigCommand(mockNebularGovernance);
+    command = new CastVoteWithReasonAndParamsBySigCommand(mockEvexGovernance);
   });
 
   it('should execute cast vote with reason and params by sig successfully', async () => {
@@ -37,11 +37,11 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,
@@ -57,7 +57,7 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
 
   it('should handle errors during cast vote with reason and params by sig execution', async () => {
     const mockError = new Error('Cast vote with reason and params by sig failed');
-    ((mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -72,13 +72,13 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against,
       mockParams.voter,
@@ -91,7 +91,7 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
     mockParams.support = VoteSupport.Abstain;
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain,
       mockParams.voter,
@@ -107,13 +107,13 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test with Buffer signature
     mockParams.signature = Buffer.from('abcdef', 'hex');
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,
@@ -126,7 +126,7 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
     mockParams.signature = new Uint8Array([0xab, 0xcd, 0xef]);
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,
@@ -142,14 +142,14 @@ describe('CastVoteWithReasonAndParamsBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test with different reason
     mockParams.reason = 'This proposal needs more consideration';
     mockParams.params = '0x123456';
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVoteWithReasonAndParamsBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,

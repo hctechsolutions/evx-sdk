@@ -1,12 +1,12 @@
 import { ProposalCanceledListener } from '@listeners';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('ProposalCanceledListener', () => {
   let listener: ProposalCanceledListener;
-  let mockGovernanceContract: jest.Mocked<NebularGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
@@ -23,7 +23,7 @@ describe('ProposalCanceledListener', () => {
       }
     } as any;
 
-    container.registerInstance(NebularGovernanceContract, mockGovernanceContract);
+    container.registerInstance(EvexGovernanceContract, mockGovernanceContract);
     listener = container.resolve(ProposalCanceledListener);
   });
 

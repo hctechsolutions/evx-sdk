@@ -1,19 +1,19 @@
 import { ProposeCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IProposeCommandParams } from '@interfaces/commands/params/IProposeCommandParams';
 
 describe('ProposeCommand', () => {
   let command: ProposeCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: IProposeCommandParams;
 
   beforeEach(() => {
     const mockPropose = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         propose: mockPropose,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -25,7 +25,7 @@ describe('ProposeCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new ProposeCommand(mockNebularGovernance);
+    command = new ProposeCommand(mockEvexGovernance);
   });
 
   it('should execute propose successfully', async () => {
@@ -34,11 +34,11 @@ describe('ProposeCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.propose).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('ProposeCommand', () => {
 
   it('should handle errors during propose execution', async () => {
     const mockError = new Error('Propose failed');
-    ((mockNebularGovernance.instance.propose as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.propose as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -67,7 +67,7 @@ describe('ProposeCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const singleTargetParams: IProposeCommandParams = {
       targets: ['0xSingleTarget'],
@@ -81,7 +81,7 @@ describe('ProposeCommand', () => {
 
     await command.execute(singleTargetParams);
 
-    expect(mockNebularGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.propose).toHaveBeenCalledWith(
       singleTargetParams.targets,
       singleTargetParams.values,
       singleTargetParams.calldatas,
@@ -95,7 +95,7 @@ describe('ProposeCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const emptyValuesParams: IProposeCommandParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -109,7 +109,7 @@ describe('ProposeCommand', () => {
 
     await command.execute(emptyValuesParams);
 
-    expect(mockNebularGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.propose).toHaveBeenCalledWith(
       emptyValuesParams.targets,
       emptyValuesParams.values,
       emptyValuesParams.calldatas,

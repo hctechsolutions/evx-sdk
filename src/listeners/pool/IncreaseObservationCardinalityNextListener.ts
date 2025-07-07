@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title IncreaseObservationCardinalityNext Event Listener
- * @notice Listens for IncreaseObservationCardinalityNext events from a NebularPool contract
+ * @notice Listens for IncreaseObservationCardinalityNext events from a EvexPool contract
  * @dev This listener monitors a pool contract for increase observation cardinality next events
  */
 @injectable()
