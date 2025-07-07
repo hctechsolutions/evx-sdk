@@ -1,12 +1,12 @@
 import { IUpdateQuorumNumeratorCommandParams } from '@interfaces/commands/params/IUpdateQuorumNumeratorCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Update Quorum Numerator Command
  * @notice Executes an update quorum numerator operation in governance
- * @dev This command interacts with the NebularGovernance contract to update the quorum numerator
+ * @dev This command interacts with the EvexGovernance contract to update the quorum numerator
  */
 @injectable()
 @singleton()
@@ -14,8 +14,8 @@ export class UpdateQuorumNumeratorCommand
   implements IBaseCommand<IUpdateQuorumNumeratorCommandParams, void>
 {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly nebularGovernance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly evexGovernance: EvexGovernanceContract
   ) {}
 
   /**
@@ -24,7 +24,7 @@ export class UpdateQuorumNumeratorCommand
    */
   async execute(params: IUpdateQuorumNumeratorCommandParams): Promise<void> {
     try {
-      const transaction = await this.nebularGovernance.instance.updateQuorumNumerator(
+      const transaction = await this.evexGovernance.instance.updateQuorumNumerator(
         params.newQuorumNumerator
       );
 

@@ -1,6 +1,6 @@
-# Nebular SDK
+# Evex SDK
 
-The Nebular SDK is a TypeScript developer toolkit designed to simplify interaction with the Nebular decentralized liquidity protocol. It provides a high-level abstraction over the core smart contracts. Built using a modular CQRS (Command Query Responsibility Segregation) architecture for scalability and clarity.
+The Evex SDK is a TypeScript developer toolkit designed to simplify interaction with the Evex decentralized liquidity protocol. It provides a high-level abstraction over the core smart contracts. Built using a modular CQRS (Command Query Responsibility Segregation) architecture for scalability and clarity.
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue.svg)
 ![CQRS](https://img.shields.io/badge/Pattern-CQRS-purple)
@@ -11,7 +11,7 @@ The Nebular SDK is a TypeScript developer toolkit designed to simplify interacti
 
 ## Documentation
 
-Welcome to the comprehensive documentation for the Nebular SDK. This section contains detailed guides, workflows, and tools documentation.
+Welcome to the comprehensive documentation for the Evex SDK. This section contains detailed guides, workflows, and tools documentation.
 
 **[Quick Start](#installation)** | **[Contributing](docs/contributing.md)** | **[Development Tools](#development)**
 
@@ -54,7 +54,7 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 
 ### Core Functionality
 * **Multi-chain Support** - Connect to any EVM-compatible chain (Ethereum Mainnet, Sepolia Testnet)
-* **Smart Contract Integration** - Full Nebular protocol contract wrappers (Factory, Pool, Position Manager, Governance)
+* **Smart Contract Integration** - Full Evex protocol contract wrappers (Factory, Pool, Position Manager, Governance)
 * **Type-safe Interactions** - Complete TypeScript support with full type definitions
 * **Dependency Injection** - Built with TSyringe for clean architecture and testability
 
@@ -87,9 +87,9 @@ Welcome to the comprehensive documentation for the Nebular SDK. This section con
 ## Installation
 
 ```bash
-npm install nebular-sdk
+npm install evex-sdk
 # or
-yarn add nebular-sdk
+yarn add evex-sdk
 ```
 
 ## Usage
@@ -99,7 +99,7 @@ yarn add nebular-sdk
 Before using any SDK functionality, you need to configure the RPC provider and chain:
 
 ```ts
-import { setRPCProvider, setAllChain } from 'nebular-sdk';
+import { setRPCProvider, setAllChain } from 'evex-sdk';
 
 // Configure RPC provider and chain
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -110,7 +110,7 @@ await setAllChain('sepolia'); // or 'mainnet'
 
 ```ts
 import 'reflect-metadata';
-import { GetPoolQuery, setRPCProvider, setAllChain } from 'nebular-sdk';
+import { GetPoolQuery, setRPCProvider, setAllChain } from 'evex-sdk';
 import { container } from 'tsyringe';
 
 // Setup SDK configuration
@@ -130,7 +130,7 @@ console.table(pool);
 
 ```ts
 import 'reflect-metadata';
-import { PoolCreatedListener, setRPCProvider, setAllChain } from 'nebular-sdk';
+import { PoolCreatedListener, setRPCProvider, setAllChain } from 'evex-sdk';
 import { container } from 'tsyringe';
 
 async function listenToEvents() {
@@ -161,7 +161,7 @@ Commands are used for write operations that modify the blockchain state. Here ar
 
 ```ts
 import 'reflect-metadata';
-import { CreatePoolCommand, setRPCProvider, setAllChain } from 'nebular-sdk';
+import { CreatePoolCommand, setRPCProvider, setAllChain } from 'evex-sdk';
 import { container } from 'tsyringe';
 
 async function createPool() {
@@ -190,7 +190,7 @@ createPool();
 
 ```ts
 import 'reflect-metadata';
-import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'nebular-sdk';
+import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'evex-sdk';
 import { container } from 'tsyringe';
 
 async function executeSwapWithCallback() {
@@ -245,7 +245,7 @@ executeSwapWithCallback();
 The SDK supports the following networks:
 
 ```typescript
-import { setRPCProvider, setAllChain } from 'nebular-sdk';
+import { setRPCProvider, setAllChain } from 'evex-sdk';
 
 // Sepolia Testnet
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -267,8 +267,8 @@ await setAllChain('mainnet');
 ### Setup
 
 ```bash
-git clone https://github.com/nebular-finance/nebular-sdk
-cd nebular-sdk
+git clone https://github.com/evex-finance/evex-sdk
+cd evex-sdk
 npm install
 ```
 
@@ -300,7 +300,7 @@ npm run test:cov      # With coverage report
 
 ## Architecture
 
-The Nebular SDK follows the **CQRS (Command Query Responsibility Segregation)** pattern:
+The Evex SDK follows the **CQRS (Command Query Responsibility Segregation)** pattern:
 
 ```
 src/
@@ -356,10 +356,10 @@ We use **GitFlow** for branch management:
 ### Need Help?
 
 - **Documentation**: Browse the guides above
-- **Bug Reports**: [GitHub Issues](https://github.com/nebular-finance/nebular-sdk/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/nebular-finance/nebular-sdk/discussions)
+- **Bug Reports**: [GitHub Issues](https://github.com/evex-finance/evex-sdk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/evex-finance/evex-sdk/discussions)
 - **Development**: [Contributing Guide](docs/contributing.md)
-- **Contact**: [Team Email](mailto:team@nebular.finance)
+- **Contact**: [Team Email](mailto:team@evex.finance)
 
 ---
 
@@ -371,16 +371,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-See [Releases](https://github.com/nebular-finance/nebular-sdk/releases) for version history and changelogs.
+See [Releases](https://github.com/evex-finance/evex-sdk/releases) for version history and changelogs.
 
-**Latest Version**: ![npm](https://img.shields.io/npm/v/nebular-sdk)
+**Latest Version**: ![npm](https://img.shields.io/npm/v/evex-sdk)
 
 ---
 
 <div align="center">
   
-**Built with love by the Nebular Finance Team**
+**Built with love by the Evex Finance Team**
 
-[Website](https://nebular.finance) • [Twitter](https://twitter.com/nebular_finance) • [Discord](https://discord.gg/nebular)
+[Website](https://evex.finance) • [Twitter](https://twitter.com/evex_finance) • [Discord](https://discord.gg/evex)
 
 </div>

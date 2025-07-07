@@ -1,7 +1,7 @@
 import { IGetQuorumDenominatorQueryParams } from '@interfaces/queries/params/IGetQuorumDenominatorQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Get Quorum Denominator Query
@@ -14,8 +14,8 @@ export class GetQuorumDenominatorQuery
   implements IBaseQuery<IGetQuorumDenominatorQueryParams, bigint>
 {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**

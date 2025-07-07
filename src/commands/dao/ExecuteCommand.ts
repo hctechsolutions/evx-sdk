@@ -1,19 +1,19 @@
 import { IExecuteCommandParams } from '@interfaces/commands/params/IExecuteCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Execute Command
  * @notice Executes a governance proposal
- * @dev This command interacts with the NebularGovernance contract to execute a proposal
+ * @dev This command interacts with the EvexGovernance contract to execute a proposal
  */
 @injectable()
 @singleton()
 export class ExecuteCommand implements IBaseCommand<IExecuteCommandParams, void> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly nebularGovernance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly evexGovernance: EvexGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class ExecuteCommand implements IBaseCommand<IExecuteCommandParams, void>
    */
   async execute(params: IExecuteCommandParams): Promise<void> {
     try {
-      const transaction = await this.nebularGovernance.instance.execute(
+      const transaction = await this.evexGovernance.instance.execute(
         params.targets,
         params.values,
         params.calldatas,

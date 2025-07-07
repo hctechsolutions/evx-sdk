@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Burn Event Listener
- * @notice Listens for Burn events from a NebularPool contract
+ * @notice Listens for Burn events from a EvexPool contract
  * @dev This listener monitors a pool contract for burn events
  */
 @injectable()

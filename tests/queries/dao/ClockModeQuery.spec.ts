@@ -1,10 +1,10 @@
 import { ClockModeQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IClockModeQueryParams } from '@interfaces/queries/params/IClockModeQueryParams';
 
 describe('ClockModeQuery', () => {
   let query: ClockModeQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

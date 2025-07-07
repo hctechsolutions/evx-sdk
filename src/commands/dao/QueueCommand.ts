@@ -1,19 +1,19 @@
 import { IQueueCommandParams } from '@interfaces/commands/params/IQueueCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Queue Command
  * @notice Executes a queue operation on a governance proposal
- * @dev This command interacts with the NebularGovernance contract to queue a proposal for execution
+ * @dev This command interacts with the EvexGovernance contract to queue a proposal for execution
  */
 @injectable()
 @singleton()
 export class QueueCommand implements IBaseCommand<IQueueCommandParams, void> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly nebularGovernance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly evexGovernance: EvexGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class QueueCommand implements IBaseCommand<IQueueCommandParams, void> {
    */
   async execute(params: IQueueCommandParams): Promise<void> {
     try {
-      const transaction = await this.nebularGovernance.instance.queue(
+      const transaction = await this.evexGovernance.instance.queue(
         params.targets,
         params.values,
         params.calldatas,

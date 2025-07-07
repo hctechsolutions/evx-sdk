@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Flash Event Listener
- * @notice Listens for Flash events from a NebularPool contract
+ * @notice Listens for Flash events from a EvexPool contract
  * @dev This listener monitors a pool contract for flash events
  */
 @injectable()

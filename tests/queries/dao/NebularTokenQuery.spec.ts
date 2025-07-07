@@ -1,38 +1,38 @@
-import { NebularTokenQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
-import { INebularTokenQueryParams } from '@interfaces/queries/params/INebularTokenQueryParams';
+import { EvexTokenQuery } from '@queries/dao';
+import { EvexGovernanceContract } from '@contracts';
+import { IEvexTokenQueryParams } from '@interfaces/queries/params/IEvexTokenQueryParams';
 
-describe('NebularTokenQuery', () => {
-  let query: NebularTokenQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+describe('EvexTokenQuery', () => {
+  let query: EvexTokenQuery;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        nebularToken: jest.fn(),
+        evexToken: jest.fn(),
       },
     } as any;
 
-    query = new NebularTokenQuery(governance);
+    query = new EvexTokenQuery(governance);
   });
 
-  it('should execute nebularToken query successfully', async () => {
+  it('should execute evexToken query successfully', async () => {
     const mockAddress = '0x1234567890abcdef1234567890abcdef12345678';
-    (governance.instance.nebularToken as unknown as jest.Mock).mockResolvedValue(mockAddress);
+    (governance.instance.evexToken as unknown as jest.Mock).mockResolvedValue(mockAddress);
 
-    const params: INebularTokenQueryParams = {};
+    const params: IEvexTokenQueryParams = {};
 
     const result = await query.execute(params);
 
-    expect(governance.instance.nebularToken).toHaveBeenCalledWith();
+    expect(governance.instance.evexToken).toHaveBeenCalledWith();
     expect(result).toBe(mockAddress);
   });
 
-  it('should handle errors during nebularToken query execution', async () => {
+  it('should handle errors during evexToken query execution', async () => {
     const error = new Error('Query failed');
-    (governance.instance.nebularToken as unknown as jest.Mock).mockRejectedValue(error);
+    (governance.instance.evexToken as unknown as jest.Mock).mockRejectedValue(error);
 
-    const params: INebularTokenQueryParams = {};
+    const params: IEvexTokenQueryParams = {};
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });

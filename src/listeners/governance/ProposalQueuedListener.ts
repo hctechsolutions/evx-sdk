@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IProposalQueuedEvent } from '@interfaces/events/governance/IProposalQueuedEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Proposal Queued Event Listener
- * @notice Listens for ProposalQueued events from the NebularGovernance contract
+ * @notice Listens for ProposalQueued events from the EvexGovernance contract
  * @dev This listener monitors the governance contract for proposal queuing events
  */
 @injectable()
@@ -17,8 +17,8 @@ export class ProposalQueuedListener implements IEventListener<IProposalQueuedEve
   private callbacks: ((event: IProposalQueuedEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governanceContract: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governanceContract: EvexGovernanceContract
   ) {}
 
   /**

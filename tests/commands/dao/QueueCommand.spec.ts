@@ -1,19 +1,19 @@
 import { QueueCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IQueueCommandParams } from '@interfaces/commands/params/IQueueCommandParams';
 
 describe('QueueCommand', () => {
   let command: QueueCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: IQueueCommandParams;
 
   beforeEach(() => {
     const mockQueue = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         queue: mockQueue,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -25,7 +25,7 @@ describe('QueueCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new QueueCommand(mockNebularGovernance);
+    command = new QueueCommand(mockEvexGovernance);
   });
 
   it('should execute queue successfully', async () => {
@@ -34,11 +34,11 @@ describe('QueueCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.queue).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('QueueCommand', () => {
 
   it('should handle errors during queue execution', async () => {
     const mockError = new Error('Queue failed');
-    ((mockNebularGovernance.instance.queue as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.queue as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -67,7 +67,7 @@ describe('QueueCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const singleTargetParams: IQueueCommandParams = {
       targets: ['0xSingleTarget'],
@@ -81,7 +81,7 @@ describe('QueueCommand', () => {
 
     await command.execute(singleTargetParams);
 
-    expect(mockNebularGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.queue).toHaveBeenCalledWith(
       singleTargetParams.targets,
       singleTargetParams.values,
       singleTargetParams.calldatas,
@@ -95,7 +95,7 @@ describe('QueueCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const emptyValuesParams: IQueueCommandParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -109,7 +109,7 @@ describe('QueueCommand', () => {
 
     await command.execute(emptyValuesParams);
 
-    expect(mockNebularGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.queue).toHaveBeenCalledWith(
       emptyValuesParams.targets,
       emptyValuesParams.values,
       emptyValuesParams.calldatas,
@@ -123,7 +123,7 @@ describe('QueueCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const differentHashParams: IQueueCommandParams = {
       targets: ['0xTarget1'],
@@ -137,7 +137,7 @@ describe('QueueCommand', () => {
 
     await command.execute(differentHashParams);
 
-    expect(mockNebularGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.queue).toHaveBeenCalledWith(
       differentHashParams.targets,
       differentHashParams.values,
       differentHashParams.calldatas,

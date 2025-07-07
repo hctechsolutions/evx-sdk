@@ -1,10 +1,10 @@
 import { GetProposalIdQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IGetProposalIdQueryParams } from '@interfaces/queries/params/IGetProposalIdQueryParams';
 
 describe('GetProposalIdQuery', () => {
   let query: GetProposalIdQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

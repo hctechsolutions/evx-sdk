@@ -190,9 +190,9 @@ jobs:
           
           echo "Creating build archive from dist directory..."
           cd dist
-          zip -r ../nebular-sdk-build.zip .
+          zip -r ../evex-sdk-build.zip .
           cd ..
-          ls -la nebular-sdk-build.zip
+          ls -la evex-sdk-build.zip
           echo "Build archive created successfully"
 
       - name: Generate changelog
@@ -212,7 +212,7 @@ jobs:
           
           $COMMITS
           
-          **Full Changelog**: https://github.com/nebular-finance/nebular-sdk/compare/${LAST_TAG}...v${{ steps.tag.outputs.version }}
+          **Full Changelog**: https://github.com/evex-finance/evex-sdk/compare/${LAST_TAG}...v${{ steps.tag.outputs.version }}
           EOF
           
           echo "Generated changelog for release"
@@ -233,7 +233,7 @@ jobs:
           draft: false
           prerelease: ${{ contains(steps.tag.outputs.version, '-') }}
           files: |
-            nebular-sdk-build.zip
+            evex-sdk-build.zip
             package.json
 
   publish-npm:
@@ -321,13 +321,13 @@ jobs:
         if: needs.versionate.result == 'success'
         run: |
           echo "Successfully created release v${{ steps.get_version.outputs.version }}"
-          echo "GitHub Release: https://github.com/nebular-finance/nebular-sdk/releases/tag/v${{ steps.get_version.outputs.version }}"
+          echo "GitHub Release: https://github.com/evex-finance/evex-sdk/releases/tag/v${{ steps.get_version.outputs.version }}"
           
       - name: Notify NPM publish success
         if: needs.publish-npm.result == 'success'
         run: |
           echo "Successfully published to NPM"
-          echo "NPM Package: https://www.npmjs.com/package/nebular-sdk"
+          echo "NPM Package: https://www.npmjs.com/package/evex-sdk"
           
       - name: Notify NPM skipped
         if: needs.publish-npm.result == 'skipped'

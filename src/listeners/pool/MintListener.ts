@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Mint Event Listener
- * @notice Listens for Mint events from a NebularPool contract
+ * @notice Listens for Mint events from a EvexPool contract
  * @dev This listener monitors a pool contract for mint events
  */
 @injectable()

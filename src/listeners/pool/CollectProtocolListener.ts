@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title CollectProtocol Event Listener
- * @notice Listens for CollectProtocol events from a NebularPool contract
+ * @notice Listens for CollectProtocol events from a EvexPool contract
  * @dev This listener monitors a pool contract for collect protocol events
  */
 @injectable()

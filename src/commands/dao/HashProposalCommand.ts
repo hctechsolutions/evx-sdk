@@ -1,19 +1,19 @@
 import { IHashProposalCommandParams } from '@interfaces/commands/params/IHashProposalCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Hash Proposal Command
  * @notice Executes a hash proposal operation to calculate the proposal ID
- * @dev This command interacts with the NebularGovernance contract to hash proposal parameters
+ * @dev This command interacts with the EvexGovernance contract to hash proposal parameters
  */
 @injectable()
 @singleton()
 export class HashProposalCommand implements IBaseCommand<IHashProposalCommandParams, bigint> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly nebularGovernance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly evexGovernance: EvexGovernanceContract
   ) {}
 
   /**
@@ -23,7 +23,7 @@ export class HashProposalCommand implements IBaseCommand<IHashProposalCommandPar
    */
   async execute(params: IHashProposalCommandParams): Promise<bigint> {
     try {
-      const proposalId = await this.nebularGovernance.instance.hashProposal(
+      const proposalId = await this.evexGovernance.instance.hashProposal(
         params.targets,
         params.values,
         params.calldatas,

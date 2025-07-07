@@ -2,7 +2,7 @@ import { IGetProposalVotesQueryParams } from '@interfaces/queries/params/IGetPro
 import { IGetProposalVotesResult } from '@interfaces/queries/IGetProposalVotesResult';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Get Proposal Votes Query
@@ -15,8 +15,8 @@ export class GetProposalVotesQuery
   implements IBaseQuery<IGetProposalVotesQueryParams, IGetProposalVotesResult>
 {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**

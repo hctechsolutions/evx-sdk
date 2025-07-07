@@ -1,10 +1,10 @@
 import { NoncesQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { INoncesQueryParams } from '@interfaces/queries/params/INoncesQueryParams';
 
 describe('NoncesQuery', () => {
   let query: NoncesQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

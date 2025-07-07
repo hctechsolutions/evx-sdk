@@ -1,20 +1,20 @@
 import { CastVoteCommand } from '@commands/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { ICastVoteCommandParams } from '@interfaces/commands/params/ICastVoteCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastVoteCommand', () => {
   let command: CastVoteCommand;
-  let mockNebularGovernance: jest.Mocked<NebularGovernanceContract>;
+  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
   let mockParams: ICastVoteCommandParams;
 
   beforeEach(() => {
     const mockCastVote = jest.fn();
-    mockNebularGovernance = {
+    mockEvexGovernance = {
       instance: {
         castVote: mockCastVote,
       },
-    } as unknown as jest.Mocked<NebularGovernanceContract>;
+    } as unknown as jest.Mocked<EvexGovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -24,7 +24,7 @@ describe('CastVoteCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new CastVoteCommand(mockNebularGovernance);
+    command = new CastVoteCommand(mockEvexGovernance);
   });
 
   it('should execute cast vote successfully', async () => {
@@ -33,11 +33,11 @@ describe('CastVoteCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVote as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVote as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVote).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVote).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For
     );
@@ -49,7 +49,7 @@ describe('CastVoteCommand', () => {
 
   it('should handle errors during cast vote execution', async () => {
     const mockError = new Error('Cast vote failed');
-    ((mockNebularGovernance.instance.castVote as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvexGovernance.instance.castVote as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -64,13 +64,13 @@ describe('CastVoteCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockNebularGovernance.instance.castVote as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvexGovernance.instance.castVote as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVote).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVote).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against
     );
@@ -79,7 +79,7 @@ describe('CastVoteCommand', () => {
     mockParams.support = VoteSupport.Abstain;
     await command.execute(mockParams);
 
-    expect(mockNebularGovernance.instance.castVote).toHaveBeenCalledWith(
+    expect(mockEvexGovernance.instance.castVote).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain
     );
