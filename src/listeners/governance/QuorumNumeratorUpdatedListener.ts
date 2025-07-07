@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IQuorumNumeratorUpdatedEvent } from '@interfaces/events/governance/IQuorumNumeratorUpdatedEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Quorum Numerator Updated Event Listener
- * @notice Listens for QuorumNumeratorUpdated events from the NebularGovernance contract
+ * @notice Listens for QuorumNumeratorUpdated events from the EvexGovernance contract
  * @dev This listener monitors the governance contract for quorum numerator update events
  */
 @injectable()
@@ -19,8 +19,8 @@ export class QuorumNumeratorUpdatedListener
   private callbacks: ((event: IQuorumNumeratorUpdatedEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governanceContract: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governanceContract: EvexGovernanceContract
   ) {}
 
   /**

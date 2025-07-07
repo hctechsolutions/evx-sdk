@@ -1,10 +1,10 @@
 import { TimelockQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { ITimelockQueryParams } from '@interfaces/queries/params/ITimelockQueryParams';
 
 describe('TimelockQuery', () => {
   let query: TimelockQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

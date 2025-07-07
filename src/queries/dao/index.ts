@@ -24,7 +24,7 @@ export * from './ProposalThresholdQuery';
 export * from './GetProposalVotesQuery';
 export * from './Eip712DomainQuery';
 export * from './NameQuery';
-export * from './NebularTokenQuery';
+export * from './EvexTokenQuery';
 export * from './NoncesQuery';
 export * from './SupportsInterfaceQuery';
 export * from './TimelockQuery';

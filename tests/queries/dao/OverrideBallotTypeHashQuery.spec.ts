@@ -1,10 +1,10 @@
 import { OverrideBallotTypeHashQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IOverrideBallotTypeHashQueryParams } from '@interfaces/queries/params/IOverrideBallotTypeHashQueryParams';
 
 describe('OverrideBallotTypeHashQuery', () => {
   let query: OverrideBallotTypeHashQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

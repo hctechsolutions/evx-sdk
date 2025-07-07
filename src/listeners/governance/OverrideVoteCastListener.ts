@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IOverrideVoteCastEvent } from '@interfaces/events/governance/IOverrideVoteCastEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Override Vote Cast Event Listener
- * @notice Listens for OverrideVoteCast events from the NebularGovernance contract
+ * @notice Listens for OverrideVoteCast events from the EvexGovernance contract
  * @dev This listener monitors the governance contract for override vote casting events
  */
 @injectable()
@@ -17,8 +17,8 @@ export class OverrideVoteCastListener implements IEventListener<IOverrideVoteCas
   private callbacks: ((event: IOverrideVoteCastEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governanceContract: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governanceContract: EvexGovernanceContract
   ) {}
 
   /**

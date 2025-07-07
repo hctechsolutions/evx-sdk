@@ -1,7 +1,7 @@
 import { ISupportsInterfaceQueryParams } from '@interfaces/queries/params/ISupportsInterfaceQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Supports Interface Query
@@ -12,8 +12,8 @@ import { NebularGovernanceContract } from '@contracts';
 @singleton()
 export class SupportsInterfaceQuery implements IBaseQuery<ISupportsInterfaceQueryParams, boolean> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**

@@ -5,7 +5,7 @@
       {
         "name": "_token",
         "type": "address",
-        "internalType": "contract INebularToken"
+        "internalType": "contract IEvexToken"
       },
       {
         "name": "_timelock",
@@ -625,13 +625,13 @@
   },
   {
     "type": "function",
-    "name": "nebularToken",
+    "name": "evexToken",
     "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address",
-        "internalType": "contract INebularToken"
+        "internalType": "contract IEvexToken"
       }
     ],
     "stateMutability": "view"

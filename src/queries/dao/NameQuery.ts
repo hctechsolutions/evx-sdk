@@ -1,19 +1,19 @@
 import { INameQueryParams } from '@interfaces/queries/params/INameQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Name Query
- * @notice Retrieves the name of the NebularGovernance contract
+ * @notice Retrieves the name of the EvexGovernance contract
  * @dev Queries the governance contract to get the contract name
  */
 @injectable()
 @singleton()
 export class NameQuery implements IBaseQuery<INameQueryParams, string> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**

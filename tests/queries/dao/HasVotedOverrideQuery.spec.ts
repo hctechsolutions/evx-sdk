@@ -1,10 +1,10 @@
 import { HasVotedOverrideQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IHasVotedOverrideQueryParams } from '@interfaces/queries/params/IHasVotedOverrideQueryParams';
 
 describe('HasVotedOverrideQuery', () => {
   let query: HasVotedOverrideQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

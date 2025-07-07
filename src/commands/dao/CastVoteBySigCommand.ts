@@ -1,19 +1,19 @@
 import { ICastVoteBySigCommandParams } from '@interfaces/commands/params/ICastVoteBySigCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Cast Vote By Sig Command
  * @notice Executes a cast vote by signature operation on a governance proposal
- * @dev This command interacts with the NebularGovernance contract to cast a vote by signature
+ * @dev This command interacts with the EvexGovernance contract to cast a vote by signature
  */
 @injectable()
 @singleton()
 export class CastVoteBySigCommand implements IBaseCommand<ICastVoteBySigCommandParams, void> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly nebularGovernance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly evexGovernance: EvexGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class CastVoteBySigCommand implements IBaseCommand<ICastVoteBySigCommandP
    */
   async execute(params: ICastVoteBySigCommandParams): Promise<void> {
     try {
-      const transaction = await this.nebularGovernance.instance.castVoteBySig(
+      const transaction = await this.evexGovernance.instance.castVoteBySig(
         params.proposalId,
         params.support as number,
         params.voter,

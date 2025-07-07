@@ -1,11 +1,11 @@
 import { GetStateQuery } from '@queries/dao';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { IGetStateQueryParams } from '@interfaces/queries/params/IGetStateQueryParams';
 import { ProposalState } from '@enums/ProposalState';
 
 describe('GetStateQuery', () => {
   let query: GetStateQuery;
-  let governance: jest.Mocked<NebularGovernanceContract>;
+  let governance: jest.Mocked<EvexGovernanceContract>;
 
   beforeEach(() => {
     governance = {

@@ -1,7 +1,7 @@
 import { IGetStateQueryParams } from '@interfaces/queries/params/IGetStateQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 import { ProposalState } from '@enums/ProposalState';
 
 /**
@@ -13,8 +13,8 @@ import { ProposalState } from '@enums/ProposalState';
 @singleton()
 export class GetStateQuery implements IBaseQuery<IGetStateQueryParams, ProposalState> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**

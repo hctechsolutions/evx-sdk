@@ -1,7 +1,7 @@
 import { INoncesQueryParams } from '@interfaces/queries/params/INoncesQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { NebularGovernanceContract } from '@contracts';
+import { EvexGovernanceContract } from '@contracts';
 
 /**
  * @title Nonces Query
@@ -12,8 +12,8 @@ import { NebularGovernanceContract } from '@contracts';
 @singleton()
 export class NoncesQuery implements IBaseQuery<INoncesQueryParams, bigint> {
   constructor(
-    @inject(NebularGovernanceContract)
-    private readonly governance: NebularGovernanceContract
+    @inject(EvexGovernanceContract)
+    private readonly governance: EvexGovernanceContract
   ) {}
 
   /**
