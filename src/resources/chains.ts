@@ -13,7 +13,8 @@ export const chains = {
     pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
     tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
-    dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4'
+    dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
+    limitOrderExecutor: '0x0000000000000000000000000000000000000000' // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
   },
   mainnet: {
     positionDescriptor: '0x17C50c136887C9258310d9C3331aA0e1f8f98330',
@@ -24,7 +25,8 @@ export const chains = {
     pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
     tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
-    dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4'
+    dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
+    limitOrderExecutor: '0x0000000000000000000000000000000000000000' // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
   }
 };
 

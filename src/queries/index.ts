@@ -7,3 +7,4 @@ export * from './pool';
 export * from './position-lens';
 export * from './quoter';
 export * from './tick-lens';
+export * from './limit-order';

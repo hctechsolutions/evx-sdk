@@ -9,3 +9,6 @@ export * from './pool';
 
 // Position Manager Events
 export * from './positionManager';
+
+// Limit Order Events
+export * from './limitOrder';
