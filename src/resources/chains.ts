@@ -14,7 +14,11 @@ export const chains = {
     tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
     dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
-    limitOrderExecutor: '0x0000000000000000000000000000000000000000' // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
+    limitOrderExecutor: '0x0000000000000000000000000000000000000000', // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
+    // Gelato Network addresses for Sepolia
+    gelatoAutomate: '0x2A6C106ae13B4BB909D95B8f9c40c5e3B4eB9c8c',
+    gelatoDedicatedMsgSender: '0x0000000000000000000000000000000000000000',
+    gelatoOps: '0x0000000000000000000000000000000000000000'
   },
   mainnet: {
     positionDescriptor: '0x17C50c136887C9258310d9C3331aA0e1f8f98330',
@@ -26,7 +30,11 @@ export const chains = {
     tickLens: '0xA23bfDfd5Ec964A64e04f00bF7BbfbC71d941722',
     factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
     dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4',
-    limitOrderExecutor: '0x0000000000000000000000000000000000000000' // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
+    limitOrderExecutor: '0x0000000000000000000000000000000000000000', // TODO: trocar pelo endereço do contrato implantado, ver com jefferson
+    // Gelato Network addresses for Mainnet
+    gelatoAutomate: '0x4D0c7842cD6a04f8EDB39883Db7817160DA15c22',
+    gelatoDedicatedMsgSender: '0x0000000000000000000000000000000000000000',
+    gelatoOps: '0x0000000000000000000000000000000000000000'
   }
 };
 

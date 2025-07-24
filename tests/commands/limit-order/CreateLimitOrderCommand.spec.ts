@@ -1,5 +1,6 @@
 import { CreateLimitOrderCommand } from '@commands/limit-order';
 import { LimitOrderExecutorContract } from '@contracts';
+import { CreateGelatoTaskCommand } from '@commands/gelato/CreateGelatoTaskCommand';
 import { ICreateLimitOrderCommandParams } from '@interfaces/commands/params/ICreateLimitOrderCommandParams';
 
 type MockMethod = jest.Mock & {
@@ -9,6 +10,7 @@ type MockMethod = jest.Mock & {
 describe('CreateLimitOrderCommand', () => {
   let command: CreateLimitOrderCommand;
   let mockLimitOrderExecutor: jest.Mocked<LimitOrderExecutorContract>;
+  let mockCreateGelatoTask: jest.Mocked<CreateGelatoTaskCommand>;
   let mockParams: ICreateLimitOrderCommandParams;
 
   beforeEach(() => {
@@ -23,6 +25,10 @@ describe('CreateLimitOrderCommand', () => {
         interface: mockInterface
       },
     } as unknown as jest.Mocked<LimitOrderExecutorContract>;
+
+    mockCreateGelatoTask = {
+      execute: jest.fn()
+    } as unknown as jest.Mocked<CreateGelatoTaskCommand>;
 
     mockParams = {
       limitOrderParams: {
@@ -41,7 +47,7 @@ describe('CreateLimitOrderCommand', () => {
       onFail: jest.fn()
     };
 
-    command = new CreateLimitOrderCommand(mockLimitOrderExecutor);
+    command = new CreateLimitOrderCommand(mockLimitOrderExecutor, mockCreateGelatoTask);
   });
 
   it('should execute create limit order successfully', async () => {

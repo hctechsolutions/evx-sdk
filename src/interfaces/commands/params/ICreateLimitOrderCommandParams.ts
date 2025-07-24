@@ -10,4 +10,6 @@ export interface ICreateLimitOrderCommandParams extends IBaseCommandParams {
   limitOrderParams: ILimitOrderParams;
   /** Optional gas fee amount for Gelato execution (in wei) */
   gelatoFee?: bigint;
+  /** Optional Gelato API key for automation */
+  gelatoApiKey?: string;
 }

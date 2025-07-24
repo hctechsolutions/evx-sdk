@@ -69,12 +69,14 @@ Welcome to the comprehensive documentation for the Evex SDK. This section contai
 * **Liquidity Provision** - Add/remove liquidity with NFT-based position management
 * **Flash Loans** - Execute flash loan operations through the PairFlash contract
 * **Governance** - Participate in DAO governance with voting and proposal management
+* **Limit Orders** - Create automated limit orders with Gelato Network integration
 
 ### Developer Experience
 * **Simple Configuration** - Easy setup with `setRPCProvider` and `setAllChain`
 * **Transaction Monitoring** - Built-in callbacks for transaction lifecycle tracking
 * **Error Handling** - Comprehensive error handling with detailed error messages
 * **Modular Design** - Import only what you need for optimal bundle size
+* **Gelato Integration** - Automated limit order execution with Gelato Network
 
 ### Infrastructure
 * **Auto-versioning** - GitFlow-based version management
@@ -227,6 +229,52 @@ async function executeSwapWithCallback() {
 
 executeSwapWithCallback();
 ```
+
+### Automated Limit Orders with Gelato
+
+Create limit orders that execute automatically when price conditions are met:
+
+```ts
+import 'reflect-metadata';
+import { CreateLimitOrderCommand } from './src/commands/limit-order';
+import { setRPCProvider, setAllChain } from './src/resources/settings';
+import { container } from 'tsyringe';
+import { ethers } from 'ethers';
+
+async function createLimitOrder() {
+  // Setup SDK configuration
+  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
+  await setAllChain('sepolia');
+
+  const createLimitOrderCommand = container.resolve(CreateLimitOrderCommand);
+  
+  const limitOrderParams = {
+    tokenIn: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // WETH
+    tokenOut: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4', // USDC
+    amountIn: ethers.parseEther('1.0'), // 1 WETH
+    minAmountOut: ethers.parseUnits('1800', 6), // 1800 USDC
+    fee: 3000, // 0.3%
+    targetPrice: ethers.parseUnits('1850', 6), // Execute at 1850 USDC/WETH
+    deadline: Math.floor(Date.now() / 1000) + 3600, // 1 hour
+    sqrtPriceLimitX96: 0n
+  };
+
+  const orderId = await createLimitOrderCommand.execute({
+    limitOrderParams,
+    gelatoFee: ethers.parseEther('0.01'), // Gelato execution fee
+    gelatoApiKey: process.env.GELATO_API_KEY,
+    onTransaction: (txHash) => console.log('Order created:', txHash),
+    onDone: () => console.log('✅ Limit order created and automated!'),
+    onFail: (error) => console.error('❌ Failed:', error)
+  });
+
+  console.log('Order ID:', orderId);
+}
+
+createLimitOrder();
+```
+
+> **Note**: Requires Gelato API key. See [Gelato Integration Guide](docs/gelato-integration.md) for setup instructions.
 
 ---
 

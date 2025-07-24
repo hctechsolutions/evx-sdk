@@ -7,3 +7,6 @@ export * from './IGetPopulatedTicksOutput';
 export * from './IQuoteExactOutputOutput';
 export * from './IQuoteExactOutputSingleOutput';
 export * from './IEip712DomainQueryOutput';
+export * from './IGetLimitOrderCreatedEventsQueryOutput';
+export * from './IGetLimitOrderExecutedEventsQueryOutput';
+export * from './IGetLimitOrderCancelledEventsQueryOutput';

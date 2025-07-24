@@ -40,3 +40,6 @@ export * from './ISupportsInterfaceQueryParams';
 export * from './ITimelockQueryParams';
 export * from './ITokenQueryParams';
 export * from './IVersionQueryParams';
+export * from './IGetLimitOrderCreatedEventsQueryParams';
+export * from './IGetLimitOrderExecutedEventsQueryParams';
+export * from './IGetLimitOrderCancelledEventsQueryParams';
