@@ -10,3 +10,4 @@ export * from './SwapRouterContract';
 export * from './QuoterContract';
 export * from './TickLensContract';
 export * from './EvexGovernanceContract';
+export * from './OrderExecutorContract';

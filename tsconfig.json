@@ -69,13 +69,20 @@
       ],
       "@enums/*": [
         "src/enums/*"
+      ],
+      "@services": [
+        "src/services/index.ts"
+      ],
+      "@services/*": [
+        "src/services/*"
       ]
     }
   },
   "include": [
     "src/**/*.ts",
     "tools/**/*.ts",
-    "tests/**/*.ts"
+    "tests/**/*.ts",
+    "eslint.config.mjs"
   ],
   "exclude": [
     "node_modules",

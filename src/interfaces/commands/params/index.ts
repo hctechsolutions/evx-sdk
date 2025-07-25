@@ -28,3 +28,6 @@ export * from './IQueueCommandParams';
 export * from './IRelayCommandParams';
 export * from './IUpdateQuorumNumeratorCommandParams';
 export * from './IUpdateTimelockCommandParams';
+export * from './ICreateOrderCommandParams';
+export * from './ICancelOrderCommandParams';
+export * from './IGelatoTaskParams';

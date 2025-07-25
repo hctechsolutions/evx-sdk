@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
+  allConfig: js.configs.all
 });
 
 export default defineConfig([
@@ -40,16 +40,17 @@ export default defineConfig([
       parser: tsParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
-      
+
       parserOptions: {
         project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
-      },
+        tsconfigRootDir: __dirname
+      }
     },
 
     rules: {
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
+      'eol-last': 'off',
 
       'prettier/prettier': [
         'error',
@@ -59,7 +60,7 @@ export default defineConfig([
           printWidth: 100,
           trailingComma: 'none',
           parser: 'typescript'
-        },
+        }
       ],
 
       'no-unused-vars': 'off',
@@ -81,7 +82,7 @@ export default defineConfig([
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
-    },
-  },
+      '@typescript-eslint/no-empty-object-type': 'off'
+    }
+  }
 ]);

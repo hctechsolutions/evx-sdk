@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { JsonRpcProvider, Signer } from 'ethers';
 import { container } from 'tsyringe';
-import { PositionManagerContract, FactoryContract } from '@contracts';
+import { PositionManagerContract, FactoryContract, OrderExecutorContract } from '@contracts';
 import { setAllSigner, setAllChain, ChainName, setRPCProvider } from '@resources';
 import { RPC } from '@providers';
 
@@ -31,9 +31,14 @@ describe('writer contract setters with dynamic resolution', () => {
     setChain: jest.fn()
   };
 
+  const mockContractC = {
+    setSigner: jest.fn(),
+    setChain: jest.fn()
+  };
+
   const mockRPC = {
     provider: null as JsonRpcProvider | null,
-    setProvider: jest.fn(),
+    setProvider: jest.fn()
   };
 
   beforeEach(() => {
@@ -42,6 +47,7 @@ describe('writer contract setters with dynamic resolution', () => {
     (container.resolve as jest.Mock).mockImplementation((contractClass) => {
       if (contractClass === PositionManagerContract) return mockContractA;
       if (contractClass === FactoryContract) return mockContractB;
+      if (contractClass === OrderExecutorContract) return mockContractC;
       throw new Error(`Unknown contract: ${contractClass}`);
     });
   });
@@ -51,8 +57,10 @@ describe('writer contract setters with dynamic resolution', () => {
 
     expect(mockContractA.setSigner).toHaveBeenCalledWith(fakeSigner);
     expect(mockContractB.setSigner).toHaveBeenCalledWith(fakeSigner);
+    expect(mockContractC.setSigner).toHaveBeenCalledWith(fakeSigner);
     expect(mockContractA.setSigner).toHaveBeenCalledTimes(1);
     expect(mockContractB.setSigner).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setSigner).toHaveBeenCalledTimes(1);
   });
 
   it('should call setChain on all resolved contracts', async () => {
@@ -60,8 +68,10 @@ describe('writer contract setters with dynamic resolution', () => {
 
     expect(mockContractA.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractB.setChain).toHaveBeenCalledWith(fakeChain);
+    expect(mockContractC.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setChain).toHaveBeenCalledTimes(1);
   });
 
   it('should set the RPC provider with the given URL', async () => {

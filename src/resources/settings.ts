@@ -1,4 +1,4 @@
-import { PositionManagerContract } from '@contracts';
+import { OrderExecutorContract, PositionManagerContract } from '@contracts';
 import { FactoryContract } from '@contracts';
 import { ChainName } from '@resources';
 import { container } from 'tsyringe';
@@ -10,7 +10,11 @@ import { Signer } from 'ethers';
  * @returns Array of contract instances that need configuration
  */
 function getWriterContracts() {
-  return [container.resolve(PositionManagerContract), container.resolve(FactoryContract)];
+  return [
+    container.resolve(PositionManagerContract),
+    container.resolve(OrderExecutorContract),
+    container.resolve(FactoryContract)
+  ];
 }
 
 /**

@@ -40,3 +40,4 @@ export * from './ISupportsInterfaceQueryParams';
 export * from './ITimelockQueryParams';
 export * from './ITokenQueryParams';
 export * from './IVersionQueryParams';
+export * from './IGetTokenURIQueryParams';
