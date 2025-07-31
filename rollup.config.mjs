@@ -17,9 +17,7 @@ const config = defineConfig([
     external: [
       'ethers',
       'reflect-metadata',
-      'tsyringe',
-      'dotenv',
-      // Adicione outras dependências externas aqui
+      'tsyringe'
     ],
     plugins: [
       json(),
@@ -56,9 +54,7 @@ const config = defineConfig([
     external: [
       'ethers',
       'reflect-metadata',
-      'tsyringe',
-      'dotenv',
-      // Adicione outras dependências externas aqui
+      'tsyringe'
     ],
     plugins: [
       json(),
