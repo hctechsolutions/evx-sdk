@@ -1,16 +1,22 @@
 import 'reflect-metadata';
 import { ethers } from 'ethers';
-import { PositionManagerContract } from '../../src/contracts/PositionManagerContract';
-import { RPC } from '../../src/providers/RPC';
+import { PositionManagerContract } from '@contracts';
+import { RPC } from '@providers';
 import { container } from 'tsyringe';
 
 // Mock the chains resource
 jest.mock('@resources', () => ({
   chains: {
     sepolia: {
-      factory: '0x1234567890123456789012345678901234567890',
-      pool: '0x2345678901234567890123456789012345678901',
-      positionManager: '0x3456789012345678901234567890123456789012'
+      metadata: {
+        chainId: 11155111,
+        explorer: 'https://sepolia.etherscan.io'
+      },
+      contracts: {
+        factory: '0x1234567890123456789012345678901234567890',
+        pool: '0x2345678901234567890123456789012345678901',
+        positionManager: '0x3456789012345678901234567890123456789012'
+      }
     }
   },
   ChainName: {
@@ -109,7 +115,7 @@ describe('PositionManagerContract', () => {
     });
 
     it('should throw error for invalid chain', () => {
-      expect(() => contract.setChain('invalid' as any)).toThrow('Address not found for invalid.positionManager');
+      expect(() => contract.setChain('invalid' as any)).toThrow('Chain not found: invalid');
     });
   });
 
@@ -119,4 +125,4 @@ describe('PositionManagerContract', () => {
       expect(address).toBe('0x3456789012345678901234567890123456789012');
     });
   });
-}); 
+});

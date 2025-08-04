@@ -254,4 +254,4 @@ Only maintainers handle releases:
 
 ---
 
-Thank you for contributing to Evex SDK! 🚀 
+Thank you for contributing to Evx SDK! 

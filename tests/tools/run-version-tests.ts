@@ -108,7 +108,7 @@ function main() {
   console.log(`Results: ${passed}/${total} tests passed`);
   
   if (passed === total) {
-    console.log('🎉 All tests passed! Version manager is working correctly.');
+    console.log('All tests passed! Version manager is working correctly.');
     process.exit(0);
   } else {
     console.log('❌ Some tests failed. Please review the implementation.');

@@ -1,4 +1,4 @@
-import { IBaseQueryParams } from '../IBaseQueryParams';
+import { IBaseQueryParams } from '@interfaces';
 
 export interface IGetPopulatedTicksQueryParams extends IBaseQueryParams {
   pool: string;

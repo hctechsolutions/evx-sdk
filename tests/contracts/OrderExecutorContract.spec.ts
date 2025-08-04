@@ -49,7 +49,7 @@ describe('OrderExecutorContract', () => {
       expect(() => {
         orderExecutorContract.setChain('unsupported' as any);
         orderExecutorContract.getAddress();
-      }).toThrow('Address not found for unsupported.orderExecutor');
+      }).toThrow('Chain not found: unsupported');
     });
   });
 

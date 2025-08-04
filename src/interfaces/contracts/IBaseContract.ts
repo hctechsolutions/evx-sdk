@@ -1,4 +1,4 @@
-import { ChainName, chains, ContractName } from '@resources';
+import { ChainName, ContractName } from '@interfaces';
 import { ethers, Signer } from 'ethers';
 import { RPC } from '@providers';
 
@@ -25,7 +25,7 @@ export interface IBaseContract {
    * @notice Sets the chain for contract interactions
    * @param chain The chain to use for contract interactions
    */
-  setChain(chain: keyof typeof chains): void;
+  setChain(chain: ChainName): void;
 
   /**
    * @notice Gets the contract address for the current chain

@@ -19,6 +19,9 @@
       "@interfaces/*": [
         "src/interfaces/*"
       ],
+      "@interfaces": [
+        "src/interfaces/index.ts"
+      ],
       "@abis/*": [
         "src/abis/*"
       ],

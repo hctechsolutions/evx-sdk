@@ -1,16 +1,22 @@
 import 'reflect-metadata';
 import { ethers } from 'ethers';
-import { PoolContract } from '../../src/contracts/PoolContract';
-import { RPC } from '../../src/providers/RPC';
+import { PoolContract } from '@contracts';
+import { RPC } from '@providers';
 import { container } from 'tsyringe';
 
 // Mock the chains resource
 jest.mock('@resources', () => ({
   chains: {
     sepolia: {
-      factory: '0x1234567890123456789012345678901234567890',
-      pool: '0x2345678901234567890123456789012345678901',
-      positionManager: '0x3456789012345678901234567890123456789012'
+      metadata: {
+        chainId: 11155111,
+        explorer: 'https://sepolia.etherscan.io'
+      },
+      contracts: {
+        factory: '0x1234567890123456789012345678901234567890',
+        pool: '0x2345678901234567890123456789012345678901',
+        positionManager: '0x3456789012345678901234567890123456789012'
+      }
     }
   },
   ChainName: {
@@ -97,4 +103,4 @@ describe('PoolContract', () => {
       expect(contract.instance).toBeInstanceOf(ethers.Contract);
     });
   });
-}); 
+});

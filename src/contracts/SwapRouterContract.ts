@@ -1,6 +1,6 @@
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
-import SwapRouterABI from '../abis/SwapRouter.json';
+import SwapRouterABI from '@abis/SwapRouter.json';
 import { inject, injectable, singleton } from 'tsyringe';
 
 /**

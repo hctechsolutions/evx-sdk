@@ -4,4 +4,5 @@ export * from './events';
 export * from './listeners';
 export * from './providers';
 export * from './queries';
+export * from './resources';
 export * from './utils';

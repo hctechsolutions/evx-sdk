@@ -1,5 +1,6 @@
 import { IBaseContract } from '@interfaces/contracts/IBaseContract';
-import { chains, ChainName, ContractName } from '@resources';
+import { chains } from '@resources';
+import { ChainName, ContractName } from '@interfaces';
 import { ethers, Signer } from 'ethers';
 import { RPC } from '@providers';
 
@@ -60,7 +61,12 @@ export abstract class BaseContract implements IBaseContract {
    * @throws Error if address is not found for the current chain
    */
   getAddress(): string {
-    const address = chains[this.chain]?.[this.name];
+    const chain = chains[this.chain];
+    if (!chain) {
+      throw new Error(`Chain not found: ${this.chain}`);
+    }
+
+    const address = chain.contracts[this.name];
     if (!address) {
       throw new Error(`Address not found for ${this.chain}.${this.name}`);
     }

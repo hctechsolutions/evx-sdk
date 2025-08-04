@@ -1,16 +1,22 @@
 import 'reflect-metadata';
 import { ethers } from 'ethers';
-import { BaseContract } from '../../src/contracts/BaseContract';
-import { RPC } from '../../src/providers/RPC';
+import { BaseContract } from '@contracts';
+import { RPC } from '@providers';
 import { container } from 'tsyringe';
 
 // Mock the chains resource
 jest.mock('@resources', () => ({
   chains: {
     sepolia: {
-      factory: '0x1234567890123456789012345678901234567890',
-      pool: '0x2345678901234567890123456789012345678901',
-      positionManager: '0x3456789012345678901234567890123456789012'
+      metadata: {
+        chainId: 11155111,
+        explorer: 'https://sepolia.etherscan.io'
+      },
+      contracts: {
+        factory: '0x1234567890123456789012345678901234567890',
+        pool: '0x2345678901234567890123456789012345678901',
+        positionManager: '0x3456789012345678901234567890123456789012'
+      }
     }
   },
   ChainName: {
@@ -116,7 +122,7 @@ describe('BaseContract', () => {
     });
 
     it('should throw error for invalid chain', () => {
-      expect(() => contract.setChain('invalid' as any)).toThrow('Address not found for invalid.factory');
+      expect(() => contract.setChain('invalid' as any)).toThrow('Chain not found: invalid');
     });
   });
 
@@ -126,4 +132,4 @@ describe('BaseContract', () => {
       expect(address).toBe('0x1234567890123456789012345678901234567890');
     });
   });
-}); 
+});

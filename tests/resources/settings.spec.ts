@@ -2,7 +2,8 @@ import 'reflect-metadata';
 import { JsonRpcProvider, Signer } from 'ethers';
 import { container } from 'tsyringe';
 import { PositionManagerContract, FactoryContract, OrderExecutorContract } from '@contracts';
-import { setAllSigner, setAllChain, ChainName, setRPCProvider } from '@resources';
+import { setAllSigner, setAllChain, setAllChainById, setRPCProvider } from '@resources';
+import { ChainName, ChainId } from '@interfaces';
 import { RPC } from '@providers';
 
 // Corrige o mock mantendo os decorators como @singleton funcionando
@@ -69,6 +70,18 @@ describe('writer contract setters with dynamic resolution', () => {
     expect(mockContractA.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractB.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractC.setChain).toHaveBeenCalledWith(fakeChain);
+    expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
+    expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setChain).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call setChain on all resolved contracts using chain ID', async () => {
+    const fakeChainId: ChainId = 1; // mainnet chain ID
+    await setAllChainById(fakeChainId);
+
+    expect(mockContractA.setChain).toHaveBeenCalledWith('mainnet');
+    expect(mockContractB.setChain).toHaveBeenCalledWith('mainnet');
+    expect(mockContractC.setChain).toHaveBeenCalledWith('mainnet');
     expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractC.setChain).toHaveBeenCalledTimes(1);

@@ -1,6 +1,7 @@
 import { OrderExecutorContract, PositionManagerContract } from '@contracts';
+import { ChainName, ChainId } from '@interfaces';
 import { FactoryContract } from '@contracts';
-import { ChainName } from '@resources';
+import { getChainNameById } from '@utils';
 import { container } from 'tsyringe';
 import { RPC } from '@providers';
 import { Signer } from 'ethers';
@@ -33,6 +34,17 @@ export async function setAllSigner(signer: Signer) {
  */
 export async function setAllChain(chain: ChainName) {
   await Promise.all(getWriterContracts().map((c) => c.setChain(chain)));
+}
+
+/**
+ * @title Set All Chain by ID
+ * @notice Sets the chain for all writer contracts using chain ID
+ * @param chainId The chain ID to use for contract interactions
+ * @throws Error if chain ID is not found
+ */
+export async function setAllChainById(chainId: ChainId) {
+  const chainName = getChainNameById(chainId);
+  await setAllChain(chainName);
 }
 
 /**
