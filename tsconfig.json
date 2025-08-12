@@ -16,79 +16,29 @@
     "importHelpers": true,
     "baseUrl": ".",
     "paths": {
-      "@interfaces/*": [
-        "src/interfaces/*"
-      ],
-      "@interfaces": [
-        "src/interfaces/index.ts"
-      ],
-      "@abis/*": [
-        "src/abis/*"
-      ],
-      "@utils": [
-        "src/utils/index.ts"
-      ],
-      "@providers": [
-        "src/providers/index.ts"
-      ],
-      "@contracts": [
-        "src/contracts/index.ts"
-      ],
-      "@resources": [
-        "src/resources/index.ts"
-      ],
-      "@commands": [
-        "src/commands/index.ts"
-      ],
-      "@commands/*": [
-        "src/commands/*"
-      ],
-      "@queries": [
-        "src/queries/index.ts"
-      ],
-      "@queries/*": [
-        "src/queries/*"
-      ],
-      "@events": [
-        "src/events/index.ts"
-      ],
-      "@events/*": [
-        "src/events/*"
-      ],
-      "@listeners": [
-        "src/listeners/index.ts"
-      ],
-      "@listeners/*": [
-        "src/listeners/*"
-      ],
-      "@tools": [
-        "tools/index.ts"
-      ],
-      "@tools/*": [
-        "tools/*"
-      ],
-      "@enums": [
-        "src/enums/index.ts"
-      ],
-      "@enums/*": [
-        "src/enums/*"
-      ],
-      "@services": [
-        "src/services/index.ts"
-      ],
-      "@services/*": [
-        "src/services/*"
-      ]
+      "@interfaces/*": ["src/interfaces/*"],
+      "@interfaces": ["src/interfaces/index.ts"],
+      "@abis/*": ["src/abis/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@providers": ["src/providers/index.ts"],
+      "@contracts": ["src/contracts/index.ts"],
+      "@resources": ["src/resources/index.ts"],
+      "@commands": ["src/commands/index.ts"],
+      "@commands/*": ["src/commands/*"],
+      "@queries": ["src/queries/index.ts"],
+      "@queries/*": ["src/queries/*"],
+      "@events": ["src/events/index.ts"],
+      "@events/*": ["src/events/*"],
+      "@listeners": ["src/listeners/index.ts"],
+      "@listeners/*": ["src/listeners/*"],
+      "@tools": ["tools/index.ts"],
+      "@tools/*": ["tools/*"],
+      "@enums": ["src/enums/index.ts"],
+      "@enums/*": ["src/enums/*"],
+      "@services": ["src/services/index.ts"],
+      "@services/*": ["src/services/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "tools/**/*.ts",
-    "tests/**/*.ts",
-    "eslint.config.mjs"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*.ts", "tools/**/*.ts", "tests/**/*.ts", "eslint.config.mjs"],
+  "exclude": ["node_modules", "dist"]
 }
