@@ -1,17 +1,17 @@
 import { GetProposalVotesQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetProposalVotesQueryParams } from '@interfaces/queries/params/IGetProposalVotesQueryParams';
 import { IGetProposalVotesResult } from '@interfaces/queries/IGetProposalVotesResult';
 
 describe('GetProposalVotesQuery', () => {
   let query: GetProposalVotesQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalVotes: jest.fn(),
-      },
+        proposalVotes: jest.fn()
+      }
     } as any;
 
     query = new GetProposalVotesQuery(governance);
@@ -22,7 +22,7 @@ describe('GetProposalVotesQuery', () => {
     (governance.instance.proposalVotes as unknown as jest.Mock).mockResolvedValue(mockVotes);
 
     const params: IGetProposalVotesQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
@@ -31,7 +31,7 @@ describe('GetProposalVotesQuery', () => {
     expect(result).toEqual({
       againstVotes: 100n,
       forVotes: 200n,
-      abstainVotes: 50n,
+      abstainVotes: 50n
     });
   });
 
@@ -39,12 +39,12 @@ describe('GetProposalVotesQuery', () => {
     const mockVotes = {
       againstVotes: 100n,
       forVotes: 200n,
-      abstainVotes: 50n,
+      abstainVotes: 50n
     };
     (governance.instance.proposalVotes as unknown as jest.Mock).mockResolvedValue(mockVotes);
 
     const params: IGetProposalVotesQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
@@ -58,9 +58,9 @@ describe('GetProposalVotesQuery', () => {
     (governance.instance.proposalVotes as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetProposalVotesQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

@@ -1,19 +1,19 @@
 import { QueueCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IQueueCommandParams } from '@interfaces/commands/params/IQueueCommandParams';
 
 describe('QueueCommand', () => {
   let command: QueueCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: IQueueCommandParams;
 
   beforeEach(() => {
     const mockQueue = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        queue: mockQueue,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        queue: mockQueue
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -22,23 +22,23 @@ describe('QueueCommand', () => {
       descriptionHash: '0xDescriptionHash',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new QueueCommand(mockEvxGovernance);
+    command = new QueueCommand(mockGovernance);
   });
 
   it('should execute queue successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.queue as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.queue).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('QueueCommand', () => {
 
   it('should handle errors during queue execution', async () => {
     const mockError = new Error('Queue failed');
-    ((mockEvxGovernance.instance.queue as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.queue as unknown as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -64,10 +64,10 @@ describe('QueueCommand', () => {
   it('should handle single target queue', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.queue as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const singleTargetParams: IQueueCommandParams = {
       targets: ['0xSingleTarget'],
@@ -76,12 +76,12 @@ describe('QueueCommand', () => {
       descriptionHash: '0xSingleDescriptionHash',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(singleTargetParams);
 
-    expect(mockEvxGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.queue).toHaveBeenCalledWith(
       singleTargetParams.targets,
       singleTargetParams.values,
       singleTargetParams.calldatas,
@@ -92,10 +92,10 @@ describe('QueueCommand', () => {
   it('should handle empty values array', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.queue as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const emptyValuesParams: IQueueCommandParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -104,12 +104,12 @@ describe('QueueCommand', () => {
       descriptionHash: '0xEmptyValuesDescriptionHash',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(emptyValuesParams);
 
-    expect(mockEvxGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.queue).toHaveBeenCalledWith(
       emptyValuesParams.targets,
       emptyValuesParams.values,
       emptyValuesParams.calldatas,
@@ -120,10 +120,10 @@ describe('QueueCommand', () => {
   it('should handle different description hash formats', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.queue as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.queue as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const differentHashParams: IQueueCommandParams = {
       targets: ['0xTarget1'],
@@ -132,16 +132,16 @@ describe('QueueCommand', () => {
       descriptionHash: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(differentHashParams);
 
-    expect(mockEvxGovernance.instance.queue).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.queue).toHaveBeenCalledWith(
       differentHashParams.targets,
       differentHashParams.values,
       differentHashParams.calldatas,
       differentHashParams.descriptionHash
     );
   });
-}); 
+});

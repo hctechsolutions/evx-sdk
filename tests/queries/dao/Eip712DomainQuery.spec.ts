@@ -1,16 +1,16 @@
 import { Eip712DomainQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IEip712DomainQueryParams } from '@interfaces/queries/params/IEip712DomainQueryParams';
 
 describe('Eip712DomainQuery', () => {
   let query: Eip712DomainQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        eip712Domain: jest.fn(),
-      },
+        eip712Domain: jest.fn()
+      }
     } as any;
 
     query = new Eip712DomainQuery(governance);
@@ -24,7 +24,7 @@ describe('Eip712DomainQuery', () => {
       chainId: 1,
       verifyingContract: '0x123',
       salt: '0xabc',
-      extensions: [1, 2, 3],
+      extensions: [1, 2, 3]
     };
     (governance.instance.eip712Domain as unknown as jest.Mock).mockResolvedValue(mockResult);
 
@@ -40,7 +40,7 @@ describe('Eip712DomainQuery', () => {
       chainId: BigInt(mockResult.chainId),
       verifyingContract: mockResult.verifyingContract,
       salt: mockResult.salt,
-      extensions: [BigInt(1), BigInt(2), BigInt(3)],
+      extensions: [BigInt(1), BigInt(2), BigInt(3)]
     });
   });
 
@@ -52,4 +52,4 @@ describe('Eip712DomainQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

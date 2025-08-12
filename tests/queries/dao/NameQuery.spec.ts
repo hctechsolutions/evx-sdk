@@ -1,16 +1,16 @@
 import { NameQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { INameQueryParams } from '@interfaces/queries/params/INameQueryParams';
 
 describe('NameQuery', () => {
   let query: NameQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        name: jest.fn(),
-      },
+        name: jest.fn()
+      }
     } as any;
 
     query = new NameQuery(governance);
@@ -36,4 +36,4 @@ describe('NameQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

@@ -1,16 +1,16 @@
 import { QuorumNumeratorUpdatedListener } from '@listeners';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('QuorumNumeratorUpdatedListener', () => {
   let listener: QuorumNumeratorUpdatedListener;
-  let mockGovernanceContract: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
-    
+
     const mockFilter = { filter: 'mock' };
     mockGovernanceContract = {
       instance: {
@@ -23,7 +23,7 @@ describe('QuorumNumeratorUpdatedListener', () => {
       }
     } as any;
 
-    container.registerInstance(EvxGovernanceContract, mockGovernanceContract);
+    container.registerInstance(GovernanceContract, mockGovernanceContract);
     listener = container.resolve(QuorumNumeratorUpdatedListener);
   });
 
@@ -33,17 +33,22 @@ describe('QuorumNumeratorUpdatedListener', () => {
     await listener.start(callback);
 
     expect(mockGovernanceContract.instance.filters.QuorumNumeratorUpdated).toHaveBeenCalled();
-    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(expect.any(Object), expect.any(Function));
+    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Function)
+    );
     expect(listener.listening).toBe(true);
   });
 
   it('should stop listening for events', async () => {
     const callback = jest.fn();
     await listener.start(callback); // Start listening first
-    
+
     listener.stop();
 
-    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith('QuorumNumeratorUpdated');
+    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith(
+      'QuorumNumeratorUpdated'
+    );
     expect(listener.listening).toBe(false);
   });
 
@@ -61,7 +66,11 @@ describe('QuorumNumeratorUpdatedListener', () => {
 
     const result = await listener.getHistoricalEvents(12000, 13000);
 
-    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(expect.any(Object), 12000, 13000);
+    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(
+      expect.any(Object),
+      12000,
+      13000
+    );
     expect(result).toEqual([
       {
         oldQuorumNumerator: 100n,
@@ -79,9 +88,11 @@ describe('QuorumNumeratorUpdatedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     await listener.start(callback);
 
@@ -94,8 +105,11 @@ describe('QuorumNumeratorUpdatedListener', () => {
 
     await capturedHandler(BigInt(100), BigInt(150), mockEvent);
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error in QuorumNumeratorUpdated event callback:', expect.any(Error));
-    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error in QuorumNumeratorUpdated event callback:',
+      expect.any(Error)
+    );
+
     consoleSpy.mockRestore();
   });
 
@@ -105,9 +119,11 @@ describe('QuorumNumeratorUpdatedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     // Start listening and add callbacks
     await listener.start(callback1);
@@ -181,7 +197,9 @@ describe('QuorumNumeratorUpdatedListener', () => {
 
     (mockGovernanceContract.instance.queryFilter as jest.Mock).mockResolvedValue(mockEvents);
 
-    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow('Invalid event format');
+    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow(
+      'Invalid event format'
+    );
   });
 
   it('should clear callbacks when stopping', async () => {
@@ -233,4 +251,4 @@ describe('QuorumNumeratorUpdatedListener', () => {
       }
     ]);
   });
-}); 
+});

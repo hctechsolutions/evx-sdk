@@ -1,16 +1,16 @@
 import { NoncesQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { INoncesQueryParams } from '@interfaces/queries/params/INoncesQueryParams';
 
 describe('NoncesQuery', () => {
   let query: NoncesQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        nonces: jest.fn(),
-      },
+        nonces: jest.fn()
+      }
     } as any;
 
     query = new NoncesQuery(governance);
@@ -21,7 +21,7 @@ describe('NoncesQuery', () => {
     (governance.instance.nonces as unknown as jest.Mock).mockResolvedValue(mockNonce);
 
     const params: INoncesQueryParams = {
-      owner: '0x1234567890123456789012345678901234567890',
+      owner: '0x1234567890123456789012345678901234567890'
     };
 
     const result = await query.execute(params);
@@ -35,9 +35,9 @@ describe('NoncesQuery', () => {
     (governance.instance.nonces as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: INoncesQueryParams = {
-      owner: '0x1234567890123456789012345678901234567890',
+      owner: '0x1234567890123456789012345678901234567890'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

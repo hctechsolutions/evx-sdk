@@ -1,7 +1,7 @@
 import { IGetQuorumQueryParams } from '@interfaces/queries/params/IGetQuorumQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Get Quorum Query
@@ -12,8 +12,8 @@ import { EvxGovernanceContract } from '@contracts';
 @singleton()
 export class GetQuorumQuery implements IBaseQuery<IGetQuorumQueryParams, bigint> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**

@@ -1,16 +1,16 @@
 import { ProposalThresholdQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposalThresholdQueryParams } from '@interfaces/queries/params/IProposalThresholdQueryParams';
 
 describe('ProposalThresholdQuery', () => {
   let query: ProposalThresholdQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalThreshold: jest.fn(),
-      },
+        proposalThreshold: jest.fn()
+      }
     } as any;
 
     query = new ProposalThresholdQuery(governance);
@@ -18,7 +18,9 @@ describe('ProposalThresholdQuery', () => {
 
   it('should execute proposal threshold query successfully', async () => {
     const mockThreshold = BigInt(1000000); // Example threshold value
-    (governance.instance.proposalThreshold as unknown as jest.Mock).mockResolvedValue(mockThreshold);
+    (governance.instance.proposalThreshold as unknown as jest.Mock).mockResolvedValue(
+      mockThreshold
+    );
 
     const params: IProposalThresholdQueryParams = {};
 
@@ -39,9 +41,10 @@ describe('ProposalThresholdQuery', () => {
 
   it('should return consistent threshold values', async () => {
     const mockThreshold = BigInt(1000000);
-    
-    (governance.instance.proposalThreshold as unknown as jest.Mock)
-      .mockResolvedValue(mockThreshold);
+
+    (governance.instance.proposalThreshold as unknown as jest.Mock).mockResolvedValue(
+      mockThreshold
+    );
 
     const params: IProposalThresholdQueryParams = {};
 
@@ -52,4 +55,4 @@ describe('ProposalThresholdQuery', () => {
     expect(result1).toBe(mockThreshold);
     expect(result2).toBe(mockThreshold);
   });
-}); 
+});

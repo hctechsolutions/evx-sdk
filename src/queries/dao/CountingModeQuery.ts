@@ -1,7 +1,7 @@
 import { ICountingModeQueryParams } from '@interfaces/queries/params/ICountingModeQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Counting Mode Query
@@ -12,8 +12,8 @@ import { EvxGovernanceContract } from '@contracts';
 @singleton()
 export class CountingModeQuery implements IBaseQuery<ICountingModeQueryParams, string> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**

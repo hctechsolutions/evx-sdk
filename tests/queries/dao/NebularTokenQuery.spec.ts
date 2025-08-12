@@ -1,26 +1,26 @@
-import { EvxTokenQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
-import { IEvxTokenQueryParams } from '@interfaces/queries/params/IEvxTokenQueryParams';
+import { ProtocolTokenQuery } from '@queries/dao';
+import { GovernanceContract } from '@contracts';
+import { IProtocolTokenQueryParams } from '@interfaces/queries/params/IProtocolTokenQueryParams';
 
-describe('EvxTokenQuery', () => {
-  let query: EvxTokenQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+describe('ProtocolTokenQuery', () => {
+  let query: ProtocolTokenQuery;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        evxToken: jest.fn(),
-      },
+        evxToken: jest.fn()
+      }
     } as any;
 
-    query = new EvxTokenQuery(governance);
+    query = new ProtocolTokenQuery(governance);
   });
 
   it('should execute evxToken query successfully', async () => {
     const mockAddress = '0x1234567890abcdef1234567890abcdef12345678';
     (governance.instance.evxToken as unknown as jest.Mock).mockResolvedValue(mockAddress);
 
-    const params: IEvxTokenQueryParams = {};
+    const params: IProtocolTokenQueryParams = {};
 
     const result = await query.execute(params);
 
@@ -32,8 +32,8 @@ describe('EvxTokenQuery', () => {
     const error = new Error('Query failed');
     (governance.instance.evxToken as unknown as jest.Mock).mockRejectedValue(error);
 
-    const params: IEvxTokenQueryParams = {};
+    const params: IProtocolTokenQueryParams = {};
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

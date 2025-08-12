@@ -1,20 +1,20 @@
 import { CastOverrideVoteBySigCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ICastOverrideVoteBySigCommandParams } from '@interfaces/commands/params/ICastOverrideVoteBySigCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastOverrideVoteBySigCommand', () => {
   let command: CastOverrideVoteBySigCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: ICastOverrideVoteBySigCommandParams;
 
   beforeEach(() => {
     const mockCastOverrideVoteBySig = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        castOverrideVoteBySig: mockCastOverrideVoteBySig,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        castOverrideVoteBySig: mockCastOverrideVoteBySig
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -24,23 +24,25 @@ describe('CastOverrideVoteBySigCommand', () => {
       signature: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new CastOverrideVoteBySigCommand(mockEvxGovernance);
+    command = new CastOverrideVoteBySigCommand(mockGovernance);
   });
 
   it('should execute cast override vote by signature successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castOverrideVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castOverrideVoteBySig as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,
@@ -55,7 +57,9 @@ describe('CastOverrideVoteBySigCommand', () => {
 
   it('should handle errors during cast override vote by signature execution', async () => {
     const mockError = new Error('Cast override vote by signature failed');
-    ((mockEvxGovernance.instance.castOverrideVoteBySig as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.castOverrideVoteBySig as unknown as jest.Mock).mockRejectedValue(
+      mockError
+    );
 
     await command.execute(mockParams);
 
@@ -67,16 +71,18 @@ describe('CastOverrideVoteBySigCommand', () => {
   it('should handle different vote support values', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castOverrideVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castOverrideVoteBySig as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against,
       mockParams.voter,
@@ -88,7 +94,7 @@ describe('CastOverrideVoteBySigCommand', () => {
     mockParams.support = VoteSupport.Abstain;
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain,
       mockParams.voter,
@@ -100,18 +106,20 @@ describe('CastOverrideVoteBySigCommand', () => {
   it('should handle different voter addresses and signatures', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castOverrideVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castOverrideVoteBySig as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     // Test with different voter address
     mockParams.voter = '0x9876543210987654321098765432109876543210';
     mockParams.signature = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef';
-    
+
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castOverrideVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       '0x9876543210987654321098765432109876543210',
@@ -119,4 +127,4 @@ describe('CastOverrideVoteBySigCommand', () => {
       '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'
     );
   });
-}); 
+});

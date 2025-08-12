@@ -1,16 +1,16 @@
 import { BallotTypeHashQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IBallotTypeHashQueryParams } from '@interfaces/queries/params/IBallotTypeHashQueryParams';
 
 describe('BallotTypeHashQuery', () => {
   let query: BallotTypeHashQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        BALLOT_TYPEHASH: jest.fn(),
-      },
+        BALLOT_TYPEHASH: jest.fn()
+      }
     } as any;
 
     query = new BallotTypeHashQuery(governance);
@@ -18,7 +18,9 @@ describe('BallotTypeHashQuery', () => {
 
   it('should execute ballot type hash query successfully', async () => {
     const mockBallotTypeHash = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef';
-    (governance.instance.BALLOT_TYPEHASH as unknown as jest.Mock).mockResolvedValue(mockBallotTypeHash);
+    (governance.instance.BALLOT_TYPEHASH as unknown as jest.Mock).mockResolvedValue(
+      mockBallotTypeHash
+    );
 
     const params: IBallotTypeHashQueryParams = {};
 
@@ -36,4 +38,4 @@ describe('BallotTypeHashQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

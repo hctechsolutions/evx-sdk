@@ -1,19 +1,19 @@
 import { IVersionQueryParams } from '@interfaces/queries/params/IVersionQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Version Query
- * @notice Retrieves the version of the EvxGovernance contract
+ * @notice Retrieves the version of the Governance contract
  * @dev Queries the governance contract to get the contract version
  */
 @injectable()
 @singleton()
 export class VersionQuery implements IBaseQuery<IVersionQueryParams, string> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**

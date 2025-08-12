@@ -12,15 +12,13 @@ import {
 describe('Chains Configuration', () => {
   describe('Type Definitions', () => {
     it('should have correct ChainName type', () => {
-      const validChainNames: ChainName[] = ['sepolia', 'mainnet'];
+      const validChainNames: ChainName[] = ['sepolia'];
       expect(validChainNames).toContain('sepolia');
-      expect(validChainNames).toContain('mainnet');
     });
 
     it('should have correct ChainId type', () => {
-      const validChainIds: ChainId[] = [11155111, 1];
+      const validChainIds: ChainId[] = [11155111];
       expect(validChainIds).toContain(11155111);
-      expect(validChainIds).toContain(1);
     });
 
     it('should have correct ContractName type', () => {
@@ -51,25 +49,12 @@ describe('Chains Configuration', () => {
       expect(chains.sepolia.contracts.factory).toBeDefined();
       expect(chains.sepolia.contracts.dao).toBeDefined();
     });
-
-    it('should have mainnet chain configuration', () => {
-      expect(chains.mainnet).toBeDefined();
-      expect(chains.mainnet.metadata.chainId).toBe(1);
-      expect(chains.mainnet.metadata.explorer).toBe('https://etherscan.io');
-      expect(chains.mainnet.contracts.factory).toBeDefined();
-      expect(chains.mainnet.contracts.dao).toBeDefined();
-    });
   });
 
   describe('getChainId function', () => {
     it('should return correct chain ID for sepolia', () => {
       const chainId = getChainId('sepolia');
       expect(chainId).toBe(11155111);
-    });
-
-    it('should return correct chain ID for mainnet', () => {
-      const chainId = getChainId('mainnet');
-      expect(chainId).toBe(1);
     });
 
     it('should throw error for invalid chain name', () => {
@@ -83,11 +68,6 @@ describe('Chains Configuration', () => {
     it('should return correct chain name for sepolia chain ID', () => {
       const chainName = getChainNameById(11155111);
       expect(chainName).toBe('sepolia');
-    });
-
-    it('should return correct chain name for mainnet chain ID', () => {
-      const chainName = getChainNameById(1);
-      expect(chainName).toBe('mainnet');
     });
 
     it('should throw error for invalid chain ID', () => {
@@ -112,19 +92,11 @@ describe('Chains Configuration', () => {
         expect(chain.contracts).toBeDefined();
       });
     });
-
-    it('should ensure all chains have the same contracts', () => {
-      const sepoliaContracts = Object.keys(chains.sepolia.contracts);
-      const mainnetContracts = Object.keys(chains.mainnet.contracts);
-
-      expect(sepoliaContracts).toEqual(mainnetContracts);
-    });
   });
 
   describe('isValidChainId function', () => {
     it('should return true for valid chain IDs', () => {
       expect(isValidChainId(11155111)).toBe(true);
-      expect(isValidChainId(1)).toBe(true);
     });
 
     it('should return false for invalid chain IDs', () => {
@@ -136,7 +108,6 @@ describe('Chains Configuration', () => {
   describe('isValidChainName function', () => {
     it('should return true for valid chain names', () => {
       expect(isValidChainName('sepolia')).toBe(true);
-      expect(isValidChainName('mainnet')).toBe(true);
     });
 
     it('should return false for invalid chain names', () => {
@@ -149,8 +120,7 @@ describe('Chains Configuration', () => {
     it('should return all supported chain IDs', () => {
       const chainIds = getAllChainIds();
       expect(chainIds).toContain(11155111);
-      expect(chainIds).toContain(1);
-      expect(chainIds.length).toBe(2);
+      expect(chainIds.length).toBe(1);
     });
   });
 
@@ -158,8 +128,7 @@ describe('Chains Configuration', () => {
     it('should return all supported chain names', () => {
       const chainNames = getAllChainNames();
       expect(chainNames).toContain('sepolia');
-      expect(chainNames).toContain('mainnet');
-      expect(chainNames.length).toBe(2);
+      expect(chainNames.length).toBe(1);
     });
   });
 });

@@ -1,16 +1,16 @@
 import { ProposalQueuedListener } from '@listeners';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('ProposalQueuedListener', () => {
   let listener: ProposalQueuedListener;
-  let mockGovernanceContract: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
-    
+
     const mockFilter = { filter: 'mock' };
     mockGovernanceContract = {
       instance: {
@@ -23,7 +23,7 @@ describe('ProposalQueuedListener', () => {
       }
     } as any;
 
-    container.registerInstance(EvxGovernanceContract, mockGovernanceContract);
+    container.registerInstance(GovernanceContract, mockGovernanceContract);
     listener = container.resolve(ProposalQueuedListener);
   });
 
@@ -33,17 +33,22 @@ describe('ProposalQueuedListener', () => {
     await listener.start(callback);
 
     expect(mockGovernanceContract.instance.filters.ProposalQueued).toHaveBeenCalled();
-    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(expect.any(Object), expect.any(Function));
+    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Function)
+    );
     expect(listener.listening).toBe(true);
   });
 
   it('should stop listening for events', async () => {
     const callback = jest.fn();
     await listener.start(callback); // Start listening first
-    
+
     listener.stop();
 
-    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith('ProposalQueued');
+    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith(
+      'ProposalQueued'
+    );
     expect(listener.listening).toBe(false);
   });
 
@@ -61,7 +66,11 @@ describe('ProposalQueuedListener', () => {
 
     const result = await listener.getHistoricalEvents(12000, 13000);
 
-    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(expect.any(Object), 12000, 13000);
+    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(
+      expect.any(Object),
+      12000,
+      13000
+    );
     expect(result).toEqual([
       {
         proposalId: 123n,
@@ -79,9 +88,11 @@ describe('ProposalQueuedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     await listener.start(callback);
 
@@ -94,8 +105,11 @@ describe('ProposalQueuedListener', () => {
 
     await capturedHandler(BigInt(123), BigInt(1640995200), mockEvent);
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error in ProposalQueued event callback:', expect.any(Error));
-    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error in ProposalQueued event callback:',
+      expect.any(Error)
+    );
+
     consoleSpy.mockRestore();
   });
 
@@ -105,9 +119,11 @@ describe('ProposalQueuedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     // Start listening and add callbacks
     await listener.start(callback1);
@@ -181,7 +197,9 @@ describe('ProposalQueuedListener', () => {
 
     (mockGovernanceContract.instance.queryFilter as jest.Mock).mockResolvedValue(mockEvents);
 
-    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow('Invalid event format');
+    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow(
+      'Invalid event format'
+    );
   });
 
   it('should clear callbacks when stopping', async () => {
@@ -233,4 +251,4 @@ describe('ProposalQueuedListener', () => {
       }
     ]);
   });
-}); 
+});

@@ -1,16 +1,16 @@
 import { VersionQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IVersionQueryParams } from '@interfaces/queries/params/IVersionQueryParams';
 
 describe('VersionQuery', () => {
   let query: VersionQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        version: jest.fn(),
-      },
+        version: jest.fn()
+      }
     } as any;
 
     query = new VersionQuery(governance);
@@ -36,4 +36,4 @@ describe('VersionQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

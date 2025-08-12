@@ -1,16 +1,16 @@
 import { GetQuorumNumeratorQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetQuorumNumeratorQueryParams } from '@interfaces/queries/params/IGetQuorumNumeratorQueryParams';
 
 describe('GetQuorumNumeratorQuery', () => {
   let query: GetQuorumNumeratorQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        quorumNumerator: jest.fn(),
-      },
+        quorumNumerator: jest.fn()
+      }
     } as any;
 
     query = new GetQuorumNumeratorQuery(governance);
@@ -18,7 +18,7 @@ describe('GetQuorumNumeratorQuery', () => {
 
   it('should execute quorum numerator query without timepoint successfully', async () => {
     const mockNumerator = BigInt(50); // Example numerator value
-    
+
     (governance.instance.quorumNumerator as unknown as jest.Mock).mockResolvedValue(mockNumerator);
 
     const params: IGetQuorumNumeratorQueryParams = {};
@@ -32,11 +32,11 @@ describe('GetQuorumNumeratorQuery', () => {
   it('should execute quorum numerator query with timepoint successfully', async () => {
     const mockNumerator = BigInt(60); // Example numerator value
     const timepoint = BigInt(12345678);
-    
+
     (governance.instance.quorumNumerator as unknown as jest.Mock).mockResolvedValue(mockNumerator);
 
     const params: IGetQuorumNumeratorQueryParams = {
-      timepoint,
+      timepoint
     };
 
     const result = await query.execute(params);
@@ -47,7 +47,7 @@ describe('GetQuorumNumeratorQuery', () => {
 
   it('should handle errors during quorum numerator query execution without timepoint', async () => {
     const error = new Error('Query failed');
-    
+
     (governance.instance.quorumNumerator as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetQuorumNumeratorQueryParams = {};
@@ -58,11 +58,11 @@ describe('GetQuorumNumeratorQuery', () => {
   it('should handle errors during quorum numerator query execution with timepoint', async () => {
     const error = new Error('Query failed');
     const timepoint = BigInt(12345678);
-    
+
     (governance.instance.quorumNumerator as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetQuorumNumeratorQueryParams = {
-      timepoint,
+      timepoint
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -70,9 +70,8 @@ describe('GetQuorumNumeratorQuery', () => {
 
   it('should return consistent numerator values for same parameters', async () => {
     const mockNumerator = BigInt(50);
-    
-    (governance.instance.quorumNumerator as unknown as jest.Mock)
-      .mockResolvedValue(mockNumerator);
+
+    (governance.instance.quorumNumerator as unknown as jest.Mock).mockResolvedValue(mockNumerator);
 
     const params: IGetQuorumNumeratorQueryParams = {};
 
@@ -89,7 +88,7 @@ describe('GetQuorumNumeratorQuery', () => {
     const mockNumerator2 = BigInt(60);
     const timepoint1 = BigInt(12345678);
     const timepoint2 = BigInt(87654321);
-    
+
     (governance.instance.quorumNumerator as unknown as jest.Mock)
       .mockResolvedValueOnce(mockNumerator1)
       .mockResolvedValueOnce(mockNumerator2);
@@ -105,4 +104,4 @@ describe('GetQuorumNumeratorQuery', () => {
     expect(result1).toBe(mockNumerator1);
     expect(result2).toBe(mockNumerator2);
   });
-}); 
+});

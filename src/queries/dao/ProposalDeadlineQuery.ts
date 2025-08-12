@@ -1,7 +1,7 @@
 import { IProposalDeadlineQueryParams } from '@interfaces/queries/params/IProposalDeadlineQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Proposal Deadline Query
@@ -12,8 +12,8 @@ import { EvxGovernanceContract } from '@contracts';
 @singleton()
 export class ProposalDeadlineQuery implements IBaseQuery<IProposalDeadlineQueryParams, bigint> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**

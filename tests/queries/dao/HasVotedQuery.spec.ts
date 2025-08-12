@@ -1,16 +1,16 @@
 import { HasVotedQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IHasVotedQueryParams } from '@interfaces/queries/params/IHasVotedQueryParams';
 
 describe('HasVotedQuery', () => {
   let query: HasVotedQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        hasVoted: jest.fn(),
-      },
+        hasVoted: jest.fn()
+      }
     } as any;
 
     query = new HasVotedQuery(governance);
@@ -22,15 +22,12 @@ describe('HasVotedQuery', () => {
 
     const params: IHasVotedQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.hasVoted).toHaveBeenCalledWith(
-      params.proposalId,
-      params.account
-    );
+    expect(governance.instance.hasVoted).toHaveBeenCalledWith(params.proposalId, params.account);
     expect(result).toBe(mockHasVoted);
   });
 
@@ -40,15 +37,12 @@ describe('HasVotedQuery', () => {
 
     const params: IHasVotedQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.hasVoted).toHaveBeenCalledWith(
-      params.proposalId,
-      params.account
-    );
+    expect(governance.instance.hasVoted).toHaveBeenCalledWith(params.proposalId, params.account);
     expect(result).toBe(mockHasVoted);
   });
 
@@ -58,9 +52,9 @@ describe('HasVotedQuery', () => {
 
     const params: IHasVotedQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

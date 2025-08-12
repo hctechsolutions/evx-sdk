@@ -1,19 +1,19 @@
 import { ICancelCommandParams } from '@interfaces/commands/params/ICancelCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Cancel Command
  * @notice Executes a cancel operation on a governance proposal
- * @dev This command interacts with the EvxGovernance contract to cancel a proposal
+ * @dev This command interacts with the Governance contract to cancel a proposal
  */
 @injectable()
 @singleton()
 export class CancelCommand implements IBaseCommand<ICancelCommandParams, void> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly evxGovernance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class CancelCommand implements IBaseCommand<ICancelCommandParams, void> {
    */
   async execute(params: ICancelCommandParams): Promise<void> {
     try {
-      const transaction = await this.evxGovernance.instance.cancel(
+      const transaction = await this.governance.instance.cancel(
         params.targets,
         params.values,
         params.calldatas,

@@ -1,7 +1,7 @@
 import { IClockModeQueryParams } from '@interfaces/queries/params/IClockModeQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Clock Mode Query
@@ -12,8 +12,8 @@ import { EvxGovernanceContract } from '@contracts';
 @singleton()
 export class ClockModeQuery implements IBaseQuery<IClockModeQueryParams, string> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**

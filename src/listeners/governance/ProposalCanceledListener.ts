@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IProposalCanceledEvent } from '@interfaces/events/governance/IProposalCanceledEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Proposal Canceled Event Listener
- * @notice Listens for ProposalCanceled events from the EvxGovernance contract
+ * @notice Listens for ProposalCanceled events from the Governance contract
  * @dev This listener monitors the governance contract for proposal cancellation events
  */
 @injectable()
@@ -17,8 +17,8 @@ export class ProposalCanceledListener implements IEventListener<IProposalCancele
   private callbacks: ((event: IProposalCanceledEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly governanceContract: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governanceContract: GovernanceContract
   ) {}
 
   /**

@@ -1,16 +1,16 @@
 import { ProposalEtaQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposalEtaQueryParams } from '@interfaces/queries/params/IProposalEtaQueryParams';
 
 describe('ProposalEtaQuery', () => {
   let query: ProposalEtaQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalEta: jest.fn(),
-      },
+        proposalEta: jest.fn()
+      }
     } as any;
 
     query = new ProposalEtaQuery(governance);
@@ -21,14 +21,12 @@ describe('ProposalEtaQuery', () => {
     (governance.instance.proposalEta as unknown as jest.Mock).mockResolvedValue(mockEta);
 
     const params: IProposalEtaQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.proposalEta).toHaveBeenCalledWith(
-      params.proposalId
-    );
+    expect(governance.instance.proposalEta).toHaveBeenCalledWith(params.proposalId);
     expect(result).toBe(mockEta);
   });
 
@@ -37,7 +35,7 @@ describe('ProposalEtaQuery', () => {
     (governance.instance.proposalEta as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IProposalEtaQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -46,17 +44,17 @@ describe('ProposalEtaQuery', () => {
   it('should handle different proposal IDs', async () => {
     const mockEta1 = BigInt(1735689600);
     const mockEta2 = BigInt(1735776000);
-    
+
     (governance.instance.proposalEta as unknown as jest.Mock)
       .mockResolvedValueOnce(mockEta1)
       .mockResolvedValueOnce(mockEta2);
 
     const params1: IProposalEtaQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const params2: IProposalEtaQueryParams = {
-      proposalId: BigInt(456),
+      proposalId: BigInt(456)
     };
 
     const result1 = await query.execute(params1);
@@ -67,4 +65,4 @@ describe('ProposalEtaQuery', () => {
     expect(result1).toBe(mockEta1);
     expect(result2).toBe(mockEta2);
   });
-}); 
+});

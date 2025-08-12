@@ -1,16 +1,16 @@
 import { TimelockQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ITimelockQueryParams } from '@interfaces/queries/params/ITimelockQueryParams';
 
 describe('TimelockQuery', () => {
   let query: TimelockQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        timelock: jest.fn(),
-      },
+        timelock: jest.fn()
+      }
     } as any;
 
     query = new TimelockQuery(governance);
@@ -36,4 +36,4 @@ describe('TimelockQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

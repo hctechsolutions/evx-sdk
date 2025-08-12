@@ -1,16 +1,16 @@
 import { HasVotedOverrideQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IHasVotedOverrideQueryParams } from '@interfaces/queries/params/IHasVotedOverrideQueryParams';
 
 describe('HasVotedOverrideQuery', () => {
   let query: HasVotedOverrideQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        hasVotedOverride: jest.fn(),
-      },
+        hasVotedOverride: jest.fn()
+      }
     } as any;
 
     query = new HasVotedOverrideQuery(governance);
@@ -18,11 +18,13 @@ describe('HasVotedOverrideQuery', () => {
 
   it('should execute has voted override query successfully when account has voted with override', async () => {
     const mockHasVotedOverride = true;
-    (governance.instance.hasVotedOverride as unknown as jest.Mock).mockResolvedValue(mockHasVotedOverride);
+    (governance.instance.hasVotedOverride as unknown as jest.Mock).mockResolvedValue(
+      mockHasVotedOverride
+    );
 
     const params: IHasVotedOverrideQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     const result = await query.execute(params);
@@ -36,11 +38,13 @@ describe('HasVotedOverrideQuery', () => {
 
   it('should execute has voted override query successfully when account has not voted with override', async () => {
     const mockHasVotedOverride = false;
-    (governance.instance.hasVotedOverride as unknown as jest.Mock).mockResolvedValue(mockHasVotedOverride);
+    (governance.instance.hasVotedOverride as unknown as jest.Mock).mockResolvedValue(
+      mockHasVotedOverride
+    );
 
     const params: IHasVotedOverrideQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     const result = await query.execute(params);
@@ -58,9 +62,9 @@ describe('HasVotedOverrideQuery', () => {
 
     const params: IHasVotedOverrideQueryParams = {
       proposalId: BigInt(123),
-      account: '0x1234567890123456789012345678901234567890',
+      account: '0x1234567890123456789012345678901234567890'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

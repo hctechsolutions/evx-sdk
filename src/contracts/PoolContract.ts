@@ -1,4 +1,4 @@
-import EvxPoolABI from '@abis/EvxPool.json';
+import PoolABI from '@abis/Pool.json';
 import { ethers, Signer } from 'ethers';
 import { container } from 'tsyringe';
 import { RPC } from '@providers';
@@ -20,7 +20,7 @@ export class PoolContract {
   constructor(address: string) {
     this.address = address;
     this.rpc = container.resolve(RPC);
-    this.instance = new ethers.Contract(address, EvxPoolABI, this.rpc.provider);
+    this.instance = new ethers.Contract(address, PoolABI, this.rpc.provider);
   }
 
   /**
@@ -29,11 +29,11 @@ export class PoolContract {
    */
   async setSigner(signer?: Signer | null): Promise<void> {
     if (!signer) {
-      this.instance = new ethers.Contract(this.address, EvxPoolABI, this.rpc.provider);
+      this.instance = new ethers.Contract(this.address, PoolABI, this.rpc.provider);
 
       return;
     }
 
-    this.instance = new ethers.Contract(this.address, EvxPoolABI, signer);
+    this.instance = new ethers.Contract(this.address, PoolABI, signer);
   }
 }

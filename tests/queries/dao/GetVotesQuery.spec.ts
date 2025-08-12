@@ -1,16 +1,16 @@
 import { GetVotesQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetVotesQueryParams } from '@interfaces/queries/params/IGetVotesQueryParams';
 
 describe('GetVotesQuery', () => {
   let query: GetVotesQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        getVotes: jest.fn(),
-      },
+        getVotes: jest.fn()
+      }
     } as any;
 
     query = new GetVotesQuery(governance);
@@ -22,15 +22,12 @@ describe('GetVotesQuery', () => {
 
     const params: IGetVotesQueryParams = {
       account: '0x1234567890123456789012345678901234567890',
-      blockNumber: BigInt(12345678),
+      blockNumber: BigInt(12345678)
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.getVotes).toHaveBeenCalledWith(
-      params.account,
-      params.blockNumber
-    );
+    expect(governance.instance.getVotes).toHaveBeenCalledWith(params.account, params.blockNumber);
     expect(result).toBe(mockVotes);
   });
 
@@ -40,9 +37,9 @@ describe('GetVotesQuery', () => {
 
     const params: IGetVotesQueryParams = {
       account: '0x1234567890123456789012345678901234567890',
-      blockNumber: BigInt(12345678),
+      blockNumber: BigInt(12345678)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

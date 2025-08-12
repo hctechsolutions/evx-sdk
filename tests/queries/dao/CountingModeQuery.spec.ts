@@ -1,16 +1,16 @@
 import { CountingModeQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ICountingModeQueryParams } from '@interfaces/queries/params/ICountingModeQueryParams';
 
 describe('CountingModeQuery', () => {
   let query: CountingModeQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        COUNTING_MODE: jest.fn(),
-      },
+        COUNTING_MODE: jest.fn()
+      }
     } as any;
 
     query = new CountingModeQuery(governance);
@@ -36,4 +36,4 @@ describe('CountingModeQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

@@ -1,16 +1,16 @@
 import { GetQuorumDenominatorQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetQuorumDenominatorQueryParams } from '@interfaces/queries/params/IGetQuorumDenominatorQueryParams';
 
 describe('GetQuorumDenominatorQuery', () => {
   let query: GetQuorumDenominatorQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        quorumDenominator: jest.fn(),
-      },
+        quorumDenominator: jest.fn()
+      }
     } as any;
 
     query = new GetQuorumDenominatorQuery(governance);
@@ -18,8 +18,10 @@ describe('GetQuorumDenominatorQuery', () => {
 
   it('should execute quorum denominator query successfully', async () => {
     const mockDenominator = BigInt(100); // Example denominator value
-    
-    (governance.instance.quorumDenominator as unknown as jest.Mock).mockResolvedValue(mockDenominator);
+
+    (governance.instance.quorumDenominator as unknown as jest.Mock).mockResolvedValue(
+      mockDenominator
+    );
 
     const params: IGetQuorumDenominatorQueryParams = {};
 
@@ -31,7 +33,7 @@ describe('GetQuorumDenominatorQuery', () => {
 
   it('should handle errors during quorum denominator query execution', async () => {
     const error = new Error('Query failed');
-    
+
     (governance.instance.quorumDenominator as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetQuorumDenominatorQueryParams = {};
@@ -41,9 +43,10 @@ describe('GetQuorumDenominatorQuery', () => {
 
   it('should return consistent denominator values', async () => {
     const mockDenominator = BigInt(100);
-    
-    (governance.instance.quorumDenominator as unknown as jest.Mock)
-      .mockResolvedValue(mockDenominator);
+
+    (governance.instance.quorumDenominator as unknown as jest.Mock).mockResolvedValue(
+      mockDenominator
+    );
 
     const params: IGetQuorumDenominatorQueryParams = {};
 
@@ -54,4 +57,4 @@ describe('GetQuorumDenominatorQuery', () => {
     expect(result1).toBe(mockDenominator);
     expect(result2).toBe(mockDenominator);
   });
-}); 
+});

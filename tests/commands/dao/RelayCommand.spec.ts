@@ -1,19 +1,19 @@
 import { RelayCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IRelayCommandParams } from '@interfaces/commands/params/IRelayCommandParams';
 
 describe('RelayCommand', () => {
   let command: RelayCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: IRelayCommandParams;
 
   beforeEach(() => {
     const mockRelay = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        relay: mockRelay,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        relay: mockRelay
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       target: '0xTargetAddress',
@@ -21,23 +21,23 @@ describe('RelayCommand', () => {
       data: '0xCalldata',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new RelayCommand(mockEvxGovernance);
+    command = new RelayCommand(mockGovernance);
   });
 
   it('should execute relay successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.relay as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.relay as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.relay).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.relay).toHaveBeenCalledWith(
       mockParams.target,
       mockParams.value,
       mockParams.data,
@@ -51,7 +51,7 @@ describe('RelayCommand', () => {
 
   it('should handle errors during relay execution', async () => {
     const mockError = new Error('Relay failed');
-    ((mockEvxGovernance.instance.relay as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.relay as unknown as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -59,4 +59,4 @@ describe('RelayCommand', () => {
     expect(mockParams.onDone).not.toHaveBeenCalled();
     expect(mockParams.onFail).toHaveBeenCalledWith(mockError);
   });
-}); 
+});

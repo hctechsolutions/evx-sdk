@@ -1,16 +1,16 @@
 import { GetVotesWithParamsQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetVotesWithParamsQueryParams } from '@interfaces/queries/params/IGetVotesWithParamsQueryParams';
 
 describe('GetVotesWithParamsQuery', () => {
   let query: GetVotesWithParamsQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        getVotesWithParams: jest.fn(),
-      },
+        getVotesWithParams: jest.fn()
+      }
     } as any;
 
     query = new GetVotesWithParamsQuery(governance);
@@ -23,7 +23,7 @@ describe('GetVotesWithParamsQuery', () => {
     const params: IGetVotesWithParamsQueryParams = {
       account: '0x1234567890123456789012345678901234567890',
       timepoint: BigInt(12345678),
-      params: '0x1234567890abcdef',
+      params: '0x1234567890abcdef'
     };
 
     const result = await query.execute(params);
@@ -43,9 +43,9 @@ describe('GetVotesWithParamsQuery', () => {
     const params: IGetVotesWithParamsQueryParams = {
       account: '0x1234567890123456789012345678901234567890',
       timepoint: BigInt(12345678),
-      params: '0x1234567890abcdef',
+      params: '0x1234567890abcdef'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

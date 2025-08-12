@@ -1,16 +1,16 @@
 import { ProposalSnapshotQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposalSnapshotQueryParams } from '@interfaces/queries/params/IProposalSnapshotQueryParams';
 
 describe('ProposalSnapshotQuery', () => {
   let query: ProposalSnapshotQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalSnapshot: jest.fn(),
-      },
+        proposalSnapshot: jest.fn()
+      }
     } as any;
 
     query = new ProposalSnapshotQuery(governance);
@@ -21,14 +21,12 @@ describe('ProposalSnapshotQuery', () => {
     (governance.instance.proposalSnapshot as unknown as jest.Mock).mockResolvedValue(mockSnapshot);
 
     const params: IProposalSnapshotQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.proposalSnapshot).toHaveBeenCalledWith(
-      params.proposalId
-    );
+    expect(governance.instance.proposalSnapshot).toHaveBeenCalledWith(params.proposalId);
     expect(result).toBe(mockSnapshot);
   });
 
@@ -37,7 +35,7 @@ describe('ProposalSnapshotQuery', () => {
     (governance.instance.proposalSnapshot as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IProposalSnapshotQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -46,17 +44,17 @@ describe('ProposalSnapshotQuery', () => {
   it('should handle different proposal IDs', async () => {
     const mockSnapshot1 = BigInt(1735689600);
     const mockSnapshot2 = BigInt(1735776000);
-    
+
     (governance.instance.proposalSnapshot as unknown as jest.Mock)
       .mockResolvedValueOnce(mockSnapshot1)
       .mockResolvedValueOnce(mockSnapshot2);
 
     const params1: IProposalSnapshotQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const params2: IProposalSnapshotQueryParams = {
-      proposalId: BigInt(456),
+      proposalId: BigInt(456)
     };
 
     const result1 = await query.execute(params1);
@@ -67,4 +65,4 @@ describe('ProposalSnapshotQuery', () => {
     expect(result1).toBe(mockSnapshot1);
     expect(result2).toBe(mockSnapshot2);
   });
-}); 
+});

@@ -1,16 +1,16 @@
 import { VoteReducedListener } from '@listeners';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('VoteReducedListener', () => {
   let listener: VoteReducedListener;
-  let mockGovernanceContract: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
-    
+
     const mockFilter = { filter: 'mock' };
     mockGovernanceContract = {
       instance: {
@@ -23,7 +23,7 @@ describe('VoteReducedListener', () => {
       }
     } as any;
 
-    container.registerInstance(EvxGovernanceContract, mockGovernanceContract);
+    container.registerInstance(GovernanceContract, mockGovernanceContract);
     listener = container.resolve(VoteReducedListener);
   });
 
@@ -33,14 +33,17 @@ describe('VoteReducedListener', () => {
     await listener.start(callback);
 
     expect(mockGovernanceContract.instance.filters.VoteReduced).toHaveBeenCalled();
-    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(expect.any(Object), expect.any(Function));
+    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Function)
+    );
     expect(listener.listening).toBe(true);
   });
 
   it('should stop listening for events', async () => {
     const callback = jest.fn();
     await listener.start(callback); // Start listening first
-    
+
     listener.stop();
 
     expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith('VoteReduced');
@@ -66,7 +69,11 @@ describe('VoteReducedListener', () => {
 
     const result = await listener.getHistoricalEvents(12000, 13000);
 
-    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(expect.any(Object), 12000, 13000);
+    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(
+      expect.any(Object),
+      12000,
+      13000
+    );
     expect(result).toEqual([
       {
         delegate: '0x1234567890123456789012345678901234567890',
@@ -86,9 +93,11 @@ describe('VoteReducedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     await listener.start(callback);
 
@@ -107,8 +116,11 @@ describe('VoteReducedListener', () => {
       mockEvent
     );
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error in VoteReduced event callback:', expect.any(Error));
-    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error in VoteReduced event callback:',
+      expect.any(Error)
+    );
+
     consoleSpy.mockRestore();
   });
 
@@ -118,9 +130,11 @@ describe('VoteReducedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     // Start listening and add callbacks
     await listener.start(callback1);
@@ -212,29 +226,21 @@ describe('VoteReducedListener', () => {
 
     (mockGovernanceContract.instance.queryFilter as jest.Mock).mockResolvedValue(mockEvents);
 
-    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow('Invalid event format');
+    await expect(listener.getHistoricalEvents(12000, 13000)).rejects.toThrow(
+      'Invalid event format'
+    );
   });
 
   it('should handle multiple historical events', async () => {
     const mockEvents = [
       {
-        args: [
-          '0x1234567890123456789012345678901234567890',
-          BigInt(123),
-          1,
-          BigInt(1000)
-        ],
+        args: ['0x1234567890123456789012345678901234567890', BigInt(123), 1, BigInt(1000)],
         blockNumber: 12345,
         transactionHash: '0xabc',
         index: 0
       },
       {
-        args: [
-          '0x0987654321098765432109876543210987654321',
-          BigInt(456),
-          0,
-          BigInt(500)
-        ],
+        args: ['0x0987654321098765432109876543210987654321', BigInt(456), 0, BigInt(500)],
         blockNumber: 12346,
         transactionHash: '0xdef',
         index: 1
@@ -303,4 +309,4 @@ describe('VoteReducedListener', () => {
       logIndex: 0
     });
   });
-}); 
+});

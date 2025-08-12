@@ -1,12 +1,12 @@
 import { ICastOverrideVoteBySigCommandParams } from '@interfaces/commands/params/ICastOverrideVoteBySigCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Cast Override Vote By Signature Command
  * @notice Executes a cast override vote by signature operation on a governance proposal
- * @dev This command interacts with the EvxGovernance contract to cast an override vote using a signature
+ * @dev This command interacts with the Governance contract to cast an override vote using a signature
  */
 @injectable()
 @singleton()
@@ -14,8 +14,8 @@ export class CastOverrideVoteBySigCommand
   implements IBaseCommand<ICastOverrideVoteBySigCommandParams, void>
 {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly evxGovernance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**
@@ -24,7 +24,7 @@ export class CastOverrideVoteBySigCommand
    */
   async execute(params: ICastOverrideVoteBySigCommandParams): Promise<void> {
     try {
-      const transaction = await this.evxGovernance.instance.castOverrideVoteBySig(
+      const transaction = await this.governance.instance.castOverrideVoteBySig(
         params.proposalId,
         params.support as number,
         params.voter,

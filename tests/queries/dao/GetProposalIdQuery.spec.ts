@@ -1,16 +1,16 @@
 import { GetProposalIdQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetProposalIdQueryParams } from '@interfaces/queries/params/IGetProposalIdQueryParams';
 
 describe('GetProposalIdQuery', () => {
   let query: GetProposalIdQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        getProposalId: jest.fn(),
-      },
+        getProposalId: jest.fn()
+      }
     } as any;
 
     query = new GetProposalIdQuery(governance);
@@ -24,7 +24,7 @@ describe('GetProposalIdQuery', () => {
       targets: ['0x1234567890123456789012345678901234567890'],
       values: [BigInt(0)],
       calldatas: ['0x'],
-      descriptionHash: '0x1234567890123456789012345678901234567890123456789012345678901234',
+      descriptionHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
     };
 
     const result = await query.execute(params);
@@ -46,9 +46,9 @@ describe('GetProposalIdQuery', () => {
       targets: ['0x1234567890123456789012345678901234567890'],
       values: [BigInt(0)],
       calldatas: ['0x'],
-      descriptionHash: '0x1234567890123456789012345678901234567890123456789012345678901234',
+      descriptionHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

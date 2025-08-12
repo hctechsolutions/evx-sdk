@@ -1,19 +1,19 @@
 import { ProposeCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposeCommandParams } from '@interfaces/commands/params/IProposeCommandParams';
 
 describe('ProposeCommand', () => {
   let command: ProposeCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: IProposeCommandParams;
 
   beforeEach(() => {
     const mockPropose = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        propose: mockPropose,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        propose: mockPropose
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -22,23 +22,23 @@ describe('ProposeCommand', () => {
       description: 'Test proposal description',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new ProposeCommand(mockEvxGovernance);
+    command = new ProposeCommand(mockGovernance);
   });
 
   it('should execute propose successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.propose as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.propose).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('ProposeCommand', () => {
 
   it('should handle errors during propose execution', async () => {
     const mockError = new Error('Propose failed');
-    ((mockEvxGovernance.instance.propose as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.propose as unknown as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -64,10 +64,10 @@ describe('ProposeCommand', () => {
   it('should handle single target proposal', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.propose as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const singleTargetParams: IProposeCommandParams = {
       targets: ['0xSingleTarget'],
@@ -76,12 +76,12 @@ describe('ProposeCommand', () => {
       description: 'Single target proposal',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(singleTargetParams);
 
-    expect(mockEvxGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.propose).toHaveBeenCalledWith(
       singleTargetParams.targets,
       singleTargetParams.values,
       singleTargetParams.calldatas,
@@ -92,10 +92,10 @@ describe('ProposeCommand', () => {
   it('should handle empty values array', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.propose as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.propose as unknown as jest.Mock).mockResolvedValue(mockTransaction);
 
     const emptyValuesParams: IProposeCommandParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -104,16 +104,16 @@ describe('ProposeCommand', () => {
       description: 'Proposal with no value transfers',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(emptyValuesParams);
 
-    expect(mockEvxGovernance.instance.propose).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.propose).toHaveBeenCalledWith(
       emptyValuesParams.targets,
       emptyValuesParams.values,
       emptyValuesParams.calldatas,
       emptyValuesParams.description
     );
   });
-}); 
+});

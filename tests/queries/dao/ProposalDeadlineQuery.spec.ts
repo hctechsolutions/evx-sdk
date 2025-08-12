@@ -1,16 +1,16 @@
 import { ProposalDeadlineQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposalDeadlineQueryParams } from '@interfaces/queries/params/IProposalDeadlineQueryParams';
 
 describe('ProposalDeadlineQuery', () => {
   let query: ProposalDeadlineQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalDeadline: jest.fn(),
-      },
+        proposalDeadline: jest.fn()
+      }
     } as any;
 
     query = new ProposalDeadlineQuery(governance);
@@ -21,14 +21,12 @@ describe('ProposalDeadlineQuery', () => {
     (governance.instance.proposalDeadline as unknown as jest.Mock).mockResolvedValue(mockDeadline);
 
     const params: IProposalDeadlineQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.proposalDeadline).toHaveBeenCalledWith(
-      params.proposalId
-    );
+    expect(governance.instance.proposalDeadline).toHaveBeenCalledWith(params.proposalId);
     expect(result).toBe(mockDeadline);
   });
 
@@ -37,7 +35,7 @@ describe('ProposalDeadlineQuery', () => {
     (governance.instance.proposalDeadline as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IProposalDeadlineQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -46,17 +44,17 @@ describe('ProposalDeadlineQuery', () => {
   it('should handle different proposal IDs', async () => {
     const mockDeadline1 = BigInt(1735689600);
     const mockDeadline2 = BigInt(1735776000);
-    
+
     (governance.instance.proposalDeadline as unknown as jest.Mock)
       .mockResolvedValueOnce(mockDeadline1)
       .mockResolvedValueOnce(mockDeadline2);
 
     const params1: IProposalDeadlineQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const params2: IProposalDeadlineQueryParams = {
-      proposalId: BigInt(456),
+      proposalId: BigInt(456)
     };
 
     const result1 = await query.execute(params1);
@@ -67,4 +65,4 @@ describe('ProposalDeadlineQuery', () => {
     expect(result1).toBe(mockDeadline1);
     expect(result2).toBe(mockDeadline2);
   });
-}); 
+});

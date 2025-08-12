@@ -1,43 +1,43 @@
 import { UpdateTimelockCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IUpdateTimelockCommandParams } from '@interfaces/commands/params/IUpdateTimelockCommandParams';
 
 describe('UpdateTimelockCommand', () => {
   let command: UpdateTimelockCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: IUpdateTimelockCommandParams;
 
   beforeEach(() => {
     const mockUpdateTimelock = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        updateTimelock: mockUpdateTimelock,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        updateTimelock: mockUpdateTimelock
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       newTimelock: '0xNewTimelockAddress',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new UpdateTimelockCommand(mockEvxGovernance);
+    command = new UpdateTimelockCommand(mockGovernance);
   });
 
   it('should execute updateTimelock successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.updateTimelock as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.updateTimelock as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.updateTimelock).toHaveBeenCalledWith(
-      mockParams.newTimelock
-    );
+    expect(mockGovernance.instance.updateTimelock).toHaveBeenCalledWith(mockParams.newTimelock);
 
     expect(mockParams.onTransaction).toHaveBeenCalledWith(mockTransaction.hash);
     expect(mockParams.onDone).toHaveBeenCalled();
@@ -46,7 +46,7 @@ describe('UpdateTimelockCommand', () => {
 
   it('should handle errors during updateTimelock execution', async () => {
     const mockError = new Error('Update timelock failed');
-    ((mockEvxGovernance.instance.updateTimelock as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.updateTimelock as unknown as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -54,4 +54,4 @@ describe('UpdateTimelockCommand', () => {
     expect(mockParams.onDone).not.toHaveBeenCalled();
     expect(mockParams.onFail).toHaveBeenCalledWith(mockError);
   });
-}); 
+});

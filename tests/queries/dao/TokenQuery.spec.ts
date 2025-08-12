@@ -1,16 +1,16 @@
 import { TokenQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ITokenQueryParams } from '@interfaces/queries/params/ITokenQueryParams';
 
 describe('TokenQuery', () => {
   let query: TokenQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        token: jest.fn(),
-      },
+        token: jest.fn()
+      }
     } as any;
 
     query = new TokenQuery(governance);
@@ -36,4 +36,4 @@ describe('TokenQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

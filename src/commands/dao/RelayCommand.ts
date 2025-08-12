@@ -1,19 +1,19 @@
 import { IRelayCommandParams } from '@interfaces/commands/params/IRelayCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 
 /**
  * @title Relay Command
  * @notice Executes a relay operation in governance
- * @dev This command interacts with the EvxGovernance contract to relay calls to other contracts
+ * @dev This command interacts with the Governance contract to relay calls to other contracts
  */
 @injectable()
 @singleton()
 export class RelayCommand implements IBaseCommand<IRelayCommandParams, void> {
   constructor(
-    @inject(EvxGovernanceContract)
-    private readonly evxGovernance: EvxGovernanceContract
+    @inject(GovernanceContract)
+    private readonly governance: GovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class RelayCommand implements IBaseCommand<IRelayCommandParams, void> {
    */
   async execute(params: IRelayCommandParams): Promise<void> {
     try {
-      const transaction = await this.evxGovernance.instance.relay(
+      const transaction = await this.governance.instance.relay(
         params.target,
         params.value,
         params.data,

@@ -34,7 +34,7 @@ export * from './IProposalThresholdQueryParams';
 export * from './IGetProposalVotesQueryParams';
 export * from './IEip712DomainQueryParams';
 export * from './INameQueryParams';
-export * from './IEvxTokenQueryParams';
+export * from './IProtocolTokenQueryParams';
 export * from './INoncesQueryParams';
 export * from './ISupportsInterfaceQueryParams';
 export * from './ITimelockQueryParams';

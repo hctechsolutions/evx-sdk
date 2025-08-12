@@ -1,17 +1,17 @@
 import { GetStateQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetStateQueryParams } from '@interfaces/queries/params/IGetStateQueryParams';
 import { ProposalState } from '@enums/ProposalState';
 
 describe('GetStateQuery', () => {
   let query: GetStateQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        state: jest.fn(),
-      },
+        state: jest.fn()
+      }
     } as any;
 
     query = new GetStateQuery(governance);
@@ -20,11 +20,11 @@ describe('GetStateQuery', () => {
   it('should execute state query successfully for Active state', async () => {
     const mockState = ProposalState.Active;
     const proposalId = BigInt(123);
-    
+
     (governance.instance.state as unknown as jest.Mock).mockResolvedValue(mockState);
 
     const params: IGetStateQueryParams = {
-      proposalId,
+      proposalId
     };
 
     const result = await query.execute(params);
@@ -36,11 +36,11 @@ describe('GetStateQuery', () => {
   it('should execute state query successfully for Succeeded state', async () => {
     const mockState = ProposalState.Succeeded;
     const proposalId = BigInt(456);
-    
+
     (governance.instance.state as unknown as jest.Mock).mockResolvedValue(mockState);
 
     const params: IGetStateQueryParams = {
-      proposalId,
+      proposalId
     };
 
     const result = await query.execute(params);
@@ -52,11 +52,11 @@ describe('GetStateQuery', () => {
   it('should execute state query successfully for Defeated state', async () => {
     const mockState = ProposalState.Defeated;
     const proposalId = BigInt(789);
-    
+
     (governance.instance.state as unknown as jest.Mock).mockResolvedValue(mockState);
 
     const params: IGetStateQueryParams = {
-      proposalId,
+      proposalId
     };
 
     const result = await query.execute(params);
@@ -68,11 +68,11 @@ describe('GetStateQuery', () => {
   it('should handle errors during state query execution', async () => {
     const error = new Error('Query failed');
     const proposalId = BigInt(123);
-    
+
     (governance.instance.state as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetStateQueryParams = {
-      proposalId,
+      proposalId
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -81,12 +81,11 @@ describe('GetStateQuery', () => {
   it('should return consistent state values for same proposal', async () => {
     const mockState = ProposalState.Active;
     const proposalId = BigInt(123);
-    
-    (governance.instance.state as unknown as jest.Mock)
-      .mockResolvedValue(mockState);
+
+    (governance.instance.state as unknown as jest.Mock).mockResolvedValue(mockState);
 
     const params: IGetStateQueryParams = {
-      proposalId,
+      proposalId
     };
 
     const result1 = await query.execute(params);
@@ -103,7 +102,7 @@ describe('GetStateQuery', () => {
     const mockState2 = ProposalState.Succeeded;
     const proposalId1 = BigInt(123);
     const proposalId2 = BigInt(456);
-    
+
     (governance.instance.state as unknown as jest.Mock)
       .mockResolvedValueOnce(mockState1)
       .mockResolvedValueOnce(mockState2);
@@ -119,4 +118,4 @@ describe('GetStateQuery', () => {
     expect(result1).toBe(mockState1);
     expect(result2).toBe(mockState2);
   });
-}); 
+});

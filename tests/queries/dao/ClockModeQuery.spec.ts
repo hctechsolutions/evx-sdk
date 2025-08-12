@@ -1,16 +1,16 @@
 import { ClockModeQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IClockModeQueryParams } from '@interfaces/queries/params/IClockModeQueryParams';
 
 describe('ClockModeQuery', () => {
   let query: ClockModeQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        CLOCK_MODE: jest.fn(),
-      },
+        CLOCK_MODE: jest.fn()
+      }
     } as any;
 
     query = new ClockModeQuery(governance);
@@ -36,4 +36,4 @@ describe('ClockModeQuery', () => {
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

@@ -1,20 +1,20 @@
 import { CastVoteWithReasonCommand } from '@commands/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ICastVoteWithReasonCommandParams } from '@interfaces/commands/params/ICastVoteWithReasonCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastVoteWithReasonCommand', () => {
   let command: CastVoteWithReasonCommand;
-  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernance: jest.Mocked<GovernanceContract>;
   let mockParams: ICastVoteWithReasonCommandParams;
 
   beforeEach(() => {
     const mockCastVoteWithReason = jest.fn();
-    mockEvxGovernance = {
+    mockGovernance = {
       instance: {
-        castVoteWithReason: mockCastVoteWithReason,
-      },
-    } as unknown as jest.Mocked<EvxGovernanceContract>;
+        castVoteWithReason: mockCastVoteWithReason
+      }
+    } as unknown as jest.Mocked<GovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -22,23 +22,25 @@ describe('CastVoteWithReasonCommand', () => {
       reason: 'This proposal aligns with our community values',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
-    command = new CastVoteWithReasonCommand(mockEvxGovernance);
+    command = new CastVoteWithReasonCommand(mockGovernance);
   });
 
   it('should execute cast vote with reason successfully', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castVoteWithReason as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castVoteWithReason as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.reason
@@ -51,7 +53,9 @@ describe('CastVoteWithReasonCommand', () => {
 
   it('should handle errors during cast vote with reason execution', async () => {
     const mockError = new Error('Cast vote with reason failed');
-    ((mockEvxGovernance.instance.castVoteWithReason as unknown) as jest.Mock).mockRejectedValue(mockError);
+    (mockGovernance.instance.castVoteWithReason as unknown as jest.Mock).mockRejectedValue(
+      mockError
+    );
 
     await command.execute(mockParams);
 
@@ -63,17 +67,19 @@ describe('CastVoteWithReasonCommand', () => {
   it('should handle different vote support values with reason', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castVoteWithReason as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castVoteWithReason as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
     mockParams.reason = 'This proposal has security concerns';
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against,
       mockParams.reason
@@ -84,7 +90,7 @@ describe('CastVoteWithReasonCommand', () => {
     mockParams.reason = 'Need more information to make a decision';
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain,
       mockParams.reason
@@ -94,15 +100,17 @@ describe('CastVoteWithReasonCommand', () => {
   it('should handle empty reason string', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castVoteWithReason as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castVoteWithReason as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
     mockParams.reason = '';
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       ''
@@ -112,19 +120,22 @@ describe('CastVoteWithReasonCommand', () => {
   it('should handle long reason string', async () => {
     const mockTransaction = {
       hash: '0xTransactionHash',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
-    ((mockEvxGovernance.instance.castVoteWithReason as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    (mockGovernance.instance.castVoteWithReason as unknown as jest.Mock).mockResolvedValue(
+      mockTransaction
+    );
 
-    const longReason = 'This is a very long reason that explains in detail why this vote is being cast. It includes multiple sentences and provides comprehensive justification for the voting decision. The reason covers various aspects of the proposal including technical considerations, economic impact, and community alignment.';
+    const longReason =
+      'This is a very long reason that explains in detail why this vote is being cast. It includes multiple sentences and provides comprehensive justification for the voting decision. The reason covers various aspects of the proposal including technical considerations, economic impact, and community alignment.';
     mockParams.reason = longReason;
     await command.execute(mockParams);
 
-    expect(mockEvxGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
+    expect(mockGovernance.instance.castVoteWithReason).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       longReason
     );
   });
-}); 
+});

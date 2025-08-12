@@ -1,16 +1,16 @@
 import { GetVotingPeriodQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IGetVotingPeriodQueryParams } from '@interfaces/queries/params/IGetVotingPeriodQueryParams';
 
 describe('GetVotingPeriodQuery', () => {
   let query: GetVotingPeriodQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        votingPeriod: jest.fn(),
-      },
+        votingPeriod: jest.fn()
+      }
     } as any;
 
     query = new GetVotingPeriodQuery(governance);
@@ -18,7 +18,7 @@ describe('GetVotingPeriodQuery', () => {
 
   it('should execute voting period query successfully', async () => {
     const mockPeriod = BigInt(604800); // Example period value (7 days in seconds)
-    
+
     (governance.instance.votingPeriod as unknown as jest.Mock).mockResolvedValue(mockPeriod);
 
     const params: IGetVotingPeriodQueryParams = {};
@@ -31,7 +31,7 @@ describe('GetVotingPeriodQuery', () => {
 
   it('should handle errors during voting period query execution', async () => {
     const error = new Error('Query failed');
-    
+
     (governance.instance.votingPeriod as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IGetVotingPeriodQueryParams = {};
@@ -41,9 +41,8 @@ describe('GetVotingPeriodQuery', () => {
 
   it('should return consistent period values', async () => {
     const mockPeriod = BigInt(604800);
-    
-    (governance.instance.votingPeriod as unknown as jest.Mock)
-      .mockResolvedValue(mockPeriod);
+
+    (governance.instance.votingPeriod as unknown as jest.Mock).mockResolvedValue(mockPeriod);
 
     const params: IGetVotingPeriodQueryParams = {};
 
@@ -54,4 +53,4 @@ describe('GetVotingPeriodQuery', () => {
     expect(result1).toBe(mockPeriod);
     expect(result2).toBe(mockPeriod);
   });
-}); 
+});

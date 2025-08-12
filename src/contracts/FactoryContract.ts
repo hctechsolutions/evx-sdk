@@ -1,4 +1,4 @@
-import EvxFactoryABI from '@abis/EvxFactory.json';
+import FactoryABI from '@abis/Factory.json';
 import { injectable, inject, singleton } from 'tsyringe';
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
@@ -19,6 +19,6 @@ export class FactoryContract extends BaseContract {
     @inject(RPC)
     readonly rpc: RPC
   ) {
-    super('factory', rpc, EvxFactoryABI);
+    super('factory', rpc, FactoryABI);
   }
 }

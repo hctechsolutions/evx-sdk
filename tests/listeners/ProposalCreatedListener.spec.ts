@@ -1,16 +1,16 @@
 import { ProposalCreatedListener } from '@listeners';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('ProposalCreatedListener', () => {
   let listener: ProposalCreatedListener;
-  let mockGovernanceContract: jest.Mocked<EvxGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
-    
+
     const mockFilter = { filter: 'mock' };
     mockGovernanceContract = {
       instance: {
@@ -23,7 +23,7 @@ describe('ProposalCreatedListener', () => {
       }
     } as any;
 
-    container.registerInstance(EvxGovernanceContract, mockGovernanceContract);
+    container.registerInstance(GovernanceContract, mockGovernanceContract);
     listener = container.resolve(ProposalCreatedListener);
   });
 
@@ -33,17 +33,22 @@ describe('ProposalCreatedListener', () => {
     await listener.start(callback);
 
     expect(mockGovernanceContract.instance.filters.ProposalCreated).toHaveBeenCalled();
-    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(expect.any(Object), expect.any(Function));
+    expect(mockGovernanceContract.instance.on).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Function)
+    );
     expect(listener.listening).toBe(true);
   });
 
   it('should stop listening for events', async () => {
     const callback = jest.fn();
     await listener.start(callback); // Start listening first
-    
+
     listener.stop();
 
-    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith('ProposalCreated');
+    expect(mockGovernanceContract.instance.removeAllListeners).toHaveBeenCalledWith(
+      'ProposalCreated'
+    );
     expect(listener.listening).toBe(false);
   });
 
@@ -71,7 +76,11 @@ describe('ProposalCreatedListener', () => {
 
     const result = await listener.getHistoricalEvents(12000, 13000);
 
-    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(expect.any(Object), 12000, 13000);
+    expect(mockGovernanceContract.instance.queryFilter).toHaveBeenCalledWith(
+      expect.any(Object),
+      12000,
+      13000
+    );
     expect(result).toEqual([
       {
         proposalId: 123n,
@@ -96,9 +105,11 @@ describe('ProposalCreatedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     await listener.start(callback);
 
@@ -122,8 +133,11 @@ describe('ProposalCreatedListener', () => {
       mockEvent
     );
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error in ProposalCreated event callback:', expect.any(Error));
-    
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error in ProposalCreated event callback:',
+      expect.any(Error)
+    );
+
     consoleSpy.mockRestore();
   });
 
@@ -133,9 +147,11 @@ describe('ProposalCreatedListener', () => {
 
     // Mock the on method to capture the event handler
     let capturedHandler: any;
-    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation((filter: any, handler: any) => {
-      capturedHandler = handler;
-    });
+    (mockGovernanceContract.instance.on as jest.Mock).mockImplementation(
+      (filter: any, handler: any) => {
+        capturedHandler = handler;
+      }
+    );
 
     // Start listening and add callbacks
     await listener.start(callback1);
@@ -231,4 +247,4 @@ describe('ProposalCreatedListener', () => {
       logIndex: 1
     });
   });
-}); 
+});

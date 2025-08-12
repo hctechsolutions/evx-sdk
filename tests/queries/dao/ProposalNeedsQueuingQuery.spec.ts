@@ -1,16 +1,16 @@
 import { ProposalNeedsQueuingQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { IProposalNeedsQueuingQueryParams } from '@interfaces/queries/params/IProposalNeedsQueuingQueryParams';
 
 describe('ProposalNeedsQueuingQuery', () => {
   let query: ProposalNeedsQueuingQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        proposalNeedsQueuing: jest.fn(),
-      },
+        proposalNeedsQueuing: jest.fn()
+      }
     } as any;
 
     query = new ProposalNeedsQueuingQuery(governance);
@@ -18,17 +18,17 @@ describe('ProposalNeedsQueuingQuery', () => {
 
   it('should execute proposal needs queuing query successfully', async () => {
     const mockNeedsQueuing = true;
-    (governance.instance.proposalNeedsQueuing as unknown as jest.Mock).mockResolvedValue(mockNeedsQueuing);
+    (governance.instance.proposalNeedsQueuing as unknown as jest.Mock).mockResolvedValue(
+      mockNeedsQueuing
+    );
 
     const params: IProposalNeedsQueuingQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const result = await query.execute(params);
 
-    expect(governance.instance.proposalNeedsQueuing).toHaveBeenCalledWith(
-      params.proposalId
-    );
+    expect(governance.instance.proposalNeedsQueuing).toHaveBeenCalledWith(params.proposalId);
     expect(result).toBe(mockNeedsQueuing);
   });
 
@@ -37,7 +37,7 @@ describe('ProposalNeedsQueuingQuery', () => {
     (governance.instance.proposalNeedsQueuing as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: IProposalNeedsQueuingQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
@@ -46,17 +46,17 @@ describe('ProposalNeedsQueuingQuery', () => {
   it('should handle different proposal IDs', async () => {
     const mockNeedsQueuing1 = true;
     const mockNeedsQueuing2 = false;
-    
+
     (governance.instance.proposalNeedsQueuing as unknown as jest.Mock)
       .mockResolvedValueOnce(mockNeedsQueuing1)
       .mockResolvedValueOnce(mockNeedsQueuing2);
 
     const params1: IProposalNeedsQueuingQueryParams = {
-      proposalId: BigInt(123),
+      proposalId: BigInt(123)
     };
 
     const params2: IProposalNeedsQueuingQueryParams = {
-      proposalId: BigInt(456),
+      proposalId: BigInt(456)
     };
 
     const result1 = await query.execute(params1);
@@ -67,4 +67,4 @@ describe('ProposalNeedsQueuingQuery', () => {
     expect(result1).toBe(mockNeedsQueuing1);
     expect(result2).toBe(mockNeedsQueuing2);
   });
-}); 
+});

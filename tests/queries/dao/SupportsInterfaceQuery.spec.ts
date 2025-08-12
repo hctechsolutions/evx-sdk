@@ -1,16 +1,16 @@
 import { SupportsInterfaceQuery } from '@queries/dao';
-import { EvxGovernanceContract } from '@contracts';
+import { GovernanceContract } from '@contracts';
 import { ISupportsInterfaceQueryParams } from '@interfaces/queries/params/ISupportsInterfaceQueryParams';
 
 describe('SupportsInterfaceQuery', () => {
   let query: SupportsInterfaceQuery;
-  let governance: jest.Mocked<EvxGovernanceContract>;
+  let governance: jest.Mocked<GovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        supportsInterface: jest.fn(),
-      },
+        supportsInterface: jest.fn()
+      }
     } as any;
 
     query = new SupportsInterfaceQuery(governance);
@@ -18,10 +18,12 @@ describe('SupportsInterfaceQuery', () => {
 
   it('should execute supports interface query successfully when interface is supported', async () => {
     const mockSupported = true;
-    (governance.instance.supportsInterface as unknown as jest.Mock).mockResolvedValue(mockSupported);
+    (governance.instance.supportsInterface as unknown as jest.Mock).mockResolvedValue(
+      mockSupported
+    );
 
     const params: ISupportsInterfaceQueryParams = {
-      interfaceId: '0x01ffc9a7', // ERC165 interface ID
+      interfaceId: '0x01ffc9a7' // ERC165 interface ID
     };
 
     const result = await query.execute(params);
@@ -32,10 +34,12 @@ describe('SupportsInterfaceQuery', () => {
 
   it('should execute supports interface query successfully when interface is not supported', async () => {
     const mockSupported = false;
-    (governance.instance.supportsInterface as unknown as jest.Mock).mockResolvedValue(mockSupported);
+    (governance.instance.supportsInterface as unknown as jest.Mock).mockResolvedValue(
+      mockSupported
+    );
 
     const params: ISupportsInterfaceQueryParams = {
-      interfaceId: '0xffffffff', // Invalid interface ID
+      interfaceId: '0xffffffff' // Invalid interface ID
     };
 
     const result = await query.execute(params);
@@ -49,9 +53,9 @@ describe('SupportsInterfaceQuery', () => {
     (governance.instance.supportsInterface as unknown as jest.Mock).mockRejectedValue(error);
 
     const params: ISupportsInterfaceQueryParams = {
-      interfaceId: '0x01ffc9a7',
+      interfaceId: '0x01ffc9a7'
     };
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });
-}); 
+});

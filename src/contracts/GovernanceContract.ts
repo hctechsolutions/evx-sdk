@@ -1,24 +1,24 @@
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
-import EvxGovernanceABI from '@abis/EvxGovernance.json';
+import GovernanceABI from '@abis/Governance.json';
 import { inject, injectable, singleton } from 'tsyringe';
 
 /**
- * @title EvxGovernance Contract
- * @notice Contract wrapper for the EvxGovernance contract
+ * @title Governance Contract
+ * @notice Contract wrapper for the Governance contract
  * @dev Extends BaseContract to provide governance functionality
  */
 @injectable()
 @singleton()
-export class EvxGovernanceContract extends BaseContract {
+export class GovernanceContract extends BaseContract {
   /**
-   * @notice Creates a new EvxGovernance contract instance
+   * @notice Creates a new Governance contract instance
    * @param rpc The RPC provider instance
    */
   constructor(
     @inject(RPC)
     readonly rpc: RPC
   ) {
-    super('dao', rpc, EvxGovernanceABI);
+    super('dao', rpc, GovernanceABI);
   }
 }

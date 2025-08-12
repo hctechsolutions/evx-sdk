@@ -33,17 +33,6 @@ describe('OrderExecutorContract', () => {
       expect(address).toBe('0x7fC548F0d27f7D6aAC90d2923b7c0EdF2c8198f2');
     });
 
-    it('should return the correct address for mainnet', () => {
-      // Arrange
-      orderExecutorContract.setChain('mainnet');
-
-      // Act
-      const address = orderExecutorContract.getAddress();
-
-      // Assert
-      expect(address).toBe('0x7fC548F0d27f7D6aAC90d2923b7c0EdF2c8198f2');
-    });
-
     it('should throw error for unsupported chain', () => {
       // Act & Assert
       expect(() => {

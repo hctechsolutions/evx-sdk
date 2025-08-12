@@ -20,7 +20,7 @@ jest.mock('tsyringe', () => {
 
 describe('writer contract setters with dynamic resolution', () => {
   const fakeSigner = {} as Signer;
-  const fakeChain: ChainName = 'mainnet';
+  const fakeChain: ChainName = 'sepolia';
 
   const mockContractA = {
     setSigner: jest.fn(),
@@ -76,12 +76,12 @@ describe('writer contract setters with dynamic resolution', () => {
   });
 
   it('should call setChain on all resolved contracts using chain ID', async () => {
-    const fakeChainId: ChainId = 1; // mainnet chain ID
+    const fakeChainId: ChainId = 11155111; // sepolia chain ID
     await setAllChainById(fakeChainId);
 
-    expect(mockContractA.setChain).toHaveBeenCalledWith('mainnet');
-    expect(mockContractB.setChain).toHaveBeenCalledWith('mainnet');
-    expect(mockContractC.setChain).toHaveBeenCalledWith('mainnet');
+    expect(mockContractA.setChain).toHaveBeenCalledWith('sepolia');
+    expect(mockContractB.setChain).toHaveBeenCalledWith('sepolia');
+    expect(mockContractC.setChain).toHaveBeenCalledWith('sepolia');
     expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
     expect(mockContractC.setChain).toHaveBeenCalledTimes(1);
