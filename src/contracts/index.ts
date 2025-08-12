@@ -9,5 +9,5 @@ export * from './PairFlashContract';
 export * from './SwapRouterContract';
 export * from './QuoterContract';
 export * from './TickLensContract';
-export * from './EvexGovernanceContract';
+export * from './EvxGovernanceContract';
 export * from './OrderExecutorContract';

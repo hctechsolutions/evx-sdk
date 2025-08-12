@@ -1,10 +1,10 @@
 import { GetProposerQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IGetProposerQueryParams } from '@interfaces/queries/params/IGetProposerQueryParams';
 
 describe('GetProposerQuery', () => {
   let query: GetProposerQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

@@ -1,10 +1,10 @@
 import { ProposalDeadlineQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IProposalDeadlineQueryParams } from '@interfaces/queries/params/IProposalDeadlineQueryParams';
 
 describe('ProposalDeadlineQuery', () => {
   let query: ProposalDeadlineQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

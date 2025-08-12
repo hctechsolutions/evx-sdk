@@ -1,19 +1,19 @@
 import { IClockQueryParams } from '@interfaces/queries/params/IClockQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Clock Query
- * @notice Retrieves the current clock value from the EvexGovernance contract
+ * @notice Retrieves the current clock value from the EvxGovernance contract
  * @dev Queries the governance contract to get the current timepoint/clock value
  */
 @injectable()
 @singleton()
 export class ClockQuery implements IBaseQuery<IClockQueryParams, bigint> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

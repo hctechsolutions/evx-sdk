@@ -1,10 +1,10 @@
 import { ProposalNeedsQueuingQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IProposalNeedsQueuingQueryParams } from '@interfaces/queries/params/IProposalNeedsQueuingQueryParams';
 
 describe('ProposalNeedsQueuingQuery', () => {
   let query: ProposalNeedsQueuingQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

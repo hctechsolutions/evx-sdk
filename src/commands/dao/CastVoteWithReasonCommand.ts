@@ -1,12 +1,12 @@
 import { ICastVoteWithReasonCommandParams } from '@interfaces/commands/params/ICastVoteWithReasonCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Cast Vote With Reason Command
  * @notice Executes a cast vote with reason operation on a governance proposal
- * @dev This command interacts with the EvexGovernance contract to cast a vote with a reason
+ * @dev This command interacts with the EvxGovernance contract to cast a vote with a reason
  */
 @injectable()
 @singleton()
@@ -14,8 +14,8 @@ export class CastVoteWithReasonCommand
   implements IBaseCommand<ICastVoteWithReasonCommandParams, void>
 {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly evexGovernance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly evxGovernance: EvxGovernanceContract
   ) {}
 
   /**
@@ -24,7 +24,7 @@ export class CastVoteWithReasonCommand
    */
   async execute(params: ICastVoteWithReasonCommandParams): Promise<void> {
     try {
-      const transaction = await this.evexGovernance.instance.castVoteWithReason(
+      const transaction = await this.evxGovernance.instance.castVoteWithReason(
         params.proposalId,
         params.support as number,
         params.reason

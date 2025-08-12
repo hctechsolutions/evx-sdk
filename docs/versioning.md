@@ -4,7 +4,7 @@ This document explains how the TypeScript `version-manager.ts` implements versio
 
 ## GitFlow Branching Model
 
-The Evex SDK uses GitFlow branching strategy with automated version management:
+The Evx SDK uses GitFlow branching strategy with automated version management:
 
 ```
 main ←-- release/X.Y.Z ←-- develop ←-- feature/name

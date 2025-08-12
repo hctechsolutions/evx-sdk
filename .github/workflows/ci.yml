@@ -2,14 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ 
-      main, 
-      develop, 
-      'release/*', 
-      'feature/*', 
-      'hotfix/*', 
-      'bugfix/*' 
-    ]
+    branches: [main, develop, 'release/*', 'feature/*', 'hotfix/*', 'bugfix/*']
 
 env:
   NODE_VERSION: '18.19.1'
@@ -23,7 +16,7 @@ jobs:
   test:
     name: Test & Lint
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,7 +40,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: test
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -74,7 +67,7 @@ jobs:
   security:
     name: Security Audit
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -104,7 +97,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for tags
+          fetch-depth: 0 # Fetch all history for tags
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
@@ -164,11 +157,11 @@ jobs:
           # Configure git for the action
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
+
           VERSION=${{ steps.tag.outputs.version }}
           TAG_NAME="v$VERSION"
           echo "Creating tag: $TAG_NAME"
-          
+
           # Check if tag already exists
           if git tag -l | grep -q "^$TAG_NAME$"; then
             echo "Tag $TAG_NAME already exists, skipping creation"
@@ -187,12 +180,12 @@ jobs:
             ls -la
             exit 1
           fi
-          
+
           echo "Creating build archive from dist directory..."
           cd dist
-          zip -r ../evex-sdk-build.zip .
+          zip -r ../evx-sdk-build.zip .
           cd ..
-          ls -la evex-sdk-build.zip
+          ls -la evx-sdk-build.zip
           echo "Build archive created successfully"
 
       - name: Generate changelog
@@ -205,16 +198,16 @@ jobs:
           else
             COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges ${LAST_TAG}..HEAD)
           fi
-          
+
           # Create changelog
           cat > CHANGELOG.md << EOF
           ## What's Changed
-          
+
           $COMMITS
-          
-          **Full Changelog**: https://github.com/evex-finance/evex-sdk/compare/${LAST_TAG}...v${{ steps.tag.outputs.version }}
+
+          **Full Changelog**: https://github.com/evx-finance/evx-sdk/compare/${LAST_TAG}...v${{ steps.tag.outputs.version }}
           EOF
-          
+
           echo "Generated changelog for release"
 
       - name: Upload updated package.json
@@ -233,7 +226,7 @@ jobs:
           draft: false
           prerelease: ${{ contains(steps.tag.outputs.version, '-') }}
           files: |
-            evex-sdk-build.zip
+            evx-sdk-build.zip
             package.json
 
   publish-npm:
@@ -242,7 +235,7 @@ jobs:
     needs: versionate
     # Only for stable releases on main (no pre-release versions)
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -273,7 +266,7 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "Package: $PACKAGE_NAME"
           echo "Version: $VERSION"
-          
+
           # Verify it's a stable version (no pre-release suffixes)
           if [[ "$VERSION" == *"-"* ]]; then
             echo "Error: Cannot publish pre-release version $VERSION to NPM"
@@ -287,7 +280,7 @@ jobs:
           # Check if package is already published
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           VERSION=$(node -p "require('./package.json').version")
-          
+
           if npm view "$PACKAGE_NAME@$VERSION" version 2>/dev/null; then
             echo "Package $PACKAGE_NAME@$VERSION already published to NPM"
           else
@@ -300,7 +293,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [versionate, publish-npm]
     if: always() && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/'))
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -321,26 +314,26 @@ jobs:
         if: needs.versionate.result == 'success'
         run: |
           echo "Successfully created release v${{ steps.get_version.outputs.version }}"
-          echo "GitHub Release: https://github.com/evex-finance/evex-sdk/releases/tag/v${{ steps.get_version.outputs.version }}"
-          
+          echo "GitHub Release: https://github.com/evx-finance/evx-sdk/releases/tag/v${{ steps.get_version.outputs.version }}"
+
       - name: Notify NPM publish success
         if: needs.publish-npm.result == 'success'
         run: |
           echo "Successfully published to NPM"
-          echo "NPM Package: https://www.npmjs.com/package/evex-sdk"
-          
+          echo "NPM Package: https://www.npmjs.com/package/evx-sdk"
+
       - name: Notify NPM skipped
         if: needs.publish-npm.result == 'skipped'
         run: |
           echo "NPM publish skipped (not a stable release on main)"
-          
+
       - name: Notify failures
         if: needs.versionate.result == 'failure' || needs.publish-npm.result == 'failure'
         run: |
           echo "Release process failed"
           echo "Version job result: ${{ needs.versionate.result }}"
           echo "NPM publish job result: ${{ needs.publish-npm.result }}"
-          
+
       - name: Notify summary
         run: |
           echo "Release Summary:"

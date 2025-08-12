@@ -1,7 +1,7 @@
 import { IProposalThresholdQueryParams } from '@interfaces/queries/params/IProposalThresholdQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Proposal Threshold Query
@@ -12,8 +12,8 @@ import { EvexGovernanceContract } from '@contracts';
 @singleton()
 export class ProposalThresholdQuery implements IBaseQuery<IProposalThresholdQueryParams, bigint> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

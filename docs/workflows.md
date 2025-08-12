@@ -1,6 +1,6 @@
 # GitHub Workflows
 
-This directory contains the GitHub Actions workflows for the Evex SDK.
+This directory contains the GitHub Actions workflows for the Evx SDK.
 
 ## Available Workflows
 

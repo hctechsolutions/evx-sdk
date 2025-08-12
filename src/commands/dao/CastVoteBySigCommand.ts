@@ -1,19 +1,19 @@
 import { ICastVoteBySigCommandParams } from '@interfaces/commands/params/ICastVoteBySigCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Cast Vote By Sig Command
  * @notice Executes a cast vote by signature operation on a governance proposal
- * @dev This command interacts with the EvexGovernance contract to cast a vote by signature
+ * @dev This command interacts with the EvxGovernance contract to cast a vote by signature
  */
 @injectable()
 @singleton()
 export class CastVoteBySigCommand implements IBaseCommand<ICastVoteBySigCommandParams, void> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly evexGovernance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly evxGovernance: EvxGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class CastVoteBySigCommand implements IBaseCommand<ICastVoteBySigCommandP
    */
   async execute(params: ICastVoteBySigCommandParams): Promise<void> {
     try {
-      const transaction = await this.evexGovernance.instance.castVoteBySig(
+      const transaction = await this.evxGovernance.instance.castVoteBySig(
         params.proposalId,
         params.support as number,
         params.voter,

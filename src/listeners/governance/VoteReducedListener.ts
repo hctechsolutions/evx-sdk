@@ -1,12 +1,12 @@
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IVoteReducedEvent } from '@interfaces/events/governance/IVoteReducedEvent';
 import { EventLog } from 'ethers';
 
 /**
  * @title Vote Reduced Event Listener
- * @notice Listens for VoteReduced events from the EvexGovernance contract
+ * @notice Listens for VoteReduced events from the EvxGovernance contract
  * @dev This listener monitors the governance contract for vote reduction events
  */
 @injectable()
@@ -17,8 +17,8 @@ export class VoteReducedListener implements IEventListener<IVoteReducedEvent> {
   private callbacks: ((event: IVoteReducedEvent) => void | Promise<void>)[] = [];
 
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governanceContract: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governanceContract: EvxGovernanceContract
   ) {}
 
   /**

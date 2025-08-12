@@ -1,6 +1,6 @@
-# Evex SDK
+# Evx SDK
 
-The Evex SDK is a TypeScript developer toolkit designed to simplify interaction with the Evex decentralized liquidity protocol. It provides a high-level abstraction over the core smart contracts. Built using a modular CQRS (Command Query Responsibility Segregation) architecture for scalability and clarity.
+The Evx SDK is a TypeScript developer toolkit designed to simplify interaction with the Evx decentralized liquidity protocol. It provides a high-level abstraction over the core smart contracts. Built using a modular CQRS (Command Query Responsibility Segregation) architecture for scalability and clarity.
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue.svg)
 ![CQRS](https://img.shields.io/badge/Pattern-CQRS-purple)
@@ -11,35 +11,39 @@ The Evex SDK is a TypeScript developer toolkit designed to simplify interaction 
 
 ## Documentation
 
-Welcome to the comprehensive documentation for the Evex SDK. This section contains detailed guides, workflows, and tools documentation.
+Welcome to the comprehensive documentation for the Evx SDK. This section contains detailed guides, workflows, and tools documentation.
 
 **[Quick Start](#installation)** | **[Contributing](docs/contributing.md)** | **[Development Tools](#development)**
 
 ### Documentation Structure
 
 #### **Getting Started**
-| Section | Description | Link |
-|---------|-------------|------|
-| **Installation** | Quick start guide | [Getting Started](#installation) |
-| **Basic Usage** | Your first SDK queries | [Usage Examples](#usage) |
-| **Environment Setup** | RPC configuration | [Environment Configuration](#environment-configuration) |
+
+| Section               | Description            | Link                                                    |
+| --------------------- | ---------------------- | ------------------------------------------------------- |
+| **Installation**      | Quick start guide      | [Getting Started](#installation)                        |
+| **Basic Usage**       | Your first SDK queries | [Usage Examples](#usage)                                |
+| **Environment Setup** | RPC configuration      | [Environment Configuration](#environment-configuration) |
 
 #### **Development Tools**
-| Section | Description | Link |
-|---------|-------------|------|
-| **Version Manager** | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md)
-| **GitFlow Versioning** | GitFlow branching strategy | [GitFlow Versioning](docs/versioning.md)
-| **GitHub Workflows** | CI/CD automation | [GitHub Workflows](docs/workflows.md)
+
+| Section                | Description                  | Link                                       |
+| ---------------------- | ---------------------------- | ------------------------------------------ |
+| **Version Manager**    | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md) |
+| **GitFlow Versioning** | GitFlow branching strategy   | [GitFlow Versioning](docs/versioning.md)   |
+| **GitHub Workflows**   | CI/CD automation             | [GitHub Workflows](docs/workflows.md)      |
 
 #### **Deployment**
-| Section | Description | Link |
-|---------|-------------|------|
-| **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md)
+
+| Section            | Description                   | Link                                |
+| ------------------ | ----------------------------- | ----------------------------------- |
+| **CI/CD Pipeline** | Automated builds and releases | [CI/CD Pipeline](docs/workflows.md) |
 
 #### **Contributing**
-| Section | Description | Link |
-|---------|-------------|------|
-| **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md)
+
+| Section                | Description       | Link                                       |
+| ---------------------- | ----------------- | ------------------------------------------ |
+| **Contributing Guide** | How to contribute | [Contributing Guide](docs/contributing.md) |
 
 ### Quick Links
 
@@ -53,43 +57,48 @@ Welcome to the comprehensive documentation for the Evex SDK. This section contai
 ## Features
 
 ### Core Functionality
-* **Multi-chain Support** - Connect to any EVM-compatible chain (Ethereum Mainnet, Sepolia Testnet)
-* **Smart Contract Integration** - Full Evex protocol contract wrappers (Factory, Pool, Position Manager, Governance)
-* **Type-safe Interactions** - Complete TypeScript support with full type definitions
-* **Dependency Injection** - Built with TSyringe for clean architecture and testability
+
+- **Multi-chain Support** - Connect to any EVM-compatible chain (Ethereum Mainnet, Sepolia Testnet)
+- **Smart Contract Integration** - Full Evx protocol contract wrappers (Factory, Pool, Position Manager, Governance)
+- **Type-safe Interactions** - Complete TypeScript support with full type definitions
+- **Dependency Injection** - Built with TSyringe for clean architecture and testability
 
 ### CQRS Architecture
-* **Commands** - Write operations for pool creation, swaps, liquidity management, and governance
-* **Queries** - Read operations for pool data, positions, quotes, and protocol information
-* **Event Listeners** - Real-time blockchain event monitoring for pools, swaps, and governance
+
+- **Commands** - Write operations for pool creation, swaps, liquidity management, and governance
+- **Queries** - Read operations for pool data, positions, quotes, and protocol information
+- **Event Listeners** - Real-time blockchain event monitoring for pools, swaps, and governance
 
 ### DeFi Operations
-* **Pool Management** - Create pools, query pool data, and manage liquidity positions
-* **Swap Operations** - Execute exact input/output swaps with slippage protection
-* **Liquidity Provision** - Add/remove liquidity with NFT-based position management
-* **Flash Loans** - Execute flash loan operations through the PairFlash contract
-* **Governance** - Participate in DAO governance with voting and proposal management
+
+- **Pool Management** - Create pools, query pool data, and manage liquidity positions
+- **Swap Operations** - Execute exact input/output swaps with slippage protection
+- **Liquidity Provision** - Add/remove liquidity with NFT-based position management
+- **Flash Loans** - Execute flash loan operations through the PairFlash contract
+- **Governance** - Participate in DAO governance with voting and proposal management
 
 ### Developer Experience
-* **Simple Configuration** - Easy setup with `setRPCProvider` and `setAllChain`
-* **Transaction Monitoring** - Built-in callbacks for transaction lifecycle tracking
-* **Error Handling** - Comprehensive error handling with detailed error messages
-* **Modular Design** - Import only what you need for optimal bundle size
+
+- **Simple Configuration** - Easy setup with `setRPCProvider` and `setAllChain`
+- **Transaction Monitoring** - Built-in callbacks for transaction lifecycle tracking
+- **Error Handling** - Comprehensive error handling with detailed error messages
+- **Modular Design** - Import only what you need for optimal bundle size
 
 ### Infrastructure
-* **Auto-versioning** - GitFlow-based version management
-* **Comprehensive Testing** - >80% test coverage with Jest
-* **CI/CD Pipeline** - Automated builds, tests, and deployments
-* **Documentation** - Complete API documentation and usage examples
+
+- **Auto-versioning** - GitFlow-based version management
+- **Comprehensive Testing** - >80% test coverage with Jest
+- **CI/CD Pipeline** - Automated builds, tests, and deployments
+- **Documentation** - Complete API documentation and usage examples
 
 ---
 
 ## Installation
 
 ```bash
-npm install evex-sdk
+npm install evx-sdk
 # or
-yarn add evex-sdk
+yarn add evx-sdk
 ```
 
 ## Usage
@@ -99,7 +108,7 @@ yarn add evex-sdk
 Before using any SDK functionality, you need to configure the RPC provider and chain:
 
 ```ts
-import { setRPCProvider, setAllChain } from 'evex-sdk';
+import { setRPCProvider, setAllChain } from 'evx-sdk';
 
 // Configure RPC provider and chain
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -110,7 +119,7 @@ await setAllChain('sepolia'); // or 'mainnet'
 
 ```ts
 import 'reflect-metadata';
-import { GetPoolQuery, setRPCProvider, setAllChain } from 'evex-sdk';
+import { GetPoolQuery, setRPCProvider, setAllChain } from 'evx-sdk';
 import { container } from 'tsyringe';
 
 // Setup SDK configuration
@@ -119,8 +128,8 @@ await setAllChain('sepolia');
 
 // Query pool information
 const getPool = container.resolve(GetPoolQuery);
-const pool = await getPool.execute({ 
-  address: '0x7Fb01B2d918Edcad3d3a05b5B7A511ACA1C66aD8' 
+const pool = await getPool.execute({
+  address: '0x7Fb01B2d918Edcad3d3a05b5B7A511ACA1C66aD8'
 });
 
 console.table(pool);
@@ -130,7 +139,7 @@ console.table(pool);
 
 ```ts
 import 'reflect-metadata';
-import { PoolCreatedListener, setRPCProvider, setAllChain } from 'evex-sdk';
+import { PoolCreatedListener, setRPCProvider, setAllChain } from 'evx-sdk';
 import { container } from 'tsyringe';
 
 async function listenToEvents() {
@@ -140,7 +149,7 @@ async function listenToEvents() {
 
   // Start listening for pool creation events
   const listener = container.resolve(PoolCreatedListener);
-  
+
   await listener.start(async (event) => {
     console.log('New pool created!');
     console.log('Token0:', event.token0);
@@ -161,7 +170,7 @@ Commands are used for write operations that modify the blockchain state. Here ar
 
 ```ts
 import 'reflect-metadata';
-import { CreatePoolCommand, setRPCProvider, setAllChain } from 'evex-sdk';
+import { CreatePoolCommand, setRPCProvider, setAllChain } from 'evx-sdk';
 import { container } from 'tsyringe';
 
 async function createPool() {
@@ -171,7 +180,7 @@ async function createPool() {
 
   // Create a new pool
   const createPoolCommand = container.resolve(CreatePoolCommand);
-  
+
   await createPoolCommand.execute({
     token0: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // Token A address
     token1: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4', // Token B address
@@ -190,7 +199,7 @@ createPool();
 
 ```ts
 import 'reflect-metadata';
-import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'evex-sdk';
+import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'evx-sdk';
 import { container } from 'tsyringe';
 
 async function executeSwapWithCallback() {
@@ -199,14 +208,14 @@ async function executeSwapWithCallback() {
   await setAllChain('sepolia');
 
   const swapCommand = container.resolve(SwapExactInputSingleCommand);
-  
+
   await swapCommand.execute({
     tokenIn: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3',
     tokenOut: '0xB1c97a44F7e83B9D8F8F1f6e52E8A3B4',
     fee: 3000,
     recipient: '0xRecipientAddress',
     deadline: Math.floor(Date.now() / 1000) + 1800, // 30 minutes
-    amountIn: '1000000000000000000',                // 1 token (18 decimals)
+    amountIn: '1000000000000000000', // 1 token (18 decimals)
     amountOutMinimum: '0',
     sqrtPriceLimitX96: 0,
     // Callbacks are part of the parameters object
@@ -232,9 +241,9 @@ executeSwapWithCallback();
 
 ## Supported Networks
 
-* Ethereum Mainnet
-* Sepolia Testnet
-* Add your own in `resources/chains.ts`
+- Ethereum Mainnet
+- Sepolia Testnet
+- Add your own in `resources/chains.ts`
 
 ---
 
@@ -245,7 +254,7 @@ executeSwapWithCallback();
 The SDK supports the following networks:
 
 ```typescript
-import { setRPCProvider, setAllChain } from 'evex-sdk';
+import { setRPCProvider, setAllChain } from 'evx-sdk';
 
 // Sepolia Testnet
 await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
@@ -267,8 +276,8 @@ await setAllChain('mainnet');
 ### Setup
 
 ```bash
-git clone https://github.com/evex-finance/evex-sdk
-cd evex-sdk
+git clone https://github.com/evx-finance/evx-sdk
+cd evx-sdk
 npm install
 ```
 
@@ -300,7 +309,7 @@ npm run test:cov      # With coverage report
 
 ## Architecture
 
-The Evex SDK follows the **CQRS (Command Query Responsibility Segregation)** pattern:
+The Evx SDK follows the **CQRS (Command Query Responsibility Segregation)** pattern:
 
 ```
 src/
@@ -341,11 +350,11 @@ We welcome contributions! Please see our [Contributing Guide](docs/contributing.
 
 We use **GitFlow** for branch management:
 
-| Branch Type | Purpose | Example |
-|-------------|---------|---------|
-| `feature/*` | New features | `feature/add-swap-command` |
-| `bugfix/*` | Bug fixes | `bugfix/fix-pool-query` |
-| `hotfix/*` | Critical fixes | `hotfix/security-patch` |
+| Branch Type | Purpose        | Example                    |
+| ----------- | -------------- | -------------------------- |
+| `feature/*` | New features   | `feature/add-swap-command` |
+| `bugfix/*`  | Bug fixes      | `bugfix/fix-pool-query`    |
+| `hotfix/*`  | Critical fixes | `hotfix/security-patch`    |
 
 > **Learn More**: [Contributing Guide](docs/contributing.md) | [GitFlow Workflow](docs/versioning.md)
 
@@ -356,10 +365,10 @@ We use **GitFlow** for branch management:
 ### Need Help?
 
 - **Documentation**: Browse the guides above
-- **Bug Reports**: [GitHub Issues](https://github.com/evex-finance/evex-sdk/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/evex-finance/evex-sdk/discussions)
+- **Bug Reports**: [GitHub Issues](https://github.com/evx-finance/evx-sdk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/evx-finance/evx-sdk/discussions)
 - **Development**: [Contributing Guide](docs/contributing.md)
-- **Contact**: [Team Email](mailto:team@evex.finance)
+- **Contact**: [Team Email](mailto:team@evx.finance)
 
 ---
 
@@ -371,16 +380,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-See [Releases](https://github.com/evex-finance/evex-sdk/releases) for version history and changelogs.
+See [Releases](https://github.com/evx-finance/evx-sdk/releases) for version history and changelogs.
 
-**Latest Version**: ![npm](https://img.shields.io/npm/v/evex-sdk)
+**Latest Version**: ![npm](https://img.shields.io/npm/v/evx-sdk)
 
 ---
 
 <div align="center">
   
-**Built with love by the Evex Finance Team**
+**Built with love by the Evx Finance Team**
 
-[Website](https://evex.finance) • [Twitter](https://twitter.com/evex_finance) • [Discord](https://discord.gg/evex)
+[Website](https://evx.finance) • [Twitter](https://twitter.com/evx_finance) • [Discord](https://discord.gg/evx)
 
 </div>

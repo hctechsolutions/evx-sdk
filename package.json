@@ -1,8 +1,8 @@
 {
-  "name": "evex-sdk",
-  "version": "1.1.0",
+  "name": "evx-sdk",
+  "version": "1.1.2",
   "author": "Jeffersson Abreu",
-  "description": "The Evex SDK is a developer toolkit designed to simplify interaction with the Evex decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
+  "description": "The Evx SDK is a developer toolkit designed to simplify interaction with the Evx decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs.js",
@@ -30,7 +30,7 @@
     "dapps",
     "blockchain",
     "smart-contracts",
-    "evex-sdk",
+    "evx-sdk",
     "amm",
     "token",
     "erc20",
@@ -71,12 +71,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evex-finance/evex-sdk.git"
+    "url": "git+https://github.com/evx-finance/evx-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/evex-finance/evex-sdk/issues"
+    "url": "https://github.com/evx-finance/evx-sdk/issues"
   },
-  "homepage": "https://github.com/evex-finance/evex-sdk#readme",
+  "homepage": "https://github.com/evx-finance/evx-sdk#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-json": "^6.1.0",

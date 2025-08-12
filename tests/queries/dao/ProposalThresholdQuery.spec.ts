@@ -1,10 +1,10 @@
 import { ProposalThresholdQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IProposalThresholdQueryParams } from '@interfaces/queries/params/IProposalThresholdQueryParams';
 
 describe('ProposalThresholdQuery', () => {
   let query: ProposalThresholdQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

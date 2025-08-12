@@ -5,7 +5,7 @@ import { RPC } from '@providers';
 
 /**
  * @title Position Manager Contract
- * @notice Contract wrapper for Evex Position Manager interactions
+ * @notice Contract wrapper for Evx Position Manager interactions
  * @dev Provides methods to interact with the position manager contract for position management
  */
 @injectable()

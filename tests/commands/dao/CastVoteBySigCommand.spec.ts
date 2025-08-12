@@ -1,20 +1,20 @@
 import { CastVoteBySigCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { ICastVoteBySigCommandParams } from '@interfaces/commands/params/ICastVoteBySigCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastVoteBySigCommand', () => {
   let command: CastVoteBySigCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: ICastVoteBySigCommandParams;
 
   beforeEach(() => {
     const mockCastVoteBySig = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         castVoteBySig: mockCastVoteBySig,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -26,7 +26,7 @@ describe('CastVoteBySigCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new CastVoteBySigCommand(mockEvexGovernance);
+    command = new CastVoteBySigCommand(mockEvxGovernance);
   });
 
   it('should execute cast vote by sig successfully', async () => {
@@ -35,11 +35,11 @@ describe('CastVoteBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.voter,
@@ -53,7 +53,7 @@ describe('CastVoteBySigCommand', () => {
 
   it('should handle errors during cast vote by sig execution', async () => {
     const mockError = new Error('Cast vote by sig failed');
-    ((mockEvexGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -68,13 +68,13 @@ describe('CastVoteBySigCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteBySig as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against,
       mockParams.voter,
@@ -85,7 +85,7 @@ describe('CastVoteBySigCommand', () => {
     mockParams.support = VoteSupport.Abstain;
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteBySig).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain,
       mockParams.voter,

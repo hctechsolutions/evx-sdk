@@ -1,10 +1,10 @@
 import { VersionQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IVersionQueryParams } from '@interfaces/queries/params/IVersionQueryParams';
 
 describe('VersionQuery', () => {
   let query: VersionQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

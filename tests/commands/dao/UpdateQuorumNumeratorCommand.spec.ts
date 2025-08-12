@@ -1,19 +1,19 @@
 import { UpdateQuorumNumeratorCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IUpdateQuorumNumeratorCommandParams } from '@interfaces/commands/params/IUpdateQuorumNumeratorCommandParams';
 
 describe('UpdateQuorumNumeratorCommand', () => {
   let command: UpdateQuorumNumeratorCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: IUpdateQuorumNumeratorCommandParams;
 
   beforeEach(() => {
     const mockUpdateQuorumNumerator = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         updateQuorumNumerator: mockUpdateQuorumNumerator,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       newQuorumNumerator: BigInt(1000),
@@ -22,7 +22,7 @@ describe('UpdateQuorumNumeratorCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new UpdateQuorumNumeratorCommand(mockEvexGovernance);
+    command = new UpdateQuorumNumeratorCommand(mockEvxGovernance);
   });
 
   it('should execute updateQuorumNumerator successfully', async () => {
@@ -31,11 +31,11 @@ describe('UpdateQuorumNumeratorCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.updateQuorumNumerator as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.updateQuorumNumerator as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.updateQuorumNumerator).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.updateQuorumNumerator).toHaveBeenCalledWith(
       mockParams.newQuorumNumerator
     );
 
@@ -46,7 +46,7 @@ describe('UpdateQuorumNumeratorCommand', () => {
 
   it('should handle errors during updateQuorumNumerator execution', async () => {
     const mockError = new Error('Update quorum numerator failed');
-    ((mockEvexGovernance.instance.updateQuorumNumerator as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.updateQuorumNumerator as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

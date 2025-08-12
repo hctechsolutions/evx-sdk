@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Swap Event Listener
- * @notice Listens for Swap events from a EvexPool contract
+ * @notice Listens for Swap events from a EvxPool contract
  * @dev This listener monitors a pool contract for swap events
  */
 @injectable()

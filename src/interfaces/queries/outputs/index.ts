@@ -8,3 +8,6 @@ export * from './IQuoteExactOutputOutput';
 export * from './IQuoteExactOutputSingleOutput';
 export * from './IEip712DomainQueryOutput';
 export * from './IGetTokenURIQueryOutput';
+export * from './IGetTicksFromPriceRangeOutput';
+export * from './ICheckPoolExistsOutput';
+export * from './IGetSlot0Output';

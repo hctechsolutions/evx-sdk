@@ -1,19 +1,19 @@
 import { CancelCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { ICancelCommandParams } from '@interfaces/commands/params/ICancelCommandParams';
 
 describe('CancelCommand', () => {
   let command: CancelCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: ICancelCommandParams;
 
   beforeEach(() => {
     const mockCancel = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         cancel: mockCancel,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -25,7 +25,7 @@ describe('CancelCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new CancelCommand(mockEvexGovernance);
+    command = new CancelCommand(mockEvxGovernance);
   });
 
   it('should execute cancel successfully', async () => {
@@ -34,11 +34,11 @@ describe('CancelCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.cancel as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.cancel as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.cancel).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.cancel).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('CancelCommand', () => {
 
   it('should handle errors during cancel execution', async () => {
     const mockError = new Error('Cancel failed');
-    ((mockEvexGovernance.instance.cancel as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.cancel as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

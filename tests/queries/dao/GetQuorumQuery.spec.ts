@@ -1,10 +1,10 @@
 import { GetQuorumQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IGetQuorumQueryParams } from '@interfaces/queries/params/IGetQuorumQueryParams';
 
 describe('GetQuorumQuery', () => {
   let query: GetQuorumQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

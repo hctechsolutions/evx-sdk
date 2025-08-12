@@ -1,19 +1,19 @@
 import { IUpdateTimelockCommandParams } from '@interfaces/commands/params/IUpdateTimelockCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Update Timelock Command
  * @notice Executes an update timelock operation in governance
- * @dev This command interacts with the EvexGovernance contract to update the timelock address
+ * @dev This command interacts with the EvxGovernance contract to update the timelock address
  */
 @injectable()
 @singleton()
 export class UpdateTimelockCommand implements IBaseCommand<IUpdateTimelockCommandParams, void> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly evexGovernance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly evxGovernance: EvxGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class UpdateTimelockCommand implements IBaseCommand<IUpdateTimelockComman
    */
   async execute(params: IUpdateTimelockCommandParams): Promise<void> {
     try {
-      const transaction = await this.evexGovernance.instance.updateTimelock(params.newTimelock);
+      const transaction = await this.evxGovernance.instance.updateTimelock(params.newTimelock);
 
       params.onTransaction?.(transaction.hash);
       const receipt = await transaction.wait();

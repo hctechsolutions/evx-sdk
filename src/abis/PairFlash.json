@@ -102,7 +102,7 @@
   },
   {
     "type": "function",
-    "name": "evexFlashCallback",
+    "name": "evxFlashCallback",
     "inputs": [
       {
         "name": "fee0",

@@ -1,27 +1,27 @@
-import { IEvexTokenQueryParams } from '@interfaces/queries/params/IEvexTokenQueryParams';
+import { IEvxTokenQueryParams } from '@interfaces/queries/params/IEvxTokenQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
- * @title Evex Token Query
- * @notice Retrieves the Evex token address from the EvexGovernance contract
- * @dev Queries the governance contract to get the Evex token address
+ * @title Evx Token Query
+ * @notice Retrieves the Evx token address from the EvxGovernance contract
+ * @dev Queries the governance contract to get the Evx token address
  */
 @injectable()
 @singleton()
-export class EvexTokenQuery implements IBaseQuery<IEvexTokenQueryParams, string> {
+export class EvxTokenQuery implements IBaseQuery<IEvxTokenQueryParams, string> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**
-   * @notice Executes the query to get the Evex token address
-   * @param params The parameters for the query (empty for evexToken function)
-   * @returns The Evex token address as a string
+   * @notice Executes the query to get the Evx token address
+   * @param params The parameters for the query (empty for evxToken function)
+   * @returns The Evx token address as a string
    */
-  async execute(_?: IEvexTokenQueryParams): Promise<string> {
-    return await this.governance.instance.evexToken();
+  async execute(_?: IEvxTokenQueryParams): Promise<string> {
+    return await this.governance.instance.evxToken();
   }
 }

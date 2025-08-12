@@ -1,13 +1,12 @@
 import { CreatePoolCommand } from '@commands/factory';
 import { FactoryContract } from '@contracts';
-import { BigNumberish } from 'ethers';
 import { ICreatePoolCommandParams } from '@interfaces/commands/params/ICreatePoolCommandParams';
 
 // Jest automatically mocks classes; here we instantiate a fake factory manually.
-type TxObject = {
+interface TxObject {
   hash: string;
   wait: jest.Mock<Promise<any>, []>;
-};
+}
 
 describe('CreatePoolCommand', () => {
   let command: CreatePoolCommand;
@@ -16,8 +15,8 @@ describe('CreatePoolCommand', () => {
   beforeEach(() => {
     factory = {
       instance: {
-        createPool: jest.fn(),
-      },
+        createPool: jest.fn()
+      }
     } as any;
 
     command = new CreatePoolCommand(factory);
@@ -26,7 +25,7 @@ describe('CreatePoolCommand', () => {
   it('should execute create pool command successfully', async () => {
     const mockTransaction = {
       hash: '0x123',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({})
     };
 
     (factory.instance.createPool as unknown as jest.Mock).mockResolvedValue(mockTransaction);
@@ -37,7 +36,7 @@ describe('CreatePoolCommand', () => {
       fee: BigInt(3000),
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(params);
@@ -62,7 +61,7 @@ describe('CreatePoolCommand', () => {
       fee: BigInt(3000),
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(params);
@@ -78,12 +77,12 @@ describe('CreatePoolCommand', () => {
       hash: '0xFAKE_TX_HASH',
       wait: jest.fn().mockResolvedValue({
         status: 1,
-        transactionHash: '0xFAKE_TX_HASH',
+        transactionHash: '0xFAKE_TX_HASH'
       })
     };
 
     // Make createPool return the fakeTx.
-    (factory.instance!.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
+    (factory.instance.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
 
     // Create spy callbacks.
     const onTransactionSpy = jest.fn<void, [string]>();
@@ -104,8 +103,8 @@ describe('CreatePoolCommand', () => {
     await command.execute(params);
 
     // Verify createPool was called correctly.
-    expect(factory.instance!.createPool).toHaveBeenCalledTimes(1);
-    expect(factory.instance!.createPool).toHaveBeenCalledWith(
+    expect(factory.instance.createPool).toHaveBeenCalledTimes(1);
+    expect(factory.instance.createPool).toHaveBeenCalledWith(
       params.token0,
       params.token1,
       params.fee
@@ -130,7 +129,7 @@ describe('CreatePoolCommand', () => {
   it('should invoke onFail when createPool throws an error', async () => {
     // Simulate createPool throwing an error.
     const creationError = new Error('Error creating pool');
-    (factory.instance!.createPool as unknown as jest.Mock).mockRejectedValue(creationError);
+    (factory.instance.createPool as unknown as jest.Mock).mockRejectedValue(creationError);
 
     // Spies for callbacks.
     const onTransactionSpy = jest.fn();
@@ -151,7 +150,7 @@ describe('CreatePoolCommand', () => {
     await command.execute(params);
 
     // createPool should have been invoked.
-    expect(factory.instance!.createPool).toHaveBeenCalledTimes(1);
+    expect(factory.instance.createPool).toHaveBeenCalledTimes(1);
 
     // No success callbacks should have been called.
     expect(onTransactionSpy).not.toHaveBeenCalled();
@@ -168,7 +167,7 @@ describe('CreatePoolCommand', () => {
       hash: '0xANOTHER_TX',
       wait: jest.fn().mockRejectedValue(new Error('Error in wait()'))
     };
-    (factory.instance!.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
+    (factory.instance.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
 
     // Spies.
     const onTransactionSpy = jest.fn();
@@ -189,7 +188,7 @@ describe('CreatePoolCommand', () => {
     await command.execute(params);
 
     // createPool and onTransaction should still occur.
-    expect(factory.instance!.createPool).toHaveBeenCalledTimes(1);
+    expect(factory.instance.createPool).toHaveBeenCalledTimes(1);
     expect(onTransactionSpy).toHaveBeenCalledWith(fakeTx.hash);
     expect(fakeTx.wait).toHaveBeenCalledTimes(1);
 
@@ -207,7 +206,7 @@ describe('CreatePoolCommand', () => {
       hash: '0xNO_CALLBACKS',
       wait: jest.fn().mockResolvedValue({ status: 1 })
     };
-    (factory.instance!.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
+    (factory.instance.createPool as unknown as jest.Mock).mockResolvedValue(fakeTx);
 
     // Parameters without optional callbacks.
     const params: ICreatePoolCommandParams = {
@@ -221,7 +220,7 @@ describe('CreatePoolCommand', () => {
     await expect(command.execute(params)).resolves.not.toThrow();
 
     // Ensure createPool was called once.
-    expect(factory.instance!.createPool).toHaveBeenCalledTimes(1);
+    expect(factory.instance.createPool).toHaveBeenCalledTimes(1);
     // Verify that wait() was also called.
     expect(fakeTx.wait).toHaveBeenCalledTimes(1);
   });

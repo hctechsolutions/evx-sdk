@@ -499,7 +499,7 @@
   },
   {
     "type": "function",
-    "name": "evexMintCallback",
+    "name": "evxMintCallback",
     "inputs": [
       {
         "name": "amount0Owed",

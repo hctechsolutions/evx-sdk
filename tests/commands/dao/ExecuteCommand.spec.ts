@@ -1,19 +1,19 @@
 import { ExecuteCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IExecuteCommandParams } from '@interfaces/commands/params/IExecuteCommandParams';
 
 describe('ExecuteCommand', () => {
   let command: ExecuteCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: IExecuteCommandParams;
 
   beforeEach(() => {
     const mockExecute = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         execute: mockExecute,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       targets: ['0xTarget1', '0xTarget2'],
@@ -25,7 +25,7 @@ describe('ExecuteCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new ExecuteCommand(mockEvexGovernance);
+    command = new ExecuteCommand(mockEvxGovernance);
   });
 
   it('should execute governance proposal successfully', async () => {
@@ -34,11 +34,11 @@ describe('ExecuteCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.execute as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.execute as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.execute).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.execute).toHaveBeenCalledWith(
       mockParams.targets,
       mockParams.values,
       mockParams.calldatas,
@@ -52,7 +52,7 @@ describe('ExecuteCommand', () => {
 
   it('should handle errors during execute execution', async () => {
     const mockError = new Error('Execute failed');
-    ((mockEvexGovernance.instance.execute as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.execute as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

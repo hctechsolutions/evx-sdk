@@ -2,11 +2,11 @@ import { IEip712DomainQueryParams } from '@interfaces/queries/params/IEip712Doma
 import { IEip712DomainQueryOutput } from '@interfaces/queries/outputs/IEip712DomainQueryOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title EIP-712 Domain Query
- * @notice Retrieves the EIP-712 domain from the EvexGovernance contract
+ * @notice Retrieves the EIP-712 domain from the EvxGovernance contract
  * @dev Queries the governance contract to get the EIP-712 domain fields
  */
 @injectable()
@@ -15,8 +15,8 @@ export class Eip712DomainQuery
   implements IBaseQuery<IEip712DomainQueryParams, IEip712DomainQueryOutput>
 {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

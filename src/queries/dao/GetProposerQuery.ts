@@ -1,7 +1,7 @@
 import { IGetProposerQueryParams } from '@interfaces/queries/params/IGetProposerQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Get Proposer Query
@@ -12,8 +12,8 @@ import { EvexGovernanceContract } from '@contracts';
 @singleton()
 export class GetProposerQuery implements IBaseQuery<IGetProposerQueryParams, string> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

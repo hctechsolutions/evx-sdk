@@ -1,19 +1,19 @@
 import { UpdateTimelockCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IUpdateTimelockCommandParams } from '@interfaces/commands/params/IUpdateTimelockCommandParams';
 
 describe('UpdateTimelockCommand', () => {
   let command: UpdateTimelockCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: IUpdateTimelockCommandParams;
 
   beforeEach(() => {
     const mockUpdateTimelock = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         updateTimelock: mockUpdateTimelock,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       newTimelock: '0xNewTimelockAddress',
@@ -22,7 +22,7 @@ describe('UpdateTimelockCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new UpdateTimelockCommand(mockEvexGovernance);
+    command = new UpdateTimelockCommand(mockEvxGovernance);
   });
 
   it('should execute updateTimelock successfully', async () => {
@@ -31,11 +31,11 @@ describe('UpdateTimelockCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.updateTimelock as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.updateTimelock as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.updateTimelock).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.updateTimelock).toHaveBeenCalledWith(
       mockParams.newTimelock
     );
 
@@ -46,7 +46,7 @@ describe('UpdateTimelockCommand', () => {
 
   it('should handle errors during updateTimelock execution', async () => {
     const mockError = new Error('Update timelock failed');
-    ((mockEvexGovernance.instance.updateTimelock as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.updateTimelock as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

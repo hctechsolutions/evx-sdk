@@ -1,38 +1,38 @@
-import { EvexTokenQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
-import { IEvexTokenQueryParams } from '@interfaces/queries/params/IEvexTokenQueryParams';
+import { EvxTokenQuery } from '@queries/dao';
+import { EvxGovernanceContract } from '@contracts';
+import { IEvxTokenQueryParams } from '@interfaces/queries/params/IEvxTokenQueryParams';
 
-describe('EvexTokenQuery', () => {
-  let query: EvexTokenQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+describe('EvxTokenQuery', () => {
+  let query: EvxTokenQuery;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {
       instance: {
-        evexToken: jest.fn(),
+        evxToken: jest.fn(),
       },
     } as any;
 
-    query = new EvexTokenQuery(governance);
+    query = new EvxTokenQuery(governance);
   });
 
-  it('should execute evexToken query successfully', async () => {
+  it('should execute evxToken query successfully', async () => {
     const mockAddress = '0x1234567890abcdef1234567890abcdef12345678';
-    (governance.instance.evexToken as unknown as jest.Mock).mockResolvedValue(mockAddress);
+    (governance.instance.evxToken as unknown as jest.Mock).mockResolvedValue(mockAddress);
 
-    const params: IEvexTokenQueryParams = {};
+    const params: IEvxTokenQueryParams = {};
 
     const result = await query.execute(params);
 
-    expect(governance.instance.evexToken).toHaveBeenCalledWith();
+    expect(governance.instance.evxToken).toHaveBeenCalledWith();
     expect(result).toBe(mockAddress);
   });
 
-  it('should handle errors during evexToken query execution', async () => {
+  it('should handle errors during evxToken query execution', async () => {
     const error = new Error('Query failed');
-    (governance.instance.evexToken as unknown as jest.Mock).mockRejectedValue(error);
+    (governance.instance.evxToken as unknown as jest.Mock).mockRejectedValue(error);
 
-    const params: IEvexTokenQueryParams = {};
+    const params: IEvxTokenQueryParams = {};
 
     await expect(query.execute(params)).rejects.toThrow('Query failed');
   });

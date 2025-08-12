@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title SetFeeProtocol Event Listener
- * @notice Listens for SetFeeProtocol events from a EvexPool contract
+ * @notice Listens for SetFeeProtocol events from a EvxPool contract
  * @dev This listener monitors a pool contract for set fee protocol events
  */
 @injectable()

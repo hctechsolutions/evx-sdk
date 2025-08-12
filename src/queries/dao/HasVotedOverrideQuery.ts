@@ -1,7 +1,7 @@
 import { IHasVotedOverrideQueryParams } from '@interfaces/queries/params/IHasVotedOverrideQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Has Voted Override Query
@@ -12,8 +12,8 @@ import { EvexGovernanceContract } from '@contracts';
 @singleton()
 export class HasVotedOverrideQuery implements IBaseQuery<IHasVotedOverrideQueryParams, boolean> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

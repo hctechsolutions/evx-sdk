@@ -1,19 +1,19 @@
 import { RelayCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IRelayCommandParams } from '@interfaces/commands/params/IRelayCommandParams';
 
 describe('RelayCommand', () => {
   let command: RelayCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: IRelayCommandParams;
 
   beforeEach(() => {
     const mockRelay = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         relay: mockRelay,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       target: '0xTargetAddress',
@@ -24,7 +24,7 @@ describe('RelayCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new RelayCommand(mockEvexGovernance);
+    command = new RelayCommand(mockEvxGovernance);
   });
 
   it('should execute relay successfully', async () => {
@@ -33,11 +33,11 @@ describe('RelayCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.relay as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.relay as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.relay).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.relay).toHaveBeenCalledWith(
       mockParams.target,
       mockParams.value,
       mockParams.data,
@@ -51,7 +51,7 @@ describe('RelayCommand', () => {
 
   it('should handle errors during relay execution', async () => {
     const mockError = new Error('Relay failed');
-    ((mockEvexGovernance.instance.relay as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.relay as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 

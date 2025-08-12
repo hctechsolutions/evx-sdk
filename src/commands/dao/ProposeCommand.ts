@@ -1,19 +1,19 @@
 import { IProposeCommandParams } from '@interfaces/commands/params/IProposeCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Propose Command
  * @notice Executes a propose operation on a governance proposal
- * @dev This command interacts with the EvexGovernance contract to propose a new governance action
+ * @dev This command interacts with the EvxGovernance contract to propose a new governance action
  */
 @injectable()
 @singleton()
 export class ProposeCommand implements IBaseCommand<IProposeCommandParams, void> {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly evexGovernance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly evxGovernance: EvxGovernanceContract
   ) {}
 
   /**
@@ -22,7 +22,7 @@ export class ProposeCommand implements IBaseCommand<IProposeCommandParams, void>
    */
   async execute(params: IProposeCommandParams): Promise<void> {
     try {
-      const transaction = await this.evexGovernance.instance.propose(
+      const transaction = await this.evxGovernance.instance.propose(
         params.targets,
         params.values,
         params.calldatas,

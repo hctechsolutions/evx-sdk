@@ -1,10 +1,10 @@
 import { TokenQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { ITokenQueryParams } from '@interfaces/queries/params/ITokenQueryParams';
 
 describe('TokenQuery', () => {
   let query: TokenQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

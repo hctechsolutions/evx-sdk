@@ -1,10 +1,10 @@
 import { ProposalEtaQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { IProposalEtaQueryParams } from '@interfaces/queries/params/IProposalEtaQueryParams';
 
 describe('ProposalEtaQuery', () => {
   let query: ProposalEtaQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {

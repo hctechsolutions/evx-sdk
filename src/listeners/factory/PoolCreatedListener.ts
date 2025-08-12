@@ -6,7 +6,7 @@ import { EventLog } from 'ethers';
 
 /**
  * @title Pool Created Event Listener
- * @notice Listens for PoolCreated events from the EvexFactory contract
+ * @notice Listens for PoolCreated events from the EvxFactory contract
  * @dev This listener monitors the factory contract for new pool creation events
  */
 @injectable()

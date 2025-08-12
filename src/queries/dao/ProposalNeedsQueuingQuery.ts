@@ -1,7 +1,7 @@
 import { IProposalNeedsQueuingQueryParams } from '@interfaces/queries/params/IProposalNeedsQueuingQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Proposal Needs Queuing Query
@@ -14,8 +14,8 @@ export class ProposalNeedsQueuingQuery
   implements IBaseQuery<IProposalNeedsQueuingQueryParams, boolean>
 {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**

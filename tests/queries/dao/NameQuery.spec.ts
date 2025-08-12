@@ -1,10 +1,10 @@
 import { NameQuery } from '@queries/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { INameQueryParams } from '@interfaces/queries/params/INameQueryParams';
 
 describe('NameQuery', () => {
   let query: NameQuery;
-  let governance: jest.Mocked<EvexGovernanceContract>;
+  let governance: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     governance = {
@@ -17,7 +17,7 @@ describe('NameQuery', () => {
   });
 
   it('should execute name query successfully', async () => {
-    const mockName = 'EvexDAO';
+    const mockName = 'EvxDAO';
     (governance.instance.name as unknown as jest.Mock).mockResolvedValue(mockName);
 
     const params: INameQueryParams = {};

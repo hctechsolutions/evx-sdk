@@ -1,12 +1,12 @@
 import { OverrideVoteCastListener } from '@listeners';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { container } from 'tsyringe';
 
 jest.mock('@contracts');
 
 describe('OverrideVoteCastListener', () => {
   let listener: OverrideVoteCastListener;
-  let mockGovernanceContract: jest.Mocked<EvexGovernanceContract>;
+  let mockGovernanceContract: jest.Mocked<EvxGovernanceContract>;
 
   beforeEach(() => {
     container.clearInstances();
@@ -23,7 +23,7 @@ describe('OverrideVoteCastListener', () => {
       }
     } as any;
 
-    container.registerInstance(EvexGovernanceContract, mockGovernanceContract);
+    container.registerInstance(EvxGovernanceContract, mockGovernanceContract);
     listener = container.resolve(OverrideVoteCastListener);
   });
 

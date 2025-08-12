@@ -1,20 +1,20 @@
 import { CastVoteWithReasonAndParamsCommand } from '@commands/dao';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 import { ICastVoteWithReasonAndParamsCommandParams } from '@interfaces/commands/params/ICastVoteWithReasonAndParamsCommandParams';
 import { VoteSupport } from '@enums/VoteSupport';
 
 describe('CastVoteWithReasonAndParamsCommand', () => {
   let command: CastVoteWithReasonAndParamsCommand;
-  let mockEvexGovernance: jest.Mocked<EvexGovernanceContract>;
+  let mockEvxGovernance: jest.Mocked<EvxGovernanceContract>;
   let mockParams: ICastVoteWithReasonAndParamsCommandParams;
 
   beforeEach(() => {
     const mockCastVoteWithReasonAndParams = jest.fn();
-    mockEvexGovernance = {
+    mockEvxGovernance = {
       instance: {
         castVoteWithReasonAndParams: mockCastVoteWithReasonAndParams,
       },
-    } as unknown as jest.Mocked<EvexGovernanceContract>;
+    } as unknown as jest.Mocked<EvxGovernanceContract>;
 
     mockParams = {
       proposalId: BigInt(1),
@@ -26,7 +26,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       onFail: jest.fn(),
     };
 
-    command = new CastVoteWithReasonAndParamsCommand(mockEvexGovernance);
+    command = new CastVoteWithReasonAndParamsCommand(mockEvxGovernance);
   });
 
   it('should execute cast vote with reason and params successfully', async () => {
@@ -35,11 +35,11 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.reason,
@@ -53,7 +53,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
 
   it('should handle errors during cast vote with reason and params execution', async () => {
     const mockError = new Error('Cast vote with reason and params failed');
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockRejectedValue(mockError);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockRejectedValue(mockError);
 
     await command.execute(mockParams);
 
@@ -68,7 +68,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test against vote
     mockParams.support = VoteSupport.Against;
@@ -76,7 +76,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
     mockParams.params = '0xabcdef1234567890';
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Against,
       mockParams.reason,
@@ -89,7 +89,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
     mockParams.params = '0x9876543210fedcba';
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.Abstain,
       mockParams.reason,
@@ -103,13 +103,13 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     mockParams.reason = '';
     mockParams.params = '0x0000000000000000';
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       '',
@@ -123,12 +123,12 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     mockParams.params = '';
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       mockParams.reason,
@@ -142,7 +142,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     const longReason = 'This is a very long reason that explains in detail why this vote is being cast. It includes multiple sentences and provides comprehensive justification for the voting decision. The reason covers various aspects of the proposal including technical considerations, economic impact, and community alignment.';
     const complexParams = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef';
@@ -151,7 +151,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
     mockParams.params = complexParams;
     await command.execute(mockParams);
 
-    expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+    expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
       mockParams.proposalId,
       VoteSupport.For,
       longReason,
@@ -165,7 +165,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       wait: jest.fn().mockResolvedValue({}),
     };
 
-    ((mockEvexGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
+    ((mockEvxGovernance.instance.castVoteWithReasonAndParams as unknown) as jest.Mock).mockResolvedValue(mockTransaction);
 
     // Test with different proposal IDs
     const proposalIds = [BigInt(1), BigInt(100), BigInt(999999)];
@@ -176,7 +176,7 @@ describe('CastVoteWithReasonAndParamsCommand', () => {
       
       await command.execute(mockParams);
 
-      expect(mockEvexGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
+      expect(mockEvxGovernance.instance.castVoteWithReasonAndParams).toHaveBeenCalledWith(
         proposalId,
         VoteSupport.For,
         mockParams.reason,

@@ -5,7 +5,7 @@
       {
         "name": "_token",
         "type": "address",
-        "internalType": "contract IEvexToken"
+        "internalType": "contract IEvxToken"
       },
       {
         "name": "_timelock",
@@ -625,13 +625,13 @@
   },
   {
     "type": "function",
-    "name": "evexToken",
+    "name": "evxToken",
     "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address",
-        "internalType": "contract IEvexToken"
+        "internalType": "contract IEvxToken"
       }
     ],
     "stateMutability": "view"

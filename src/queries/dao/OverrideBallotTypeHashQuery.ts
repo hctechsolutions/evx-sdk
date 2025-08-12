@@ -1,11 +1,11 @@
 import { IOverrideBallotTypeHashQueryParams } from '@interfaces/queries/params/IOverrideBallotTypeHashQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
-import { EvexGovernanceContract } from '@contracts';
+import { EvxGovernanceContract } from '@contracts';
 
 /**
  * @title Override Ballot Type Hash Query
- * @notice Retrieves the override ballot type hash from the EvexGovernance contract
+ * @notice Retrieves the override ballot type hash from the EvxGovernance contract
  * @dev Queries the governance contract to get the OVERRIDE_BALLOT_TYPEHASH for override EIP-712 signatures
  */
 @injectable()
@@ -14,8 +14,8 @@ export class OverrideBallotTypeHashQuery
   implements IBaseQuery<IOverrideBallotTypeHashQueryParams, string>
 {
   constructor(
-    @inject(EvexGovernanceContract)
-    private readonly governance: EvexGovernanceContract
+    @inject(EvxGovernanceContract)
+    private readonly governance: EvxGovernanceContract
   ) {}
 
   /**
