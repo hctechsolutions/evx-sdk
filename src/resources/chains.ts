@@ -8,11 +8,7 @@ export const chains = {
     metadata: {
       chainId: 11155111,
       explorer: 'https://sepolia.etherscan.io',
-      nativeToken: {
-        symbol: 'ETH',
-        name: 'Ethereum',
-        decimals: 18
-      }
+      nativeToken: '0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14'
     },
     contracts: {
       positionDescriptor: '0x17C50c136887C9258310d9C3331aA0e1f8f98330',

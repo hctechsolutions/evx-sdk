@@ -17,3 +17,13 @@ export type ChainId = (typeof chains)[ChainName]['metadata']['chainId'];
  * @notice Type definition for supported contract names
  */
 export type ContractName = keyof (typeof chains)[ChainName]['contracts'];
+
+/**
+ * @title Chain Metadata Type
+ * @notice Type definition for chain metadata
+ */
+export type ChainMetadata = {
+  chainId: ChainId;
+  explorer: string;
+  nativeToken: string;
+};
