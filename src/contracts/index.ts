@@ -10,4 +10,3 @@ export * from './SwapRouterContract';
 export * from './QuoterContract';
 export * from './TickLensContract';
 export * from './GovernanceContract';
-export * from './OrderExecutorContract';

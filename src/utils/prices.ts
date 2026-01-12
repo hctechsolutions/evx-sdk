@@ -1,3 +1,5 @@
+import { Q96 } from '@resources';
+
 /**
  * @title Decimal to SqrtX96 Price
  * @notice Converts a decimal price to sqrt price in X96 format
@@ -17,9 +19,21 @@ export function decimalToSqrtX96Price(
   const scaledPrice = decimalPrice * factor;
 
   const sqrtP = Math.sqrt(scaledPrice);
-  const sqrtPriceX96 = sqrtP * 2 ** 96;
+  const sqrtPriceX96 = sqrtP * Number(Q96);
 
   return BigInt(Math.floor(sqrtPriceX96));
+}
+
+/**
+ * @title SqrtX96 to Float
+ * @notice Converts a sqrt price in X96 format to a float number (without squaring)
+ * @dev Used for intermediate calculations that need the sqrt price as a float
+ * @param sqrtPriceX96 The sqrt price in X96 format
+ * @returns The sqrt price as a float number
+ */
+export function sqrtX96ToFloat(sqrtPriceX96: bigint | number): number {
+  const sqrtPrice = sqrtPriceX96.toString();
+  return Number(sqrtPrice) / Number(Q96);
 }
 
 /**
@@ -37,8 +51,7 @@ export function sqrtX96ToDecimalPrice(
   decimalsToken1: number
 ): number {
   // (sqrtPriceX96 / 2**96) ** 2
-  const sqrtPrice = sqrtPriceX96.toString();
-  const sqrtPriceFloat = Number(sqrtPrice) / 2 ** 96;
+  const sqrtPriceFloat = sqrtX96ToFloat(sqrtPriceX96);
   const price = sqrtPriceFloat ** 2;
   return price * 10 ** (decimalsToken0 - decimalsToken1);
 }

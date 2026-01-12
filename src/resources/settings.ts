@@ -1,4 +1,4 @@
-import { OrderExecutorContract, PositionManagerContract } from '@contracts';
+import { PositionManagerContract } from '@contracts';
 import { ChainName, ChainId } from '@interfaces';
 import { FactoryContract } from '@contracts';
 import { getChainNameById } from '@utils';
@@ -11,11 +11,7 @@ import { Signer } from 'ethers';
  * @returns Array of contract instances that need configuration
  */
 function getWriterContracts() {
-  return [
-    container.resolve(PositionManagerContract),
-    container.resolve(OrderExecutorContract),
-    container.resolve(FactoryContract)
-  ];
+  return [container.resolve(PositionManagerContract), container.resolve(FactoryContract)];
 }
 
 /**
@@ -24,7 +20,7 @@ function getWriterContracts() {
  * @param signer The signer to use for transactions
  */
 export async function setAllSigner(signer: Signer) {
-  await Promise.all(getWriterContracts().map((c) => c.setSigner(signer)));
+  await Promise.all(getWriterContracts().map((c: any) => c.setSigner(signer)));
 }
 
 /**
@@ -33,7 +29,7 @@ export async function setAllSigner(signer: Signer) {
  * @param chain The chain to use for contract interactions
  */
 export async function setAllChain(chain: ChainName) {
-  await Promise.all(getWriterContracts().map((c) => c.setChain(chain)));
+  await Promise.all(getWriterContracts().map((c: any) => c.setChain(chain)));
 }
 
 /**

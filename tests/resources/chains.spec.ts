@@ -11,7 +11,7 @@ describe('Chains Resources', () => {
     });
 
     it('should have correct structure for each chain', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
         expect(chainConfig).toHaveProperty('metadata');
         expect(chainConfig).toHaveProperty('contracts');
 
@@ -21,7 +21,6 @@ describe('Chains Resources', () => {
 
         expect(chainConfig.contracts).toHaveProperty('positionDescriptor');
         expect(chainConfig.contracts).toHaveProperty('positionManager');
-        expect(chainConfig.contracts).toHaveProperty('orderExecutor');
         expect(chainConfig.contracts).toHaveProperty('positionLens');
         expect(chainConfig.contracts).toHaveProperty('swapRouter');
         expect(chainConfig.contracts).toHaveProperty('swapQuoter');
@@ -50,7 +49,7 @@ describe('Chains Resources', () => {
     });
 
     it('should have valid contract addresses', () => {
-      Object.entries(sepoliaChain.contracts).forEach(([contractName, address]) => {
+      Object.entries(sepoliaChain.contracts).forEach(([_contractName, address]) => {
         expect(address).toMatch(/^0x[a-fA-F0-9]{40}$/);
         expect(typeof address).toBe('string');
         expect(address.length).toBe(42); // 0x + 40 hex chars
@@ -66,7 +65,7 @@ describe('Chains Resources', () => {
 
   describe('data validation', () => {
     it('should have valid chain IDs', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
         const chainId = chainConfig.metadata.chainId;
         expect(typeof chainId).toBe('number');
         expect(chainId).toBeGreaterThan(0);
@@ -75,7 +74,7 @@ describe('Chains Resources', () => {
     });
 
     it('should have valid explorer URLs', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
         const explorer = chainConfig.metadata.explorer;
         expect(typeof explorer).toBe('string');
         expect(explorer).toMatch(/^https?:\/\/.+/);
@@ -84,7 +83,7 @@ describe('Chains Resources', () => {
     });
 
     it('should have valid native token addresses', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
         const nativeToken = chainConfig.metadata.nativeToken;
         expect(typeof nativeToken).toBe('string');
         expect(nativeToken).toMatch(/^0x[a-fA-F0-9]{40}$/);
@@ -92,8 +91,8 @@ describe('Chains Resources', () => {
     });
 
     it('should have valid contract addresses', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
-        Object.entries(chainConfig.contracts).forEach(([contractName, address]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
+        Object.entries(chainConfig.contracts).forEach(([_contractName, address]) => {
           expect(typeof address).toBe('string');
           expect(address).toMatch(/^0x[a-fA-F0-9]{40}$/);
           expect(address.length).toBe(42);
@@ -121,7 +120,7 @@ describe('Chains Resources', () => {
     });
 
     it('should not have duplicate contract addresses within a chain', () => {
-      Object.entries(chains).forEach(([chainName, chainConfig]) => {
+      Object.entries(chains).forEach(([_chainName, chainConfig]) => {
         const addresses = Object.values(chainConfig.contracts);
         const uniqueAddresses = new Set(addresses);
         expect(uniqueAddresses.size).toBe(addresses.length);
@@ -140,7 +139,6 @@ describe('Chains Resources', () => {
         contracts: {
           positionDescriptor: '0x1234567890123456789012345678901234567890',
           positionManager: '0x1234567890123456789012345678901234567890',
-          orderExecutor: '0x1234567890123456789012345678901234567890',
           positionLens: '0x1234567890123456789012345678901234567890',
           swapRouter: '0x1234567890123456789012345678901234567890',
           swapQuoter: '0x1234567890123456789012345678901234567890',

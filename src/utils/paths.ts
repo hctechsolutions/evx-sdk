@@ -5,6 +5,7 @@
  */
 
 import { Pool, PathNode, TradingPath, EncodedPath } from '@interfaces/utils';
+import { getAddress } from 'ethers';
 
 /**
  * @notice Pool lookup without sorting overhead
@@ -91,6 +92,15 @@ export function findShortestPath(
 
   // Convert to trading path with O(1) lookups
   return convertPathToTradingPath(path, lookup);
+}
+
+export function findShortestPathEncoded(
+  pools: Pool[],
+  inputToken: string,
+  outputToken: string
+): EncodedPath | null {
+  const path = findShortestPath(pools, inputToken, outputToken);
+  return path ? encodePath(path, pools) : null;
 }
 
 /**
@@ -230,7 +240,7 @@ function convertPathToTradingPath(path: PathNode[], lookup: PoolLookup): Trading
  * @param isExactOutput Whether this is for exact output (reverses the path)
  * @returns Encoded path with all necessary data for SwapRouter
  */
-export function encodePath(path: TradingPath, pools: Pool[], isExactOutput = false): EncodedPath {
+function encodePath(path: TradingPath, pools: Pool[], isExactOutput = false): EncodedPath {
   if (path.tokens.length < 2) {
     throw new Error('Path must have at least 2 tokens');
   }
@@ -244,8 +254,15 @@ export function encodePath(path: TradingPath, pools: Pool[], isExactOutput = fal
   const tokens = isExactOutput ? [...path.tokens].reverse() : path.tokens;
   const poolsList = isExactOutput ? [...path.pools].reverse() : path.pools;
 
-  // Always start with the first token
-  encodedTokens.push(tokens[0]);
+  // Normalize first token to checksummed format
+  let normalizedFirstToken: string;
+  try {
+    normalizedFirstToken = getAddress(tokens[0]);
+  } catch {
+    // If getAddress fails, use as-is (might already be checksummed or invalid)
+    normalizedFirstToken = tokens[0];
+  }
+  encodedTokens.push(normalizedFirstToken);
 
   // Process each hop - each hop adds: fee + next_token
   for (let i = 0; i < poolsList.length; i++) {
@@ -257,8 +274,15 @@ export function encodePath(path: TradingPath, pools: Pool[], isExactOutput = fal
     // Add fee for this hop
     encodedFees.push(pool.fee);
 
-    // Add the next token (which becomes the input for the next hop)
-    encodedTokens.push(tokens[i + 1]);
+    // Normalize next token to checksummed format
+    let normalizedNextToken: string;
+    try {
+      normalizedNextToken = getAddress(tokens[i + 1]);
+    } catch {
+      // If getAddress fails, use as-is (might already be checksummed or invalid)
+      normalizedNextToken = tokens[i + 1];
+    }
+    encodedTokens.push(normalizedNextToken);
     encodedPools.push(pool.address);
   }
 

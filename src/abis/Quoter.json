@@ -43,7 +43,7 @@
   },
   {
     "type": "function",
-    "name": "evxSwapCallback",
+    "name": "nebularSwapCallback",
     "inputs": [
       {
         "name": "amount0Delta",
@@ -263,5 +263,69 @@
       }
     ],
     "stateMutability": "nonpayable"
+  },
+  {
+    "type": "error",
+    "name": "InsufficientRevertData",
+    "inputs": [
+      {
+        "name": "length",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoOpSwap",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OutputAmountMismatch",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "received",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PoolNotFound",
+    "inputs": [
+      {
+        "name": "tokenA",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenB",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "fee",
+        "type": "uint24",
+        "internalType": "uint24"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PoolQuoteFailed",
+    "inputs": [
+      {
+        "name": "reason",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ]
   }
 ]

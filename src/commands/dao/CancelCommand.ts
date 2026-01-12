@@ -34,6 +34,7 @@ export class CancelCommand implements IBaseCommand<ICancelCommandParams, void> {
 
       params.onDone?.(receipt);
     } catch (error: any) {
+      // Tratar o erro
       params.onFail?.(error);
     }
   }

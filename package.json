@@ -1,6 +1,6 @@
 {
   "name": "evx-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Jeffersson Abreu",
   "description": "The Evx SDK is a developer toolkit designed to simplify interaction with the Evx decentralized liquidity protocol. It provides an abstraction layer over the smart contracts, allowing developers to easily build applications, integrate liquidity pools, fetch pool data, simulate quotes, deploy pools, and manage NFT-based liquidity positions.",
   "license": "MIT",
@@ -96,11 +96,15 @@
     "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
+    "tslib": "^2.8.1",
     "tsx": "^4.19.4",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "ethers": "^6.14.1",
+    "evx-tokens": "^0.0.1-beta",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.10.0"
   }
