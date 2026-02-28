@@ -3,7 +3,7 @@ import { IQuoteExactInputSingleOutput } from '@interfaces/queries/outputs/IQuote
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, singleton } from 'tsyringe';
 import { QuoterContract } from '@contracts';
-import { RPC } from '@providers';
+import { ErrorExtractor } from '@utils';
 
 /**
  * @title Quote Exact Input Single Query
@@ -16,31 +16,55 @@ export class QuoteExactInputSingleQuery
   implements IBaseQuery<IQuoteExactInputSingleQueryParams, IQuoteExactInputSingleOutput>
 {
   constructor(
-    @inject(RPC)
-    private readonly rpc: RPC
+    @inject(ErrorExtractor)
+    private readonly errorExtractor: ErrorExtractor,
+    @inject(QuoterContract)
+    private readonly quoter: QuoterContract
   ) {}
 
   /**
    * @notice Executes the quote exact input single query
    * @param params The parameters for getting the quote
    * @returns The quote data including amount out, price impact, and gas estimate
+   * @throws Error with IContractError format if quote fails
    */
   async execute(params: IQuoteExactInputSingleQueryParams): Promise<IQuoteExactInputSingleOutput> {
-    const quoter = new QuoterContract(this.rpc);
-    const [amountOut, sqrtPriceX96After, initializedTicksCrossed, gasEstimate] =
-      await quoter.instance.quoteExactInputSingle.staticCall({
-        tokenIn: params.tokenIn,
-        tokenOut: params.tokenOut,
-        fee: params.fee,
-        amountIn: params.amountIn,
-        sqrtPriceLimitX96: params.sqrtPriceLimitX96
-      });
+    try {
+      const [amountOut, sqrtPriceX96After, initializedTicksCrossed, gasEstimate] =
+        await this.quoter.instance.quoteExactInputSingle.staticCall({
+          tokenIn: params.tokenIn,
+          tokenOut: params.tokenOut,
+          fee: params.fee,
+          amountIn: params.amountIn,
+          sqrtPriceLimitX96: params.sqrtPriceLimitX96
+        });
 
-    return {
-      amountOut,
-      sqrtPriceX96After,
-      initializedTicksCrossed,
-      gasEstimate
-    };
+      return {
+        amountOut,
+        sqrtPriceX96After,
+        initializedTicksCrossed,
+        gasEstimate
+      };
+    } catch (error: unknown) {
+      // Quoter static calls are designed to revert intentionally
+      // If the revert contains 96 bytes, it's valid quote data (handled by ethers.js)
+      // Otherwise, it's a real error that needs to be extracted
+
+      // Extract the contract error
+      const contractError = this.errorExtractor.extractContractError(
+        error,
+        this.quoter.instance.interface
+      );
+
+      // Create enhanced error with contract error information
+      const enhancedError = new Error(
+        `Quote failed: ${contractError.errorMessage} (${contractError.errorCode})`
+      );
+
+      // Attach contract error to the error object
+      (enhancedError as any).contractError = contractError;
+
+      throw enhancedError;
+    }
   }
 }

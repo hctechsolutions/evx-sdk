@@ -43,7 +43,7 @@
   },
   {
     "type": "function",
-    "name": "nebularSwapCallback",
+    "name": "evxSwapCallback",
     "inputs": [
       {
         "name": "amount0Delta",
@@ -263,6 +263,11 @@
       }
     ],
     "stateMutability": "nonpayable"
+  },
+  {
+    "type": "error",
+    "name": "InsufficientLiquidity",
+    "inputs": []
   },
   {
     "type": "error",

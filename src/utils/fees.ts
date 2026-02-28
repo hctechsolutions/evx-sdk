@@ -20,20 +20,20 @@ export function basisPointsToPercentage(basisPoints: bigint): number {
 }
 
 /**
- * @notice Converts a percentage value to Nebular fee format.
- * @dev Nebular uses 1 unit = 0.0001%
+ * @notice Converts a percentage value to Evx fee format.
+ * @dev Evx uses 1 unit = 0.0001%
  * @param percentage The percentage value (e.g., 0.3 for 0.3%).
  * @return The fee value as a BigInt.
  */
 export function percentageToFee(percentage: number): bigint {
-  // Convert percentage to Nebular fee units (1 unit = 0.0001%)
+  // Convert percentage to Evx fee units (1 unit = 0.0001%)
   return BigInt(Math.round(percentage * 10000));
 }
 
 /**
- * @notice Converts Nebular fee format to a percentage value.
- * @dev Nebular uses 1 unit = 0.0001%
- * @param fee The fee value from Nebular.
+ * @notice Converts Evx fee format to a percentage value.
+ * @dev Evx uses 1 unit = 0.0001%
+ * @param fee The fee value from Evx.
  * @return The percentage as a number.
  */
 export function feeToPercentage(fee: bigint): number {
@@ -41,19 +41,19 @@ export function feeToPercentage(fee: bigint): number {
 }
 
 /**
- * @notice Converts basis points to Nebular fee format.
- * @dev 1 BPS = 0.01% = 100 Nebular units
+ * @notice Converts basis points to Evx fee format.
+ * @dev 1 BPS = 0.01% = 100 Evx units
  * @param basisPoints The basis points value.
- * @return The Nebular fee value as a BigInt.
+ * @return The Evx fee value as a BigInt.
  */
 export function basisPointsToFee(basisPoints: bigint): bigint {
   return basisPoints * 100n;
 }
 
 /**
- * @notice Converts Nebular fee format to basis points.
- * @dev 1 Nebular unit = 0.0001% = 0.01 BPS
- * @param fee The Nebular fee value.
+ * @notice Converts Evx fee format to basis points.
+ * @dev 1 Evx unit = 0.0001% = 0.01 BPS
+ * @param fee The Evx fee value.
  * @return The basis points as a BigInt.
  */
 export function feeToBasisPoints(fee: bigint): bigint {

@@ -17,7 +17,9 @@ export class GetPositionFeeQuery
 {
   constructor(
     @inject(RPC)
-    private readonly rpc: RPC
+    private readonly rpc: RPC,
+    @inject(PositionLensContract)
+    private readonly positionLens: PositionLensContract
   ) {}
 
   /**
@@ -26,8 +28,7 @@ export class GetPositionFeeQuery
    * @returns The fees owed for both tokens in the position
    */
   async execute(params: IGetPositionFeeParams): Promise<IGetPositionFeeOutput> {
-    const positionLens = new PositionLensContract(this.rpc);
-    const [owed0, owed1] = await positionLens.instance.getPositionFee(params.tokenId);
+    const [owed0, owed1] = await this.positionLens.instance.getPositionFee(params.tokenId);
 
     return {
       owed0,

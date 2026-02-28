@@ -20,7 +20,7 @@ export class InitializePoolCommand implements IBaseCommand<IInitializeOnlyPoolCo
     await pool.setSigner(params.signer);
 
     try {
-      const transaction = await pool.instance.InitializeObservation(params.initialPrice);
+      const transaction = await pool.instance.initializeObservation(params.initialPrice);
 
       params.onTransaction?.(transaction.hash);
       const receipt = await transaction.wait();

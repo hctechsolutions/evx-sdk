@@ -15,7 +15,9 @@ import { RPC } from '@providers';
 export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPositionOutput> {
   constructor(
     @inject(RPC)
-    private readonly rpc: RPC
+    private readonly rpc: RPC,
+    @inject(PositionManagerContract)
+    private readonly positionManager: PositionManagerContract
   ) {}
 
   /**
@@ -24,8 +26,6 @@ export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPosi
    * @returns The position data
    */
   async execute(params: IGetPositionParams): Promise<IGetPositionOutput> {
-    const positionManager = new PositionManagerContract(this.rpc);
-
     const [
       nonce,
       operator,
@@ -39,7 +39,7 @@ export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPosi
       feeGrowthInside1LastX128,
       tokensOwed0,
       tokensOwed1
-    ] = await positionManager.instance.positions(params.tokenId);
+    ] = await this.positionManager.instance.positions(params.tokenId);
 
     return {
       nonce,

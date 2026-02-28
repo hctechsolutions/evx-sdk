@@ -63,22 +63,22 @@ describe('Fee conversion utilities', () => {
   });
 
   describe('percentageToFee', () => {
-    it('should convert 0.3% to 3000 Nebular fee units', () => {
+    it('should convert 0.3% to 3000 Evx fee units', () => {
       const result = percentageToFee(0.3);
       expect(result).toBe(3000n);
     });
 
-    it('should convert 1% to 10000 Nebular fee units', () => {
+    it('should convert 1% to 10000 Evx fee units', () => {
       const result = percentageToFee(1);
       expect(result).toBe(10000n);
     });
 
-    it('should convert 0.01% to 100 Nebular fee units', () => {
+    it('should convert 0.01% to 100 Evx fee units', () => {
       const result = percentageToFee(0.01);
       expect(result).toBe(100n);
     });
 
-    it('should convert 100% to 1000000 Nebular fee units', () => {
+    it('should convert 100% to 1000000 Evx fee units', () => {
       const result = percentageToFee(100);
       expect(result).toBe(1000000n);
     });
@@ -90,22 +90,22 @@ describe('Fee conversion utilities', () => {
   });
 
   describe('feeToPercentage', () => {
-    it('should convert 3000 Nebular fee units to 0.3%', () => {
+    it('should convert 3000 Evx fee units to 0.3%', () => {
       const result = feeToPercentage(3000n);
       expect(result).toBe(0.3);
     });
 
-    it('should convert 10000 Nebular fee units to 1%', () => {
+    it('should convert 10000 Evx fee units to 1%', () => {
       const result = feeToPercentage(10000n);
       expect(result).toBe(1);
     });
 
-    it('should convert 100 Nebular fee units to 0.01%', () => {
+    it('should convert 100 Evx fee units to 0.01%', () => {
       const result = feeToPercentage(100n);
       expect(result).toBe(0.01);
     });
 
-    it('should convert 1000000 Nebular fee units to 100%', () => {
+    it('should convert 1000000 Evx fee units to 100%', () => {
       const result = feeToPercentage(1000000n);
       expect(result).toBe(100);
     });
@@ -117,22 +117,22 @@ describe('Fee conversion utilities', () => {
   });
 
   describe('basisPointsToFee', () => {
-    it('should convert 30 basis points to 3000 Nebular fee units', () => {
+    it('should convert 30 basis points to 3000 Evx fee units', () => {
       const result = basisPointsToFee(30n);
       expect(result).toBe(3000n);
     });
 
-    it('should convert 100 basis points to 10000 Nebular fee units', () => {
+    it('should convert 100 basis points to 10000 Evx fee units', () => {
       const result = basisPointsToFee(100n);
       expect(result).toBe(10000n);
     });
 
-    it('should convert 1 basis point to 100 Nebular fee units', () => {
+    it('should convert 1 basis point to 100 Evx fee units', () => {
       const result = basisPointsToFee(1n);
       expect(result).toBe(100n);
     });
 
-    it('should convert 10000 basis points to 1000000 Nebular fee units', () => {
+    it('should convert 10000 basis points to 1000000 Evx fee units', () => {
       const result = basisPointsToFee(10000n);
       expect(result).toBe(1000000n);
     });
@@ -144,22 +144,22 @@ describe('Fee conversion utilities', () => {
   });
 
   describe('feeToBasisPoints', () => {
-    it('should convert 3000 Nebular fee units to 30 basis points', () => {
+    it('should convert 3000 Evx fee units to 30 basis points', () => {
       const result = feeToBasisPoints(3000n);
       expect(result).toBe(30n);
     });
 
-    it('should convert 10000 Nebular fee units to 100 basis points', () => {
+    it('should convert 10000 Evx fee units to 100 basis points', () => {
       const result = feeToBasisPoints(10000n);
       expect(result).toBe(100n);
     });
 
-    it('should convert 100 Nebular fee units to 1 basis point', () => {
+    it('should convert 100 Evx fee units to 1 basis point', () => {
       const result = feeToBasisPoints(100n);
       expect(result).toBe(1n);
     });
 
-    it('should convert 1000000 Nebular fee units to 10000 basis points', () => {
+    it('should convert 1000000 Evx fee units to 10000 basis points', () => {
       const result = feeToBasisPoints(1000000n);
       expect(result).toBe(10000n);
     });
@@ -212,7 +212,7 @@ describe('Fee conversion utilities', () => {
 
     it('should handle very small percentages', () => {
       expect(percentageToBasisPoints(0.0001)).toBe(0n); // Rounds to 0
-      expect(percentageToFee(0.0001)).toBe(1n); // 0.0001% = 1 Nebular unit
+      expect(percentageToFee(0.0001)).toBe(1n); // 0.0001% = 1 Evx unit
     });
 
     it('should handle very large percentages', () => {

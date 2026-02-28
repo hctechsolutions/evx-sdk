@@ -5,6 +5,24 @@
  * @notice Native tokens here are the WETH9 token of the chain
  */
 export const chains = {
+  anvil: {
+    metadata: {
+      chainId: 31337,
+      explorer: 'http://localhost',
+      nativeToken: '0xc6e7DF5E7b4f2A278906862b61205850344D4e7d'
+    },
+    contracts: {
+      positionDescriptor: '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
+      positionManager: '0x09635F643e140090A9A8Dcd712eD6285858ceBef',
+      positionLens: '0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690',
+      swapRouter: '0xc5a5C42992dECbae36851359345FE25997F5C42d',
+      swapQuoter: '0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E',
+      pairFlash: '0x67d269191c92Caf3cD7723F116c85e6E9bf55933',
+      tickLens: '0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB',
+      factory: '0x68B1D87F95878fE05B998F19b66F4baba5De1aed',
+      dao: '0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0'
+    }
+  },
   sepolia: {
     metadata: {
       chainId: 11155111,
@@ -16,7 +34,7 @@ export const chains = {
       positionManager: '0x29d077c93A7F5F1092E18B4883B26DD6c934de81',
       positionLens: '0x1D29d573D44E308D161095764FC85f6bAd913d8B',
       swapRouter: '0xDea4395543832560b33F80C4B5cA1F852856D088',
-      swapQuoter: '0x6cb7Df410cD1c47e29473154f2FA36cf058D4477',
+      swapQuoter: '0x73b3eE38eb195Ec70d534BeC8517258b162600D9',
       pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
       tickLens: '0x9706cA44f004054BAA842b5db1f62f6c9b77A095',
       factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
