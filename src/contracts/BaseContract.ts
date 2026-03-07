@@ -52,7 +52,8 @@ export abstract class BaseContract implements IBaseContract {
    */
   setChain(chain: keyof typeof chains): void {
     this.chain = chain;
-    this.instance = new ethers.Contract(this.getAddress(), this.abi, this.rpc.provider);
+    const runner = this.signer ?? this.rpc.provider;
+    this.instance = new ethers.Contract(this.getAddress(), this.abi, runner);
   }
 
   /**

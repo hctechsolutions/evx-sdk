@@ -8,4 +8,3 @@ export * from './gas';
 export * from './paths';
 export * from './chains';
 export * from './liquidity';
-export * from './errors';

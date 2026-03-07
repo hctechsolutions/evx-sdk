@@ -5,24 +5,6 @@
  * @notice Native tokens here are the WETH9 token of the chain
  */
 export const chains = {
-  anvil: {
-    metadata: {
-      chainId: 31337,
-      explorer: 'http://localhost',
-      nativeToken: '0xc6e7DF5E7b4f2A278906862b61205850344D4e7d'
-    },
-    contracts: {
-      positionDescriptor: '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
-      positionManager: '0x09635F643e140090A9A8Dcd712eD6285858ceBef',
-      positionLens: '0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690',
-      swapRouter: '0xc5a5C42992dECbae36851359345FE25997F5C42d',
-      swapQuoter: '0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E',
-      pairFlash: '0x67d269191c92Caf3cD7723F116c85e6E9bf55933',
-      tickLens: '0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB',
-      factory: '0x68B1D87F95878fE05B998F19b66F4baba5De1aed',
-      dao: '0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0'
-    }
-  },
   sepolia: {
     metadata: {
       chainId: 11155111,
@@ -30,15 +12,15 @@ export const chains = {
       nativeToken: '0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14'
     },
     contracts: {
-      positionDescriptor: '0x17C50c136887C9258310d9C3331aA0e1f8f98330',
-      positionManager: '0x29d077c93A7F5F1092E18B4883B26DD6c934de81',
-      positionLens: '0x1D29d573D44E308D161095764FC85f6bAd913d8B',
-      swapRouter: '0xDea4395543832560b33F80C4B5cA1F852856D088',
-      swapQuoter: '0x73b3eE38eb195Ec70d534BeC8517258b162600D9',
-      pairFlash: '0xdBd297d618f5ab6330a05Fd0645a268F44687452',
-      tickLens: '0x9706cA44f004054BAA842b5db1f62f6c9b77A095',
-      factory: '0x822AC7faa4EdA0bfA4c9A4eb5EeeB43d3Cba9CC7',
-      dao: '0x0FA0d8D55B6a90823De8fc843cEd7D02F2DE7cC4'
+      positionDescriptor: '0x8771F74602DCd156Ea8cec907FB4b80C5AB5A2D4',
+      positionManager: '0xf9caf5Aca0d591dbd3f1AFDbA163Ca28e3dFD400',
+      positionLens: '0x8b7642E4cFf901DE0Bef11E83ceA6a407b8536fa',
+      swapRouter: '0x54322f353fD7098f5b8e1b61736bb26f2DfDcBb9',
+      swapQuoter: '0x0e9D243b5e72aede1a3588D10f526ca2b4EE1358',
+      pairFlash: '0xEdB5297386F17C17cdCC93804153BcB53235fc98',
+      tickLens: '0x25E54207295363F8421f3A0D27f54DaacC33A7Cd',
+      factory: '0xfCe1909B6aF92ADD218C90BF5f8aF87A4158e9EF',
+      dao: '0x7e72d7697406fDc0eB21E6395663c39E17654413'
     }
   },
   hoodi: {

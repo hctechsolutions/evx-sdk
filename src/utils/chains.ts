@@ -1,5 +1,13 @@
 import { chains } from '@resources';
-import { ChainName, ChainId, ChainMetadata } from '@interfaces';
+import { ChainName, ChainId, ChainMetadata, ContractName } from '@interfaces';
+
+export function getChainContracts(chainId: ChainId): Record<ContractName, string> {
+  const chain = chains[getChainNameById(chainId)];
+  if (!chain) {
+    throw new Error(`Chain not found: ${chainId}`);
+  }
+  return chain.contracts;
+}
 
 /**
  * @title Get Chain ID Function
@@ -93,7 +101,7 @@ export function getChainMetadata(chainName: ChainName): ChainMetadata {
  * @notice Returns an array of all supported chain names and their metadata
  * @returns Array of chain names and their metadata
  */
-export function getAllChainsMetadata(): Array<{ name: ChainName; metadata: ChainMetadata }> {
+export function getAllChainsMetadata(): { name: ChainName; metadata: ChainMetadata }[] {
   return Object.entries(chains).map(([name, chain]) => ({
     name: name as ChainName,
     metadata: chain.metadata as ChainMetadata

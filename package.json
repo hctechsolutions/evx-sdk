@@ -74,7 +74,10 @@
     "script:anvil:initialize-pool": "tsx scripts/anvil/initialize-pool.ts",
     "script:anvil:mint": "tsx scripts/anvil/mint-pool.ts",
     "script:anvil:increase-position": "tsx scripts/anvil/increase-position.ts",
-    "script:anvil:quote": "tsx scripts/anvil/quote.ts"
+    "script:anvil:quote": "tsx scripts/anvil/quote.ts",
+    "script:anvil:quote-multihop": "tsx scripts/anvil/quote-multihop.ts",
+    "script:anvil:mint-small-and-quote-over": "tsx scripts/anvil/mint-small-and-quote-over.ts",
+    "script:anvil:mint-small-multihop-and-quote-over": "tsx scripts/anvil/mint-small-multihop-and-quote-over.ts"
   },
   "repository": {
     "type": "git",

@@ -18,18 +18,22 @@ describe('QuoteExactInputSingleQuery', () => {
     quoterContract = {
       instance: {
         quoteExactInputSingle: {
-          staticCall: jest.fn().mockImplementation(() => Promise.resolve([
-            BigInt(1000), // amountOut
-            BigInt(100), // sqrtPriceX96After
-            1, // initializedTicksCrossed
-            BigInt(50000), // gasEstimate
-          ])),
-        },
-      } as unknown as Contract,
+          staticCall: jest.fn().mockImplementation(() =>
+           
+              Promise.resolve([
+                BigInt(1000), // amountOut
+                BigInt(100), // sqrtPriceX96After
+                1, // initilizedTicksCrossed
+              
+           BigInt(50000) // gasEstimate
+           ])
+          )
+        }
+      } as unknown as Contract
     } as any;
 
     rpc = {
-      provider: {} as any,
+      provider: {} as any
     } as any;
 
     (QuoterContract as jest.Mock).mockImplementation(() => quoterContract);
@@ -44,7 +48,7 @@ describe('QuoteExactInputSingleQuery', () => {
       tokenOut: '0x5678',
       fee: BigInt(500),
       amountIn: BigInt(100),
-      sqrtPriceLimitX96: BigInt(0),
+      sqrtPriceLimitX96: BigInt(0)
     };
 
     const result = await query.execute(params);
@@ -54,14 +58,14 @@ describe('QuoteExactInputSingleQuery', () => {
       tokenOut: params.tokenOut,
       fee: params.fee,
       amountIn: params.amountIn,
-      sqrtPriceLimitX96: params.sqrtPriceLimitX96,
+      sqrtPriceLimitX96: params.sqrtPriceLimitX96
     });
 
     expect(result).toEqual({
       amountOut: BigInt(1000),
-      sqrtPriceX96After: BigInt(100),
+      sqrtPriceX96After: BigInt(00),
       initializedTicksCrossed: 1,
-      gasEstimate: BigInt(50000),
+      gasEstimate: BigInt(50000)
     });
   });
-}); 
+});
