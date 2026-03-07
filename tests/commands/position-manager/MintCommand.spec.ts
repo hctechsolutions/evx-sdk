@@ -10,6 +10,7 @@ describe('MintCommand', () => {
     positionManager = {
       instance: {
         mint: jest.fn(),
+        target: '0xPositionManagerAddress',
       },
     } as any;
 
@@ -19,7 +20,7 @@ describe('MintCommand', () => {
   it('should execute mint command successfully', async () => {
     const mockTransaction = {
       hash: '0x123',
-      wait: jest.fn().mockResolvedValue({}),
+      wait: jest.fn().mockResolvedValue({ hash: '0x123', logs: [] }),
     };
 
     (positionManager.instance.mint as unknown as jest.Mock).mockResolvedValue(mockTransaction);
@@ -57,7 +58,15 @@ describe('MintCommand', () => {
       deadline: params.deadline,
     });
     expect(params.onTransaction).toHaveBeenCalledWith(mockTransaction.hash);
-    expect(params.onDone).toHaveBeenCalled();
+    expect(params.onDone).toHaveBeenCalledWith(
+      expect.objectContaining({
+        transactionHash: expect.any(String),
+        tokenId: expect.any(String),
+        liquidity: expect.any(String),
+        amount0: expect.any(String),
+        amount1: expect.any(String),
+      })
+    );
     expect(params.onFail).not.toHaveBeenCalled();
   });
 

@@ -2,10 +2,21 @@ import { BigNumberish } from 'ethers';
 import { IBaseCommandParams } from './IBaseCommandParams';
 
 /**
+ * @notice Result of a successful mint call (from IncreaseLiquidity event / mint return)
+ */
+export interface MintResult {
+  tokenId: string;
+  liquidity: string;
+  amount0: string;
+  amount1: string;
+  transactionHash: string;
+}
+
+/**
  * @notice Parameters for minting a new position
  * @dev Extends base command parameters with minting specific parameters
  */
-export interface IMintCommandParams extends IBaseCommandParams {
+export interface IMintCommandParams extends Omit<IBaseCommandParams, 'onDone'> {
   token0: string; // The address of the first token
   token1: string; // The address of the second token
   fee: number; // The fee tier of the pool
@@ -17,4 +28,6 @@ export interface IMintCommandParams extends IBaseCommandParams {
   amount1Min: BigNumberish; // The minimum amount of token1 to add
   recipient: string; // The address that will receive the position
   deadline: number; // The deadline for the transaction
+  /** Called when mint succeeds with decoded mint result (tokenId, liquidity, amount0, amount1, transactionHash) */
+  onDone?: (result: MintResult) => void;
 }
