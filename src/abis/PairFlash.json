@@ -39,6 +39,29 @@
   },
   {
     "type": "function",
+    "name": "evxFlashCallback",
+    "inputs": [
+      {
+        "name": "fee0",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "fee1",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "factory",
     "inputs": [],
     "outputs": [
@@ -95,29 +118,6 @@
             "internalType": "uint24"
           }
         ]
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "evxFlashCallback",
-    "inputs": [
-      {
-        "name": "fee0",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "fee1",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
       }
     ],
     "outputs": [],

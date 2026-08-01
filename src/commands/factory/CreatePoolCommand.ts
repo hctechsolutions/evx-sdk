@@ -25,7 +25,9 @@ export class CreatePoolCommand implements IBaseCommand<ICreatePoolCommandParams,
       const transaction = await this.factory.instance.createPool(
         params.token0,
         params.token1,
-        params.fee
+        params.fee,
+        params.feeMax,
+        params.policyKeeper
       );
 
       params.onTransaction?.(transaction.hash);

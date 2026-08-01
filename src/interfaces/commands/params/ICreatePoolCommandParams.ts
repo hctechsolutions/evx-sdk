@@ -1,11 +1,10 @@
-import { IBaseCommandParams } from './IBaseCommandParams';
+import { ICreatePoolTokensParams } from './ICreatePoolTokensParams';
 
 /**
- * @notice Parameters for creating a new pool
- * @dev Extends base command parameters with pool creation specific parameters
+ * @notice Parameters for creating a new pool via EvxFactory.createPool
+ * @dev Includes feeMax and policyKeeper required by the Story 1.2 factory signature
  */
-export interface ICreatePoolCommandParams extends IBaseCommandParams {
-  token0: string; // The address of the first token in the pool
-  token1: string; // The address of the second token in the pool
-  fee: bigint; // The fee tier for the pool
+export interface ICreatePoolCommandParams extends ICreatePoolTokensParams {
+  feeMax: bigint; // Maximum swap fee allowed via setDynamicFee
+  policyKeeper: string; // Address authorized to call setDynamicFee
 }

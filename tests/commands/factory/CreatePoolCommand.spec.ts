@@ -34,6 +34,8 @@ describe('CreatePoolCommand', () => {
       token0: '0x123',
       token1: '0x456',
       fee: BigInt(3000),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
       onFail: jest.fn()
@@ -44,7 +46,9 @@ describe('CreatePoolCommand', () => {
     expect(factory.instance.createPool).toHaveBeenCalledWith(
       params.token0,
       params.token1,
-      params.fee
+      params.fee,
+      params.feeMax,
+      params.policyKeeper
     );
     expect(params.onTransaction).toHaveBeenCalledWith(mockTransaction.hash);
     expect(params.onDone).toHaveBeenCalled();
@@ -59,6 +63,8 @@ describe('CreatePoolCommand', () => {
       token0: '0x123',
       token1: '0x456',
       fee: BigInt(3000),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF',
       onTransaction: jest.fn(),
       onDone: jest.fn(),
       onFail: jest.fn()
@@ -94,6 +100,8 @@ describe('CreatePoolCommand', () => {
       token0: '0xToken0Address',
       token1: '0xToken1Address',
       fee: BigInt(3000),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF',
       onTransaction: onTransactionSpy,
       onDone: onDoneSpy,
       onFail: onFailSpy
@@ -107,7 +115,9 @@ describe('CreatePoolCommand', () => {
     expect(factory.instance.createPool).toHaveBeenCalledWith(
       params.token0,
       params.token1,
-      params.fee
+      params.fee,
+      params.feeMax,
+      params.policyKeeper
     );
 
     // Verify onTransaction received the hash.
@@ -141,6 +151,8 @@ describe('CreatePoolCommand', () => {
       token0: '0xTokenA',
       token1: '0xTokenB',
       fee: BigInt(500),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF',
       onTransaction: onTransactionSpy,
       onDone: onDoneSpy,
       onFail: onFailSpy
@@ -179,6 +191,8 @@ describe('CreatePoolCommand', () => {
       token0: '0xTokenX',
       token1: '0xTokenY',
       fee: BigInt(1000),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF',
       onTransaction: onTransactionSpy,
       onDone: onDoneSpy,
       onFail: onFailSpy
@@ -212,7 +226,9 @@ describe('CreatePoolCommand', () => {
     const params: ICreatePoolCommandParams = {
       token0: '0xA',
       token1: '0xB',
-      fee: BigInt(200)
+      fee: BigInt(200),
+      feeMax: BigInt(10000),
+      policyKeeper: '0xBEEF'
       // onTransaction, onDone, and onFail are undefined
     };
 

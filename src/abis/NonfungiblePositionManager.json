@@ -259,6 +259,29 @@
   },
   {
     "type": "function",
+    "name": "evxMintCallback",
+    "inputs": [
+      {
+        "name": "amount0Owed",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "amount1Owed",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "factory",
     "inputs": [],
     "outputs": [
@@ -496,29 +519,6 @@
       }
     ],
     "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "evxMintCallback",
-    "inputs": [
-      {
-        "name": "amount0Owed",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "amount1Owed",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
   },
   {
     "type": "function",

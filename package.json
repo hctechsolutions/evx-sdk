@@ -68,7 +68,7 @@
     "version:update": "tsx tools/version-manager.ts --branch",
     "version:simulate": "tsx tools/version-manager.ts --simulate --branch",
     "version:test": "tsx tests/tools/run-version-tests.ts",
-    "script:anvil:enable-fee-amount": "tsx scripts/anvil/enable-fee-amount.ts",
+    "sync:abis": "bash \"${EVX_ROOT:-..}/evx-intent-engine/scripts/sync-foundry-artifacts.sh\"",
     "script:anvil:create-pool": "tsx scripts/anvil/create-pool.ts",
     "script:anvil:check-pool-initialized": "tsx scripts/anvil/check-pool-initialized.ts",
     "script:anvil:initialize-pool": "tsx scripts/anvil/initialize-pool.ts",

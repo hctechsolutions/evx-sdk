@@ -28,6 +28,16 @@
         "name": "fee",
         "type": "uint24",
         "internalType": "uint24"
+      },
+      {
+        "name": "feeMax",
+        "type": "uint24",
+        "internalType": "uint24"
+      },
+      {
+        "name": "policyKeeper",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [

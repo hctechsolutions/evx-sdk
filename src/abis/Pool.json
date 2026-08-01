@@ -139,6 +139,19 @@
   },
   {
     "type": "function",
+    "name": "feeBase",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint24",
+        "internalType": "uint24"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "feeGrowthGlobal0X128",
     "inputs": [],
     "outputs": [
@@ -159,6 +172,19 @@
         "name": "",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "feeMax",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint24",
+        "internalType": "uint24"
       }
     ],
     "stateMutability": "view"
@@ -232,6 +258,16 @@
         "name": "_tickSpacing",
         "type": "int24",
         "internalType": "int24"
+      },
+      {
+        "name": "_feeMax",
+        "type": "uint24",
+        "internalType": "uint24"
+      },
+      {
+        "name": "_policyKeeper",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [],
@@ -380,6 +416,19 @@
   },
   {
     "type": "function",
+    "name": "policyKeeper",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "positions",
     "inputs": [
       {
@@ -434,6 +483,19 @@
       }
     ],
     "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setDynamicFee",
+    "inputs": [
+      {
+        "name": "newFee",
+        "type": "uint24",
+        "internalType": "uint24"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -805,6 +867,25 @@
   },
   {
     "type": "event",
+    "name": "FeeUpdated",
+    "inputs": [
+      {
+        "name": "previousFee",
+        "type": "uint24",
+        "indexed": false,
+        "internalType": "uint24"
+      },
+      {
+        "name": "newFee",
+        "type": "uint24",
+        "indexed": false,
+        "internalType": "uint24"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "Flash",
     "inputs": [
       {
@@ -1025,6 +1106,16 @@
   },
   {
     "type": "error",
+    "name": "FeeOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "FeeTooHigh",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "FlashFee0NotReceived",
     "inputs": []
   },
@@ -1046,6 +1137,11 @@
   {
     "type": "error",
     "name": "InsufficientInputAmount",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidFeeBounds",
     "inputs": []
   },
   {
@@ -1090,6 +1186,11 @@
   },
   {
     "type": "error",
+    "name": "OnlyPolicyKeeper",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "SqrtPriceLimit",
     "inputs": []
   },
@@ -1106,6 +1207,11 @@
   {
     "type": "error",
     "name": "UpperTickNotInitialized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroPolicyKeeper",
     "inputs": []
   },
   {
