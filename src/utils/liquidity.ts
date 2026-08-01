@@ -1,6 +1,14 @@
 import { decimalToSqrtX96Price, sqrtX96ToFloat } from './prices';
 
 /**
+ * @title Liquidity (high-level)
+ * @notice High-level helpers for position amounts based on **USD value** and decimal prices.
+ * @description
+ * For **contract-aligned** math (bigint, sqrtPriceX96) use `liquidityAmounts.ts` instead:
+ * getAmount1ForAmount0, getLiquidityForAmounts, getAmountsForLiquidity, etc.
+ */
+
+/**
  * @title Calculate Amounts For Position
  * @notice Calculates token0 and token1 amounts for a position based on price range and total USD value
  * @dev Uses Uniswap V3 formulas to calculate the correct amounts based on sqrtPriceX96

@@ -1,6 +1,5 @@
 import { MintCommand } from '@commands/position-manager';
 import { PositionManagerContract } from '@contracts';
-import { BigNumberish } from 'ethers';
 
 describe('MintCommand', () => {
   let command: MintCommand;
@@ -10,8 +9,8 @@ describe('MintCommand', () => {
     positionManager = {
       instance: {
         mint: jest.fn(),
-        target: '0xPositionManagerAddress',
-      },
+        target: '0xPositionManagerAddress'
+      }
     } as any;
 
     command = new MintCommand(positionManager);
@@ -20,7 +19,7 @@ describe('MintCommand', () => {
   it('should execute mint command successfully', async () => {
     const mockTransaction = {
       hash: '0x123',
-      wait: jest.fn().mockResolvedValue({ hash: '0x123', logs: [] }),
+      wait: jest.fn().mockResolvedValue({ hash: '0x123', logs: [] })
     };
 
     (positionManager.instance.mint as unknown as jest.Mock).mockResolvedValue(mockTransaction);
@@ -39,7 +38,7 @@ describe('MintCommand', () => {
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(params);
@@ -55,7 +54,7 @@ describe('MintCommand', () => {
       amount0Min: params.amount0Min,
       amount1Min: params.amount1Min,
       recipient: params.recipient,
-      deadline: params.deadline,
+      deadline: params.deadline
     });
     expect(params.onTransaction).toHaveBeenCalledWith(mockTransaction.hash);
     expect(params.onDone).toHaveBeenCalledWith(
@@ -64,7 +63,7 @@ describe('MintCommand', () => {
         tokenId: expect.any(String),
         liquidity: expect.any(String),
         amount0: expect.any(String),
-        amount1: expect.any(String),
+        amount1: expect.any(String)
       })
     );
     expect(params.onFail).not.toHaveBeenCalled();
@@ -88,7 +87,7 @@ describe('MintCommand', () => {
       deadline: Math.floor(Date.now() / 1000) + 3600,
       onTransaction: jest.fn(),
       onDone: jest.fn(),
-      onFail: jest.fn(),
+      onFail: jest.fn()
     };
 
     await command.execute(params);
@@ -97,4 +96,4 @@ describe('MintCommand', () => {
     expect(params.onDone).not.toHaveBeenCalled();
     expect(params.onFail).toHaveBeenCalledWith(error);
   });
-}); 
+});

@@ -4,40 +4,6 @@ import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
 import { injectable, inject, singleton } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
-const INCREASE_LIQUIDITY_EVENT =
-  'event IncreaseLiquidity(uint256 indexed tokenId, uint128 liquidity, uint256 amount0, uint256 amount1)';
-
-const increaseLiquidityInterface = new ethers.Interface([INCREASE_LIQUIDITY_EVENT]);
-
-function parseIncreaseLiquidityFromReceipt(
-  receipt: ethers.ContractTransactionReceipt,
-  positionManagerAddress: string
-): MintResult | null {
-  const addressLower = positionManagerAddress.toLowerCase();
-  for (const log of receipt.logs) {
-    if (log.address.toLowerCase() !== addressLower) continue;
-    try {
-      const parsed = increaseLiquidityInterface.parseLog({
-        topics: log.topics as string[],
-        data: log.data
-      });
-      if (parsed?.name === 'IncreaseLiquidity') {
-        const [tokenId, liquidity, amount0, amount1] = parsed.args;
-        return {
-          tokenId: String(tokenId),
-          liquidity: String(liquidity),
-          amount0: String(amount0),
-          amount1: String(amount1),
-          transactionHash: receipt.hash
-        };
-      }
-    } catch {
-      continue;
-    }
-  }
-  return null;
-}
-
 /**
  * @title Mint Command
  * @notice Creates a new position by providing liquidity to a pool
@@ -74,24 +40,40 @@ export class MintCommand implements IBaseCommand<IMintCommandParams, void> {
       params.onTransaction?.(transaction.hash);
       const receipt = await transaction.wait();
 
-      const mintResult = parseIncreaseLiquidityFromReceipt(
-        receipt as ethers.ContractTransactionReceipt,
-        this.positionManager.instance.target as string
-      );
-
-      if (mintResult) {
-        params.onDone?.(mintResult);
-      } else {
-        params.onDone?.({
-          tokenId: '0',
-          liquidity: '0',
-          amount0: '0',
-          amount1: '0',
-          transactionHash: receipt.hash
-        });
-      }
+      const mintResult = this.parseMintResult(receipt as ethers.ContractTransactionReceipt);
+      params.onDone?.(mintResult);
     } catch (error: any) {
       params.onFail?.(error);
     }
+  }
+
+  private parseMintResult(receipt: ethers.ContractTransactionReceipt): MintResult {
+    const { interface: iface, target } = this.positionManager.instance;
+    const addressLower = (target as string).toLowerCase();
+    for (const log of receipt.logs) {
+      if (log.address.toLowerCase() !== addressLower) continue;
+      try {
+        const parsed = iface.parseLog({ topics: log.topics as string[], data: log.data });
+        if (parsed?.name === 'IncreaseLiquidity') {
+          const [tokenId, liquidity, amount0, amount1] = parsed.args;
+          return {
+            tokenId: String(tokenId),
+            liquidity: String(liquidity),
+            amount0: String(amount0),
+            amount1: String(amount1),
+            transactionHash: receipt.hash
+          };
+        }
+      } catch {
+        continue;
+      }
+    }
+    return {
+      tokenId: '0',
+      liquidity: '0',
+      amount0: '0',
+      amount1: '0',
+      transactionHash: receipt.hash
+    };
   }
 }
