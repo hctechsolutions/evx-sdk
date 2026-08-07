@@ -20,7 +20,11 @@ import { Signer } from 'ethers';
  * @returns Array of contract instances that need configuration
  */
 function getWriterContracts() {
-  return [container.resolve(PositionManagerContract), container.resolve(FactoryContract)];
+  return [
+    container.resolve(PositionManagerContract),
+    container.resolve(FactoryContract),
+    container.resolve(SwapRouterContract)
+  ];
 }
 
 function getReaderContracts() {
@@ -29,7 +33,6 @@ function getReaderContracts() {
     container.resolve(PairFlashContract),
     container.resolve(PositionLensContract),
     container.resolve(QuoterContract),
-    container.resolve(SwapRouterContract),
     container.resolve(TickLensContract),
     container.resolve(FactoryContract)
   ];
