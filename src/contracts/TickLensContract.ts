@@ -1,5 +1,5 @@
 import { BaseContract } from './BaseContract';
-import { inject, injectable, singleton } from 'tsyringe';
+import { inject, injectable, scoped, Lifecycle } from 'tsyringe';
 import TickLensABI from '@abis/TickLens.json';
 import { RPC } from '@providers';
 
@@ -9,7 +9,7 @@ import { RPC } from '@providers';
  * @dev This contract is used to get tick data from pools
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class TickLensContract extends BaseContract {
   /**
    * @notice Creates a new Tick Lens contract instance

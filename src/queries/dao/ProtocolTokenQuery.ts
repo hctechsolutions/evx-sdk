@@ -1,6 +1,6 @@
 import { IProtocolTokenQueryParams } from '@interfaces/queries/params/IProtocolTokenQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the Evx token address
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ProtocolTokenQuery implements IBaseQuery<IProtocolTokenQueryParams, string> {
   constructor(
     @inject(GovernanceContract)

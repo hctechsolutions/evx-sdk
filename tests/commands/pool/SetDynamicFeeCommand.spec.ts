@@ -17,7 +17,7 @@ describe('SetDynamicFeeCommand', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    command = new SetDynamicFeeCommand();
+    command = new SetDynamicFeeCommand({} as any);
   });
 
   it('should execute setDynamicFee successfully', async () => {

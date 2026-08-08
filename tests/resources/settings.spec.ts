@@ -1,12 +1,25 @@
 import 'reflect-metadata';
 import { JsonRpcProvider, Signer } from 'ethers';
 import { container } from 'tsyringe';
-import { PositionManagerContract, FactoryContract } from '@contracts';
-import { setAllSigner, setAllChain, setAllChainById, setRPCProvider } from '@resources';
+import {
+  PositionManagerContract,
+  FactoryContract,
+  SwapRouterContract,
+  GovernanceContract,
+  PairFlashContract,
+  PositionLensContract,
+  QuoterContract,
+  TickLensContract
+} from '@contracts';
+import {
+  setAllSigner,
+  setAllChain,
+  setAllChainById,
+  setRPCProvider
+} from '@resources';
 import { ChainName, ChainId } from '@interfaces';
 import { RPC } from '@providers';
 
-// Corrige o mock mantendo os decorators como @singleton funcionando
 jest.mock('tsyringe', () => {
   const actual = jest.requireActual('tsyringe');
   return {
@@ -32,6 +45,16 @@ describe('writer contract setters with dynamic resolution', () => {
     setChain: jest.fn()
   };
 
+  const mockContractC = {
+    setSigner: jest.fn(),
+    setChain: jest.fn()
+  };
+
+  const mockReader = {
+    setSigner: jest.fn(),
+    setChain: jest.fn()
+  };
+
   const mockRPC = {
     provider: null as JsonRpcProvider | null,
     setProvider: jest.fn()
@@ -43,6 +66,17 @@ describe('writer contract setters with dynamic resolution', () => {
     (container.resolve as jest.Mock).mockImplementation((contractClass) => {
       if (contractClass === PositionManagerContract) return mockContractA;
       if (contractClass === FactoryContract) return mockContractB;
+      if (contractClass === SwapRouterContract) return mockContractC;
+      if (
+        contractClass === GovernanceContract ||
+        contractClass === PairFlashContract ||
+        contractClass === PositionLensContract ||
+        contractClass === QuoterContract ||
+        contractClass === TickLensContract
+      ) {
+        return mockReader;
+      }
+      if (contractClass === RPC) return mockRPC;
       throw new Error(`Unknown contract: ${contractClass}`);
     });
   });
@@ -52,8 +86,7 @@ describe('writer contract setters with dynamic resolution', () => {
 
     expect(mockContractA.setSigner).toHaveBeenCalledWith(fakeSigner);
     expect(mockContractB.setSigner).toHaveBeenCalledWith(fakeSigner);
-    expect(mockContractA.setSigner).toHaveBeenCalledTimes(1);
-    expect(mockContractB.setSigner).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setSigner).toHaveBeenCalledWith(fakeSigner);
   });
 
   it('should call setChain on all resolved contracts', async () => {
@@ -61,26 +94,20 @@ describe('writer contract setters with dynamic resolution', () => {
 
     expect(mockContractA.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractB.setChain).toHaveBeenCalledWith(fakeChain);
-    expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
-    expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setChain).toHaveBeenCalledWith(fakeChain);
+    expect(mockReader.setChain).toHaveBeenCalledWith(fakeChain);
   });
 
   it('should call setChain on all resolved contracts using chain ID', async () => {
-    const fakeChainId: ChainId = 11155111; // sepolia chain ID
+    const fakeChainId: ChainId = 11155111;
     await setAllChainById(fakeChainId);
 
     expect(mockContractA.setChain).toHaveBeenCalledWith('sepolia');
     expect(mockContractB.setChain).toHaveBeenCalledWith('sepolia');
-    expect(mockContractA.setChain).toHaveBeenCalledTimes(1);
-    expect(mockContractB.setChain).toHaveBeenCalledTimes(1);
+    expect(mockContractC.setChain).toHaveBeenCalledWith('sepolia');
   });
 
   it('should set the RPC provider with the given URL', async () => {
-    (container.resolve as jest.Mock).mockImplementation((contractClass) => {
-      if (contractClass === RPC) return mockRPC;
-      throw new Error(`Unknown contract: ${contractClass}`);
-    });
-
     const rpcUrl = 'https://test-rpc-url';
     await setRPCProvider(rpcUrl);
 

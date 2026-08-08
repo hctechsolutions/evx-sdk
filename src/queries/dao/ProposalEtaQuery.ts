@@ -1,6 +1,6 @@
 import { IProposalEtaQueryParams } from '@interfaces/queries/params/IProposalEtaQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the eta timestamp for a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ProposalEtaQuery implements IBaseQuery<IProposalEtaQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

@@ -1,7 +1,7 @@
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
 import SwapRouterABI from '@abis/SwapRouter.json';
-import { inject, injectable, singleton } from 'tsyringe';
+import { inject, injectable, scoped, Lifecycle } from 'tsyringe';
 
 /**
  * @title SwapRouter Contract
@@ -9,7 +9,7 @@ import { inject, injectable, singleton } from 'tsyringe';
  * @dev Extends BaseContract to provide swap functionality
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class SwapRouterContract extends BaseContract {
   /**
    * @notice Creates a new SwapRouter contract instance

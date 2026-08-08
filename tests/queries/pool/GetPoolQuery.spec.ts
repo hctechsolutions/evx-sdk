@@ -21,7 +21,7 @@ describe('GetPoolQuery', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockPool = new PoolContract('0xPOOL');
-    query = new GetPoolQuery();
+    query = new GetPoolQuery({} as any);
   });
 
   it('should execute get pool query successfully', async () => {

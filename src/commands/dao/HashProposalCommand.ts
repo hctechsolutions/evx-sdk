@@ -1,6 +1,6 @@
 import { IHashProposalCommandParams } from '@interfaces/commands/params/IHashProposalCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to hash proposal parameters
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class HashProposalCommand implements IBaseCommand<IHashProposalCommandParams, bigint> {
   constructor(
     @inject(GovernanceContract)

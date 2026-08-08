@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { ISetFeeProtocolEvent } from '@interfaces/events/pool/ISetFeeProtocolEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors a pool contract for set fee protocol events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class SetFeeProtocolListener implements IEventListener<ISetFeeProtocolEvent> {
   private isListening = false;
   private eventFilter: any;

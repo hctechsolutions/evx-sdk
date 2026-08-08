@@ -1,6 +1,6 @@
 import { IUpdateQuorumNumeratorCommandParams } from '@interfaces/commands/params/IUpdateQuorumNumeratorCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to update the quorum numerator
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class UpdateQuorumNumeratorCommand
   implements IBaseCommand<IUpdateQuorumNumeratorCommandParams, void>
 {

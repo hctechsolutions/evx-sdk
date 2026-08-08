@@ -1,6 +1,6 @@
 import { IGetVotesWithParamsQueryParams } from '@interfaces/queries/params/IGetVotesWithParamsQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the voting power of an account at a historical timepoint with custom parameters
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetVotesWithParamsQuery implements IBaseQuery<IGetVotesWithParamsQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

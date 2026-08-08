@@ -1,5 +1,5 @@
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 
 /**
@@ -8,7 +8,7 @@ import { FactoryContract } from '@contracts';
  * @dev Queries the factory contract to get the current owner
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetOwnerQuery implements IBaseQuery<void, string> {
   constructor(
     @inject(FactoryContract)

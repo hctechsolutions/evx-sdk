@@ -1,6 +1,6 @@
 import { IGetQuorumDenominatorQueryParams } from '@interfaces/queries/params/IGetQuorumDenominatorQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the denominator used in quorum calculations
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetQuorumDenominatorQuery
   implements IBaseQuery<IGetQuorumDenominatorQueryParams, bigint>
 {

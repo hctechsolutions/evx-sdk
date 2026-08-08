@@ -1,7 +1,7 @@
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
 import GovernanceABI from '@abis/Governance.json';
-import { inject, injectable, singleton } from 'tsyringe';
+import { inject, injectable, scoped, Lifecycle } from 'tsyringe';
 
 /**
  * @title Governance Contract
@@ -9,7 +9,7 @@ import { inject, injectable, singleton } from 'tsyringe';
  * @dev Extends BaseContract to provide governance functionality
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GovernanceContract extends BaseContract {
   /**
    * @notice Creates a new Governance contract instance

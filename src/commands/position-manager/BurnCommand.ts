@@ -1,6 +1,6 @@
 import { IBurnCommandParams } from '@interfaces/commands/params/IBurnCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { PositionManagerContract } from '@contracts';
  * @dev This command interacts with the PositionManager contract to burn a position
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class BurnCommand implements IBaseCommand<IBurnCommandParams, void> {
   constructor(
     @inject(PositionManagerContract)

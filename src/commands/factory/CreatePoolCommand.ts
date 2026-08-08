@@ -1,6 +1,6 @@
 import { ICreatePoolCommandParams } from '@interfaces/commands/params/ICreatePoolCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { FactoryContract } from '@contracts';
  * @dev This command interacts with the Factory contract to create a pool
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CreatePoolCommand implements IBaseCommand<ICreatePoolCommandParams, void> {
   constructor(
     @inject(FactoryContract)

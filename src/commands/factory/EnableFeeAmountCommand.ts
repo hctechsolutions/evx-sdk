@@ -1,6 +1,6 @@
 import { IEnableFeeAmountCommandParams } from '@interfaces/commands/params/IEnableFeeAmountCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { FactoryContract } from '@contracts';
  * @dev This command interacts with the Factory contract to enable a fee amount
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class EnableFeeAmountCommand implements IBaseCommand<IEnableFeeAmountCommandParams, void> {
   constructor(
     @inject(FactoryContract)

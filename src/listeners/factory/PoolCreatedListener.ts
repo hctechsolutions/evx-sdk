@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IPoolCreatedEvent } from '@interfaces/events/factory/IPoolCreatedEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors the factory contract for new pool creation events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class PoolCreatedListener implements IEventListener<IPoolCreatedEvent> {
   private isListening = false;
   private eventFilter: any;

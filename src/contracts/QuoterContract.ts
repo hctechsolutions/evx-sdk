@@ -1,5 +1,5 @@
 import { BaseContract } from './BaseContract';
-import { inject, injectable, singleton } from 'tsyringe';
+import { inject, injectable, scoped, Lifecycle } from 'tsyringe';
 import QuoterABI from '@abis/Quoter.json';
 import { RPC } from '@providers';
 
@@ -9,7 +9,7 @@ import { RPC } from '@providers';
  * @dev This contract is used to get quotes for swaps without executing them
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class QuoterContract extends BaseContract {
   /**
    * @notice Creates a new Quoter contract instance

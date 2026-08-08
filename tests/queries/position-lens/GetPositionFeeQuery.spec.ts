@@ -19,13 +19,19 @@ const { __getPositionFeeMock } = jest.requireMock('@contracts');
 describe('GetPositionFeeQuery', () => {
   let query: GetPositionFeeQuery;
   let mockRpc: jest.Mocked<RPC>;
+  let mockPositionLens: any;
 
   beforeEach(() => {
     mockRpc = {
       provider: {} as any,
       setProvider: jest.fn(),
     } as any;
-    query = new GetPositionFeeQuery(mockRpc);
+    mockPositionLens = {
+      instance: {
+        getPositionFee: __getPositionFeeMock,
+      },
+    };
+    query = new GetPositionFeeQuery(mockRpc, mockPositionLens);
     __getPositionFeeMock.mockReset();
   });
 

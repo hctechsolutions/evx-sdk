@@ -1,7 +1,7 @@
 import { IEip712DomainQueryParams } from '@interfaces/queries/params/IEip712DomainQueryParams';
 import { IEip712DomainQueryOutput } from '@interfaces/queries/outputs/IEip712DomainQueryOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -10,7 +10,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the EIP-712 domain fields
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class Eip712DomainQuery
   implements IBaseQuery<IEip712DomainQueryParams, IEip712DomainQueryOutput>
 {

@@ -1,6 +1,6 @@
 import { IInitFlashCommandParams } from '@interfaces/commands/params/IInitFlashCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PairFlashContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { PairFlashContract } from '@contracts';
  * @dev This command interacts with the PairFlash contract to initialize a flash loan
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class InitFlashCommand implements IBaseCommand<IInitFlashCommandParams, void> {
   constructor(
     @inject(PairFlashContract)

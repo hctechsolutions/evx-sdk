@@ -1,7 +1,7 @@
 import { IQuoteExactInputQueryParams } from '@interfaces/queries/params/IQuoteExactInputQueryParams';
 import { IQuoteExactInputOutput } from '@interfaces/queries/outputs/IQuoteExactInputOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { QuoterContract } from '@contracts';
 
 /**
@@ -10,7 +10,7 @@ import { QuoterContract } from '@contracts';
  * @dev This query interacts with the QuoterContract to get a quote for an exact input swap
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class QuoteExactInputQuery
   implements IBaseQuery<IQuoteExactInputQueryParams, IQuoteExactInputOutput>
 {

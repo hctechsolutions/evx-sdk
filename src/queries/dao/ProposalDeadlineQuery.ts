@@ -1,6 +1,6 @@
 import { IProposalDeadlineQueryParams } from '@interfaces/queries/params/IProposalDeadlineQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the deadline timestamp for a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ProposalDeadlineQuery implements IBaseQuery<IProposalDeadlineQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

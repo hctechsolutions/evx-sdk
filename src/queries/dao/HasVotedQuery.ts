@@ -1,6 +1,6 @@
 import { IHasVotedQueryParams } from '@interfaces/queries/params/IHasVotedQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to check the voting status of an account for a specific proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class HasVotedQuery implements IBaseQuery<IHasVotedQueryParams, boolean> {
   constructor(
     @inject(GovernanceContract)

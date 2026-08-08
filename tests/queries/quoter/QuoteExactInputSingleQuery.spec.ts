@@ -63,7 +63,7 @@ describe('QuoteExactInputSingleQuery', () => {
 
     expect(result).toEqual({
       amountOut: BigInt(1000),
-      sqrtPriceX96After: BigInt(00),
+      sqrtPriceX96After: BigInt(100),
       initializedTicksCrossed: 1,
       gasEstimate: BigInt(50000)
     });

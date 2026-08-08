@@ -1,7 +1,7 @@
 import { IGetPositionFeeParams } from '@interfaces/queries/params/IGetPositionFeeParams';
 import { IGetPositionFeeOutput } from '@interfaces/queries/outputs/IGetPositionFeeOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionLensContract } from '@contracts';
 import { RPC } from '@providers';
 
@@ -11,7 +11,7 @@ import { RPC } from '@providers';
  * @dev This query interacts with the PositionLensContract to get position fees
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetPositionFeeQuery
   implements IBaseQuery<IGetPositionFeeParams, IGetPositionFeeOutput>
 {

@@ -1,6 +1,6 @@
 import { IOverrideBallotTypeHashQueryParams } from '@interfaces/queries/params/IOverrideBallotTypeHashQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the OVERRIDE_BALLOT_TYPEHASH for override EIP-712 signatures
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class OverrideBallotTypeHashQuery
   implements IBaseQuery<IOverrideBallotTypeHashQueryParams, string>
 {

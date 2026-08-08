@@ -1,6 +1,6 @@
 import { IExtendedBallotTypeHashQueryParams } from '@interfaces/queries/params/IExtendedBallotTypeHashQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the EXTENDED_BALLOT_TYPEHASH for extended EIP-712 signatures
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ExtendedBallotTypeHashQuery
   implements IBaseQuery<IExtendedBallotTypeHashQueryParams, string>
 {

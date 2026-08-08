@@ -1,6 +1,6 @@
 import { IExecuteCommandParams } from '@interfaces/commands/params/IExecuteCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to execute a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ExecuteCommand implements IBaseCommand<IExecuteCommandParams, void> {
   constructor(
     @inject(GovernanceContract)

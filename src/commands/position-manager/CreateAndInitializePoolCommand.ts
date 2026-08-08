@@ -1,7 +1,7 @@
 import { ICreateAndInitializePoolCommandParams } from '@interfaces/commands/params/ICreateAndInitializePoolCommandParams';
 import { ICreatePoolCommandOutput } from '@interfaces/commands/outputs/ICreatePoolCommandOutput';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { sortTokens } from '@utils';
 
@@ -11,7 +11,7 @@ import { sortTokens } from '@utils';
  * @dev This command interacts with the PositionManager contract to create and initialize a pool
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CreateAndInitializePoolCommand
   implements IBaseCommand<ICreateAndInitializePoolCommandParams, ICreatePoolCommandOutput>
 {

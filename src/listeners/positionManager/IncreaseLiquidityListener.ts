@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IIncreaseLiquidityEvent } from '@interfaces/events/positionManager/IIncreaseLiquidityEvent';
@@ -9,7 +9,7 @@ import { EventLog } from 'ethers';
  * @notice Listens for IncreaseLiquidity events from the NonfungiblePositionManager contract
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class IncreaseLiquidityListener implements IEventListener<IIncreaseLiquidityEvent> {
   private isListening = false;
   private eventFilter: any;

@@ -1,6 +1,6 @@
 import { ICastVoteBySigCommandParams } from '@interfaces/commands/params/ICastVoteBySigCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to cast a vote by signature
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CastVoteBySigCommand implements IBaseCommand<ICastVoteBySigCommandParams, void> {
   constructor(
     @inject(GovernanceContract)

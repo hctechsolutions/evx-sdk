@@ -1,6 +1,6 @@
 import { ISwapExactOutputCommandParams } from '@interfaces/commands/params/ISwapExactOutputCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { SwapRouterContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { SwapRouterContract } from '@contracts';
  * @dev This command interacts with the SwapRouter contract to execute a swap with exact output
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class SwapExactOutputCommand implements IBaseCommand<ISwapExactOutputCommandParams, void> {
   constructor(
     @inject(SwapRouterContract)

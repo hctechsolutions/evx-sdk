@@ -1,6 +1,6 @@
 import { INoncesQueryParams } from '@interfaces/queries/params/INoncesQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the nonce of an owner address
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class NoncesQuery implements IBaseQuery<INoncesQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

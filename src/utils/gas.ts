@@ -2,17 +2,22 @@ import { ethers } from 'ethers';
 import { container } from 'tsyringe';
 import { RPC } from '@providers';
 
+function resolveRpc(rpc?: RPC): RPC {
+  return rpc ?? container.resolve(RPC);
+}
+
 /**
  * @notice Gets comprehensive gas price information from network
+ * @param rpc Optional scoped RPC; defaults to root container (legacy Web)
  * @return Object with gas prices in wei
  */
-export async function getNetworkGasPrices() {
-  const rpc = container.resolve(RPC);
-  if (!rpc.provider) {
+export async function getNetworkGasPrices(rpc?: RPC) {
+  const resolved = resolveRpc(rpc);
+  if (!resolved.provider) {
     throw new Error('RPC provider not initialized');
   }
 
-  const feeData = await rpc.provider.getFeeData();
+  const feeData = await resolved.provider.getFeeData();
 
   return {
     // Legacy gas price (for legacy transactions)
@@ -35,25 +40,30 @@ export async function getNetworkGasPrices() {
 
 /**
  * @notice Gets the current network gas price in wei
+ * @param rpc Optional scoped RPC; defaults to root container (legacy Web)
  * @return The current gas price in wei
  */
-export async function getCurrentNetworkGasPrice(): Promise<bigint> {
-  const rpc = container.resolve(RPC);
-  if (!rpc.provider) {
+export async function getCurrentNetworkGasPrice(rpc?: RPC): Promise<bigint> {
+  const resolved = resolveRpc(rpc);
+  if (!resolved.provider) {
     throw new Error('RPC provider not initialized');
   }
 
-  const feeData = await rpc.provider.getFeeData();
+  const feeData = await resolved.provider.getFeeData();
   return feeData.gasPrice ?? feeData.maxFeePerGas ?? 1n;
 }
 
 /**
  * @notice Converts gas estimate to ETH cost with different gas price scenarios
  * @param gasEstimateInUnits The gas estimate from contract (in gas units)
+ * @param rpc Optional scoped RPC; defaults to root container (legacy Web)
  * @return Object with costs in ETH for different gas price scenarios
  */
-export async function convertGasEstimateToEthCost(gasEstimateInUnits: bigint) {
-  const gasPricesInWei = await getNetworkGasPrices();
+export async function convertGasEstimateToEthCost(
+  gasEstimateInUnits: bigint,
+  rpc?: RPC
+) {
+  const gasPricesInWei = await getNetworkGasPrices(rpc);
 
   return {
     // Cost with current gas price

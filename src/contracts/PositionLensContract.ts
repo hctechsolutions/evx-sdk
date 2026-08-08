@@ -1,7 +1,7 @@
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
 import PositionLensABI from '@abis/PositionLens.json';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 
 /**
  * @title Position Lens Contract
@@ -9,7 +9,7 @@ import { injectable, inject, singleton } from 'tsyringe';
  * @dev Extends BaseContract to provide position lens functionality
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class PositionLensContract extends BaseContract {
   constructor(
     @inject(RPC)

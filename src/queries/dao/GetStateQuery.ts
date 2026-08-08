@@ -1,6 +1,6 @@
 import { IGetStateQueryParams } from '@interfaces/queries/params/IGetStateQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 import { ProposalState } from '@enums/ProposalState';
 
@@ -10,7 +10,7 @@ import { ProposalState } from '@enums/ProposalState';
  * @dev Queries the governance contract to get the current state of a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetStateQuery implements IBaseQuery<IGetStateQueryParams, ProposalState> {
   constructor(
     @inject(GovernanceContract)

@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IFeeAmountEnabledEvent } from '@interfaces/events/factory/IFeeAmountEnabledEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors the factory contract for fee amount enablement events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class FeeAmountEnabledListener implements IEventListener<IFeeAmountEnabledEvent> {
   private isListening = false;
   private eventFilter: any;

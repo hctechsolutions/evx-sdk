@@ -1,5 +1,5 @@
 import FactoryABI from '@abis/Factory.json';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
 
@@ -9,7 +9,7 @@ import { RPC } from '@providers';
  * @dev Provides methods to interact with the factory contract for pool creation
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class FactoryContract extends BaseContract {
   /**
    * @notice Creates a new factory contract instance

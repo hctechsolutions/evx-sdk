@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { ICollectPositionEvent } from '@interfaces/events/positionManager/ICollectPositionEvent';
@@ -9,7 +9,7 @@ import { EventLog } from 'ethers';
  * @notice Listens for Collect events from the NonfungiblePositionManager contract
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CollectPositionListener implements IEventListener<ICollectPositionEvent> {
   private isListening = false;
   private eventFilter: any;

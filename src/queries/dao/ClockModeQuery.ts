@@ -1,6 +1,6 @@
 import { IClockModeQueryParams } from '@interfaces/queries/params/IClockModeQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the clock mode (e.g., "mode=blocknumber&from=default")
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ClockModeQuery implements IBaseQuery<IClockModeQueryParams, string> {
   constructor(
     @inject(GovernanceContract)

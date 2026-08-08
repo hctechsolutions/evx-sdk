@@ -1,6 +1,6 @@
 import { IProposalSnapshotQueryParams } from '@interfaces/queries/params/IProposalSnapshotQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the snapshot block/timestamp for a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ProposalSnapshotQuery implements IBaseQuery<IProposalSnapshotQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

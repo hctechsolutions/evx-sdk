@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IVoteReducedEvent } from '@interfaces/events/governance/IVoteReducedEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors the governance contract for vote reduction events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class VoteReducedListener implements IEventListener<IVoteReducedEvent> {
   private isListening = false;
   private eventFilter: any;

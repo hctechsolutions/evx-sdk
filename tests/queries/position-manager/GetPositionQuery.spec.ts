@@ -21,13 +21,15 @@ const { __positionsMock } = jest.requireMock('@contracts');
 describe('GetPositionQuery', () => {
   let query: GetPositionQuery;
   let mockRpc: jest.Mocked<RPC>;
+  let mockPositionManager: PositionManagerContract;
 
   beforeEach(() => {
     mockRpc = {
       provider: {} as any,
       setProvider: jest.fn(),
     } as any;
-    query = new GetPositionQuery(mockRpc);
+    mockPositionManager = new PositionManagerContract(mockRpc as any) as any;
+    query = new GetPositionQuery(mockRpc, mockPositionManager);
     __positionsMock.mockReset();
   });
 

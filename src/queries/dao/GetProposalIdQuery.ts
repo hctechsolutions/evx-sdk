@@ -1,6 +1,6 @@
 import { IGetProposalIdQueryParams } from '@interfaces/queries/params/IGetProposalIdQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to calculate the proposal ID from proposal details
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetProposalIdQuery implements IBaseQuery<IGetProposalIdQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

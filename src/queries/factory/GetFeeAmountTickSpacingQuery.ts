@@ -1,6 +1,6 @@
 import { IGetFeeAmountTickSpacingQueryParams } from '@interfaces/queries/params/IGetFeeAmountTickSpacingQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { FactoryContract } from '@contracts';
  * @dev Queries the factory contract to get the tick spacing configuration
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetFeeAmountTickSpacingQuery
   implements IBaseQuery<IGetFeeAmountTickSpacingQueryParams, number>
 {

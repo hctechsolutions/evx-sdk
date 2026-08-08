@@ -1,7 +1,8 @@
 import { ISetDynamicFeeCommandParams } from '@interfaces/commands/params/ISetDynamicFeeCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, singleton } from 'tsyringe';
+import { inject, injectable, scoped, Lifecycle } from 'tsyringe';
 import { PoolContract } from '@contracts';
+import { RPC } from '@providers';
 
 /**
  * @title Set Dynamic Fee Command
@@ -9,14 +10,21 @@ import { PoolContract } from '@contracts';
  * @dev Uses ABI synced from Foundry artifacts (AD-6)
  */
 @injectable()
-@singleton()
-export class SetDynamicFeeCommand implements IBaseCommand<ISetDynamicFeeCommandParams, void> {
+@scoped(Lifecycle.ContainerScoped)
+export class SetDynamicFeeCommand
+  implements IBaseCommand<ISetDynamicFeeCommandParams, void>
+{
+  constructor(
+    @inject(RPC)
+    private readonly rpc: RPC
+  ) {}
+
   /**
    * @notice Executes setDynamicFee on the target pool
    * @param params Pool address, new fee, signer, and lifecycle callbacks
    */
   async execute(params: ISetDynamicFeeCommandParams): Promise<void> {
-    const pool = new PoolContract(params.poolAddress);
+    const pool = new PoolContract(params.poolAddress, this.rpc);
     await pool.setSigner(params.signer);
 
     try {

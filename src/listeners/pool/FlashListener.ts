@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IFlashEvent } from '@interfaces/events/pool/IFlashEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors a pool contract for flash events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class FlashListener implements IEventListener<IFlashEvent> {
   private isListening = false;
   private eventFilter: any;

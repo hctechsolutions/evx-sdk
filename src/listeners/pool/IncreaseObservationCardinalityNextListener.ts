@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IIncreaseObservationCardinalityNextEvent } from '@interfaces/events/pool/IIncreaseObservationCardinalityNextEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors a pool contract for increase observation cardinality next events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class IncreaseObservationCardinalityNextListener
   implements IEventListener<IIncreaseObservationCardinalityNextEvent>
 {

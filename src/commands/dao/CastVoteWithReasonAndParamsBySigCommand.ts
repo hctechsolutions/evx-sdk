@@ -1,6 +1,6 @@
 import { ICastVoteWithReasonAndParamsBySigCommandParams } from '@interfaces/commands/params/ICastVoteWithReasonAndParamsBySigCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to cast a vote with reason and additional parameters by signature
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CastVoteWithReasonAndParamsBySigCommand
   implements IBaseCommand<ICastVoteWithReasonAndParamsBySigCommandParams, void>
 {

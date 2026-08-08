@@ -1,6 +1,6 @@
 import { IProposalThresholdQueryParams } from '@interfaces/queries/params/IProposalThresholdQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the minimum voting power required to create a proposal
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class ProposalThresholdQuery implements IBaseQuery<IProposalThresholdQueryParams, bigint> {
   constructor(
     @inject(GovernanceContract)

@@ -17,6 +17,8 @@ import { Signer } from 'ethers';
 
 /**
  * @notice Gets all writer contracts that need signer and chain updates
+ * @dev Resolves from the **root** container — legacy single-consumer (Web).
+ *      Multi-request hosts must use {@link createSdkScope} instead.
  * @returns Array of contract instances that need configuration
  */
 function getWriterContracts() {
@@ -44,8 +46,9 @@ export async function getAllContracts(): Promise<BaseContract[]> {
 
 /**
  * @title Set All Signer
- * @notice Sets the signer for all writer contracts
+ * @notice Sets the signer for all writer contracts (root / legacy Web)
  * @param signer The signer to use for transactions
+ * @deprecated For multi-request backends prefer {@link createSdkScope}
  */
 export async function setAllSigner(signer: Signer) {
   await Promise.all(getWriterContracts().map((c: any) => c.setSigner(signer)));
@@ -53,8 +56,9 @@ export async function setAllSigner(signer: Signer) {
 
 /**
  * @title Set All Chain
- * @notice Sets the chain for all writer contracts
+ * @notice Sets the chain for all contracts on the root container (legacy Web)
  * @param chain The chain to use for contract interactions
+ * @deprecated For multi-request backends prefer {@link createSdkScope}
  */
 export async function setAllChain(chain: ChainName) {
   const contracts = await getAllContracts();
@@ -63,9 +67,10 @@ export async function setAllChain(chain: ChainName) {
 
 /**
  * @title Set All Chain by ID
- * @notice Sets the chain for all writer contracts using chain ID
+ * @notice Sets the chain for all contracts using chain ID (root / legacy Web)
  * @param chainId The chain ID to use for contract interactions
  * @throws Error if chain ID is not found
+ * @deprecated For multi-request backends prefer {@link createSdkScope}
  */
 export async function setAllChainById(chainId: ChainId) {
   const chainName = getChainNameById(chainId);
@@ -74,8 +79,9 @@ export async function setAllChainById(chainId: ChainId) {
 
 /**
  * @title Set RPC Provider
- * @notice Sets the RPC provider URL for the SDK
+ * @notice Sets the RPC provider URL on the root container (legacy Web)
  * @param rpcUrl The RPC URL to connect to
+ * @deprecated For multi-request backends prefer {@link createSdkScope}
  */
 export async function setRPCProvider(rpcUrl: string): Promise<void> {
   const rpc = container.resolve(RPC);

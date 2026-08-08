@@ -13,4 +13,9 @@ export interface IRPC {
    * @param newRPC The new RPC URL to connect to
    */
   setProvider(newRPC: string): void;
+
+  /**
+   * @notice Tears down the current JsonRpcProvider (sockets/timers)
+   */
+  destroyProvider(): void;
 }

@@ -1,7 +1,7 @@
 import { IGetTokenURIQueryParams } from '@interfaces/queries/params/IGetTokenURIQueryParams';
 import { IGetTokenURIQueryOutput } from '@interfaces/queries/outputs/IGetTokenURIQueryOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
 /**
@@ -10,7 +10,7 @@ import { PositionManagerContract } from '@contracts';
  * @dev This query interacts with the PositionManagerContract to get and decode the token URI
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetTokenURIQuery
   implements IBaseQuery<IGetTokenURIQueryParams, IGetTokenURIQueryOutput>
 {

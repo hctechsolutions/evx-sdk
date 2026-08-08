@@ -1,7 +1,7 @@
 import { IGetPositionParams } from '@interfaces/queries/params/IGetPositionParams';
 import { IGetPositionOutput } from '@interfaces/queries/outputs/IGetPositionOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 import { RPC } from '@providers';
 
@@ -11,7 +11,7 @@ import { RPC } from '@providers';
  * @dev This query interacts with the PositionManagerContract to get position data
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetPositionQuery implements IBaseQuery<IGetPositionParams, IGetPositionOutput> {
   constructor(
     @inject(RPC)

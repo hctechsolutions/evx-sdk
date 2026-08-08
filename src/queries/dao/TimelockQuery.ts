@@ -1,6 +1,6 @@
 import { ITimelockQueryParams } from '@interfaces/queries/params/ITimelockQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the timelock controller address
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class TimelockQuery implements IBaseQuery<ITimelockQueryParams, string> {
   constructor(
     @inject(GovernanceContract)

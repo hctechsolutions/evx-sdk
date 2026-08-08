@@ -1,6 +1,6 @@
 import { IIncreaseLiquidityCommandParams } from '@interfaces/commands/params/IIncreaseLiquidityCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PositionManagerContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { PositionManagerContract } from '@contracts';
  * @dev This command interacts with the PositionManager contract to add liquidity
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class IncreaseLiquidityCommand
   implements IBaseCommand<IIncreaseLiquidityCommandParams, void>
 {

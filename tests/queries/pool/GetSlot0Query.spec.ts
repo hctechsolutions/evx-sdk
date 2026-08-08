@@ -54,7 +54,10 @@ describe('GetSlot0Query', () => {
 
     const result = await query.execute(mockParams);
 
-    expect(PoolContract).toHaveBeenCalledWith(mockParams.poolAddress);
+    expect(PoolContract).toHaveBeenCalledWith(
+      mockParams.poolAddress,
+      mockRPC
+    );
     expect(mockPoolInstance.slot0.staticCall).toHaveBeenCalledWith();
 
     expect(result).toEqual({

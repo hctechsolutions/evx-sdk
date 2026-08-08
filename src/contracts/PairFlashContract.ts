@@ -1,5 +1,5 @@
 import { BaseContract } from './BaseContract';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import PairFlashAbi from '@abis/PairFlash.json';
 import { RPC } from '@providers';
 
@@ -9,7 +9,7 @@ import { RPC } from '@providers';
  * @dev This contract interacts with the PairFlash contract
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class PairFlashContract extends BaseContract {
   constructor(
     @inject(RPC)

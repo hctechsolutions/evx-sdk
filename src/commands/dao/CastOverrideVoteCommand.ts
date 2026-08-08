@@ -1,6 +1,6 @@
 import { ICastOverrideVoteCommandParams } from '@interfaces/commands/params/ICastOverrideVoteCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to cast an override vote
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CastOverrideVoteCommand implements IBaseCommand<ICastOverrideVoteCommandParams, void> {
   constructor(
     @inject(GovernanceContract)

@@ -1,6 +1,6 @@
 import { IBallotTypeHashQueryParams } from '@interfaces/queries/params/IBallotTypeHashQueryParams';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev Queries the governance contract to get the BALLOT_TYPEHASH for EIP-712 signatures
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class BallotTypeHashQuery implements IBaseQuery<IBallotTypeHashQueryParams, string> {
   constructor(
     @inject(GovernanceContract)

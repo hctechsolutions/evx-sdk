@@ -1,7 +1,7 @@
 import { IGetPopulatedTicksQueryParams } from '@interfaces/queries/params/IGetPopulatedTicksQueryParams';
 import { IGetPopulatedTicksOutput } from '@interfaces/queries/outputs/IGetPopulatedTicksOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { TickLensContract } from '@contracts';
 import { TICK_BITMAP_INDEX } from '@resources';
 
@@ -11,7 +11,7 @@ import { TICK_BITMAP_INDEX } from '@resources';
  * @dev This query interacts with the TickLensContract to get the populated ticks
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetPopulatedTicksQuery
   implements IBaseQuery<IGetPopulatedTicksQueryParams, IGetPopulatedTicksOutput>
 {

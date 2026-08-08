@@ -1,7 +1,7 @@
 import { ICheckPoolExistsQueryParams } from '@interfaces/queries/params/ICheckPoolExistsQueryParams';
 import { ICheckPoolExistsOutput } from '@interfaces/queries/outputs/ICheckPoolExistsOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { FactoryContract } from '@contracts';
 
 /**
@@ -10,7 +10,7 @@ import { FactoryContract } from '@contracts';
  * @dev Queries the factory contract to get the pool address and determines existence
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class CheckPoolExistsQuery
   implements IBaseQuery<ICheckPoolExistsQueryParams, ICheckPoolExistsOutput>
 {

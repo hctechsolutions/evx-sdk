@@ -1,6 +1,6 @@
 import { IRelayCommandParams } from '@interfaces/commands/params/IRelayCommandParams';
 import { IBaseCommand } from '@interfaces/commands/IBaseCommand';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 
 /**
@@ -9,7 +9,7 @@ import { GovernanceContract } from '@contracts';
  * @dev This command interacts with the Governance contract to relay calls to other contracts
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class RelayCommand implements IBaseCommand<IRelayCommandParams, void> {
   constructor(
     @inject(GovernanceContract)

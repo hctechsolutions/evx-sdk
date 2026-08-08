@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { PoolContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IMintEvent } from '@interfaces/events/pool/IMintEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors a pool contract for mint events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class MintListener implements IEventListener<IMintEvent> {
   private isListening = false;
   private eventFilter: any;

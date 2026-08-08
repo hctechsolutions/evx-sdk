@@ -1,7 +1,7 @@
 import { IGetTicksFromPriceRangeQueryParams } from '@interfaces/queries/params/IGetTicksFromPriceRangeQueryParams';
 import { IGetTicksFromPriceRangeOutput } from '@interfaces/queries/outputs/IGetTicksFromPriceRangeOutput';
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { TickLensContract } from '@contracts';
 
 /**
@@ -10,7 +10,7 @@ import { TickLensContract } from '@contracts';
  * @dev This query interacts with the TickLensContract to convert sqrt prices to ticks
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class GetTicksFromPriceRangeQuery
   implements IBaseQuery<IGetTicksFromPriceRangeQueryParams, IGetTicksFromPriceRangeOutput>
 {

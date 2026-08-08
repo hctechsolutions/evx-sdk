@@ -1,5 +1,5 @@
 import PositionManagerABI from '@abis/NonfungiblePositionManager.json';
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { BaseContract } from './BaseContract';
 import { RPC } from '@providers';
 
@@ -9,7 +9,7 @@ import { RPC } from '@providers';
  * @dev Provides methods to interact with the position manager contract for position management
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class PositionManagerContract extends BaseContract {
   /**
    * @notice Creates a new position manager contract instance

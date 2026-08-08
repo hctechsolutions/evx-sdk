@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IOverrideVoteCastEvent } from '@interfaces/events/governance/IOverrideVoteCastEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors the governance contract for override vote casting events
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class OverrideVoteCastListener implements IEventListener<IOverrideVoteCastEvent> {
   private isListening = false;
   private eventFilter: any;

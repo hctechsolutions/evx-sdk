@@ -1,4 +1,4 @@
-import { injectable, inject, singleton } from 'tsyringe';
+import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { GovernanceContract } from '@contracts';
 import { IEventListener } from '@interfaces/listeners/IEventListener';
 import { IVoteCastWithParamsEvent } from '@interfaces/events/governance/IVoteCastWithParamsEvent';
@@ -10,7 +10,7 @@ import { EventLog } from 'ethers';
  * @dev This listener monitors the governance contract for vote casting events with additional parameters
  */
 @injectable()
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class VoteCastWithParamsListener implements IEventListener<IVoteCastWithParamsEvent> {
   private isListening = false;
   private eventFilter: any;

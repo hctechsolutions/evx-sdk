@@ -1,13 +1,13 @@
 import { IRPC } from '@interfaces/providers/IRPC';
 import { JsonRpcProvider } from 'ethers';
-import { singleton } from 'tsyringe';
+import { scoped, Lifecycle } from 'tsyringe';
 
 /**
  * @title RPC Provider
  * @notice Manages the RPC connection for the SDK
- * @dev Provides a singleton instance of JsonRpcProvider for blockchain interactions
+ * @dev ContainerScoped — one instance per DI scope (AD-21)
  */
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class RPC implements IRPC {
   provider: JsonRpcProvider | null;
 
@@ -24,6 +24,17 @@ export class RPC implements IRPC {
    * @param newRPC The new RPC URL to connect to
    */
   setProvider(newRPC: string) {
+    this.destroyProvider();
     this.provider = new JsonRpcProvider(newRPC);
+  }
+
+  /**
+   * @notice Tears down the current JsonRpcProvider (sockets/timers)
+   */
+  destroyProvider(): void {
+    if (this.provider && typeof this.provider.destroy === 'function') {
+      this.provider.destroy();
+    }
+    this.provider = null;
   }
 }
