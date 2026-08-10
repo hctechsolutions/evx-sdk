@@ -3,6 +3,7 @@ import { IQuoteExactInputOutput } from '@interfaces/queries/outputs/IQuoteExactI
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { QuoterContract } from '@contracts';
+import { rethrowQuoteError } from '@utils';
 
 /**
  * @title Quote Exact Input Query
@@ -23,17 +24,22 @@ export class QuoteExactInputQuery
    * @notice Executes the quote exact input query
    * @param params The parameters for getting the quote
    * @returns The quote data including amount out, price impact, and gas estimate
-   * @throws Error if quote fails (reverts from contract)
+   * @throws QuoteSdkError with AD-26 `code` when Quoter emits a typed custom error;
+   *         opaque / Panic reverts are rethrown without AD-26 code
    */
   async execute(params: IQuoteExactInputQueryParams): Promise<IQuoteExactInputOutput> {
-    const [amountOut, sqrtPriceX96AfterList, initializedTicksCrossedList, gasEstimate] =
-      await this.quoter.instance.quoteExactInput.staticCall(params.path, params.amountIn);
+    try {
+      const [amountOut, sqrtPriceX96AfterList, initializedTicksCrossedList, gasEstimate] =
+        await this.quoter.instance.quoteExactInput.staticCall(params.path, params.amountIn);
 
-    return {
-      amountOut,
-      sqrtPriceX96AfterList,
-      initializedTicksCrossedList,
-      gasEstimate
-    };
+      return {
+        amountOut,
+        sqrtPriceX96AfterList,
+        initializedTicksCrossedList,
+        gasEstimate
+      };
+    } catch (err) {
+      rethrowQuoteError(err);
+    }
   }
 }

@@ -282,7 +282,7 @@
   },
   {
     "type": "error",
-    "name": "NoOpSwap",
+    "name": "InvalidRoute",
     "inputs": []
   },
   {
@@ -303,6 +303,32 @@
   },
   {
     "type": "error",
+    "name": "PoolQuoteFailed",
+    "inputs": [
+      {
+        "name": "reason",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroLiquidity",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ArithmeticInternal",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NoOpSwap",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "PoolNotFound",
     "inputs": [
       {
@@ -319,17 +345,6 @@
         "name": "fee",
         "type": "uint24",
         "internalType": "uint24"
-      }
-    ]
-  },
-  {
-    "type": "error",
-    "name": "PoolQuoteFailed",
-    "inputs": [
-      {
-        "name": "reason",
-        "type": "bytes",
-        "internalType": "bytes"
       }
     ]
   }

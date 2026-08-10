@@ -3,6 +3,7 @@ import { IQuoteExactOutputSingleOutput } from '@interfaces/queries/outputs/IQuot
 import { IBaseQuery } from '@interfaces/queries/IBaseQuery';
 import { injectable, inject, scoped, Lifecycle } from 'tsyringe';
 import { QuoterContract } from '@contracts';
+import { rethrowQuoteError } from '@utils';
 
 /**
  * @title Quote Exact Output Single Query
@@ -23,25 +24,30 @@ export class QuoteExactOutputSingleQuery
    * @notice Executes the quote exact output single query
    * @param params The parameters for getting the quote
    * @returns The quote data including amount in, price impact, and gas estimate
-   * @throws Error if quote fails (reverts from contract)
+   * @throws QuoteSdkError with AD-26 `code` when Quoter emits a typed custom error;
+   *         opaque / Panic reverts are rethrown without AD-26 code
    */
   async execute(
     params: IQuoteExactOutputSingleQueryParams
   ): Promise<IQuoteExactOutputSingleOutput> {
-    const [amountIn, sqrtPriceX96After, initializedTicksCrossed, gasEstimate] =
-      await this.quoter.instance.quoteExactOutputSingle.staticCall({
-        tokenIn: params.tokenIn,
-        tokenOut: params.tokenOut,
-        amount: params.amount,
-        fee: params.fee,
-        sqrtPriceLimitX96: params.sqrtPriceLimitX96 ?? 0n
-      });
+    try {
+      const [amountIn, sqrtPriceX96After, initializedTicksCrossed, gasEstimate] =
+        await this.quoter.instance.quoteExactOutputSingle.staticCall({
+          tokenIn: params.tokenIn,
+          tokenOut: params.tokenOut,
+          amount: params.amount,
+          fee: params.fee,
+          sqrtPriceLimitX96: params.sqrtPriceLimitX96 ?? 0n
+        });
 
-    return {
-      amountIn,
-      sqrtPriceX96After,
-      initializedTicksCrossed,
-      gasEstimate
-    };
+      return {
+        amountIn,
+        sqrtPriceX96After,
+        initializedTicksCrossed,
+        gasEstimate
+      };
+    } catch (err) {
+      rethrowQuoteError(err);
+    }
   }
 }
