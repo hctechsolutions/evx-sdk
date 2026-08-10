@@ -97,10 +97,11 @@ export function findShortestPath(
 export function findShortestPathEncoded(
   pools: Pool[],
   inputToken: string,
-  outputToken: string
+  outputToken: string,
+  isExactOutput = false
 ): EncodedPath | null {
   const path = findShortestPath(pools, inputToken, outputToken);
-  return path ? encodePath(path, pools) : null;
+  return path ? encodePath(path, pools, isExactOutput) : null;
 }
 
 /**
