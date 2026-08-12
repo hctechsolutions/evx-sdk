@@ -4,6 +4,9 @@ export * from './factory';
 // Governance Listeners
 export * from './governance';
 
+// Airdrop Listeners
+export * from './airdrop';
+
 // Pool Listeners
 export * from './pool';
 

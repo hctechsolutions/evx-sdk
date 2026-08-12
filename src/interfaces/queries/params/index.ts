@@ -44,3 +44,4 @@ export * from './IGetTokenURIQueryParams';
 export * from './IGetTicksFromPriceRangeQueryParams';
 export * from './ICheckPoolExistsQueryParams';
 export * from './IGetSlot0QueryParams';
+export * from './IIsClaimedQueryParams';

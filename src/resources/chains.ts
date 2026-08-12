@@ -20,7 +20,10 @@ export const chains = {
       pairFlash: '0xEdB5297386F17C17cdCC93804153BcB53235fc98',
       tickLens: '0x25E54207295363F8421f3A0D27f54DaacC33A7Cd',
       factory: '0xfCe1909B6aF92ADD218C90BF5f8aF87A4158e9EF',
-      dao: '0x7e72d7697406fDc0eB21E6395663c39E17654413'
+      dao: '0x7e72d7697406fDc0eB21E6395663c39E17654413',
+      // Story 5.3 — Sepolia airdrop (DeployAirdropDistributor 2026-08-12)
+      airdropDistributor: '0x5Ccf8AdF20D9E236033586E943Da9c8299905896',
+      evxToken: '0x5587fa17Bef4633e6d5257D6A69c9FD2c9029342'
     }
   },
   hoodi: {
@@ -38,7 +41,10 @@ export const chains = {
       pairFlash: '0xbFaC029008475Cc2F209C41876fd7f258EA82b1E',
       tickLens: '0x966Cb9B74da374Ad6776Fd44833CE0C21a8c8dA4',
       factory: '0x04dE425EE9A0b15721764D7CC8e83B7Fd5E17Fd8',
-      dao: '0xBde2E7EE0163C0568467bAbe6252E8C3D24Dfce6'
+      dao: '0xBde2E7EE0163C0568467bAbe6252E8C3D24Dfce6',
+      // Placeholder until Hoodi airdrop deploy (Sepolia is MVP minimum)
+      airdropDistributor: '0x0000000000000000000000000000000000000000',
+      evxToken: '0x0000000000000000000000000000000000000000'
     }
   }
 };
