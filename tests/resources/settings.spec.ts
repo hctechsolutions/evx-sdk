@@ -9,7 +9,8 @@ import {
   PairFlashContract,
   PositionLensContract,
   QuoterContract,
-  TickLensContract
+  TickLensContract,
+  AirdropDistributorContract
 } from '@contracts';
 import {
   setAllSigner,
@@ -72,7 +73,8 @@ describe('writer contract setters with dynamic resolution', () => {
         contractClass === PairFlashContract ||
         contractClass === PositionLensContract ||
         contractClass === QuoterContract ||
-        contractClass === TickLensContract
+        contractClass === TickLensContract ||
+        contractClass === AirdropDistributorContract
       ) {
         return mockReader;
       }

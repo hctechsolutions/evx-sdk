@@ -1,5 +1,6 @@
 import {
   BaseContract,
+  AirdropDistributorContract,
   FactoryContract,
   GovernanceContract,
   PairFlashContract,
@@ -58,7 +59,8 @@ function resolveScopeContracts(scope: DependencyContainer): BaseContract[] {
     scope.resolve(PositionLensContract),
     scope.resolve(QuoterContract),
     scope.resolve(TickLensContract),
-    scope.resolve(FactoryContract)
+    scope.resolve(FactoryContract),
+    scope.resolve(AirdropDistributorContract)
   ];
   return [...readers, ...writers];
 }

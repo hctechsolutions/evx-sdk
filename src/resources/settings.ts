@@ -6,7 +6,8 @@ import {
   PositionManagerContract,
   QuoterContract,
   SwapRouterContract,
-  TickLensContract
+  TickLensContract,
+  AirdropDistributorContract
 } from '@contracts';
 import { ChainName, ChainId } from '@interfaces';
 import { FactoryContract } from '@contracts';
@@ -36,7 +37,8 @@ function getReaderContracts() {
     container.resolve(PositionLensContract),
     container.resolve(QuoterContract),
     container.resolve(TickLensContract),
-    container.resolve(FactoryContract)
+    container.resolve(FactoryContract),
+    container.resolve(AirdropDistributorContract)
   ];
 }
 

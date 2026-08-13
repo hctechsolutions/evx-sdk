@@ -3,7 +3,11 @@
     "type": "constructor",
     "inputs": [
       { "name": "token_", "type": "address", "internalType": "address" },
-      { "name": "merkleRoot_", "type": "bytes32", "internalType": "bytes32" }
+      { "name": "merkleRoot_", "type": "bytes32", "internalType": "bytes32" },
+      { "name": "claimDeadline_", "type": "uint256", "internalType": "uint256" },
+      { "name": "distributionIdHash_", "type": "bytes32", "internalType": "bytes32" },
+      { "name": "totalAllocated_", "type": "uint256", "internalType": "uint256" },
+      { "name": "treasury_", "type": "address", "internalType": "address" }
     ],
     "stateMutability": "nonpayable"
   },
@@ -41,6 +45,62 @@
     "stateMutability": "view"
   },
   {
+    "type": "function",
+    "name": "claimDeadline",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "distributionIdHash",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalAllocated",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "claimedAmount",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "treasury",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "unclaimedSwept",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sweepUnclaimed",
+    "inputs": [{ "name": "to", "type": "address", "internalType": "address" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "sweepExcess",
+    "inputs": [{ "name": "to", "type": "address", "internalType": "address" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
     "type": "event",
     "name": "Claimed",
     "inputs": [
@@ -51,13 +111,51 @@
     "anonymous": false
   },
   {
-    "type": "error",
-    "name": "AlreadyClaimed",
-    "inputs": []
+    "type": "event",
+    "name": "DistributorInitialized",
+    "inputs": [
+      { "name": "merkleRoot", "type": "bytes32", "indexed": false, "internalType": "bytes32" },
+      { "name": "claimDeadline", "type": "uint256", "indexed": false, "internalType": "uint256" },
+      { "name": "token", "type": "address", "indexed": false, "internalType": "address" },
+      { "name": "distributionIdHash", "type": "bytes32", "indexed": false, "internalType": "bytes32" },
+      { "name": "totalAllocated", "type": "uint256", "indexed": false, "internalType": "uint256" },
+      { "name": "treasury", "type": "address", "indexed": false, "internalType": "address" }
+    ],
+    "anonymous": false
   },
   {
-    "type": "error",
-    "name": "InvalidProof",
-    "inputs": []
-  }
+    "type": "event",
+    "name": "UnclaimedSwept",
+    "inputs": [
+      { "name": "to", "type": "address", "indexed": false, "internalType": "address" },
+      { "name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ExcessSwept",
+    "inputs": [
+      { "name": "to", "type": "address", "indexed": false, "internalType": "address" },
+      { "name": "amount", "type": "uint256", "indexed": false, "internalType": "uint256" }
+    ],
+    "anonymous": false
+  },
+  { "type": "error", "name": "AlreadyClaimed", "inputs": [] },
+  { "type": "error", "name": "InvalidProof", "inputs": [] },
+  { "type": "error", "name": "InvalidToken", "inputs": [] },
+  { "type": "error", "name": "InvalidMerkleRoot", "inputs": [] },
+  { "type": "error", "name": "InvalidDeadline", "inputs": [] },
+  { "type": "error", "name": "InvalidTotalAllocated", "inputs": [] },
+  { "type": "error", "name": "InvalidDistributionIdHash", "inputs": [] },
+  { "type": "error", "name": "InvalidTreasury", "inputs": [] },
+  { "type": "error", "name": "InvalidAmount", "inputs": [] },
+  { "type": "error", "name": "InvalidAccount", "inputs": [] },
+  { "type": "error", "name": "ExceedsTotalAllocated", "inputs": [] },
+  { "type": "error", "name": "ClaimWindowClosed", "inputs": [] },
+  { "type": "error", "name": "ClaimWindowOpen", "inputs": [] },
+  { "type": "error", "name": "Unauthorized", "inputs": [] },
+  { "type": "error", "name": "AlreadySwept", "inputs": [] },
+  { "type": "error", "name": "UnclaimedNotSwept", "inputs": [] },
+  { "type": "error", "name": "InsufficientBalanceForUnclaimed", "inputs": [] }
 ]

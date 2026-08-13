@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { createSdkScope } from '../../src/scope';
 import { RPC } from '@providers';
-import { FactoryContract, QuoterContract } from '@contracts';
+import { FactoryContract, QuoterContract, AirdropDistributorContract } from '@contracts';
 import { GetPoolQuery } from '@queries/pool';
 
 describe('createSdkScope (AD-21 isolation)', () => {
@@ -40,11 +40,13 @@ describe('createSdkScope (AD-21 isolation)', () => {
 
           const sepoliaFactory = sepolia.resolve(FactoryContract);
           const sepoliaQuoter = sepolia.resolve(QuoterContract);
+          const sepoliaAirdrop = sepolia.resolve(AirdropDistributorContract);
           const sepoliaRpc = sepolia.resolve(RPC);
 
           expect(sepoliaRpc).toBe(sepolia.rpc);
           expect(sepoliaFactory.chain).toBe('sepolia');
           expect(sepoliaQuoter.chain).toBe('sepolia');
+          expect(sepoliaAirdrop.chain).toBe('sepolia');
           expect(sepoliaFactory.rpc).toBe(sepolia.rpc);
           expect(sepoliaQuoter.rpc).toBe(sepolia.rpc);
         }),
@@ -53,11 +55,13 @@ describe('createSdkScope (AD-21 isolation)', () => {
 
           const hoodiFactory = hoodi.resolve(FactoryContract);
           const hoodiQuoter = hoodi.resolve(QuoterContract);
+          const hoodiAirdrop = hoodi.resolve(AirdropDistributorContract);
           const hoodiRpc = hoodi.resolve(RPC);
 
           expect(hoodiRpc).toBe(hoodi.rpc);
           expect(hoodiFactory.chain).toBe('hoodi');
           expect(hoodiQuoter.chain).toBe('hoodi');
+          expect(hoodiAirdrop.chain).toBe('hoodi');
           expect(hoodiFactory.rpc).toBe(hoodi.rpc);
           expect(hoodiQuoter.rpc).toBe(hoodi.rpc);
         })
@@ -73,6 +77,8 @@ describe('createSdkScope (AD-21 isolation)', () => {
       );
       expect(sepolia.resolve(FactoryContract).chain).toBe('sepolia');
       expect(hoodi.resolve(FactoryContract).chain).toBe('hoodi');
+      expect(sepolia.resolve(AirdropDistributorContract).chain).toBe('sepolia');
+      expect(hoodi.resolve(AirdropDistributorContract).chain).toBe('hoodi');
 
       const rootRpc = container.resolve(RPC);
       expect(rootRpc).not.toBe(sepolia.rpc);
