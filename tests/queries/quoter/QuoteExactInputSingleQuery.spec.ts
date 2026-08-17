@@ -88,6 +88,25 @@ describe('QuoteExactInputSingleQuery', () => {
     ).rejects.toMatchObject({ code: 'insufficient_liquidity' });
   });
 
+  it('surfaces AD-26 code for ZeroLiquidity revert', async () => {
+    const { Interface } = await import('ethers');
+    const iface = new Interface(['error ZeroLiquidity()']);
+    const data = iface.encodeErrorResult('ZeroLiquidity', []);
+    (
+      quoterContract.instance.quoteExactInputSingle.staticCall as jest.Mock
+    ).mockRejectedValue({ code: 'CALL_EXCEPTION', data });
+
+    await expect(
+      query.execute({
+        tokenIn: '0x1',
+        tokenOut: '0x2',
+        fee: 3000n,
+        amountIn: 1n,
+        sqrtPriceLimitX96: 0n
+      })
+    ).rejects.toMatchObject({ code: 'zero_liquidity' });
+  });
+
   it('does not invent AD-26 from opaque Panic CALL_EXCEPTION', async () => {
     (
       quoterContract.instance.quoteExactInputSingle.staticCall as jest.Mock
