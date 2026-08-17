@@ -50,6 +50,12 @@ describe('quoteErrors AD-26 decoder', () => {
     expect(decodeQuoteErrorCode(wrapped)).toBe('insufficient_liquidity');
   });
 
+  it('unwraps PoolQuoteFailed(ArithmeticInternal) to arithmetic_internal', () => {
+    const inner = iface.encodeErrorResult('ArithmeticInternal', []);
+    const wrapped = iface.encodeErrorResult('PoolQuoteFailed', [inner]);
+    expect(decodeQuoteErrorCode(wrapped)).toBe('arithmetic_internal');
+  });
+
   it('rethrowQuoteError attaches code only for typed errors', () => {
     const data = iface.encodeErrorResult('InsufficientLiquidity', []);
     expect(() =>
