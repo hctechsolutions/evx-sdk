@@ -46,5 +46,25 @@ export const chains = {
       airdropDistributor: '0x0000000000000000000000000000000000000000',
       evxToken: '0x0000000000000000000000000000000000000000'
     }
+  },
+  anvil: {
+    metadata: {
+      chainId: 31337,
+      explorer: 'http://127.0.0.1:8545',
+      nativeToken: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae'
+    },
+    contracts: {
+      positionDescriptor: '0xa85233c63b9ee964add6f2cffe00fd84eb32338f',
+      positionManager: '0x4a679253410272dd5232b3ff7cf5dbb88f295319',
+      positionLens: '0x67d269191c92caf3cd7723f116c85e6e9bf55933',
+      swapRouter: '0x7a2088a1bfc9d81c55368ae168c2c02570cb814f',
+      swapQuoter: '0xc5a5c42992decbae36851359345fe25997f5c42d',
+      pairFlash: '0x09635f643e140090a9a8dcd712ed6285858cebef',
+      tickLens: '0xe6e340d132b5f46d1e472debcd681b2abc16e57e',
+      factory: '0x3aa5ebb10dc797cac828524e59a333d0a371443c',
+      dao: '0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0',
+      airdropDistributor: '0x0000000000000000000000000000000000000000',
+      evxToken: '0x5fbdb2315678afecb367f032d93f642f64180aa3'
+    }
   }
 };
