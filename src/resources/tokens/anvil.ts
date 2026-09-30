@@ -6,31 +6,28 @@ import type { CatalogToken } from './types';
 import { quotationsBySymbol } from './quotations';
 
 export const anvil: CatalogToken[] = [
-  {
-    address: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae',
-    name: 'Wrapped Ether',
-    symbol: 'WETH',
-    decimals: 18,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
-    quotations: quotationsBySymbol.WETH
-  },
-  {
-    address: '0xc3e53f4d16ae77db1c982e75a937b9f60fe63690',
-    name: 'Fetch.ai',
-    symbol: 'FET',
-    decimals: 18,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xaea46A60368A7bD060eec7DF8CBa43b7EF41ad85/logo.png',
-    quotations: quotationsBySymbol.FET
-  },
-  {
-    address: '0x84ea74d481ee0a5332c457a4d796187f6ba67feb',
-    name: 'Avalanche',
-    symbol: 'AVAX',
-    decimals: 18,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/avalanchec/info/logo.png',
-    quotations: quotationsBySymbol.AVAX
-  }
+    {
+      address: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae',
+      name: 'Wrapped Ether',
+      symbol: 'WETH',
+      decimals: 18,
+      logoURI: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
+      quotations: quotationsBySymbol.WETH
+    },
+    {
+      address: '0xc3e53f4d16ae77db1c982e75a937b9f60fe63690',
+      name: 'Fetch.ai',
+      symbol: 'FET',
+      decimals: 18,
+      logoURI: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xaea46A60368A7bD060eec7DF8CBa43b7EF41ad85/logo.png',
+      quotations: quotationsBySymbol.FET
+    },
+    {
+      address: '0x84ea74d481ee0a5332c457a4d796187f6ba67feb',
+      name: 'Avalanche',
+      symbol: 'AVAX',
+      decimals: 18,
+      logoURI: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/avalanchec/info/logo.png',
+      quotations: quotationsBySymbol.AVAX
+    }
 ];
