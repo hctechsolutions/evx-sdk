@@ -40,9 +40,6 @@ const config: JestConfigWithTsJest = {
     '^@listeners': '<rootDir>/src/listeners/index.ts',
     '^@listeners/(.*)$': '<rootDir>/src/listeners/$1',
 
-    '^@tools': '<rootDir>/tools/index.ts',
-    '^@tools/(.*)$': '<rootDir>/tools/$1',
-
     '^@enums/(.*)$': '<rootDir>/src/enums/$1',
   },
 

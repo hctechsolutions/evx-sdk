@@ -31,14 +31,12 @@
       "@events/*": ["src/events/*"],
       "@listeners": ["src/listeners/index.ts"],
       "@listeners/*": ["src/listeners/*"],
-      "@tools": ["tools/index.ts"],
-      "@tools/*": ["tools/*"],
       "@enums": ["src/enums/index.ts"],
       "@enums/*": ["src/enums/*"],
       "@services": ["src/services/index.ts"],
       "@services/*": ["src/services/*"]
     }
   },
-  "include": ["src/**/*.ts", "tools/**/*.ts", "tests/**/*.ts", "eslint.config.mjs"],
+  "include": ["src/**/*.ts", "tests/**/*.ts", "eslint.config.mjs"],
   "exclude": ["node_modules", "dist"]
 }

@@ -64,20 +64,7 @@
     "build:watch": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "version:update": "tsx tools/version-manager.ts --branch",
-    "version:simulate": "tsx tools/version-manager.ts --simulate --branch",
-    "version:test": "tsx tests/tools/run-version-tests.ts",
-    "sync:abis": "bash \"${EVX_ROOT:-..}/evx-intent-engine/scripts/sync-foundry-artifacts.sh\"",
-    "script:anvil:create-pool": "tsx scripts/anvil/create-pool.ts",
-    "script:anvil:check-pool-initialized": "tsx scripts/anvil/check-pool-initialized.ts",
-    "script:anvil:initialize-pool": "tsx scripts/anvil/initialize-pool.ts",
-    "script:anvil:mint": "tsx scripts/anvil/mint-pool.ts",
-    "script:anvil:increase-position": "tsx scripts/anvil/increase-position.ts",
-    "script:anvil:quote": "tsx scripts/anvil/quote.ts",
-    "script:anvil:quote-multihop": "tsx scripts/anvil/quote-multihop.ts",
-    "script:anvil:mint-small-and-quote-over": "tsx scripts/anvil/mint-small-and-quote-over.ts",
-    "script:anvil:mint-small-multihop-and-quote-over": "tsx scripts/anvil/mint-small-multihop-and-quote-over.ts"
+    "test:cov": "jest --coverage"
   },
   "repository": {
     "type": "git",

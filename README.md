@@ -29,7 +29,6 @@ Welcome to the comprehensive documentation for the Evx SDK. This section contain
 
 | Section                | Description                  | Link                                       |
 | ---------------------- | ---------------------------- | ------------------------------------------ |
-| **Version Manager**    | Automatic GitFlow versioning | [Version Manager](docs/version-manager.md) |
 | **GitFlow Versioning** | GitFlow branching strategy   | [GitFlow Versioning](docs/versioning.md)   |
 | **GitHub Workflows**   | CI/CD automation             | [GitHub Workflows](docs/workflows.md)      |
 
@@ -47,7 +46,6 @@ Welcome to the comprehensive documentation for the Evx SDK. This section contain
 
 ### Quick Links
 
-- **[Version Manager](docs/version-manager.md)** - Automatic GitFlow versioning
 - **[GitHub Workflows](docs/workflows.md)** - CI/CD automation
 - **[GitFlow Versioning](docs/versioning.md)** - GitFlow branching strategy
 - **[Contributing Guide](docs/contributing.md)** - Development workflow
@@ -288,11 +286,6 @@ npm run build             # Build TypeScript
 npm test                  # Run tests
 npm run lint              # Check code style
 npm run lint:fix          # Fix linting issues
-
-# Version management
-npm run version:update    # Update version based on branch
-npm run version:simulate  # Simulate version update
-npm run version:test      # Test version manager
 ```
 
 ### Testing

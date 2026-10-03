@@ -6,7 +6,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env:
-  NODE_VERSION: '18.19.1'
+  NODE_VERSION: '22'
 
 jobs:
   validate:
@@ -34,9 +34,6 @@ jobs:
 
       - name: Check build
         run: npm run build
-
-      - name: Test version manager
-        run: npm run version:test
 
       - name: Check package.json formatting
         run: |
