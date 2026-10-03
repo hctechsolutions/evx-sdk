@@ -7,7 +7,7 @@ import { quotationsBySymbol } from './quotations';
 
 export const anvil: CatalogToken[] = [
     {
-      address: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae',
+      address: '0xcd8a1c3ba11cf5ecfa6267617243239504a98d90',
       name: 'Wrapped Ether',
       symbol: 'WETH',
       decimals: 18,
@@ -15,7 +15,7 @@ export const anvil: CatalogToken[] = [
       quotations: quotationsBySymbol.WETH
     },
     {
-      address: '0xc3e53f4d16ae77db1c982e75a937b9f60fe63690',
+      address: '0x922d6956c99e12dfeb3224dea977d0939758a1fe',
       name: 'Fetch.ai',
       symbol: 'FET',
       decimals: 18,
@@ -23,7 +23,7 @@ export const anvil: CatalogToken[] = [
       quotations: quotationsBySymbol.FET
     },
     {
-      address: '0x84ea74d481ee0a5332c457a4d796187f6ba67feb',
+      address: '0x5081a39b8a5f0e35a8d959395a630b68b74dd30f',
       name: 'Avalanche',
       symbol: 'AVAX',
       decimals: 18,

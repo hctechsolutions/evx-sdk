@@ -51,20 +51,20 @@ export const chains = {
     metadata: {
       chainId: 31337,
       explorer: 'http://127.0.0.1:8545',
-      nativeToken: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae'
+      nativeToken: '0xcd8a1c3ba11cf5ecfa6267617243239504a98d90'
     },
     contracts: {
-      positionDescriptor: '0xa85233c63b9ee964add6f2cffe00fd84eb32338f',
-      positionManager: '0x4a679253410272dd5232b3ff7cf5dbb88f295319',
-      positionLens: '0x67d269191c92caf3cd7723f116c85e6e9bf55933',
-      swapRouter: '0x7a2088a1bfc9d81c55368ae168c2c02570cb814f',
-      swapQuoter: '0xc5a5c42992decbae36851359345fe25997f5c42d',
-      pairFlash: '0x09635f643e140090a9a8dcd712ed6285858cebef',
-      tickLens: '0xe6e340d132b5f46d1e472debcd681b2abc16e57e',
-      factory: '0x3aa5ebb10dc797cac828524e59a333d0a371443c',
-      dao: '0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0',
+      positionDescriptor: '0x7bc06c482dead17c0e297afbc32f6e63d3846650',
+      positionManager: '0xc351628eb244ec633d5f21fbd6621e1a683b1181',
+      positionLens: '0xb0d4afd8879ed9f52b28595d31b441d079b2ca07',
+      swapRouter: '0xfd471836031dc5108809d173a067e8486b9047a3',
+      swapQuoter: '0x1429859428c0abc9c2c47c8ee9fbaf82cfa0f20f',
+      pairFlash: '0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc',
+      tickLens: '0x162a433068f51e18b7d13932f27e66a3f99e6890',
+      factory: '0x2bdcc0de6be1f7d2ee689a0342d76f52e8efaba3',
+      dao: '0x809d550fca64d94bd9f66e60752a544199cfac3d',
       airdropDistributor: '0x0000000000000000000000000000000000000000',
-      evxToken: '0x5fbdb2315678afecb367f032d93f642f64180aa3'
+      evxToken: '0x851356ae760d987e095750cceb3bc6014560891c'
     }
   }
 };
