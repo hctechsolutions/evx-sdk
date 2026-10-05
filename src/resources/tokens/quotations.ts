@@ -45,6 +45,51 @@ const avaxQuotations: [TokenQuotation, ...TokenQuotation[]] = [
   }
 ];
 
+const usdcQuotations: [TokenQuotation, ...TokenQuotation[]] = [
+  {
+    name: 'bybit',
+    url: 'https://api.bybit.com/v5/market/tickers',
+    method: 'GET',
+    params: { category: 'spot', symbol: 'USDCUSDT' }
+  },
+  {
+    name: 'CoinGecko',
+    url: 'https://api.coingecko.com/api/v3/simple/price',
+    method: 'GET',
+    params: { ids: 'usd-coin', vs_currencies: 'usd' }
+  }
+];
+
+const daiQuotations: [TokenQuotation, ...TokenQuotation[]] = [
+  {
+    name: 'bybit',
+    url: 'https://api.bybit.com/v5/market/tickers',
+    method: 'GET',
+    params: { category: 'spot', symbol: 'DAIUSDT' }
+  },
+  {
+    name: 'CoinGecko',
+    url: 'https://api.coingecko.com/api/v3/simple/price',
+    method: 'GET',
+    params: { ids: 'dai', vs_currencies: 'usd' }
+  }
+];
+
+const uniQuotations: [TokenQuotation, ...TokenQuotation[]] = [
+  {
+    name: 'bybit',
+    url: 'https://api.bybit.com/v5/market/tickers',
+    method: 'GET',
+    params: { category: 'spot', symbol: 'UNIUSDT' }
+  },
+  {
+    name: 'CoinGecko',
+    url: 'https://api.coingecko.com/api/v3/simple/price',
+    method: 'GET',
+    params: { ids: 'uniswap', vs_currencies: 'usd' }
+  }
+];
+
 const linkQuotations: [TokenQuotation, ...TokenQuotation[]] = [
   {
     name: 'bybit',
@@ -70,7 +115,10 @@ export const quotationsBySymbol = {
   AVAX: avaxQuotations,
   WAVAX: avaxQuotations,
   LINK: linkQuotations,
-  WLINK: linkQuotations
+  WLINK: linkQuotations,
+  USDC: usdcQuotations,
+  DAI: daiQuotations,
+  UNI: uniQuotations
 } as const satisfies Record<string, [TokenQuotation, ...TokenQuotation[]]>;
 
 export type QuotedSymbol = keyof typeof quotationsBySymbol;

@@ -15,7 +15,7 @@ export type IAirdropDistributorState = {
 
 /**
  * @title Airdrop Distributor State Query
- * @notice Live read of immutable/view fields for readiness + economics (Story 5.4)
+ * @notice Live read of immutable/view fields for readiness + economics
  */
 @injectable()
 @scoped(Lifecycle.ContainerScoped)

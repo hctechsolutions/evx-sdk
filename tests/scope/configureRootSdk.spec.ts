@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { JsonRpcProvider, Signer } from 'ethers';
+import { Signer } from 'ethers';
 import { container } from 'tsyringe';
 import {
   PositionManagerContract,
@@ -13,13 +13,11 @@ import {
   AirdropDistributorContract
 } from '@contracts';
 import {
-  setAllSigner,
-  setAllChain,
-  setAllChainById,
-  setRPCProvider
-} from '@resources';
+  configureRootSigner,
+  configureRootChain,
+  configureRootChainById
+} from '../../src/scope/configureRootSdk';
 import { ChainName, ChainId } from '@interfaces';
-import { RPC } from '@providers';
 
 jest.mock('tsyringe', () => {
   const actual = jest.requireActual('tsyringe');
@@ -32,7 +30,7 @@ jest.mock('tsyringe', () => {
   };
 });
 
-describe('writer contract setters with dynamic resolution', () => {
+describe('configureRootSdk (root container)', () => {
   const fakeSigner = {} as Signer;
   const fakeChain: ChainName = 'sepolia';
 
@@ -56,11 +54,6 @@ describe('writer contract setters with dynamic resolution', () => {
     setChain: jest.fn()
   };
 
-  const mockRPC = {
-    provider: null as JsonRpcProvider | null,
-    setProvider: jest.fn()
-  };
-
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -78,13 +71,12 @@ describe('writer contract setters with dynamic resolution', () => {
       ) {
         return mockReader;
       }
-      if (contractClass === RPC) return mockRPC;
       throw new Error(`Unknown contract: ${contractClass}`);
     });
   });
 
-  it('should call setSigner on all resolved contracts', async () => {
-    await setAllSigner(fakeSigner);
+  it('should call setSigner on all writer contracts', async () => {
+    await configureRootSigner(fakeSigner);
 
     expect(mockContractA.setSigner).toHaveBeenCalledWith(fakeSigner);
     expect(mockContractB.setSigner).toHaveBeenCalledWith(fakeSigner);
@@ -92,7 +84,7 @@ describe('writer contract setters with dynamic resolution', () => {
   });
 
   it('should call setChain on all resolved contracts', async () => {
-    await setAllChain(fakeChain);
+    await configureRootChain(fakeChain);
 
     expect(mockContractA.setChain).toHaveBeenCalledWith(fakeChain);
     expect(mockContractB.setChain).toHaveBeenCalledWith(fakeChain);
@@ -102,17 +94,10 @@ describe('writer contract setters with dynamic resolution', () => {
 
   it('should call setChain on all resolved contracts using chain ID', async () => {
     const fakeChainId: ChainId = 11155111;
-    await setAllChainById(fakeChainId);
+    await configureRootChainById(fakeChainId);
 
     expect(mockContractA.setChain).toHaveBeenCalledWith('sepolia');
     expect(mockContractB.setChain).toHaveBeenCalledWith('sepolia');
     expect(mockContractC.setChain).toHaveBeenCalledWith('sepolia');
-  });
-
-  it('should set the RPC provider with the given URL', async () => {
-    const rpcUrl = 'https://test-rpc-url';
-    await setRPCProvider(rpcUrl);
-
-    expect(mockRPC.setProvider).toHaveBeenCalledWith(rpcUrl);
   });
 });

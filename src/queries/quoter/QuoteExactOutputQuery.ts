@@ -24,8 +24,8 @@ export class QuoteExactOutputQuery
    * @notice Executes the quote exact output query
    * @param params The parameters for getting the quote
    * @returns The quote data including amount in, price impact, and gas estimate
-   * @throws QuoteSdkError with AD-26 `code` when Quoter emits a typed custom error;
-   *         opaque / Panic reverts are rethrown without AD-26 code
+ * @throws QuoteSdkError with `code` when Quoter emits a typed custom error;
+ * opaque / Panic reverts are rethrown without code
    */
   async execute(params: IQuoteExactOutputQueryParams): Promise<IQuoteExactOutputOutput> {
     try {

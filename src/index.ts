@@ -27,5 +27,5 @@ export * from './listeners';
 // Enums
 export * from './enums';
 
-// Multi-request / multi-chain scope (AD-21)
+// Multi-request / multi-chain scope
 export * from './scope';

@@ -1,7 +1,7 @@
 /**
- * @title Quoter AD-26 error decoding
+ * @title Quoter error decoding
  * @notice Maps typed Quoter custom errors to stable quote error codes.
- * @dev Never maps Panic(0x11) / PoolQuoteFailed / opaque reverts to AD-26 codes.
+ * @dev Never maps Panic(0x11) / PoolQuoteFailed / opaque reverts to codes.
  */
 import { Interface, hexlify, getBytes } from 'ethers';
 import QuoterABI from '@abis/Quoter.json';
@@ -80,7 +80,7 @@ function isPanicSelector(data: string): boolean {
 }
 
 /**
- * Decode revert data to an AD-26 code when the custom error is known.
+ * Decode revert data to an code when the custom error is known.
  * Returns undefined for opaque / Panic / PoolQuoteFailed (unclassified).
  * Does NOT map Panic(0x11) → arithmetic_internal.
  */
@@ -93,7 +93,7 @@ export function decodeQuoteErrorCode(data: string | undefined): QuoteErrorCode |
     if (!parsed) return undefined;
 
     if (parsed.name === 'PoolQuoteFailed') {
-      // Opaque wrapper — inspect inner bytes but never invent AD-26 from Panic.
+ // Opaque wrapper — inspect inner bytes but never invent from Panic.
       const reason = parsed.args[0] as string | Uint8Array;
       const inner =
         typeof reason === 'string' ? reason : hexlify(getBytes(reason));
@@ -108,8 +108,8 @@ export function decodeQuoteErrorCode(data: string | undefined): QuoteErrorCode |
 }
 
 /**
- * Re-throw SDK/ethers failures with `code` set only for typed AD-26 errors.
- * Opaque CALL_EXCEPTION / Panic remain without AD-26 code.
+ * Re-throw SDK/ethers failures with `code` set only for typed errors.
+ * Opaque CALL_EXCEPTION / Panic remain without code.
  */
 export function rethrowQuoteError(err: unknown): never {
   if (err instanceof QuoteSdkError) throw err;

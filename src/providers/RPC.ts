@@ -5,7 +5,7 @@ import { scoped, Lifecycle } from 'tsyringe';
 /**
  * @title RPC Provider
  * @notice Manages the RPC connection for the SDK
- * @dev ContainerScoped — one instance per DI scope (AD-21)
+ * @dev ContainerScoped — one instance per DI scope
  */
 @scoped(Lifecycle.ContainerScoped)
 export class RPC implements IRPC {

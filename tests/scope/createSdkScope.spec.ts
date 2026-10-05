@@ -5,7 +5,7 @@ import { RPC } from '@providers';
 import { FactoryContract, QuoterContract, AirdropDistributorContract } from '@contracts';
 import { GetPoolQuery } from '@queries/pool';
 
-describe('createSdkScope (AD-21 isolation)', () => {
+describe('createSdkScope isolation', () => {
   afterEach(() => {
     container.clearInstances();
   });

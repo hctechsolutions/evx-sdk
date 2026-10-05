@@ -24,7 +24,7 @@ const PINNED_DATASET_HASH =
   '68ae92d892f800cfb2f07c88dbdd4757427913f592d79ded281fcfb9d0efa960';
 
 /**
- * Story 5.4 D29 — leaf encoding must match Foundry / Back seed / generator.
+ * D29 — leaf encoding must match Foundry / Back seed / generator.
  */
 describe('leaf-golden fixture (D29)', () => {
   it('encodes each leaf identically to golden JSON', () => {

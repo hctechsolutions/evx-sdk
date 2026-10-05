@@ -77,7 +77,7 @@ Welcome to the comprehensive documentation for the Evx SDK. This section contain
 
 ### Developer Experience
 
-- **Simple Configuration** - Easy setup with `setRPCProvider` and `setAllChain`
+- **Scoped configuration** - Isolated RPC + chain via `createSdkScope` (multi-request safe)
 - **Transaction Monitoring** - Built-in callbacks for transaction lifecycle tracking
 - **Error Handling** - Comprehensive error handling with detailed error messages
 - **Modular Design** - Import only what you need for optimal bundle size
@@ -103,50 +103,54 @@ yarn add evx-sdk
 
 ### Setup SDK Configuration
 
-Before using any SDK functionality, you need to configure the RPC provider and chain:
+Create an isolated scope with your RPC URL and chain ID (preferred for backends and scripts):
 
 ```ts
-import { setRPCProvider, setAllChain } from 'evx-sdk';
+import { createSdkScope } from 'evx-sdk';
 
-// Configure RPC provider and chain
-await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-await setAllChain('sepolia'); // or 'mainnet'
+const scope = createSdkScope({
+  rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+  chainId: 11155111 // Sepolia
+});
+
+// Use scope.resolve(CommandOrQuery) — call scope.dispose() when done
 ```
+
+Single-tab browser apps (Evx Web tx builders) use `configureRootChainById` / `configureRootSigner` on the root container instead of product RPC.
 
 ### Read pool info directly from blockchain
 
 ```ts
 import 'reflect-metadata';
-import { GetPoolQuery, setRPCProvider, setAllChain } from 'evx-sdk';
-import { container } from 'tsyringe';
+import { GetPoolQuery, createSdkScope } from 'evx-sdk';
 
-// Setup SDK configuration
-await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-await setAllChain('sepolia');
+const scope = createSdkScope({
+  rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+  chainId: 11155111
+});
 
-// Query pool information
-const getPool = container.resolve(GetPoolQuery);
+const getPool = scope.resolve(GetPoolQuery);
 const pool = await getPool.execute({
   address: '0x7Fb01B2d918Edcad3d3a05b5B7A511ACA1C66aD8'
 });
 
 console.table(pool);
+scope.dispose();
 ```
 
 ### Listen to pool events
 
 ```ts
 import 'reflect-metadata';
-import { PoolCreatedListener, setRPCProvider, setAllChain } from 'evx-sdk';
-import { container } from 'tsyringe';
+import { PoolCreatedListener, createSdkScope } from 'evx-sdk';
 
 async function listenToEvents() {
-  // Setup SDK configuration
-  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-  await setAllChain('sepolia');
+  const scope = createSdkScope({
+    rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+    chainId: 11155111
+  });
 
-  // Start listening for pool creation events
-  const listener = container.resolve(PoolCreatedListener);
+  const listener = scope.resolve(PoolCreatedListener);
 
   await listener.start(async (event) => {
     console.log('New pool created!');
@@ -168,16 +172,15 @@ Commands are used for write operations that modify the blockchain state. Here ar
 
 ```ts
 import 'reflect-metadata';
-import { CreatePoolCommand, setRPCProvider, setAllChain } from 'evx-sdk';
-import { container } from 'tsyringe';
+import { CreatePoolCommand, createSdkScope } from 'evx-sdk';
 
 async function createPool() {
-  // Setup SDK configuration
-  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-  await setAllChain('sepolia');
+  const scope = createSdkScope({
+    rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+    chainId: 11155111
+  });
 
-  // Create a new pool
-  const createPoolCommand = container.resolve(CreatePoolCommand);
+  const createPoolCommand = scope.resolve(CreatePoolCommand);
 
   await createPoolCommand.execute({
     token0: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3', // Token A address
@@ -197,15 +200,15 @@ createPool();
 
 ```ts
 import 'reflect-metadata';
-import { SwapExactInputSingleCommand, setRPCProvider, setAllChain } from 'evx-sdk';
-import { container } from 'tsyringe';
+import { SwapExactInputSingleCommand, createSdkScope } from 'evx-sdk';
 
 async function executeSwapWithCallback() {
-  // Setup SDK configuration
-  await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-  await setAllChain('sepolia');
+  const scope = createSdkScope({
+    rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+    chainId: 11155111
+  });
 
-  const swapCommand = container.resolve(SwapExactInputSingleCommand);
+  const swapCommand = scope.resolve(SwapExactInputSingleCommand);
 
   await swapCommand.execute({
     tokenIn: '0xA0b86a33E6eF5d5D8C8F7F1f6e52E8A3',
@@ -252,15 +255,17 @@ executeSwapWithCallback();
 The SDK supports the following networks:
 
 ```typescript
-import { setRPCProvider, setAllChain } from 'evx-sdk';
+import { createSdkScope } from 'evx-sdk';
 
-// Sepolia Testnet
-await setRPCProvider('https://sepolia.infura.io/v3/YOUR_KEY');
-await setAllChain('sepolia');
+const sepolia = createSdkScope({
+  rpcUrl: 'https://sepolia.infura.io/v3/YOUR_KEY',
+  chainId: 11155111
+});
 
-// Ethereum Mainnet
-await setRPCProvider('https://mainnet.infura.io/v3/YOUR_KEY');
-await setAllChain('mainnet');
+const mainnet = createSdkScope({
+  rpcUrl: 'https://mainnet.infura.io/v3/YOUR_KEY',
+  chainId: 1
+});
 ```
 
 ## Development

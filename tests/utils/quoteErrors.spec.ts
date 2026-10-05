@@ -5,7 +5,7 @@ import {
   rethrowQuoteError
 } from '@utils';
 
-describe('quoteErrors AD-26 decoder', () => {
+describe('quoteErrors decoder',  => {
   const iface = new Interface([
     'error ZeroLiquidity()',
     'error InsufficientLiquidity()',
@@ -16,7 +16,7 @@ describe('quoteErrors AD-26 decoder', () => {
     'error PoolNotFound(address,address,uint24)'
   ]);
 
-  it('maps typed custom errors to AD-26 codes', () => {
+ it('maps typed custom errors to codes',  => {
     expect(decodeQuoteErrorCode(iface.encodeErrorResult('ZeroLiquidity', []))).toBe(
       'zero_liquidity'
     );
@@ -31,13 +31,13 @@ describe('quoteErrors AD-26 decoder', () => {
     ).toBe('arithmetic_internal');
   });
 
-  it('does not map Panic(0x11) to any AD-26 code (no Panic→arithmetic_internal)', () => {
+ it('does not map Panic(0x11) to any code (no Panic→arithmetic_internal)',  => {
     const panic11 =
       '0x4e487b710000000000000000000000000000000000000000000000000000000000000011';
     expect(decodeQuoteErrorCode(panic11)).toBeUndefined();
   });
 
-  it('does not map PoolQuoteFailed(Panic) to AD-26', () => {
+ it('does not map PoolQuoteFailed(Panic) to ',  => {
     const panic11 =
       '0x4e487b710000000000000000000000000000000000000000000000000000000000000011';
     const wrapped = iface.encodeErrorResult('PoolQuoteFailed', [panic11]);
@@ -91,7 +91,7 @@ describe('quoteErrors AD-26 decoder', () => {
     }
   });
 
-  it('opaque CALL_EXCEPTION without typed data keeps no AD-26 code', () => {
+ it('opaque CALL_EXCEPTION without typed data keeps no code',  => {
     const opaque = { code: 'CALL_EXCEPTION', message: 'execution reverted' };
     expect(() => rethrowQuoteError(opaque)).toThrow();
     try {

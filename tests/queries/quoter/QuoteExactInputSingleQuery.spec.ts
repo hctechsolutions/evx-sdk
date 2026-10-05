@@ -69,7 +69,7 @@ describe('QuoteExactInputSingleQuery', () => {
     });
   });
 
-  it('surfaces AD-26 code for InsufficientLiquidity revert', async () => {
+ it('surfaces code for InsufficientLiquidity revert', async  => {
     const { Interface } = await import('ethers');
     const iface = new Interface(['error InsufficientLiquidity()']);
     const data = iface.encodeErrorResult('InsufficientLiquidity', []);
@@ -88,7 +88,7 @@ describe('QuoteExactInputSingleQuery', () => {
     ).rejects.toMatchObject({ code: 'insufficient_liquidity' });
   });
 
-  it('surfaces AD-26 code for ZeroLiquidity revert', async () => {
+ it('surfaces code for ZeroLiquidity revert', async  => {
     const { Interface } = await import('ethers');
     const iface = new Interface(['error ZeroLiquidity()']);
     const data = iface.encodeErrorResult('ZeroLiquidity', []);
@@ -107,7 +107,7 @@ describe('QuoteExactInputSingleQuery', () => {
     ).rejects.toMatchObject({ code: 'zero_liquidity' });
   });
 
-  it('does not invent AD-26 from opaque Panic CALL_EXCEPTION', async () => {
+ it('does not invent from opaque Panic CALL_EXCEPTION', async  => {
     (
       quoterContract.instance.quoteExactInputSingle.staticCall as jest.Mock
     ).mockRejectedValue({

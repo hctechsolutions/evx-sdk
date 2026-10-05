@@ -7,7 +7,7 @@ import { RPC } from '@providers';
 /**
  * @title Set Dynamic Fee Command
  * @notice Updates the swap fee on an EvxPool via setDynamicFee (policyKeeper ACL)
- * @dev Uses ABI synced from Foundry artifacts (AD-6)
+ * @dev Uses ABI synced from Foundry artifacts
  */
 @injectable()
 @scoped(Lifecycle.ContainerScoped)

@@ -11,7 +11,7 @@ export type IErc20BalanceOfParams = {
 
 /**
  * @title ERC20 BalanceOf Query
- * @notice Token balance for funding invariant (Story 5.4 D20) — Platform Back only
+ * @notice Token balance for funding invariant ( D20) — Platform Back only
  */
 @injectable()
 @scoped(Lifecycle.ContainerScoped)

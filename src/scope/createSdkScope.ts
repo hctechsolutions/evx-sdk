@@ -24,7 +24,7 @@ import {
 
 /**
  * Options for {@link createSdkScope}.
- * Isolates provider + chain for multi-request / multi-chain hosts (AD-21).
+ * Isolates provider + chain for multi-request / multi-chain hosts .
  */
 export type SdkScopeOptions = {
   rpcUrl: string;
@@ -35,8 +35,9 @@ export type SdkScopeOptions = {
  * Isolated SDK execution scope: own RPC, contracts, and DI subtree.
  * Prefer this in Nest / multi-request backends.
  *
- * Legacy Web single-tab bootstrap (`setRPCProvider` / `setAllChain`) remains
- * on the root container and must not be used under concurrency.
+ * Single-tab browser hosts configure the root container via
+ * {@link configureRootChainById} / {@link configureRootSigner}; do not use those
+ * under concurrency — use scoped instances here instead.
  */
 export type SdkScope = {
   chainId: ChainId;
@@ -69,7 +70,7 @@ function resolveScopeContracts(scope: DependencyContainer): BaseContract[] {
  * @title Create SDK Scope
  * @notice Creates an isolated DI scope with its own RPC provider and chain
  * @dev Uses tsyringe child container + ContainerScoped lifecycle. Does not
- *      mutate root `setRPCProvider` / `setAllChain` state.
+ *      mutate root container chain/RPC state.
  * @param options rpcUrl + chainId (must be a Supported Network from chains.ts)
  * @returns Disposable scope with resolve() for Commands/Queries
  */

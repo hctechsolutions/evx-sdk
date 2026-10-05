@@ -11,3 +11,4 @@ export * from './chains';
 export * from './liquidity';
 export * from './liquidityAmounts';
 export * from './quoteErrors';
+export * from './airdrop-merkle';
